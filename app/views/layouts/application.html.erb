@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= content_for?(:title) ? yield(:title) : 'VideoApp' %></title>
+  <%= stylesheet_link_tag 'application', media: 'all'%>
+  <%= csrf_meta_tags %>
+  <base href="<%= request.original_fullpath %>">
+  <%= yield :stylesheets %>
+  <%= javascript_include_tag 'application' %>
+</head>
+<body data-ng-app="video" data-ng-cloak data-loading-status>
+<%= content_for?(:content) ? yield(:content) : yield %>
+</body>
+</html>
