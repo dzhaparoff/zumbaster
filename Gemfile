@@ -7,8 +7,8 @@ gem 'rails', '4.1.8'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
-gem 'less-rails' #less precompiler
-gem 'therubyracer'
+#gem 'less-rails' #less precompiler
+#gem 'therubyracer'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
