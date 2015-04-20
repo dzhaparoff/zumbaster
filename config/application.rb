@@ -17,7 +17,7 @@ module Videoplayer
 
   class Constants
     DISK_API_URL = 'https://cloud-api.yandex.net:443'
-    YANDEX_TOKEN = '8891cca6ba1b44b28e48470cc2c960cc'
+    YANDEX_TOKEN = 'fbdfc29b8a5f4668b2e6f0de49202ec3'
   end
 
   class Application < Rails::Application

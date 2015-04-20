@@ -38,7 +38,11 @@ gem 'faraday'
 gem 'faraday_middleware'
 gem 'nokogiri'
 
+gem 'therubyracer'
+
 gem 'russian'
+
+gem 'streamio-ffmpeg' # https://github.com/streamio/streamio-ffmpeg
 
 group :development do
   gem "awesome_print"

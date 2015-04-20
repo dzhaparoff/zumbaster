@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'mainpage#index'
-
+  get 'login' => 'mainpage#login'
   get 'get_file_list' => 'mainpage#get_file_list'
 
   # Example of regular route:
