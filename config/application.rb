@@ -14,12 +14,6 @@ require "sprockets/railtie"
 Bundler.require(*Rails.groups)
 
 module Videoplayer
-
-  class Constants
-    DISK_API_URL = 'https://cloud-api.yandex.net:443'
-    YANDEX_TOKEN = 'fbdfc29b8a5f4668b2e6f0de49202ec3'
-  end
-
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -32,6 +26,6 @@ module Videoplayer
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-
+    config.autoload_paths << Rails.root.join('lib')
   end
 end

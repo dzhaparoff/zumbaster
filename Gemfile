@@ -31,17 +31,31 @@ gem 'spring',      group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'hashie'  							#https://github.com/intridea/hashie
+gem 'will_paginate'
+
+gem 'devise'								#https://github.com/plataformatec/devise#getting-started
+gem 'omniauth-facebook'						#
+gem 'omniauth-vkontakte'					#
+
+#gem 'pg_search'
+
+gem "dynamic_sitemaps"
+
 gem 'autoprefixer-rails'
 gem 'angularjs-rails'
 
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'nokogiri'
+gem 'm3u8'
 
 gem 'therubyracer'
 
 gem 'russian'
 
+gem 'paperclip'
+gem 'paperclip-av-transcoder'
 gem 'streamio-ffmpeg' # https://github.com/streamio/streamio-ffmpeg
 
 group :development do
