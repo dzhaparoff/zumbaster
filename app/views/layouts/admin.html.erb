@@ -6,9 +6,9 @@
   <%= csrf_meta_tags %>
   <base href="<%= request.original_fullpath %>">
   <%= yield :stylesheets %>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'admin/admin' %>
 </head>
-<body data-ng-app="zumbaster" data-ng-cloak>
+<body data-ng-app="admin" data-ng-cloak>
 <%= content_for?(:content) ? yield(:content) : yield %>
 </body>
 </html>

@@ -1,2 +1,2 @@
 //= require angular
-//= require ng-app
+//= require_tree .
