@@ -21,14 +21,4 @@ class CreateSeasons < ActiveRecord::Migration
       t.timestamps
     end
   end
-
-  def self.up
-    add_attachment :seasons, :poster
-    add_attachment :seasons, :thumb
-  end
-
-  def self.down
-    remove_attachment :seasons, :poster
-    remove_attachment :seasons, :thumb
-  end
 end

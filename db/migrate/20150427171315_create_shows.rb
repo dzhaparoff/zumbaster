@@ -29,22 +29,4 @@ class CreateShows < ActiveRecord::Migration
       t.timestamps
     end
   end
-
-  def self.up
-    add_attachment :shows, :fanart
-    add_attachment :shows, :poster
-    add_attachment :shows, :logo
-    add_attachment :shows, :clearart
-    add_attachment :shows, :banner
-    add_attachment :shows, :thumb
-  end
-
-  def self.down
-    remove_attachment :shows, :fanart
-    remove_attachment :shows, :poster
-    remove_attachment :shows, :logo
-    remove_attachment :shows, :clearart
-    remove_attachment :shows, :banner
-    remove_attachment :shows, :thumb
-  end
 end

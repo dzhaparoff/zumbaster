@@ -1,4 +1,5 @@
 class Myshows
+
   def initialize
     @http = new_http_request_builder
   end

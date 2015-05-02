@@ -9,7 +9,7 @@ class Trakt
     JSON.parse @http.get('/genres/shows').body
   end
 
-  def fresh_shows
+  def popular_shows
     JSON.parse @http.get('/shows/popular', limit: 100, page: 1).body
   end
 
@@ -22,7 +22,8 @@ class Trakt
   end
 
   def show(id_or_slug)
-    JSON.parse @http.get("/shows/#{id_or_slug}", extended: "full,images").body
+    res = @http.get("/shows/#{id_or_slug}", extended: "full,images")
+    JSON.parse res.body unless res.status == 404
   end
 
   def show_aliases(id_or_slug)
@@ -30,7 +31,8 @@ class Trakt
   end
 
   def show_translations(id_or_slug)
-    JSON.parse @http.get("/shows/#{id_or_slug}/translations/ru").body
+    res =  @http.get("/shows/#{id_or_slug}/translations/ru")
+    JSON.parse res.body unless res.status == 404
   end
 
   def show_people(id_or_slug)

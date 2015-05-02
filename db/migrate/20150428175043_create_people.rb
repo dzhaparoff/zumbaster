@@ -18,11 +18,4 @@ class CreatePeople < ActiveRecord::Migration
     end
   end
 
-  def self.up
-    add_attachment :seasons, :headshot
-  end
-
-  def self.down
-    remove_attachment :seasons, :headshot
-  end
 end

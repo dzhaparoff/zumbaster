@@ -11,7 +11,7 @@ class CreateGenres < ActiveRecord::Migration
 
     create_table :genres_shows, id: false do |t|
       t.belongs_to :show, index: true
-      t.belongs_to :part, index: true
+      t.belongs_to :genre, index: true
     end
   end
 end

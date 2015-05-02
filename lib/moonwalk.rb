@@ -12,6 +12,10 @@ class Moonwalk
     JSON.parse @http.get("/api/videos.json", kinopoisk_id: kinopoisk_id).body
   end
 
+  def translators
+    JSON.parse @http.get("/api/translators.json").body
+  end
+
   def show_episodes(kinopoisk_id, translator_id)
     JSON.parse @http.get("/api/serial_episodes.json", kinopoisk_id: kinopoisk_id, translator_id: translator_id).body
   end

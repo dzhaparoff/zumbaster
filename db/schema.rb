@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150429103125) do
+ActiveRecord::Schema.define(version: 20150502210139) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,10 +63,10 @@ ActiveRecord::Schema.define(version: 20150429103125) do
 
   create_table "genres_shows", id: false, force: true do |t|
     t.integer "show_id"
-    t.integer "part_id"
+    t.integer "genre_id"
   end
 
-  add_index "genres_shows", ["part_id"], name: "index_genres_shows_on_part_id", using: :btree
+  add_index "genres_shows", ["genre_id"], name: "index_genres_shows_on_genre_id", using: :btree
   add_index "genres_shows", ["show_id"], name: "index_genres_shows_on_show_id", using: :btree
 
   create_table "imdb_ratings", force: true do |t|
@@ -129,6 +129,22 @@ ActiveRecord::Schema.define(version: 20150429103125) do
     t.integer  "rating_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
+    t.string   "thumb_file_name"
+    t.string   "thumb_content_type"
+    t.integer  "thumb_file_size"
+    t.datetime "thumb_updated_at"
+    t.string   "screenshot_file_name"
+    t.string   "screenshot_content_type"
+    t.integer  "screenshot_file_size"
+    t.datetime "screenshot_updated_at"
+    t.string   "headshot_file_name"
+    t.string   "headshot_content_type"
+    t.integer  "headshot_file_size"
+    t.datetime "headshot_updated_at"
   end
 
   create_table "shows", force: true do |t|
@@ -136,8 +152,8 @@ ActiveRecord::Schema.define(version: 20150429103125) do
     t.string   "slug_en"
     t.string   "title_ru"
     t.string   "title_en"
-    t.string   "description_ru"
-    t.string   "description_en"
+    t.text     "description_ru"
+    t.text     "description_en"
     t.string   "slogan_ru"
     t.string   "slogan_en"
     t.integer  "year"
@@ -154,6 +170,34 @@ ActiveRecord::Schema.define(version: 20150429103125) do
     t.integer  "aired_episodes"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "fanart_file_name"
+    t.string   "fanart_content_type"
+    t.integer  "fanart_file_size"
+    t.datetime "fanart_updated_at"
+    t.string   "poster_file_name"
+    t.string   "poster_content_type"
+    t.integer  "poster_file_size"
+    t.datetime "poster_updated_at"
+    t.string   "logo_file_name"
+    t.string   "logo_content_type"
+    t.integer  "logo_file_size"
+    t.datetime "logo_updated_at"
+    t.string   "clearart_file_name"
+    t.string   "clearart_content_type"
+    t.integer  "clearart_file_size"
+    t.datetime "clearart_updated_at"
+    t.string   "banner_file_name"
+    t.string   "banner_content_type"
+    t.integer  "banner_file_size"
+    t.datetime "banner_updated_at"
+    t.string   "thumb_file_name"
+    t.string   "thumb_content_type"
+    t.integer  "thumb_file_size"
+    t.datetime "thumb_updated_at"
+    t.string   "poster_ru_file_name"
+    t.string   "poster_ru_content_type"
+    t.integer  "poster_ru_file_size"
+    t.datetime "poster_ru_updated_at"
   end
 
   create_table "translations", force: true do |t|

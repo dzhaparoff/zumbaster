@@ -23,11 +23,4 @@ class CreateEpisodes < ActiveRecord::Migration
     end
   end
 
-  def self.up
-    add_attachment :seasons, :screenshot
-  end
-
-  def self.down
-    remove_attachment :seasons, :screenshot
-  end
 end
