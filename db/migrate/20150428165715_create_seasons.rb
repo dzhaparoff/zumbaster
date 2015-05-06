@@ -16,7 +16,6 @@ class CreateSeasons < ActiveRecord::Migration
       t.integer :aired_episodes
 
       t.references :show
-      t.references :rating
 
       t.timestamps
     end

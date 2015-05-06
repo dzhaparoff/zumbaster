@@ -7,11 +7,16 @@ class Kinopoisk
   def rating(kinopoisk_id)
     rating = Nokogiri::Slop @http.get("http://rating.kinopoisk.ru/#{kinopoisk_id}.xml").body
 
+    kp = rating.rating.kp_rating.content if defined? rating.rating.kp_rating
+    kp_num_vote = rating.rating.kp_rating['num_vote'] if defined? rating.rating.kp_rating
+    imdb =  rating.rating.imdb_rating.content if defined? rating.rating.imdb_rating
+    imdb_num_vote = rating.rating.imdb_rating['num_vote'] if defined? rating.rating.imdb_rating
+
     {
-        kp: rating.rating.kp_rating.content.to_f,
-        kp_num_vote: rating.rating.kp_rating['num_vote'],
-        imdb: rating.rating.imdb_rating.content.to_f,
-        imdb_num_vote: rating.rating.imdb_rating['num_vote'],
+        kp: kp,
+        kp_num_vote: kp_num_vote,
+        imdb: imdb,
+        imdb_num_vote: imdb_num_vote
     }
   end
 

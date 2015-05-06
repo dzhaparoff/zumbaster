@@ -1,2 +1,34 @@
 <% title "Главная страница" %>
-<%== ap @genres  %>
+<% @shows.each do |s| %>
+    <div class="row">
+      <div class="large-12 columns">
+        <h1><%= s.title_ru  %></h1>
+        <img src="<%= s.poster.url(:thumb) %>" alt="<%= s.title_ru  %>"/>
+        <div class="description"><%= s.description_ru %></div>
+        <div class="row">
+          <% s.seasons.order(:number).each do |s| %>
+            <div class="large-6 columns">
+              <h2><%= s.slug_en %></h2>
+              <img src="<%= s.poster.url(:thumb) %>"/>
+              <div class="row">
+              <% s.episodes.order(:number).each do |e| %>
+                  <div class="small-6 columns">
+                    <h6><%= e.slug_en %></h6>
+                    <img width="400" src="<%= e.screenshot.url(:original) %>"/>
+                    <ul>
+                      <% e.translations.each do |t| %>
+                      <li>
+                        <h5><%= t.translator.name unless t.translator.nil? %></h5>
+                        <div data-videoplayer="<%= t.id %>"></div>
+                      </li>
+                      <% end %>
+                    </ul>
+                  </div>
+              <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+        </div>
+    </div>
+<%break end %>

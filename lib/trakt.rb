@@ -40,7 +40,8 @@ class Trakt
   end
 
   def show_seasons(id_or_slug)
-    JSON.parse @http.get("/shows/#{id_or_slug}/seasons", extended: "full,images,episodes").body
+    res = @http.get("/shows/#{id_or_slug}/seasons", extended: "full,images,episodes")
+    JSON.parse res.body unless res.status == 404
   end
 
   private

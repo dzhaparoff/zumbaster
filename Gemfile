@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.8'
 gem 'pg'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails'
 # gem 'less-rails' #less precompiler
 gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
@@ -24,6 +24,8 @@ gem "dynamic_sitemaps"
 
 gem 'autoprefixer-rails'
 gem 'angularjs-rails'
+gem 'jquery-rails'
+gem 'foundation-rails'
 
 gem 'faraday'
 gem 'faraday_middleware'

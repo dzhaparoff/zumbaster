@@ -6,13 +6,14 @@ class AddAttaches < ActiveRecord::Migration
     add_attachment :shows, :clearart
     add_attachment :shows, :banner
     add_attachment :shows, :thumb
+    add_attachment :shows, :poster_ru
 
     add_attachment :seasons, :poster
     add_attachment :seasons, :thumb
 
-    add_attachment :seasons, :screenshot
+    add_attachment :episodes, :screenshot
 
-    add_attachment :seasons, :headshot
+    add_attachment :people, :headshot
   end
 
   def self.down
@@ -22,12 +23,13 @@ class AddAttaches < ActiveRecord::Migration
     remove_attachment :shows, :clearart
     remove_attachment :shows, :banner
     remove_attachment :shows, :thumb
+    remove_attachment :shows, :poster_ru
 
     remove_attachment :seasons, :poster
     remove_attachment :seasons, :thumb
 
-    remove_attachment :seasons, :screenshot
+    remove_attachment :episodes, :screenshot
 
-    remove_attachment :seasons, :headshot
+    remove_attachment :people, :headshot
   end
 end

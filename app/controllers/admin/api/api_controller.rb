@@ -47,8 +47,7 @@ class Admin::Api::ApiController < Admin::AdminController
 
     existing_ids = existing_show_ids :myshow
 
-    shows = shows[99..500].map do |show|
-      sleep 0.01
+    shows = shows[0..10].map do |show|
       show.merge! @myshow.get_show show['id'] unless existing_ids.include? show['id']
     end
 
@@ -106,10 +105,33 @@ class Admin::Api::ApiController < Admin::AdminController
         show.genres << g unless g.nil?
       end
       show.save
-      sleep 0.02
+      sleep 0.01
     end
 
     render json: true
+  end
+
+  def sync_shows_translate
+    shows = Show.all
+
+    shows.each do |show|
+      next unless show.description_ru.nil?
+      next unless show.ids['imdb'].to_i > 0
+
+      imdb = imdb_to_trakt_id show.ids['imdb']
+      trakt_show_translation = @trakt.show_translations imdb
+
+      next if trakt_show_translation.nil?
+      next if trakt_show_translation[0].nil?
+
+      show.description_ru = trakt_show_translation[0]['overview']
+      show.save
+
+      sleep 0.01
+    end
+
+    render json: true
+
   end
 
   def sync_shows_pics
@@ -117,7 +139,7 @@ class Admin::Api::ApiController < Admin::AdminController
 
     shows.each do |show|
       next unless show.ids['imdb'].to_i > 0
-      next if show.poster.exists? && show.fanart.exists? && show.logo.exists? && show.clearart.exists? && show.banner.exists? && show.thumb.exists?
+      next if show.poster.exists? || show.fanart.exists? || show.logo.exists? || show.clearart.exists? || show.banner.exists? || show.thumb.exists?
 
       imdb = imdb_to_trakt_id show.ids['imdb']
       trakt_show = @trakt.show imdb
@@ -154,27 +176,126 @@ class Admin::Api::ApiController < Admin::AdminController
     render json: true
   end
 
-  def sync_shows_translate
+  def sync_rating
     shows = Show.all
 
     shows.each do |show|
-      next unless show.description_ru.nil?
-      next unless show.ids['imdb'].to_i > 0
+      next unless show.ids['kp'].to_i > 0
 
-      imdb = imdb_to_trakt_id show.ids['imdb']
-      trakt_show_translation = @trakt.show_translations imdb
+      kp = show.ids['kp']
+      rating = @kinopoisk.rating(kp)
 
-      next if trakt_show_translation.nil?
-      next if trakt_show_translation[0].nil?
+      new_rating = Rating.find_or_create_by rated: show do |r|
+        new_rating_imdb = ImdbRating.find_or_create_by rating: r do |r_item|
+          r_item.value = rating[:imdb]
+          r_item.count = rating[:imdb_num_vote]
+        end
+        new_rating_imdb.save
 
-      show.description_ru = trakt_show_translation[0]['overview']
-      show.save
+        new_rating_kp = KpRating.find_or_create_by rating: r do |r_item|
+          r_item.value = rating[:kp]
+          r_item.count = rating[:kp_num_vote]
+        end
+        new_rating_kp.save
+      end
+      new_rating.save
 
-      sleep 0.02
+      sleep 0.01
     end
 
     render json: true
+  end
 
+  def sync_seasons
+    shows = Show.all
+
+    shows.each do |show|
+      next unless show.ids['imdb'].to_i > 0
+      imdb = imdb_to_trakt_id show.ids['imdb']
+      trakt_seasons = @trakt.show_seasons imdb
+
+      next if trakt_seasons.nil?
+
+      trakt_seasons.each do |season|
+        next if season['number'] == 0
+        s = Season.where(show: show, number: season['number']).first_or_create
+        # next unless s.episode_count.nil?
+        season_number = "s%02d" % season['number']
+        s.number = season['number']
+        s.ids = season['ids']
+        s.episode_count = season['episode_count']
+        s.aired_episodes = season['aired_episodes']
+        s.slug_ru = s.slug_en = "#{season_number}"
+        s.description_ru = season['overview']
+
+        s.poster = URI.parse season['images']['poster']['full'] unless season['images']['poster']['full'].nil? || s.poster.exists?
+        s.thumb = URI.parse season['images']['thumb']['full'] unless season['images']['thumb']['full'].nil? || s.thumb.exists?
+
+        s.save
+
+        next if season['episodes'].nil?
+        # next if Episode.where(show: show, season: s).count > 0
+
+        season['episodes'].each do |episode|
+          e = Episode.where(show: show, season: s, number: episode['number']).first_or_create
+          episode_number = "e%02d" % episode['number']
+          e.show = show
+          e.season = s
+          e.number = episode['number']
+          e.ids = episode['ids']
+          e.slug_ru = "#{season_number}#{episode_number}"
+          e.slug_en = "#{season_number}#{episode_number}"
+          e.title_en = episode['title']
+          e.slug_en = episode['title'].parameterize unless episode['title'].nil?
+          e.number_abs = episode['number_abs']
+          e.description_en = episode['overview']
+          e.first_aired = DateTime.parse episode['first_aired'] unless episode['first_aired'].nil?
+
+          screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status unless episode['images']['screenshot']['full'].nil?
+
+          e.screenshot = URI.parse episode['images']['screenshot']['full'] unless episode['images']['screenshot']['full'].nil? || e.screenshot.exists? || screenshot_status == 403 || screenshot_status == 404
+          e.save
+        end
+      end
+     end
+
+    render json: true
+  end
+
+  def sync_moonwalk
+    shows = Show.all
+
+    shows.each do |show|
+      next unless show.ids['kp'].to_i > 0
+      kp = show.ids['kp']
+
+      moonwalk = @moonwalk.show kp
+
+      moonwalk.each do |m|
+        translator_id = m['translator_id']
+
+        moonwalk_episodes = @moonwalk.get_playlist_url kp, translator_id
+
+        puts ap moonwalk_episodes
+
+        moonwalk_episodes[:playlists].each_pair do |season_number, episodes|
+          season = Season.where(show: show, number: season_number).take
+          episodes.each_pair do |episode_number, playlists|
+            episode = Episode.where(show: show, season: season, number: episode_number).take
+            translator = Translator.where(ex_id: translator_id).take
+            translation = Translation.where(episode: episode, translator: translator).first_or_create
+            translation.f4m = playlists['playlists']['manifest_f4m']
+            translation.m3u8 = playlists['playlists']['manifest_m3u8']
+            translation.moonwalk_token = playlists['token'][0]
+            translation.save
+
+            sleep 0.01
+          end
+        end
+      end
+    end
+
+    render json: true
   end
 
   private

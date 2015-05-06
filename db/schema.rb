@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150502210139) do
+ActiveRecord::Schema.define(version: 20150505165409) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20150502210139) do
     t.string   "slug_en"
     t.string   "title_ru"
     t.string   "title_en"
-    t.string   "description_ru"
-    t.string   "description_en"
+    t.text     "description_ru"
+    t.text     "description_en"
     t.string   "abs_name"
     t.integer  "number"
     t.integer  "number_abs"
@@ -50,6 +50,10 @@ ActiveRecord::Schema.define(version: 20150502210139) do
     t.integer  "season_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "screenshot_file_name"
+    t.string   "screenshot_content_type"
+    t.integer  "screenshot_file_size"
+    t.datetime "screenshot_updated_at"
   end
 
   create_table "genres", force: true do |t|
@@ -102,6 +106,10 @@ ActiveRecord::Schema.define(version: 20150502210139) do
     t.json     "ids"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "headshot_file_name"
+    t.string   "headshot_content_type"
+    t.integer  "headshot_file_size"
+    t.datetime "headshot_updated_at"
   end
 
   create_table "ratings", force: true do |t|
@@ -118,15 +126,14 @@ ActiveRecord::Schema.define(version: 20150502210139) do
     t.string   "slug_en"
     t.string   "title_ru"
     t.string   "title_en"
-    t.string   "description_ru"
-    t.string   "description_en"
+    t.text     "description_ru"
+    t.text     "description_en"
     t.datetime "first_aired"
     t.integer  "number"
     t.json     "ids"
     t.integer  "episode_count"
     t.integer  "aired_episodes"
     t.integer  "show_id"
-    t.integer  "rating_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "poster_file_name"
@@ -137,14 +144,6 @@ ActiveRecord::Schema.define(version: 20150502210139) do
     t.string   "thumb_content_type"
     t.integer  "thumb_file_size"
     t.datetime "thumb_updated_at"
-    t.string   "screenshot_file_name"
-    t.string   "screenshot_content_type"
-    t.integer  "screenshot_file_size"
-    t.datetime "screenshot_updated_at"
-    t.string   "headshot_file_name"
-    t.string   "headshot_content_type"
-    t.integer  "headshot_file_size"
-    t.datetime "headshot_updated_at"
   end
 
   create_table "shows", force: true do |t|
@@ -209,6 +208,8 @@ ActiveRecord::Schema.define(version: 20150502210139) do
     t.datetime "added_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "episode_id"
+    t.integer  "translator_id"
   end
 
   create_table "translators", force: true do |t|
