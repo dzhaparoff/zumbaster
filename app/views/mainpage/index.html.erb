@@ -1,34 +1,35 @@
 <% title "Главная страница" %>
-<% @shows.each do |s| %>
-    <div class="row">
-      <div class="large-12 columns">
-        <h1><%= s.title_ru  %></h1>
-        <img src="<%= s.poster.url(:thumb) %>" alt="<%= s.title_ru  %>"/>
-        <div class="description"><%= s.description_ru %></div>
-        <div class="row">
-          <% s.seasons.order(:number).each do |s| %>
-            <div class="large-6 columns">
-              <h2><%= s.slug_en %></h2>
-              <img src="<%= s.poster.url(:thumb) %>"/>
-              <div class="row">
-              <% s.episodes.order(:number).each do |e| %>
-                  <div class="small-6 columns">
-                    <h6><%= e.slug_en %></h6>
-                    <img width="400" src="<%= e.screenshot.url(:original) %>"/>
-                    <ul>
-                      <% e.translations.each do |t| %>
-                      <li>
-                        <h5><%= t.translator.name unless t.translator.nil? %></h5>
-                        <div data-videoplayer="<%= t.id %>"></div>
-                      </li>
-                      <% end %>
-                    </ul>
-                  </div>
-              <% end %>
-              </div>
-            </div>
-          <% end %>
+<ul class="mainpage-slider" data-orbit data-options="animation:fade;">
+<% @shows.take(3).each do |s| %>
+      <li>
+        <%= image_tag s.fanart.url(:original), alt: s.title_ru%>
+        <div class="orbit-caption">
+          <%= s.title_ru %>
         </div>
-        </div>
-    </div>
-<%break end %>
+      </li>
+<% end %>
+</ul>
+<div class="row mainpage">
+  <div class="medium-8 column">
+    <h4>Популярные сериалы</h4>
+    <ul class="small-block-grid-3 medium-block-grid-4 large-block-grid-6">
+      <% @shows.take(6).each_with_index do |s, index| %>
+      <li class="show_item">
+        <%= image_tag s.poster.url(:thumb), alt: s.title_ru%>
+        <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="medium-4 column">
+    <h4>Новые сериалы</h4>
+    <ul class="small-block-grid-3 medium-block-grid-2 large-block-grid-3">
+      <% @new_shows.each_with_index do |s, index| %>
+          <li class="show_item">
+            <%= image_tag s.poster.url(:thumb), alt: s.title_ru%>
+            <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

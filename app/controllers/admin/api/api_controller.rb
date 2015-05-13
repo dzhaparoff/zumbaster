@@ -111,6 +111,52 @@ class Admin::Api::ApiController < Admin::AdminController
     render json: true
   end
 
+  def sync_show_people
+    shows = Show.all
+
+    shows.each do |show|
+      next unless show.ids['imdb'].to_i > 0
+      imdb = imdb_to_trakt_id show.ids['imdb']
+      people = @trakt.show_people imdb
+      ap people
+      people['cast'].each do |c|
+        person = Person.where(slug_en: c['person']['ids']['slug']).first_or_create
+        cast = show.casts.where(character: c['character'], person: person, show: show).first_or_create
+        person.name_en = c['person']['name']
+        person.slug_en = c['person']['ids']['slug']
+        person.biography_en = c['person']['biography']
+        person.birthday = Date.parse c['person']['birthday'] unless c['person']['birthday'].nil?
+        person.death = Date.parse c['person']['death'] unless c['person']['death'].nil?
+        person.ids = c['person']['ids']
+        person.headshot = c['person']['images']['headshot']['full'] unless c['person']['images']['headshot']['full'].nil? || person.headshot.exists?
+        person.save
+        cast.save
+        show.casts << cast
+      end
+
+      people['crew'].each do |key, group|
+        group.each do |c|
+          person = Person.where(slug_en: c['person']['ids']['slug']).first_or_create
+          crew = show.crews.where(job: c['job'], person: person, show: show).first_or_create
+          person.name_en = c['person']['name']
+          person.slug_en = c['person']['ids']['slug']
+          person.biography_en = c['person']['biography']
+          person.birthday = Date.parse c['person']['birthday'] unless c['person']['birthday'].nil?
+          person.death = Date.parse c['person']['death'] unless c['person']['death'].nil?
+          person.ids = c['person']['ids']
+          person.headshot = c['person']['images']['headshot']['full'] unless c['person']['images']['headshot']['full'].nil? || person.headshot.exists?
+          person.save
+          crew.job_group = key
+          crew.save
+          show.crews << crew
+        end
+      end
+
+      show.save
+    end
+    render json: true
+  end
+
   def sync_shows_translate
     shows = Show.all
 
@@ -295,6 +341,31 @@ class Admin::Api::ApiController < Admin::AdminController
       end
     end
 
+    render json: true
+  end
+
+  def sync_ru_names_from_kp
+    shows = Show.order(:id).all
+    shows.each do |show|
+      next unless show.ids['kp'].to_i > 0
+      kp = show.ids['kp']
+      kp_episode_names = @kinopoisk.episode_names kp
+      ap kp_episode_names
+      show.episodes.each do |episode|
+        title_en = episode.title_en
+        next if title_en.nil?
+        next if title_en.size < 2
+        kp_episode_names.each do |key, value|
+          next unless value.size > 0
+          regexp = Regexp.new("#{title_en}", Regexp::IGNORECASE)
+          if key[regexp]
+            episode.title_ru = value
+            episode.title_en = key
+          end
+        end
+        episode.save
+      end
+    end
     render json: true
   end
 

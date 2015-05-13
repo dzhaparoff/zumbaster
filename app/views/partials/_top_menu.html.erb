@@ -1,0 +1,27 @@
+<ul class="title-area">
+  <li class="name">
+    <h1><a href="#">Zumbaster</a></h1>
+  </li>
+  <li class="toggle-topbar menu-icon"><a href="#"><span>Меню</span></a></li>
+</ul>
+<section class="top-bar-section">
+  <!-- Right Nav Section -->
+  <ul class="right">
+    <li><a href="#" class="link">Вход</a></li>
+  </ul>
+  <!-- Left Nav Section -->
+  <ul class="left">
+    <li class="has-dropdown">
+      <a href="#">Жанры</a>
+      <ul class="dropdown">
+        <% genres_list.each do |genre| %><li><a href="<%= genre_path genre.slug_ru %>" class="<%= ap(genre_path genre.slug_ru) %>"><%= genre.name_ru %></a></li><% end %>
+      </ul>
+    </li>
+    <li class="divider"></li>
+    <li><a href="#">Популярные</a></li>
+    <li><a href="#">Новые</a></li>
+    <li class="divider"></li>
+    <li><a href="#">Последние обновления</a></li>
+    <li><a href="#">Календарь выхода серий</a></li>
+  </ul>
+</section>

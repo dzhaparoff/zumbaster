@@ -20,6 +20,18 @@ class Kinopoisk
     }
   end
 
+  def episode_names(kinopoisk_id)
+    doc = Nokogiri::HTML(@http.get("http://www.kinopoisk.ru/film/#{kinopoisk_id}/episodes/").body)
+
+    episodes = {}
+
+    doc.css('.episodesOriginalName').each do |s|
+      episodes[s.text] = s.previous_element.css('b').text
+    end
+
+    episodes
+  end
+
   private
 
   def new_http_request_builder(api_url)

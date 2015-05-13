@@ -1,8 +1,33 @@
 @import "foundation_and_overrides";
-//= require_tree .
-//= require_self
+@import "*";
 
-body {
-  background-color:#fff;
+.top-menu {
+  transition: background 0.4s ease;
+  background: #3653AF;
 }
 
+.top-menu.fixed {
+  background: rgba(0, 0, 0, .8);
+}
+
+.mainpage-slider li{
+  max-height: 500px;
+  overflow: hidden;
+}
+
+.mainpage-slider li img {
+  transform: translate3d(0, -15%, 0)
+}
+
+.top-bar-section ul li {
+  background: $transparent;
+}
+
+.mainpage {
+  .show_item .title {
+    display: block;
+    padding-top: rem-calc(6);
+    font-size: rem-calc(12);
+    line-height: rem-calc(14);
+  }
+}

@@ -4,7 +4,7 @@ class CreatePeople < ActiveRecord::Migration
       t.string :slug_ru
       t.string :slug_en
       t.string :name_ru
-      t.string :name_ru
+      t.string :name_en
       t.string :biography_ru
       t.string :biography_en
       t.date :birthday

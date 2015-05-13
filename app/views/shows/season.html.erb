@@ -1,0 +1,40 @@
+<% title @show.title_ru %>
+<div class="show-fanart show-for-medium-up">
+  <img src="<%= @show.fanart.url(:original) %>"/>
+</div>
+<div class="row show-details">
+  <div class="medium-3 small-centered medium-uncentered columns show-poster">
+    <div class="sticky-sidebar">
+        <img src="<%= @season.poster.url(:medium) %>" alt="<%= @show.title_ru  %>, сезон <%=@season.number%>"/>
+    </div>
+  </div>
+  <div class="medium-9 columns">
+    <div class="row">
+      <div class="large-12 columns show-description">
+        <h1><%= @show.title_ru %>, сезон <%=@season.number%></h1>
+        <div class="description"><%= @season.description_en %></div>
+      </div>
+    </div>
+    <div class="row">
+      <% @season.episodes.order(:number).each_with_index do |e, index| %>
+      <div class="large-4 medium-4 small-6 columns<%= index == @season.episodes.size - 1 ? ' end' : ''%> show-episodes">
+        <a href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % e.number %>"><img src="<%= e.screenshot.url(:original) %>"/></a>
+        <h5>
+          <%= e.title_ru %><br>
+          <span><%= e.title_en %></span>
+        </h5>
+        <h6>Эпизод <%= e.number %></h6>
+      </div>
+      <% end %>
+    </div>
+    <div class="row">
+      <h3>Другие сезоны</h3>
+      <% @show.seasons.order(:number).each_with_index do |s, index| %>
+          <div class="large-2 medium-3 small-4 columns<%= index == @show.seasons.size - 1 ? ' end' : ''%> show-seasons">
+            <h5>Сезон <%= s.number %></h5>
+            <a href="<%= show_season_path @show.slug_ru, "%02d" % s.number %>"><img src="<%= s.poster.url(:thumb) %>"/></a>
+          </div>
+      <% end %>
+    </div>
+  </div>
+</div>
