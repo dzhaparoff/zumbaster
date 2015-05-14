@@ -118,7 +118,6 @@ class Admin::Api::ApiController < Admin::AdminController
       next unless show.ids['imdb'].to_i > 0
       imdb = imdb_to_trakt_id show.ids['imdb']
       people = @trakt.show_people imdb
-      ap people
       people['cast'].each do |c|
         person = Person.where(slug_en: c['person']['ids']['slug']).first_or_create
         cast = show.casts.where(character: c['character'], person: person, show: show).first_or_create
@@ -322,8 +321,6 @@ class Admin::Api::ApiController < Admin::AdminController
 
         moonwalk_episodes = @moonwalk.get_playlist_url kp, translator_id
 
-        puts ap moonwalk_episodes
-
         moonwalk_episodes[:playlists].each_pair do |season_number, episodes|
           season = Season.where(show: show, number: season_number).take
           episodes.each_pair do |episode_number, playlists|
@@ -350,7 +347,6 @@ class Admin::Api::ApiController < Admin::AdminController
       next unless show.ids['kp'].to_i > 0
       kp = show.ids['kp']
       kp_episode_names = @kinopoisk.episode_names kp
-      ap kp_episode_names
       show.episodes.each do |episode|
         title_en = episode.title_en
         next if title_en.nil?
