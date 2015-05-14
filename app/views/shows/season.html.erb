@@ -16,25 +16,30 @@
       </div>
     </div>
     <div class="row">
+      <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
       <% @season.episodes.order(:number).each_with_index do |e, index| %>
-      <div class="large-4 medium-4 small-6 columns<%= index == @season.episodes.size - 1 ? ' end' : ''%> show-episodes">
+      <li class="show-episodes">
         <a href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % e.number %>"><img src="<%= e.screenshot.url(:original) %>"/></a>
         <h5>
           <%= e.title_ru %><br>
           <span><%= e.title_en %></span>
+          <span><%= Russian::strftime(e.first_aired, "%d %B %Y")  %></span>
         </h5>
         <h6>Эпизод <%= e.number %></h6>
-      </div>
+      </li>
       <% end %>
+      </ul>
     </div>
     <div class="row">
       <h3>Другие сезоны</h3>
+      <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6">
       <% @show.seasons.order(:number).each_with_index do |s, index| %>
-          <div class="large-2 medium-3 small-4 columns<%= index == @show.seasons.size - 1 ? ' end' : ''%> show-seasons">
+          <li>
             <h5>Сезон <%= s.number %></h5>
             <a href="<%= show_season_path @show.slug_ru, "%02d" % s.number %>"><img src="<%= s.poster.url(:thumb) %>"/></a>
-          </div>
+          </li>
       <% end %>
+      </ul>
     </div>
   </div>
 </div>

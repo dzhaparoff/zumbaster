@@ -30,4 +30,41 @@
     font-size: rem-calc(12);
     line-height: rem-calc(14);
   }
+
+  .show-episode {
+    font-size: rem-calc(12);
+    line-height: rem-calc(14);
+
+    img {
+      margin-bottom: rem-calc(5);
+    }
+
+    span, a {
+      display: block;
+      color: $tuatara;
+    }
+
+    span b {
+      color: $primary-color;
+    }
+
+    .show-title {
+      margin-bottom: rem-calc(5);
+    }
+
+    .episode-date {
+      margin-top: rem-calc(5);
+    }
+
+    .episode-title {
+      font-size: percentage(1.4);
+      line-height: rem-calc(20);
+      color: $primary-color;
+    }
+  }
+  .about-block {
+    p {
+      font-size: rem-calc(12);
+    }
+  }
 }

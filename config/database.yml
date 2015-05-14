@@ -82,4 +82,5 @@ production:
   <<: *default
   database: zumbaster_db
   username: zumbaster
-  password: <%= ENV['VIDEOPLAYER_DATABASE_PASSWORD'] %>
+  password: <%= ENV['ZUMBASTER_DATABASE_PASSWORD'] %>
+  host: 185.53.169.174

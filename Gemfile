@@ -37,8 +37,13 @@ gem 'russian'
 gem 'paperclip'
 gem 'paperclip-av-transcoder'
 gem 'streamio-ffmpeg' # https://github.com/streamio/streamio-ffmpeg
+gem "resque", "~> 2.0.0.pre.1", github: "resque/resque" # https://github.com/resque/resque
 
 group :development do
   gem "awesome_print"
   gem 'spring'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
 end

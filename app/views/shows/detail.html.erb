@@ -25,12 +25,14 @@
           </div>
         </div>
         <div class="row">
-          <% @show.seasons.order(:number).each_with_index do |s, index| %>
-              <div class="large-3 medium-4 small-6 columns<%= index == @show.seasons.size - 1 ? ' end' : ''%> show-seasons">
+          <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6">
+          <% @show.seasons.order(:number).each do |s| %>
+                <li>
                 <h5>Сезон <%= s.number %></h5>
                 <a href="<%= show_season_path @show.slug_ru, "%02d" % s.number %>"><img src="<%= s.poster.url(:thumb) %>"/></a>
-              </div>
+                </li>
           <%end%>
+          </ul>
         </div>
       </div>
     </div>
