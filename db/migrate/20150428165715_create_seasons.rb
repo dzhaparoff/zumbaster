@@ -5,8 +5,8 @@ class CreateSeasons < ActiveRecord::Migration
       t.string :slug_en
       t.string :title_ru
       t.string :title_en
-      t.string :description_ru
-      t.string :description_en
+      t.text :description_ru
+      t.text :description_en
 
       t.datetime :first_aired
 

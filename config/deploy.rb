@@ -1,14 +1,14 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-set :application, 'Zumbaster'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'zumbaster'
+set :repo_url, 'https://github.com/dzhaparoff/zumbaster.git'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-# set :deploy_to, '/var/www/my_app_name'
+set :deploy_to, '/home/zumbaster'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -32,16 +32,16 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 3
 
 namespace :deploy do
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+      within release_path do
+        execute :rake, 'cache:clear'
+      end
     end
   end
 
