@@ -4,13 +4,13 @@ Devise.setup do |config|
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
-  # config.secret_key = '3bff0db513732814e1c2d1b470a56c58169e2a380c94c34da4bab8964ea0f7587d94f5c1b78ab076779bb479907f50d69030524e91a9ee9e69e0386d2d6185b0'
+  config.secret_key = '3bff0db513732814e1c2d1b470a56c58169e2a380c94c34da4bab8964ea0f7587d94f5c1b78ab076779bb479907f50d69030524e91a9ee9e69e0386d2d6185b0'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = 'mail@hd-serials.tv'
 
   # Configure the class responsible to send e-mails.
   # config.mailer = 'Devise::Mailer'
@@ -97,7 +97,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 10
 
   # Setup a pepper to generate the encrypted password.
-  # config.pepper = 'ba98c424d0970dc3fc245cdb84135b857c0478281af9f5a92f40c8faad589342801a2c21619246bcbe52f8fcfcb750ce84a606cdacecba888052fbf4096b25ac'
+  config.pepper = 'ba98c424d0970dc3fc245cdb84135b857c0478281af9f5a92f40c8faad589342801a2c21619246bcbe52f8fcfcb750ce84a606cdacecba888052fbf4096b25ac'
 
   # ==> Configuration for :confirmable
   # A period that the user is allowed to access the website even without
@@ -140,7 +140,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length.
-  config.password_length = 8..128
+  config.password_length = 6..128
 
   # Email regex used to validate email formats. It simply asserts that
   # one (and only one) @ exists in the given string. This is mainly
@@ -230,6 +230,8 @@ Devise.setup do |config|
   config.sign_out_via = :delete
 
   # ==> OmniAuth
+  config.omniauth :vkontakte, '4919373', 'B524hqlx5MeVH3zGjZtB', {display: 'popup', lang: 'ru', image_size: 'original', scope: 'friends, photos, email'}
+  config.omniauth :facebook, '458953274255543', '7b095374a7069375535d625cae5afe3b'
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'

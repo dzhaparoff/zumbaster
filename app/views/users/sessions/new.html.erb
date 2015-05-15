@@ -1,26 +1,47 @@
-<h2>Log in</h2>
+<div id="LoginForm">
+  <section class="ui center aligned very relaxed page grid" >
+    <div class="six wide left aligned column">
+      <div class="row">
+        <div class="column">
+          <h1 class="center aligned ui inverted header">
+            Аутентификация
+          </h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="ui form segment column <%= 'error' if alert %>">
+          <p class="ui error message"><%= alert %></p>
+          <p class="ui warning message"><%= notice %></p>
+          <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div class="field">
+                <%= f.label :email, 'E-mail' %>
+                <%= f.email_field :email, autofocus: true %>
+              </div>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+              <div class="field">
+                <%= f.label :password, 'Пароль' %>
+                <%= f.password_field :password, autocomplete: "off" %>
+              </div>
+              <div class="ui horizontal grid">
+                <% if devise_mapping.rememberable? -%>
+                    <div class="inline field left aligned eight wide  column">
+                      <div class="ui checkbox">
+                        <%= f.check_box :remember_me %>
+                        <%= f.label :remember_me, "Запомнить меня" %>
+                      </div>
+                    </div>
+                <% end -%>
+                <div class="right aligned eight wide  column">
+                  <%= f.submit "Вход", class: 'ui submit teal labeled button' %>
+                </div>
+              </div>
+          <% end %>
+          <div class="ui horizontal divider">Или</div>
+          <div class="center aligned column">
+            <%= render "users/shared/links" %>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end -%>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
-
-<%= render "users/shared/links" %>
+  </section>
+</div>

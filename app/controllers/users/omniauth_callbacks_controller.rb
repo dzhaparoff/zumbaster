@@ -1,28 +1,29 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
-  # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
+  def facebook
 
-  # You should also create an action method in this controller like this:
-  # def twitter
-  # end
+    @user = User.from_omniauth(request.env["omniauth.auth"])
 
-  # More info at:
-  # https://github.com/plataformatec/devise#omniauth
+    if @user.persisted?
+      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+    else
+      session["devise.facebook_data"] = request.env["omniauth.auth"]
+      redirect_to new_user_registration_url
+    end
 
-  # GET|POST /resource/auth/twitter
-  # def passthru
-  #   super
-  # end
+  end
 
-  # GET|POST /users/auth/twitter/callback
-  # def failure
-  #   super
-  # end
+  def vkontakte
 
-  # protected
+    @user = User.from_omniauth_vk(request.env["omniauth.auth"])
 
-  # The path used when omniauth fails
-  # def after_omniauth_failure_path_for(scope)
-  #   super(scope)
-  # end
+    if @user.persisted?
+      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      set_flash_message(:notice, :success, :kind => "Vkontakte") if is_navigational_format?
+    else
+      session["devise.vkontakte_data"] = request.env["omniauth.auth"]
+      redirect_to new_user_registration_url
+    end
+
+  end
 end
