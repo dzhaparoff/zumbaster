@@ -9,6 +9,8 @@
   <%= javascript_include_tag 'admin/admin' %>
 </head>
 <body data-ng-app="admin" data-ng-cloak>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
 <%= content_for?(:content) ? yield(:content) : yield %>
 </body>
 </html>

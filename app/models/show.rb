@@ -15,4 +15,19 @@ class Show < ActiveRecord::Base
   has_attached_file :thumb, :styles => { :medium => "500x281#", :thumb => "250x140#" }, convert_options: { all: '-quality 75 -strip' }
 
   do_not_validate_attachment_file_type :fanart, :poster, :logo, :clearart, :banner, :thumb
+
+  def self.existed_ids
+    shows = select :ids
+
+    kp, imdb, tvrage, myshow = [],[],[],[]
+
+    shows.each do |s|
+      kp << s.ids['kp']
+      imdb << s.ids['imdb']
+      tvrage << s.ids['tvrage']
+      myshow << s.ids['myshow']
+    end
+
+    { kp: kp, imdb: imdb, tvrage: tvrage, myshow: myshow }
+  end
 end

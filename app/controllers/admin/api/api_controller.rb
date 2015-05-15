@@ -28,7 +28,6 @@ class Admin::Api::ApiController < Admin::AdminController
 
   def sync_translators
     translators = @moonwalk.translators
-
     translators.each do |translator|
       if Translator.find_by_ex_id(translator['id']).nil?
         new_translator = Translator.new do |t|
@@ -45,10 +44,10 @@ class Admin::Api::ApiController < Admin::AdminController
   def sync_shows
     shows = @myshow.get_top_shows
 
-    existing_ids = existing_show_ids :myshow
+    existing_ids = Show.existed_ids
 
     shows = shows[0..10].map do |show|
-      show.merge! @myshow.get_show show['id'] unless existing_ids.include? show['id']
+      show.merge! @myshow.get_show show['id'] unless existing_ids[:myshow].include? show['id']
     end
 
     shows.compact!
@@ -73,7 +72,7 @@ class Admin::Api::ApiController < Admin::AdminController
         new_show.save
     end
 
-    render json: true
+    render json: shows
   end
 
   def sync_shows_trakt
