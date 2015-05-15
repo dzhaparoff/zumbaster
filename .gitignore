@@ -16,5 +16,5 @@
 /tmp
 
 /public/tmp
-/public/system
-/public/assets
+/public/system/*
+/public/assets/*
