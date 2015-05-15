@@ -30,7 +30,6 @@ gem 'foundation-rails'
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'nokogiri'
-gem 'm3u8'
 
 gem 'russian'
 
@@ -46,4 +45,5 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
+  gem 'capistrano-passenger'
 end
