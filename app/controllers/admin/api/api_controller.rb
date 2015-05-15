@@ -200,7 +200,7 @@ class Admin::Api::ApiController < Admin::AdminController
 
       show.save
 
-      sleep 0.02
+      sleep 0.01
     end
 
     render json: true
