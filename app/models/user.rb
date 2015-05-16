@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, :styles => { :medium => "500x500#", :thumb => "250x250#" }, convert_options: { all: '-quality 75 -strip' }
 
   devise :database_authenticatable,
-         :rememberable, :trackable, :validatable,
+         :rememberable, :trackable, :validatable, :registerable,
          :omniauthable, omniauth_providers: [:vkontakte, :facebook]
 
   def self.from_omniauth(auth)

@@ -1,0 +1,34 @@
+@import "foundation_and_overrides";
+
+.fullscreen-form {
+  margin-top:25%;
+
+  .panel {
+    box-shadow: 0 0 rem-calc(50) rgba(0,0,0,0.4);
+  }
+
+  .submit.button {
+    padding: rem-calc(12) 0;
+    width:100%;
+    font-size: rem-calc(14);
+    margin-bottom: 0;
+  }
+
+  .divider {
+    margin: rem-calc(20) 0;
+    font-size: rem-calc(14);
+  }
+}
+
+.form-title {
+  font-size: rem-calc(20);
+  line-height: rem-calc(24);
+  text-align:center;
+  color: $white;
+  margin-bottom: rem-calc(25);
+  font-weight: bold;
+}
+
+.social-icon {
+  margin-bottom: 0;
+}

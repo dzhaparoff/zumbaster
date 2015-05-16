@@ -1,4 +1,18 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  layout 'fullscreen'
+
+  def new
+    super
+  end
+
+  def create
+    # add custom create logic here
+  end
+
+  def update
+    super
+  end
+
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
 
