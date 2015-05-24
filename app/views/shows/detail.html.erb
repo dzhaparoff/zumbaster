@@ -16,7 +16,7 @@
               <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6">
                 <% @show.casts.each do |cast| %>
                     <li class="item">
-                      <img src="<%= cast.person.headshot.url(:thumb) %>"/>
+                      <img src="<%= cast.person.headshot.url(:cropped_thumb) %>"/>
                       <p><%= cast.character %></p>
                     </li>
                 <% end %>

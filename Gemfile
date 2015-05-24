@@ -29,11 +29,13 @@ gem 'foundation-rails'
 
 gem 'faraday'
 gem 'faraday_middleware'
+gem 'typhoeus'
 gem 'nokogiri'
 
 gem 'russian'
 
 gem 'paperclip'
+gem 'paperclip-meta'
 gem 'paperclip-av-transcoder'
 gem 'streamio-ffmpeg' # https://github.com/streamio/streamio-ffmpeg
 gem "resque", "~> 2.0.0.pre.1", github: "resque/resque" # https://github.com/resque/resque

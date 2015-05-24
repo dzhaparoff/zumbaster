@@ -23,7 +23,7 @@
         <h5>
           <%= e.title_ru %><br>
           <span><%= e.title_en %></span>
-          <span><%= Russian::strftime(e.first_aired, "%d %B %Y")  %></span>
+          <span><%= Russian::strftime(e.first_aired, "%d %B %Y") unless e.first_aired.nil? %></span>
         </h5>
         <h6>Эпизод <%= e.number %></h6>
       </li>

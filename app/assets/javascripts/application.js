@@ -3,6 +3,7 @@
 //= require foundation
 //= require_self
 //= require ng-app
+//= require_tree
 
 $(function(){
     $(document).foundation();

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150515154107) do
+ActiveRecord::Schema.define(version: 20150517075208) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,7 @@ ActiveRecord::Schema.define(version: 20150515154107) do
     t.string   "screenshot_content_type"
     t.integer  "screenshot_file_size"
     t.datetime "screenshot_updated_at"
+    t.text     "screenshot_meta"
   end
 
   create_table "genres", force: true do |t|
@@ -111,6 +112,7 @@ ActiveRecord::Schema.define(version: 20150515154107) do
     t.integer  "headshot_file_size"
     t.datetime "headshot_updated_at"
     t.string   "name_en"
+    t.text     "headshot_meta"
   end
 
   create_table "ratings", force: true do |t|
@@ -145,6 +147,8 @@ ActiveRecord::Schema.define(version: 20150515154107) do
     t.string   "thumb_content_type"
     t.integer  "thumb_file_size"
     t.datetime "thumb_updated_at"
+    t.text     "poster_meta"
+    t.text     "thumb_meta"
   end
 
   create_table "shows", force: true do |t|
@@ -198,6 +202,13 @@ ActiveRecord::Schema.define(version: 20150515154107) do
     t.string   "poster_ru_content_type"
     t.integer  "poster_ru_file_size"
     t.datetime "poster_ru_updated_at"
+    t.text     "poster_meta"
+    t.text     "poster_ru_meta"
+    t.text     "fanart_meta"
+    t.text     "logo_meta"
+    t.text     "clearart_meta"
+    t.text     "banner_meta"
+    t.text     "thumb_meta"
   end
 
   create_table "translations", force: true do |t|
@@ -237,6 +248,16 @@ ActiveRecord::Schema.define(version: 20150515154107) do
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
+    t.string   "provider"
+    t.string   "uid"
+    t.text     "avatar_meta"
+    t.string   "name"
+    t.string   "nickname"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "location"
+    t.json     "urls"
+    t.integer  "sex"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

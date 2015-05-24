@@ -1,5 +1,5 @@
 class Admin::Api::ApiController < Admin::AdminController
-
+  require 'typhoeus/adapters/faraday'
   def initialize
     @myshow = Myshows.new
     @trakt = Trakt.new
@@ -318,7 +318,7 @@ class Admin::Api::ApiController < Admin::AdminController
       moonwalk.each do |m|
         translator_id = m['translator_id']
 
-        moonwalk_episodes = @moonwalk.get_playlist_url kp, translator_id
+        moonwalk_episodes = @moonwalk.get_playlist_url_parallel kp, translator_id
 
         moonwalk_episodes[:playlists].each_pair do |season_number, episodes|
           season = Season.where(show: show, number: season_number).take
@@ -328,10 +328,8 @@ class Admin::Api::ApiController < Admin::AdminController
             translation = Translation.where(episode: episode, translator: translator).first_or_create
             translation.f4m = playlists['playlists']['manifest_f4m']
             translation.m3u8 = playlists['playlists']['manifest_m3u8']
-            translation.moonwalk_token = playlists['token'][0]
+            translation.moonwalk_token = playlists['token']
             translation.save
-
-            sleep 0.01
           end
         end
       end
@@ -390,11 +388,9 @@ class Admin::Api::ApiController < Admin::AdminController
       else
         return {kp: kp, imdb: imdb, tvrage: tvrage, myshow: myshow}
     end
-
   end
 
   def imdb_to_trakt_id imdb
     "tt%07d" % imdb.to_i
   end
-
 end

@@ -9,10 +9,14 @@
   <%= yield :stylesheets %>
   <%= javascript_include_tag 'vendor/modernizr' %>
   <%= javascript_include_tag 'application' %>
+  <script src="http://www.quasimondo.com/StackBlurForCanvas/StackBlur.js" language="javascript"></script>
 </head>
 <body data-ng-app="zumbaster" data-ng-cloak data-ng-strict-di>
 <section class="fullscreen">
-  <%= content_for?(:content) ? yield(:content) : yield %>
+  <div class="wrapper">
+    <%= content_for?(:content) ? yield(:content) : yield %>
+    <%== random_bg_image %>
+  </div>
 </section>
 </body>
 </html>

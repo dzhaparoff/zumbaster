@@ -1,10 +1,79 @@
-@import "foundation_and_overrides";
+// import "foundation_and_overrides";
+
+$main-color: rgba(255, 255, 255, 0.8);
+$secondary-color: rgba(0, 0, 0, 0.55);
+
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+
+  .fullscreen-image {
+    display:none;
+  }
+}
+
+#innerBlurBg {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  z-index: 0;
+  opacity: .7;
+}
 
 .fullscreen-form {
-  margin-top:25%;
+  position: relative;
+  z-index: 2;
+  margin-top:20%;
 
   .panel {
-    box-shadow: 0 0 rem-calc(50) rgba(0,0,0,0.4);
+    box-shadow: 0 0 rem-calc(50) rgba(0,0,0,0.45);
+    position:relative;
+    border: none;
+    overflow: hidden;
+    background: #fff;
+
+    & > div {
+      z-index: 2;
+    }
+
+    .row {
+      position: relative;
+      z-index: 2;
+
+      label, p, div {
+        color: $main-color;
+      }
+
+      a {
+        color: $secondary-color;
+        &:hover {
+          color: $main-color;
+        }
+      }
+
+      .button {
+        background: none;
+        border: 1px solid $main-color;
+        color: $main-color;
+
+        &:hover {
+          background-color: $main-color;
+          color: $secondary-color;
+        }
+      }
+      .vertical-align-middle {
+        & > * {
+          display: inline-block;
+          vertical-align: middle;
+        }
+      }
+    }
   }
 
   .submit.button {
@@ -18,17 +87,17 @@
     margin: rem-calc(20) 0;
     font-size: rem-calc(14);
   }
-}
 
-.form-title {
-  font-size: rem-calc(20);
-  line-height: rem-calc(24);
-  text-align:center;
-  color: $white;
-  margin-bottom: rem-calc(25);
-  font-weight: bold;
-}
+  .form-title {
+    font-size: rem-calc(20);
+    line-height: rem-calc(24);
+    text-align:center;
+    color: $white;
+    margin-bottom: rem-calc(25);
+    font-weight: bold;
+  }
 
-.social-icon {
-  margin-bottom: 0;
+  .social-icon {
+    margin-bottom: 0;
+  }
 }
