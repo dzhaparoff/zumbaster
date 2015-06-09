@@ -255,6 +255,7 @@ class Admin::Api::ApiController < Admin::AdminController
 
     shows.each do |show|
       next unless show.ids['imdb'].to_i > 0
+      next if show.status == 'ended' unless show.seasons.nil?
       imdb = imdb_to_trakt_id show.ids['imdb']
       trakt_seasons = @trakt.show_seasons imdb
 
@@ -262,8 +263,10 @@ class Admin::Api::ApiController < Admin::AdminController
 
       trakt_seasons.each do |season|
         next if season['number'] == 0
+        next if show.seasons.order(number: :asc).last.number > season['number'] && show.seasons.count > 0
+
         s = Season.where(show: show, number: season['number']).first_or_create
-        # next unless s.episode_count.nil?
+
         season_number = "s%02d" % season['number']
         s.number = season['number']
         s.ids = season['ids']
@@ -278,10 +281,10 @@ class Admin::Api::ApiController < Admin::AdminController
         s.save
 
         next if season['episodes'].nil?
-        # next if Episode.where(show: show, season: s).count > 0
 
         season['episodes'].each do |episode|
           e = Episode.where(show: show, season: s, number: episode['number']).first_or_create
+
           episode_number = "e%02d" % episode['number']
           e.show = show
           e.season = s
@@ -311,6 +314,8 @@ class Admin::Api::ApiController < Admin::AdminController
 
     shows.each do |show|
       next unless show.ids['kp'].to_i > 0
+      next if show.status == 'ended' unless show.seasons.nil?
+
       kp = show.ids['kp']
 
       moonwalk = @moonwalk.show kp
@@ -326,8 +331,8 @@ class Admin::Api::ApiController < Admin::AdminController
             episode = Episode.where(show: show, season: season, number: episode_number).take
             translator = Translator.where(ex_id: translator_id).take
             translation = Translation.where(episode: episode, translator: translator).first_or_create
-            translation.f4m = playlists['playlists']['manifest_f4m']
-            translation.m3u8 = playlists['playlists']['manifest_m3u8']
+            translation.f4m = playlists['playlists']['manifest_f4m'] unless playlists['playlists'].nil?
+            translation.m3u8 = playlists['playlists']['manifest_m3u8'] unless playlists['playlists'].nil?
             translation.moonwalk_token = playlists['token']
             translation.save
           end
@@ -351,7 +356,12 @@ class Admin::Api::ApiController < Admin::AdminController
         kp_episode_names.each do |key, value|
           next unless value.size > 0
           regexp = Regexp.new("#{title_en}", Regexp::IGNORECASE)
-          if key[regexp]
+          if key.length > 1
+            regexp2 = Regexp.new("#{key}", Regexp::IGNORECASE)
+          else
+            regexp2 = key
+          end
+          if key[regexp] || title_en[regexp2]
             episode.title_ru = value
             episode.title_en = key
           end

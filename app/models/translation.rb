@@ -10,26 +10,16 @@ class Translation < ActiveRecord::Base
   def sync_translation_video
     e = episode.number
     s = episode.season.number
+    moonwalk = Moonwalk.new
+    serial = moonwalk.show_episodes(episode.show.ids['kp'], translator.ex_id)
 
-    http = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-      builder.headers['Content-Type'] = 'application/json'
-      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'
-      builder.params['api_token'] = APP_CONFIG['m_api_key']
-      builder.adapter Faraday.default_adapter
-    end
-
-    request = http.get('/api/serial_episodes.json',
-                        kinopoisk_id: episode.show.ids['kp'],
-                        translator_id: translator.ex_id)
-
-    serial = JSON.parse request.body
     main_iframe_link = serial['serial']['iframe_url'].to_s
 
-    request2 = Faraday.get main_iframe_link,
+    request = Faraday.get main_iframe_link,
                                     season: s,
                                     episode: e
 
-    doc = Nokogiri::HTML.parse(request2.body)
+    doc = Nokogiri::HTML.parse(request.body)
     script = doc.search('body > script')[1]
 
     false if script.nil?
@@ -39,8 +29,9 @@ class Translation < ActiveRecord::Base
 
     new_playlist = Moonwalk.playlist_getter video_token
 
-    f4m = new_playlist['manifest_f4m']
-    m3u8 = new_playlist['manifest_m3u8']
-    save
+    self.f4m = new_playlist['manifest_f4m']
+    self.m3u8 = new_playlist['manifest_m3u8']
+
+    self.save
   end
 end

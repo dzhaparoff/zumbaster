@@ -1,11 +1,10 @@
 class Moonwalk
 
   def initialize
-
     api_url = APP_CONFIG['m_api_url']
     api_key = APP_CONFIG['m_api_key']
     @http = new_http_request_builder api_url, api_key
-
+    @http_parallel = new_http_request_parallel api_url, api_key
   end
 
   def show(kinopoisk_id)
@@ -39,9 +38,9 @@ class Moonwalk
 
     seasons_episodes.sort.to_h.each_pair do |k, v|
       request[k] = {}
-      @http.in_parallel do
+      @http_parallel.in_parallel do
         v.each do |episode|
-          request[k][episode] = @http.get main_iframe_link[18..-1],
+          request[k][episode] = @http_parallel.get main_iframe_link[18..-1],
                               season: k,
                               episode: episode
         end
@@ -63,12 +62,12 @@ class Moonwalk
                                                         video_token: video_token,
                                                         content_type: 'serial',
                                                         access_key: 'zNW4q9pL82sHxV')
-    playlist_request.body
+    JSON.parse playlist_request.body
   end
 
   private
 
-  def new_http_request_builder api_url, api_key
+  def new_http_request_parallel api_url, api_key
     manager = Typhoeus::Hydra.new(:max_concurrency => 1)
     Faraday.new(url: api_url, parallel_manager: manager) do |builder|
       builder.headers['Content-Type'] = 'application/json'
@@ -76,6 +75,15 @@ class Moonwalk
       builder.params['api_token'] = api_key
       # builder.adapter Faraday.default_adapter
       builder.adapter :typhoeus
+    end
+  end
+
+  def new_http_request_builder api_url, api_key
+    Faraday.new(url: api_url) do |builder|
+      builder.headers['Content-Type'] = 'application/json'
+      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'
+      builder.params['api_token'] = api_key
+      builder.adapter Faraday.default_adapter
     end
   end
 
@@ -101,8 +109,8 @@ class Moonwalk
 
           if playlists_mask[:m3u8].nil? && playlists_mask[:f4m].nil?
             playlist_request = Moonwalk.playlist_getter video_token
-            playlists_mask = make_playlist_mask JSON.parse playlist_request
-            playlists[s][e]['playlists'] = JSON.parse playlist_request
+            playlists_mask = make_playlist_mask playlist_request
+            playlists[s][e]['playlists'] = playlist_request
           else
             playlists[s][e]['playlists'] = make_playlist_from_mask playlists_mask, video_token
           end
