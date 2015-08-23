@@ -14,7 +14,7 @@
     <li class="has-dropdown">
       <a href="#">Жанры</a>
       <ul class="dropdown">
-        <% genres_list.each do |genre| %><li><a href="<%= genre_path genre.slug_ru %>" class="<%= ap(genre_path genre.slug_ru) %>"><%= genre.name_ru %></a></li><% end %>
+        <% genres_list.each do |genre| %><li><a href="<%= genre_path genre.slug_ru %>" class="<%= cp(genre_path genre.slug_ru) %>"><%= genre.name_ru %></a></li><% end %>
       </ul>
     </li>
     <li class="divider"></li>

@@ -12,6 +12,10 @@ class Myshows
     JSON.parse @http.get("/shows/#{id}").body
   end
 
+  def find_show string
+    JSON.parse @http.get("/shows/search/?q=#{string}").body
+  end
+
   private
 
   def new_http_request_builder

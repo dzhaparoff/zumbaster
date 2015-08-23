@@ -1,10 +1,10 @@
 class Admin::AdminController < ApplicationController
   layout 'admin'
   before_action :authenticate_user!, :user_is_admin?
+  skip_before_action :verify_authenticity_token
 
   def index
-
-    render json: false
+    @shows = Show.all
   end
 
   private

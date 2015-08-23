@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="PostgreSQL - zumbaster@localhost" uuid="f4f9826c-795e-4dc3-8dc5-f7f0615084bb" />
+    <data-source name="Rails zumbaster: development" uuid="9d43ba6b-e975-4e96-851c-1d4ea7839715">
+      <user-name>zumbaster</user-name>
+      <user-password>dfc4dfcfdfdedfc6dfcbdfc8dfc9dfc5dfc7</user-password>
+    </data-source>
+    <data-source name="Rails zumbaster: test" uuid="7c170c17-b47b-49b6-bd6c-4c72a2c388d4" />
+    <data-source name="Rails zumbaster: production" uuid="4a446765-a57e-42df-81b5-78a56d85f3a0">
+      <user-name>zumbaster</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddff0dfffdfe7dfe8dfebdff9dffedfefdff8dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
+    </data-source>
+  </component>
+</project>

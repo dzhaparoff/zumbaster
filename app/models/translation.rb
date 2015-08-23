@@ -3,6 +3,7 @@ class Translation < ActiveRecord::Base
   belongs_to :translator
 
   def translation_video_exist?
+    return false if m3u8.nil?
     responce = Faraday.get(m3u8)
     responce.status == 200
   end
@@ -11,7 +12,9 @@ class Translation < ActiveRecord::Base
     e = episode.number
     s = episode.season.number
     moonwalk = Moonwalk.new
-    serial = moonwalk.show_episodes(episode.show.ids['kp'], translator.ex_id)
+
+    tansl_id = translator.nil? ? nil : translator.ex_id
+    serial = moonwalk.show_episodes(episode.show.ids['kp'], tansl_id)
 
     main_iframe_link = serial['serial']['iframe_url'].to_s
 
@@ -20,12 +23,14 @@ class Translation < ActiveRecord::Base
                                     episode: e
 
     doc = Nokogiri::HTML.parse(request.body)
-    script = doc.search('body > script')[1]
 
-    false if script.nil?
-    false if script.content.nil?
+    video_token = false
 
-    video_token = script.content.to_s.scan(/video_token\: \'([a-zA-Z0-9]+)\'/).first.first
+    doc.search('body > script').each do |script|
+      video_token = check_script_tag script, video_token
+    end
+
+    return false if video_token == false
 
     new_playlist = Moonwalk.playlist_getter video_token
 
@@ -33,5 +38,21 @@ class Translation < ActiveRecord::Base
     self.m3u8 = new_playlist['manifest_m3u8']
 
     self.save
+  end
+
+  private
+
+  def check_script_tag(script, video_token)
+
+    return video_token if video_token != false
+
+    return false if script.nil?
+    return false if script.content.nil?
+
+    video_token_raw = script.content.to_s.scan(/video_token\: \'([a-zA-Z0-9]+)\'/)
+
+    return false if video_token_raw.first.nil? || video_token_raw.nil? || video_token_raw.size == 0
+
+    video_token_raw.first.first
   end
 end

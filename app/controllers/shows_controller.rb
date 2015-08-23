@@ -3,6 +3,7 @@ class ShowsController < ApplicationController
 
   def detail
     @show = Show.find_by_slug_ru @show_slug
+    @genres = @show.genres
   end
 
   def season

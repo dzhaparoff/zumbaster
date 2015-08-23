@@ -100,12 +100,11 @@ class Moonwalk
           playlists[s][e] = {}
           doc = Nokogiri::HTML.parse(r.body)
 
-          script = doc.search('body > script')[1]
+          video_token = false
 
-          next if script.nil?
-          next if script.content.nil?
-
-          video_token = script.content.to_s.scan(/video_token\: \'([a-zA-Z0-9]+)\'/).first.first
+          doc.search('body > script').each do |script|
+            video_token = check_script_tag script, video_token
+          end
 
           if playlists_mask[:m3u8].nil? && playlists_mask[:f4m].nil?
             playlist_request = Moonwalk.playlist_getter video_token
@@ -132,5 +131,19 @@ class Moonwalk
         'manifest_m3u8' => mask_hash[:m3u8].gsub("#", video_token),
         'manifest_f4m'  => mask_hash[:f4m].gsub("#", video_token)
     }
+  end
+
+  def check_script_tag(script, video_token)
+
+    return video_token if video_token != false
+
+    return false if script.nil?
+    return false if script.content.nil?
+
+    video_token_raw = script.content.to_s.scan(/video_token\: \'([a-zA-Z0-9]+)\'/)
+
+    return false if video_token_raw.first.nil? || video_token_raw.nil? || video_token_raw.size == 0
+
+    video_token_raw.first.first
   end
 end

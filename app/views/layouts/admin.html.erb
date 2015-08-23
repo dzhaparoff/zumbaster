@@ -1,16 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="admin" data-ng-strict-di>
 <head>
-  <title><%= content_for?(:title) ? yield(:title) : 'Zumbaster' %></title>
+  <title><%= content_for?(:title) ? yield(:title) : 'Admin Panel - Zumbaster' %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <%= stylesheet_link_tag 'application', media: 'all'%>
+  <%= stylesheet_link_tag 'admin/admin', media: 'all'%>
   <%= csrf_meta_tags %>
   <base href="<%= request.original_fullpath %>">
   <%= yield :stylesheets %>
+  <%= javascript_include_tag 'vendor/modernizr' %>
+  <%= javascript_include_tag '//yandex.st/swfobject/2.2/swfobject.min.js' %>
   <%= javascript_include_tag 'admin/admin' %>
+  <%= csrf_meta_tags %>
 </head>
-<body data-ng-app="admin" data-ng-cloak>
-<p class="notice"><%= notice %></p>
-<p class="alert"><%= alert %></p>
-<%= content_for?(:content) ? yield(:content) : yield %>
+<body data-ng-controller="MainCtrl as main">
+<div class="contain-to-grid sticky top-menu">
+  <nav class="top-bar" data-topbar role="navigation">
+    <%= render "admin/partials/top_menu" %>
+  </nav>
+</div>
+<section class="main-section">
+  <p class="notice"><%= notice %></p>
+  <p class="alert"><%= alert %></p>
+  <%= content_for?(:content) ? yield(:content) : yield %>
+</section>
+<%= render "admin/partials/footer" %>
 </body>
 </html>

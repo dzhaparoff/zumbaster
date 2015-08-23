@@ -1,0 +1,42 @@
+<% title "Сериалы" %>
+<div class="row">
+  <div class="medium-12 column">
+    <p></p>
+    <table width="100%">
+      <caption>Количество сериалов: <%= @shows.count %></caption>
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>Название</th>
+        <th>Кинопоиск</th>
+        <th>Статус</th>
+      </tr>
+      </thead>
+      <tbody>
+      <%- @shows.each do |show| %>
+          <tr>
+            <td><%= show.id %></td>
+            <td><%= show.title_ru %> (<%= show.title_en %>)</td>
+            <td><%= link_to 'кинопоиск', "http://kinopoisk.ru/film/#{show.ids['kp']}", target: '_blank' %></td>
+            <td><%= show.status %></td>
+          </tr>
+          <tr fill-show="<%= show.id %>" data-ng-class="show.api.loading.class" class="loading-fade">
+            <td colspan="4">
+              <div class="row">
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_with_trakt')" data-ng-disabled="show.api.loading.loading">Заполнить инфу</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_translate')" data-ng-disabled="show.api.loading.loading">Заполнить русскую инфу</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_pics')" data-ng-disabled="show.api.loading.loading">Добавить постеры и фан-арт</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_ru_pics')" data-ng-disabled="show.api.loading.loading">Добавить русские постеры</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_rating')" data-ng-disabled="show.api.loading.loading">Синхронизировать рейтинг</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_people')" data-ng-disabled="show.api.loading.loading">Добавить PEOPLE</button></div>
+              </div>
+              <div class="row">
+                <div class="small-12 column"><button class="button tiny" data-ng-click="show.actions.post('activate')" data-ng-disabled="show.api.loading.loading">Активировать</button></div>
+              </div>
+            </td>
+          </tr>
+      <% end -%>
+      </tbody>
+    </table>
+  </div>
+</div>

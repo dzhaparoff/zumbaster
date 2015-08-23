@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.1.8'
+gem 'rails', '4.2.3'
 gem 'pg'
 # Use SCSS for stylesheets
 gem 'sass-rails'
@@ -22,10 +22,12 @@ gem 'omniauth-vkontakte'
 
 gem "dynamic_sitemaps"
 
+gem 'turbolinks'
 gem 'autoprefixer-rails'
 gem 'angularjs-rails'
 gem 'jquery-rails'
 gem 'foundation-rails'
+gem 'lodash-rails'
 
 gem 'faraday'
 gem 'faraday_middleware'
@@ -38,6 +40,11 @@ gem 'paperclip'
 gem 'paperclip-meta'
 gem 'paperclip-av-transcoder'
 gem 'streamio-ffmpeg' # https://github.com/streamio/streamio-ffmpeg
+
+
+gem 'daemons'
+gem 'delayed_job_active_record'
+gem 'progress_job'
 gem "resque", "~> 2.0.0.pre.1", github: "resque/resque" # https://github.com/resque/resque
 
 group :development do

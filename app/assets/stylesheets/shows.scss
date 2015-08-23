@@ -1,9 +1,12 @@
 @import "foundation_and_overrides";
 
 @media #{$medium-up} {
-  .show-details .show-poster img{
+  .show-details .show-poster{
     position: relative;
-    top: -60px;
+    transform: translate3d(0, -60px, 0);
+    img {
+      margin-bottom: 20px;
+    }
   }
 }
 

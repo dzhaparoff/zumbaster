@@ -42,7 +42,13 @@
                 var player;
 
                 playlist.promise.then(function(){
-                    construct_player();
+
+                    if(playlist.f4m !== null){
+                        construct_player();
+                    }
+                    else
+                        elem.parent().remove();
+
                 });
 
                 function construct_player() {

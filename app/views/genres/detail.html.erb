@@ -1,0 +1,14 @@
+<% title @genre.name_ru %>
+<div class="row genres">
+  <div class="medium-12 column">
+    <h1><%= @genre.name_ru %></h1>
+    <ul class="small-block-grid-3 medium-block-grid-6 large-block-grid-8">
+      <% @shows.each do |s| %>
+          <li class="show_item">
+            <a href="<%= show_path(s.slug_ru) %>"><%= image_tag s.poster.url(:thumb), alt: s.title_ru%></a>
+            <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

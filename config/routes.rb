@@ -48,7 +48,18 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'admin#index'
 
+    # get '/shows/:action' => 'shows'
+    # get '/genres/:action' => 'genres'
+
+    resources :shows, :genres, :translators, :people do
+      get '/actions/:action', on: :collection, as: :action
+    end
+
     namespace :api do
+      resources :shows, :genres, :translators, :people do # RESTful api
+        get '/1.0/:action', on: :collection # non RESTful api
+        post '/1.0/:action', on: :collection
+      end
       get '/:action' => 'api' # non RESTful api
       post '/:action' => 'api' # non RESTful api
     end

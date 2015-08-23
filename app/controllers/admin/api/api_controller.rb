@@ -7,10 +7,6 @@ class Admin::Api::ApiController < Admin::AdminController
     @kinopoisk = Kinopoisk.new
   end
 
-  def check
-    render json: @trakt.genres
-  end
-
   def sync_genres
     genres = @trakt.genres
     genres.each do |genre|
@@ -64,6 +60,7 @@ class Admin::Api::ApiController < Admin::AdminController
           s.slug_en = show['title'].parameterize unless show['title'].nil?
           s.title_ru = show['ruTitle']
           s.title_en = show['title']
+          s.description_ru = show['description']
           s.year = show['year']
           s.ids = ids
           s.runtime = show['runtime']
@@ -263,7 +260,8 @@ class Admin::Api::ApiController < Admin::AdminController
 
       trakt_seasons.each do |season|
         next if season['number'] == 0
-        next if show.seasons.order(number: :asc).last.number > season['number'] && show.seasons.count > 0
+
+        # next if show.seasons.order(number: :asc).last.number > season['number'] && show.seasons.count > 0
 
         s = Season.where(show: show, number: season['number']).first_or_create
 

@@ -1,0 +1,48 @@
+<section data-search-show>
+<form name="search.form" data-ng-submit="search.go()">
+    <div class="row">
+      <div class="medium-12 column">
+        <h2>Поиск сериалов</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 column">
+        <label>Название сериала
+          <div class="row collapse">
+            <div class="small-10 column">
+              <input type="text" data-ng-model="search.show_name" placeholder="Введите название сериала, или ключевые слова" />
+            </div>
+            <div class="small-2 column">
+              <button type="submit" class="button postfix">Найти</button>
+            </div>
+          </div>
+        </label>
+      </div>
+    </div>
+  <div class="row" data-ng-if="search.found">
+    <div class="medium-12 column">
+      <table>
+        <thead>
+            <tr>
+              <td colspan="2">Название</td>
+              <td>Год</td>
+              <td>Статус</td>
+              <td>Описание</td>
+              <td></td>
+            </tr>
+        </thead>
+          <tbody>
+              <tr data-ng-repeat="item in search.found_items" data-ng-class="{'exist' : item.exist}">
+                <td>{{item.ruTitle}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.year}}</td>
+                <td>{{item.status}}</td>
+                <td data-ng-bind-html="main.helpers.parseHtml(item.description)"></td>
+                <td><button type="button" data-ng-disabled="item.exist" data-ng-click="search.addShow(item)">Добавить</button></td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</form>
+</section>

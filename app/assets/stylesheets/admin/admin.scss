@@ -1,3 +1,95 @@
-// Place all the styles related to the admin/admin controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@mixin ng-if-fade($opacity_to){
+  &.ng-enter {
+    opacity: 0;
+    &.ng-enter-active {
+      opacity: $opacity_to;
+    }
+  }
+
+  &.ng-leave {
+    opacity: $opacity_to;
+    &.ng-leave-active {
+      opacity: 0;
+    }
+  }
+}
+
+@mixin loading-fade($opacity_to){
+  transition: opacity 0.35s ease;
+  &.loading-add {
+    opacity: 1;
+    &.loading {
+      opacity: $opacity_to;
+    }
+  }
+
+  &.loading {
+    opacity: $opacity_to;
+    &.loading-remove {
+      opacity: 1;
+    }
+  }
+}
+
+.loading-fade {
+  @include loading-fade(0.4);
+}
+
+.progress-button {
+  position: relative;
+  transition: all 0.35s ease;
+
+  &.in-progress {
+    transform: translate3d(0,-4px,0);
+  }
+
+  &:focus, &:active {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .progress {
+    position: absolute;
+    display: block;
+    padding:0;
+    margin:0;
+    left: 0;
+    bottom: -4px;
+    height: 4px;
+    width: 100%;
+    background: rgba(20, 32, 76, .35);
+    border: none;
+    transition: all 0.35s ease;
+
+    .bar {
+      position: absolute;
+      top:0;
+      left:0;
+      height: 100%;
+      transition: all 0.35s ease;
+      background: rgba(20, 32, 76, 1);
+    }
+
+    &.ng-enter {
+      opacity: 0;
+      bottom: 0;
+      height: 0;
+      &.ng-enter-active {
+        opacity: 1;
+        bottom: -4px;
+        height: 4px;
+      }
+    }
+
+    &.ng-leave {
+      opacity: 1;
+      bottom: -4px;
+      height: 4px;
+      &.ng-leave-active {
+        opacity: 0;
+        bottom: 0;
+        height: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<% title "Жанры" %>
+<div class="row" data-resource="genres">
+  <div class="medium-12 column">
+    <table width="100%">
+      <caption>Жанры</caption>
+      <thead>
+      <tr>
+        <th>id</th>
+        <th>Название Ru</th>
+        <th>Название En</th>
+        <th>Символьный код Ru</th>
+        <th>Символьный код En</th>
+        <th>Количество сериалов</th>
+        <th>Действия</th>
+      </tr>
+      </thead>
+      <tbody>
+      <%- @genres.each do |g| %>
+          <tr data-model-item="<%= g.id %>" data-model="Genre">
+            <td><%= g.id %></td>
+            <td><div data-ng-model="item.model.name_ru" class="contenteditable" data-ng-class="main.helpers.class(item.editable, 'editable', 'not-editable')" contenteditable="{{item.editable}}"><%= g.name_ru %></div></td>
+            <td><div data-ng-model="item.model.name_en" class="contenteditable" data-ng-class="main.helpers.class(item.editable, 'editable', 'not-editable')" contenteditable="{{item.editable}}"><%= g.name_en %></div></td>
+            <td><div data-ng-model="item.model.slug_ru" class="contenteditable" data-ng-class="main.helpers.class(item.editable, 'editable', 'not-editable')" contenteditable="{{item.editable}}"><%= g.slug_ru %></div></td>
+            <td><div data-ng-model="item.model.slug_en" class="contenteditable" data-ng-class="main.helpers.class(item.editable, 'editable', 'not-editable')" contenteditable="{{item.editable}}"><%= g.slug_en %></div></td>
+            <td><%= g.shows.count %></td>
+            <td>
+              <button class="button tiny" data-ng-if="!item.editable"  data-ng-click="editor.edit_item(item)">Редактировать</button>
+              <button class="button tiny success" data-ng-if="item.editable" data-ng-click="editor.save_item(item)">Сохранить</button>
+              <button class="button tiny alert" data-ng-if="item.editable" data-ng-click="editor.cancel_edit_item(item)">Отменить</button>
+            </td>
+          </tr>
+      <% end -%>
+      </tbody>
+    </table>
+  </div>
+</div>

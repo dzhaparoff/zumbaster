@@ -5,24 +5,33 @@
     <div class="row">
       <div class="large-12 columns">
         <div class="row show-details">
-          <div class="medium-4 small-centered medium-uncentered columns show-poster">
+          <div class="medium-3 small-centered medium-uncentered columns show-poster">
             <img src="<%= @show.poster.url(:medium) %>" alt="<%= @show.title_ru  %>"/>
+
           </div>
-          <div class="medium-8 columns show-description">
-            <h1><%= @show.title_ru %></h1>
-            <div class="description"><%= @show.description_ru %></div>
-            <img src="<%= @show.thumb.url %>" alt=""/>
-            <h5>Актеры:</h5>
-            <div class="people-list">
-              <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6">
-                <% @show.casts.each do |cast| %>
-                    <li class="item">
-                      <img src="<%= cast.person.headshot.url(:cropped_thumb) %>"/>
-                      <p><%= cast.character %></p>
-                    </li>
-                <% end %>
-              </ul>
-            </div>
+          <div class="medium-9 columns show-description">
+            <h1 class="title-ru"><%= @show.title_ru %></h1>
+            <h3 class="title-en"><%= @show.title_en %></h3>
+
+            <div class="more-info"><%= @show.first_aired.year %>, <%= @show.country.upcase %>, <%== genres_inline_list @genres %></div>
+            <div class="more-info">Канал: <%= @show.network %>, <%= @show.certification %></div>
+            <div class="more-info">Количество сезонов: <%= @show.seasons.where("number > 0").count %>, <%= @show.status %></div>
+            <div class="more-info">Количество эпизодов: <%= @show.aired_episodes %></div>
+            <div class="more-info">Продолжительность эпизода: <%= distance_of_time_in_words @show.runtime.minutes %></div>
+            <div class="more-info">Общая продолжительность: <%= distance_of_time_in_words (@show.runtime * @show.aired_episodes).minutes %></div>
+
+            <div class="description"><%== @show.description_ru %></div>
+            <!--<h5>Актеры:</h5>-->
+            <!--<div class="people-list">-->
+              <!--<ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6">-->
+                <!--<% @show.casts.each do |cast| %>-->
+                    <!--<li class="item">-->
+                      <!--<img src="<%= cast.person.headshot.url(:cropped_thumb) %>"/>-->
+                      <!--<p><%= cast.character %></p>-->
+                    <!--</li>-->
+                <!--<% end %>-->
+              <!--</ul>-->
+            <!--</div>-->
           </div>
         </div>
         <div class="row">

@@ -9,6 +9,7 @@
   <%= yield :stylesheets %>
   <%= javascript_include_tag 'vendor/modernizr' %>
   <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
   <script src="http://www.quasimondo.com/StackBlurForCanvas/StackBlur.js" language="javascript"></script>
 </head>
 <body data-ng-app="zumbaster" data-ng-cloak data-ng-strict-di>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="zumbaster" data-ng-strict-di>
 <head>
-  <title><%= content_for?(:title) ? yield(:title) : 'Zumbaster' %></title>
+  <title><%= content_for?(:title) ? yield(:title) : 'HdSerials' %> - Смотреть сериалы в хорошем качестве онлайн - Hd-Serials.tv</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <%= stylesheet_link_tag 'application', media: 'all'%>
   <%= csrf_meta_tags %>
@@ -10,8 +10,9 @@
   <%= javascript_include_tag 'vendor/modernizr' %>
   <%= javascript_include_tag '//yandex.st/swfobject/2.2/swfobject.min.js' %>
   <%= javascript_include_tag 'application' %>
+  <%= csrf_meta_tags %>
 </head>
-<body data-ng-app="zumbaster" data-ng-cloak data-ng-strict-di>
+<body>
     <div class="contain-to-grid sticky top-menu">
         <nav class="top-bar" data-topbar role="navigation">
           <%= render "partials/top_menu" %>
