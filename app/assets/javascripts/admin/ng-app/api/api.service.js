@@ -43,6 +43,66 @@
                 );
                 return result.promise;
             },
+            index : function(resource) {
+                var self = this;
+                var result = $q.defer();
+                var loading_id = resource;
+
+                if(!this.loading.hasOwnProperty(loading_id))
+                    this.loading[loading_id] = Loading.new(loading_id);
+
+                self.loading[loading_id].loading_start(resource + '-loading');
+                self.__resolve_promise (
+                    self.__get(resource),
+                    result,
+                    loading_id
+                );
+                return result.promise;
+            },
+            show : function (resource, id) {
+                var self = this;
+                var result = $q.defer();
+                var loading_id = resource;
+
+                if(!this.loading.hasOwnProperty(loading_id))
+                    this.loading[loading_id] = Loading.new(loading_id);
+
+                self.loading[loading_id].loading_start(resource + '-loading');
+                self.__resolve_promise (
+                    self.__get(resource + '/' + id),
+                    result,
+                    loading_id
+                );
+                return result.promise;
+            },
+            create : function(resource, model){
+                var self = this;
+                var result = $q.defer();
+                var loading_id = resource;
+
+                if(!this.loading.hasOwnProperty(loading_id))
+                    this.loading[loading_id] = Loading.new(loading_id);
+                    self.__resolve_promise (
+                        self.__post(resource, model),
+                        result,
+                        loading_id
+                );
+                return result.promise;
+            },
+            update : function(resource, id, model){
+                var self = this;
+                var result = $q.defer();
+                var loading_id = resource;
+
+                if(!this.loading.hasOwnProperty(loading_id))
+                    this.loading[loading_id] = Loading.new(loading_id);
+                    self.__resolve_promise (
+                        self.__put(resource + '/' + id, model),
+                        result,
+                        loading_id
+                );
+                return result.promise;
+            },
             __resolve_promise : function(promise, defer, loading_id){
                 var self = this;
                 promise

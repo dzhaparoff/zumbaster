@@ -30,7 +30,7 @@
                 }
 
                 function addShow(show){
-                    vm.api.action('post', 'shows', '', show).then(function(d){
+                    vm.api.create('shows', show).then(function(d){
                         vm.found = true;
                         show.exist = true;
                     });
