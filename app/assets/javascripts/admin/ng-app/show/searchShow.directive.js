@@ -23,7 +23,7 @@
                     var request = {
                         name : vm.show_name
                     };
-                    vm.api.action('get', 'shows', '1.0/search_in_myshow', request).then(function(d){
+                    vm.api.action('get', 'shows', 'search_in_myshow', request).then(function(d){
                         vm.found = true;
                         vm.found_items = d;
                     });
