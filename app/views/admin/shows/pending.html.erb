@@ -23,12 +23,12 @@
           <tr fill-show="<%= show.id %>" data-ng-class="show.api.loading.class" class="loading-fade">
             <td colspan="4">
               <div class="row">
-                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_with_trakt')" data-ng-disabled="show.api.loading.loading">Заполнить инфу</button></div>
-                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_translate')" data-ng-disabled="show.api.loading.loading">Заполнить русскую инфу</button></div>
-                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_pics')" data-ng-disabled="show.api.loading.loading">Добавить постеры и фан-арт</button></div>
-                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_ru_pics')" data-ng-disabled="show.api.loading.loading">Добавить русские постеры</button></div>
-                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_rating')" data-ng-disabled="show.api.loading.loading">Синхронизировать рейтинг</button></div>
-                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_people')" data-ng-disabled="show.api.loading.loading">Добавить PEOPLE</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_with_trakt')" data-ng-disabled="show.api.loading.shows_sync_with_trakt.loading">Заполнить инфу</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_translate')" data-ng-disabled="show.api.loading.shows_sync_translate.loading">Заполнить русскую инфу</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_pics')" data-ng-disabled="show.api.loading.shows_sync_pics.loading">Добавить постеры и фан-арт</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_ru_pics')" data-ng-disabled="show.api.loading.shows_sync_ru_pics.loading">Добавить русские постеры</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_rating')" data-ng-disabled="show.api.loading.shows_sync_rating.loading">Синхронизировать рейтинг</button></div>
+                <div class="small-2 column"><button class="button tiny expand" data-ng-click="show.actions.post('sync_people')" data-ng-disabled="show.api.loading.shows_sync_people.loading">Добавить PEOPLE</button></div>
               </div>
               <div class="row">
                 <div class="small-12 column"><button class="button tiny" data-ng-click="show.actions.post('activate')" data-ng-disabled="show.api.loading.loading">Активировать</button></div>
