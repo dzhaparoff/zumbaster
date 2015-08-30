@@ -13,6 +13,7 @@ module ApplicationHelper
 
   def random_bg_image
     show = Show.offset(rand(Show.count)).first
+    return "" if show.nil?
     image = show.fanart
     "<img class=\"fullscreen-image\" data-canvas-image src=\"#{image.url}\" data-width=\"#{image.width}\" data-height=\"#{image.height}\"/>"\
     "<style>.wrapper {background-image: url(#{image.url});}</style>"
