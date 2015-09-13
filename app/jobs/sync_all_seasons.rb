@@ -58,7 +58,8 @@ class SyncAllSeasonsJob < ProgressJob::Base
 
         screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status unless episode['images']['screenshot']['full'].nil?
 
-        e.screenshot = URI.parse episode['images']['screenshot']['full'] unless episode['images']['screenshot']['full'].nil? || e.screenshot.exists? || screenshot_status == 403 || screenshot_status == 404
+        #e.screenshot = URI.parse episode['images']['screenshot']['full'] unless episode['images']['screenshot']['full'].nil? || e.screenshot.exists? || screenshot_status == 403 || screenshot_status == 404
+        e.screenshot = URI.parse episode['images']['screenshot']['full'] unless e.screenshot.exists? || screenshot_status == 403 || screenshot_status == 404
         e.save
         update_progress
       end
