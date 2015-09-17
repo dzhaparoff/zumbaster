@@ -364,8 +364,8 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
           episode = Episode.where(show: show, season: season, number: episode_number).take
           translator = Translator.where(ex_id: translator_id).take
           translation = Translation.where(episode: episode, translator: translator).first_or_create
-          translation.f4m = playlists['playlists']['manifest_f4m'] unless playlists['playlists'].nil?
-          translation.m3u8 = playlists['playlists']['manifest_m3u8'] unless playlists['playlists'].nil?
+          translation.f4m = playlists['playlists']['manifest_f4m'] unless playlists['playlists'].nil? || playlists
+          translation.m3u8 = playlists['playlists']['manifest_m3u8'] unless playlists['playlists'].nil? || playlists
           translation.moonwalk_token = playlists['token']
           translation.save
         end
