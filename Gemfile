@@ -21,6 +21,7 @@ gem 'omniauth-vkontakte'
 # gem 'pg_search'
 
 gem "dynamic_sitemaps"
+gem 'meta-tags'
 
 gem 'turbolinks'
 gem 'angularjs-rails'

@@ -1,6 +1,15 @@
-<% title "Главная страница" %>
+<%
+   title "Главная страница"
+   description "Сериалы онлайн высокого качества (HD, 720p)"
+%>
 <section class="main-page-fanart page-fanart show-for-medium-up" data-no-transition-cache>
-  <img src="<%= @random_show.fanart.url(:original) %>"/>
+  <article class="fanart-slide">
+    <div class="poster"><img src="<%= @random_show.poster.url(:thumb) %>" alt="<%= @random_show.title_ru %>"/></div>
+    <h1 class="title_ru"><%= @random_show.title_ru %></h1>
+    <div class="title_en"><%= @random_show.title_en %></div>
+
+  </article>
+  <img src="<%= @random_show.fanart.url(:original) %>" alt="<%= @random_show.title_ru %>"/>
 </section>
 <section class="main-page">
     <div class="row">

@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title><%= content_for?(:title) ? yield(:title) : 'HdSerials' %> - Смотреть сериалы в хорошем качестве онлайн - Hd-Serials.tv</title>
-  <%= yield(:meta_tags) if content_for(:meta_tags)  %>
+  <%= display_meta_tags %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <%= csrf_meta_tags %>
   <base href="<%= request.original_fullpath %>">
