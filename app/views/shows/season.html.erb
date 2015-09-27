@@ -1,6 +1,13 @@
 <% title @show.title_ru %>
 <div class="show-fanart show-for-medium-up">
   <img src="<%= @show.fanart.url(:original) %>"/>
+  <div class="show-info-params">
+    <div class="row">
+      <div class="small-9 small-offset-3 columns">
+        <h1><%= @show.title_ru %>, сезон <%=@season.number%></h1>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="row show-details">
   <div class="medium-3 small-centered medium-uncentered columns show-poster">
@@ -11,7 +18,6 @@
   <div class="medium-9 columns">
     <div class="row">
       <div class="large-12 columns show-description">
-        <h1><%= @show.title_ru %>, сезон <%=@season.number%></h1>
         <div class="description"><%= @season.description_en %></div>
       </div>
     </div>
@@ -33,7 +39,7 @@
     <div class="row">
       <h3>Другие сезоны</h3>
       <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6">
-      <% @show.seasons.order(:number).each_with_index do |s, index| %>
+      <% @show.seasons.present.where.not( number: @season.number).each do |s| %>
           <li>
             <h5>Сезон <%= s.number %></h5>
             <a href="<%= show_season_path @show.slug_ru, "%02d" % s.number %>"><img src="<%= s.poster.url(:thumb) %>"/></a>

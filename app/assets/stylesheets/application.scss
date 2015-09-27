@@ -1,73 +1,49 @@
 @import "foundation_and_overrides";
+@import "mixins";
 @import "*";
 
+@include margins-paddings-list;
+
+html.turbolinks-progress-bar::before {
+  background-color: $green !important;
+  height: 3px !important;
+  box-shadow: rem-calc(0 0 20 0) rgba(0,0,0,0.8);
+}
+
 .top-menu {
-  transition: background 0.4s ease;
-  background: #3653AF;
+  transition: background 0.3s ease;
+  position: fixed;
+  z-index: 99;
+  background-image: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 90%);
+  background-repeat: repeat-x;
+  background-color: rgba(0, 0, 0, 0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=0);
+}
+
+.touch .top-menu {
+  background: rgba(0, 0, 0, .8);
+  position: fixed;
+  z-index: 99;
 }
 
 .top-menu.fixed {
-  background: rgba(0, 0, 0, .8);
+  background-color: rgba(0, 0, 0, .8);
+  position: fixed;
+  z-index: 99;
 }
 
-.mainpage-slider li{
-  max-height: 500px;
-  overflow: hidden;
-}
-
-.mainpage-slider li img {
-  transform: translate3d(0, -15%, 0)
+.f-topbar-fixed {
+  padding-top: 0!important;
 }
 
 .top-bar-section ul li {
   background: $transparent;
 }
 
-.mainpage {
-  .show_item .title {
-    display: block;
-    padding-top: rem-calc(6);
-    font-size: rem-calc(12);
-    line-height: rem-calc(14);
-  }
+.main-section {
 
-  .show-episode {
-    font-size: rem-calc(12);
-    line-height: rem-calc(14);
-
-    img {
-      margin-bottom: rem-calc(5);
-    }
-
-    span, a {
-      display: block;
-      color: $tuatara;
-    }
-
-    span b {
-      color: $primary-color;
-    }
-
-    .show-title {
-      margin-bottom: rem-calc(5);
-    }
-
-    .episode-date {
-      margin-top: rem-calc(5);
-    }
-
-    .episode-title {
-      font-size: percentage(1.4);
-      line-height: rem-calc(20);
-      color: $primary-color;
-    }
-  }
-  .about-block {
-    p {
-      font-size: rem-calc(12);
-    }
-  }
 }
+
 
 .fullscreen {
   width: 100%;
@@ -75,6 +51,21 @@
   background: #368a55;
 }
 
-footer {
+.page-fanart {
+  height: rem-calc(400);
+  overflow: hidden;
+  position: relative;
+  margin-bottom: rem-calc(20);
 
+  &:after {
+    content: "";
+    position: absolute;
+    top:0;  left:0;  right:0;  bottom:0;
+    background: asset-url('video-overlay.png');
+  }
+
+  img {
+    transform: translate3d(0, -10%, 0);
+    width: 100%;
+  }
 }

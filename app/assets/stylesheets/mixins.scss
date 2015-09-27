@@ -1,0 +1,96 @@
+@media #{$screen} and (orientation: portrait) and (min-width:#{lower-bound($medium-range)}) and (max-width:#{upper-bound($medium-range)}) {
+  @include grid-html-classes($size:medium-portrait);
+  @include block-grid-html-classes($size:medium-portrait,$include-spacing:false);
+}
+
+@media #{$screen} and (orientation: portrait) and (min-width:#{lower-bound($small-range)}) and (max-width:#{upper-bound($small-range)}) {
+  @include grid-html-classes($size:small-portrait);
+  @include block-grid-html-classes($size:small-portrait,$include-spacing:false);
+}
+
+/*generators and helpers*/
+
+@mixin margins-paddings($value, $prefix : false) {
+  @if $prefix {
+    .#{$prefix}-m-t-#{$value} { margin-top: rem-calc($value); }
+    .#{$prefix}-m-b-#{$value} { margin-bottom: rem-calc($value); }
+    .#{$prefix}-p-t-#{$value} { padding-top: rem-calc($value); }
+    .#{$prefix}-p-b-#{$value} { padding-bottom: rem-calc($value); }
+    .#{$prefix}-p-l-#{$value} { padding-left: rem-calc($value); }
+    .#{$prefix}-p-r-#{$value} { padding-right: rem-calc($value); }
+  }
+  @else {
+    .m-t-#{$value} { margin-top: rem-calc($value); }
+    .m-b-#{$value} { margin-bottom: rem-calc($value); }
+    .p-t-#{$value} { padding-top: rem-calc($value); }
+    .p-l-#{$value} { padding-left: rem-calc($value); }
+    .p-r-#{$value} { padding-right: rem-calc($value); }
+    .p-b-#{$value} { padding-bottom: rem-calc($value); }
+  }
+}
+
+@mixin margins-paddings-list {
+  $max-value: 8;
+
+  @for $i from 1 through $max-value {
+    @include margins-paddings($i*10);
+  }
+
+  $sizes: small medium large;
+  $modes: up only;
+
+  @each $size in $sizes {
+    @each $mode in $modes {
+      @if $size == small {
+        @if $mode == up {
+          @for $i from 1 through $max-value {
+            @media #{$small-up} {
+              @include margins-paddings($i*10, #{$size}-#{$mode});
+            }
+          }
+        }
+        @if $mode == only {
+          @for $i from 1 through $max-value {
+            @media #{$small-only} {
+              @include margins-paddings($i*10, #{$size}-#{$mode});
+            }
+          }
+        }
+      }
+
+      @if $size == medium {
+        @if $mode == up {
+          @for $i from 1 through $max-value {
+            @media #{$medium-up} {
+              @include margins-paddings($i*10, #{$size}-#{$mode});
+            }
+          }
+        }
+        @if $mode == only {
+          @for $i from 1 through $max-value {
+            @media #{$medium-only} {
+              @include margins-paddings($i*10, #{$size}-#{$mode});
+            }
+          }
+        }
+      }
+
+      @if $size == large {
+        @if $mode == up {
+          @for $i from 1 through $max-value {
+            @media #{$large-up} {
+              @include margins-paddings($i*10, #{$size}-#{$mode});
+            }
+          }
+        }
+        @if $mode == only {
+          @for $i from 1 through $max-value {
+            @media #{$large-only} {
+              @include margins-paddings($i*10, #{$size}-#{$mode});
+            }
+          }
+        }
+      }
+    }
+  }
+}

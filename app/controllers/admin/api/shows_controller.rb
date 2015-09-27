@@ -34,7 +34,7 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
   end
 
   def show
-    render json: Show.find(params[:id])
+    render json: Show.unscoped.find(params[:id])
   end
 
   def edit
@@ -42,7 +42,12 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
   end
 
   def update
-    render json: Show.find(params[:id]).update(model_params)
+    show = Show.unscoped.find(params[:id])
+    unless params[:ids].nil? && params[:ids].size > 0
+      show.ids = params[:ids]
+      show.save
+    end
+    render json: show.update(model_params)
   end
 
   def destroy
@@ -424,6 +429,7 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
             :slogan_en,
             :ended,
             :id,
+            :ids,
             :imdbId,
             :kinopoiskId,
             :rating,

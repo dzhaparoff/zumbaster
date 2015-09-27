@@ -1,81 +1,86 @@
 <% title "Главная страница" %>
-<div class="row mainpage">
-  <div class="medium-8 column">
-    <h4>Популярные сериалы</h4>
-    <ul class="small-block-grid-3 medium-block-grid-4 large-block-grid-6">
-      <% @shows.take(12).each do |s| %>
-      <li class="show_item">
-        <a href="<%= show_path(s.slug_ru) %>"><%= image_tag s.poster.url(:thumb), alt: s.title_ru%></a>
-        <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="medium-4 column">
-    <h4>Новые сериалы</h4>
-    <ul class="small-block-grid-3 medium-block-grid-2 large-block-grid-3">
-      <% @new_shows.each do |s| %>
+<section class="main-page-fanart page-fanart show-for-medium-up" data-no-transition-cache>
+  <img src="<%= @random_show.fanart.url(:original) %>"/>
+</section>
+<section class="main-page">
+    <div class="row">
+      <div class="medium-8 column">
+        <h4>Популярные сериалы</h4>
+        <ul class="small-block-grid-3 medium-block-grid-4 large-block-grid-6">
+          <% @popular_shows.each do |s| %>
           <li class="show_item">
             <a href="<%= show_path(s.slug_ru) %>"><%= image_tag s.poster.url(:thumb), alt: s.title_ru%></a>
             <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
           </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
-<div class="row mainpage">
-  <div class="small-12 medium-8 medium-push-4 column">
-      <h4>Новые эпизоды</h4>
-      <ul class="small-block-grid-3 medium-block-grid-3 large-block-grid-4">
-        <% @new_episodes.each do |s| %>
-            <li class="show-episode">
-              <a href="<%= show_episode_path(s.show.slug_ru, "%02d" % s.season.number, "%02d" % s.number) %>"><img src="<%= s.screenshot.url(:original) %>"/></a>
-              <span class="show-title"><b><%= s.show.title_ru %></b><br>сезон <%= s.season.number %>, эпизод <%= s.number %></span>
-              <!--<span class="episode-title" href="<%= show_episode_path(s.show.slug_ru, "%02d" % s.season.number, "%02d" % s.number) %>"><%= s.title_ru %></span>-->
-              <!--<span class="episode-title-en"><%= s.title_en %></span>-->
-              <span class="episode-date"><%= Russian::strftime(s.first_aired, "%e %B %Y")%></span>
-            </li>
-        <% end %>
-      </ul>
-  </div>
-  <div class="small-12 medium-4 medium-pull-8 column">
-    <div class="about-block">
-        <h5>Бесплатный онлайн кинотеатр<br>HD-Serials.TV: фильмы в хорошем качестве всегда приносят настоящее удовольствие</h5>
-        <p>Каждый день миллионы людей ищут фильмы онлайн и никто не хочет усложнять себе жизнь – и вы наверняка один из них!
-          А раз так, то HD-Serials.TV – это именно тот ресурс, который вам нужен, если вы хотите смотреть фильмы онлайн бесплатно и
-          без регистрации. Потому что именно наш сайт является настоящим Эльдорадо для киноманов.</p>
-        <p>Мы дарим вам смех, адреналин, взрывные эмоции – а вы при этом не тратите ничего! Хотите смотреть кино
-          без регистрации? Пожалуйста, выбирайте и смотрите – мы экономим ваше время. На сайте доступен бесплатный
-          просмотр фильмов – мы экономим ваши деньги. И нет, все вышесказанное не значит, что картины будут в плохом качестве.
-          Как раз наоборот! И мы снова экономим – ваши усилия, которые могли быть потрачены на попытки разобрать невнятные диалоги,
-          некачественный перевод, расплывчатую картинку.</p>
-        <p>Быстро, бесплатно, захватывающе – вот что такое кинопросмотр с HD-Serials.TV!</p>
+          <% end %>
+        </ul>
+      </div>
+      <div class="medium-4 column">
+        <h4>Новые сериалы</h4>
+        <ul class="small-block-grid-3 medium-block-grid-2 large-block-grid-3">
+          <% @new_shows.each do |s| %>
+              <li class="show_item">
+                <a href="<%= show_path(s.slug_ru) %>"><%= image_tag s.poster.url(:thumb), alt: s.title_ru%></a>
+                <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
     </div>
-  </div>
-</div>
-<div class="row mainpage">
-  <div class="small-12 medium-6 column">
-    <h4>Лучшие сериалы по версии Кинопоиск</h4>
-    <ul class="small-block-grid-3 medium-block-grid-4 large-block-grid-6">
-      <% @top_kinopoisk.each do |s| %>
-          <li class="show_item">
-            <a href="<%= show_path(s.slug_ru) %>"><%= image_tag s.poster.url(:thumb), alt: s.title_ru%></a>
-            <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
-            <%= s.rating.kp_rating.value %>
-          </li>
-      <% end %>
-    </ul>
-  </div>
-  <div class="small-12 medium-6 column">
-    <h4>Лучшие сериалы по версии IMDB</h4>
-    <ul class="small-block-grid-3 medium-block-grid-4 large-block-grid-6">
-      <% @top_imdb.each do |s| %>
-          <li class="show_item">
-            <a href="<%= show_path(s.slug_ru) %>"><%= image_tag s.poster.url(:thumb), alt: s.title_ru%></a>
-            <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
-            <%= s.rating.imdb_rating.value %>
-          </li>
-      <% end %>
-    </ul>
-  </div>
-</div>
+    <div class="row">
+      <div class="small-12 medium-8 medium-push-4 column">
+          <h4>Новые эпизоды</h4>
+          <ul class="small-block-grid-3 medium-block-grid-3 large-block-grid-4">
+            <% @new_episodes.each do |s| %>
+                <li class="show-episode">
+                  <a href="<%= show_episode_path(s.show.slug_ru, "%02d" % s.season.number, "%02d" % s.number) %>"><img src="<%= s.screenshot.url(:original) %>"/></a>
+                  <span class="show-title"><b><%= s.show.title_ru %></b><br>сезон <%= s.season.number %>, эпизод <%= s.number %></span>
+                  <!--<span class="episode-title" href="<%= show_episode_path(s.show.slug_ru, "%02d" % s.season.number, "%02d" % s.number) %>"><%= s.title_ru %></span>-->
+                  <!--<span class="episode-title-en"><%= s.title_en %></span>-->
+                  <span class="episode-date"><%= Russian::strftime(s.first_aired, "%e %B %Y")%></span>
+                </li>
+            <% end %>
+          </ul>
+      </div>
+      <div class="small-12 medium-4 medium-pull-8 column">
+        <div class="about-block">
+            <h5>Бесплатный онлайн кинотеатр<br>HD-Serials.TV: фильмы в хорошем качестве всегда приносят настоящее удовольствие</h5>
+            <p>Каждый день миллионы людей ищут фильмы онлайн и никто не хочет усложнять себе жизнь – и вы наверняка один из них!
+              А раз так, то HD-Serials.TV – это именно тот ресурс, который вам нужен, если вы хотите смотреть фильмы онлайн бесплатно и
+              без регистрации. Потому что именно наш сайт является настоящим Эльдорадо для киноманов.</p>
+            <p>Мы дарим вам смех, адреналин, взрывные эмоции – а вы при этом не тратите ничего! Хотите смотреть кино
+              без регистрации? Пожалуйста, выбирайте и смотрите – мы экономим ваше время. На сайте доступен бесплатный
+              просмотр фильмов – мы экономим ваши деньги. И нет, все вышесказанное не значит, что картины будут в плохом качестве.
+              Как раз наоборот! И мы снова экономим – ваши усилия, которые могли быть потрачены на попытки разобрать невнятные диалоги,
+              некачественный перевод, расплывчатую картинку.</p>
+            <p>Быстро, бесплатно, захватывающе – вот что такое кинопросмотр с HD-Serials.TV!</p>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 medium-6 column">
+        <h4>Лучшие сериалы по версии Кинопоиск</h4>
+        <ul class="small-block-grid-3 medium-block-grid-4 large-block-grid-6">
+          <% @top_kinopoisk.each do |s| %>
+              <li class="show_item">
+                <a href="<%= show_path(s.slug_ru) %>"><%= image_tag s.poster.url(:thumb), alt: s.title_ru%></a>
+                <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
+                <%= s.rating.kp_rating.value %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+      <div class="small-12 medium-6 column">
+        <h4>Лучшие сериалы по версии IMDB</h4>
+        <ul class="small-block-grid-3 medium-block-grid-4 large-block-grid-6">
+          <% @top_imdb.each do |s| %>
+              <li class="show_item">
+                <a href="<%= show_path(s.slug_ru) %>"><%= image_tag s.poster.url(:thumb), alt: s.title_ru%></a>
+                <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
+                <%= s.rating.imdb_rating.value %>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+</section>

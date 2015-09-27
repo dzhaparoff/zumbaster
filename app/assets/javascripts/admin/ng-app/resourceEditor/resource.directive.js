@@ -76,6 +76,14 @@
             restrict: 'A',
             require: '?ngModel',
             link: function(scope, element, attrs, ngModel) {
+                var itemType; /*int, float, string*/
+
+                if(angular.isDefined(attrs.itemType)) {
+                    itemType = attrs.itemType;
+                }
+                else
+                    itemType = 'string';
+
                 if (!ngModel) return;
 
                 // Specify how UI should be updated
@@ -97,6 +105,16 @@
                     if ( attrs.stripBr && html == '<br>' ) {
                         html = '';
                     }
+
+                    switch(true){
+                        case itemType == 'int':
+                            html = parseInt(html);
+                            break;
+                        case itemType == 'float':
+                            html = parseFloat(html);
+                            break;
+                    }
+
                     ngModel.$setViewValue(html);
                 }
             }

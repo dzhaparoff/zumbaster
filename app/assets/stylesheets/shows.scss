@@ -1,11 +1,31 @@
 @import "foundation_and_overrides";
 
-@media #{$medium-up} {
-  .show-details .show-poster{
-    position: relative;
-    transform: translate3d(0, -60px, 0);
-    img {
-      margin-bottom: 20px;
+.show-fanart {
+  height: 400px;
+  overflow: hidden;
+  position: relative;
+  &:after {
+    content: "";
+    position: absolute;
+    top:0;  left:0;  right:0;  bottom:0;
+    background: asset-url('video-overlay.png');
+  }
+  margin-bottom: rem-calc(-120);
+}
+
+.show-details {
+  @media #{$medium-up} {
+    .show-poster{
+      position: relative;
+      img {
+        margin-bottom: 20px;
+        padding: rem-calc(6);
+        background: #fff;
+        box-shadow: rem-calc(0 0 30) rgba(#000, .6);
+      }
+    }
+    .show-description {
+      margin-top: rem-calc(120);
     }
   }
 }
@@ -14,12 +34,162 @@
   margin-bottom:20px;
 }
 
-.show-fanart {
-  height: 400px;
-  overflow: hidden;
-  position: relative;
-}
-
 .show-fanart img {
   transform: translate3d(0,-10%,0);
+}
+
+.show-info-params {
+  position: absolute;
+  bottom:0;
+  width: 100%;
+  color: #ffffff;
+
+  .show-title {
+    .title {
+      display: inline-block;
+      vertical-align: middle;
+      h1 {
+        font-size: rem-calc(35);
+        color: #fff;
+        margin-bottom: rem-calc(0);
+      }
+      .subtitle {
+        line-height: rem-calc(22);
+        font-size: rem-calc(18);
+        color: rgba(#fff, .8);
+        padding-bottom: rem-calc(10)
+      }
+    }
+
+    .awwards-list {
+      display: inline-block;
+      vertical-align: bottom;
+    }
+  }
+
+  .transparent-bg {
+    background: rgba(#000, .75);
+    position: absolute;
+    bottom:0;
+    width: 100%;
+    height: rem-calc(45);
+  }
+
+  .shadow-bg {
+    position: absolute;
+    left:0;
+    bottom: rem-calc(45);
+    height: rem-calc(150);
+    width: 100%;
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=0);
+  }
+
+  .additional-info {
+    height: rem-calc(45);
+    line-height: rem-calc(45);
+    font-size: rem-calc(14);
+    span {
+      color: $iron;
+    }
+  }
+}
+
+.show-description {
+
+  .genres-list {
+    padding-top:rem-calc(20);
+  }
+  .description {
+    padding-top:rem-calc(20);
+  }
+}
+
+.awwards {
+  display: inline-block;
+  margin-left: rem-calc(5);
+  width: 71px;
+  height: 64px;
+  background: asset-url("awards.png");
+  overflow: hidden;
+  margin-bottom: rem-calc(4);
+
+  &.kinopoisk {
+    background-position: 0 -64px;
+  }
+
+  &.imdb {
+    background-position: 0 0;
+  }
+
+  .count {
+    line-height: rem-calc(52);
+    text-align: center;
+    display: block;
+    font-size: rem-calc(20);
+  }
+}
+
+.seasons-list {
+  li {
+    a {
+      display: block;
+      position: relative;
+      padding: rem-calc(0);
+      background: #fff;
+      box-shadow: rem-calc(0 0 0) rgba(#000, .6);
+      transition: box-shadow 0.35s ease;
+      transform: translateZ(0);
+
+      //box-shadow: rem-calc(0 0 30) rgba(#000, .6);
+      &:after {
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        content: "";
+        box-shadow: inset 0 rem-calc(-40) rem-calc(100) rem-calc(20) rgba($black, .8);
+        transition: box-shadow 0.35s ease, opacity 0.35s ease;
+        transform: translateZ(0);
+        z-index: 1;
+      }
+      .season-number {
+        position: absolute;
+        transform: translateZ(0);
+        top: 80%;
+        left: 0;
+        width: 100%;
+        text-align: center;
+        color: #fff;
+        font-weight: $font-weight-bold;
+        z-index: 2;
+        text-shadow: 0 0 rem-calc(16) $black;
+        opacity: 1;
+        transition: opacity 0.35s ease 0.2s, filter 0.35s ease 0s, -webkit-filter 0.35s ease 0s;
+        filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='0');
+        -webkit-filter: blur(0);
+        filter: blur(0);
+      }
+      img {
+
+      }
+      &:hover {
+        box-shadow: rem-calc(0 0 80) rgba(#000, .6);
+        &:after {
+          box-shadow: inset 0 rem-calc(-40) rem-calc(50) 0 rgba($black, .8);
+          opacity: 0;
+        }
+        .season-number {
+          opacity: 0;
+          filter:progid:DXImageTransform.Microsoft.Blur(PixelRadius='10');
+          -webkit-filter: blur(10px);
+          filter: blur(10px);
+          //transition: opacity 0.35s ease 0s, filter 0.35s ease .2s, -webkit-filter 0.35s ease .2s;
+        }
+      }
+    }
+  }
 }

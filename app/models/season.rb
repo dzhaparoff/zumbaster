@@ -7,4 +7,11 @@ class Season < ActiveRecord::Base
   has_attached_file :thumb, :styles => { :medium => "500x281#", :thumb => "250x140#" },  convert_options: { all: '-quality 75 -strip' }
 
   do_not_validate_attachment_file_type :poster, :thumb
+
+  default_scope do
+    order(:number)
+  end
+
+  scope :present, -> { where("aired_episodes > 0 AND number > 0") }
+
 end

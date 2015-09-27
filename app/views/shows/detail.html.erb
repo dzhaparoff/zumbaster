@@ -1,48 +1,71 @@
 <% title @show.title_ru %>
-    <div class="show-fanart show-for-medium-up">
-        <img src="<%= @show.fanart.url(:original) %>"/>
-    </div>
+<div class="show-fanart show-for-medium-up">
+  <img src="<%= @show.fanart.url(:original) %>"/>
+  <div class="show-info-params">
+    <div class="transparent-bg"></div>
+    <div class="shadow-bg"></div>
     <div class="row">
-      <div class="large-12 columns">
-        <div class="row show-details">
-          <div class="medium-3 small-centered medium-uncentered columns show-poster">
-            <img src="<%= @show.poster.url(:medium) %>" alt="<%= @show.title_ru  %>"/>
-
-          </div>
-          <div class="medium-9 columns show-description">
-            <h1 class="title-ru"><%= @show.title_ru %></h1>
-            <h3 class="title-en"><%= @show.title_en %></h3>
-
-            <div class="more-info"><%= @show.first_aired.year %>, <%= @show.country.upcase %>, <%== genres_inline_list @genres %></div>
-            <div class="more-info">Канал: <%= @show.network %>, <%= @show.certification %></div>
-            <div class="more-info">Количество сезонов: <%= @show.seasons.where("number > 0").count %>, <%= @show.status %></div>
-            <div class="more-info">Количество эпизодов: <%= @show.aired_episodes %></div>
-            <div class="more-info">Продолжительность эпизода: <%= distance_of_time_in_words @show.runtime.minutes %></div>
-            <div class="more-info">Общая продолжительность: <%= distance_of_time_in_words (@show.runtime * @show.aired_episodes).minutes %></div>
-
-            <div class="description"><%== @show.description_ru %></div>
-            <!--<h5>Актеры:</h5>-->
-            <!--<div class="people-list">-->
-              <!--<ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6">-->
-                <!--<% @show.casts.each do |cast| %>-->
-                    <!--<li class="item">-->
-                      <!--<img src="<%= cast.person.headshot.url(:cropped_thumb) %>"/>-->
-                      <!--<p><%= cast.character %></p>-->
-                    <!--</li>-->
-                <!--<% end %>-->
-              <!--</ul>-->
-            <!--</div>-->
+      <div class="small-9 small-offset-3 columns">
+        <div class="row">
+          <div class="small-12 columns show-title">
+            <div class="title">
+              <h1><%= @show.title_ru %></h1>
+              <div class="subtitle"><%= @show.title_en %> (<%= @show.first_aired.year %>, <%= @show.country.upcase %>)</div>
+            </div>
+            <div class="awwards-list">
+              <div class="awwards imdb"><div class="count"><%= @show.rating.imdb_rating.value %></div></div>
+              <div class="awwards kinopoisk"><div class="count"><%= number_with_precision @show.rating.kp_rating.value, precision: 1 %></div></div>
+            </div>
           </div>
         </div>
-        <div class="row">
-          <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6">
-          <% @show.seasons.order(:number).each do |s| %>
-                <li>
-                <h5>Сезон <%= s.number %></h5>
-                <a href="<%= show_season_path @show.slug_ru, "%02d" % s.number %>"><img src="<%= s.poster.url(:thumb) %>"/></a>
-                </li>
-          <%end%>
-          </ul>
+        <div class="row additional-info">
+          <div class="small-12 columns">
+            <span>Канал:</span> <%= @show.network %>,<!-- <%= @show.certification %>,-->
+            <%= @show.status %>
+            <span>Сезонов:</span> <%= @show.seasons.present.count %>
+            <span>Эпизодов:</span> <%= @show.aired_episodes %>
+            <span>Продолж.:</span> <%= distance_of_time_in_words @show.runtime.minutes %> (<%= distance_of_time_in_words (@show.runtime * @show.aired_episodes).minutes %>)
+          </div>
         </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="row">
+  <div class="large-12 columns">
+    <div class="row show-details p-b-30">
+      <div class="medium-3 small-centered medium-uncentered columns show-poster">
+        <img src="<%= @show.poster.url(:medium) %>" alt="<%= @show.title_ru  %>"/>
+      </div>
+      <div class="medium-9 columns show-description">
+        <div class="genres-list">Жанры: <%== genres_inline_list @genres %></div>
+        <div class="description"><%== @show.description_ru %></div>
+        <!--<h5>Актеры:</h5>-->
+        <!--<div class="people-list">-->
+        <!--<ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6">-->
+        <!--<% @show.casts.each do |cast| %>-->
+            <!--<li class="item">-->
+            <!--<img src="<%= cast.person.headshot.url(:cropped_thumb) %>"/>-->
+            <!--<p><%= cast.character %></p>-->
+            <!--</li>-->
+            <!--<% end %>-->
+        <!--</ul>-->
+        <!--</div>-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-12 columns">
+          <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6 seasons-list">
+            <% @show.seasons.present.each do |s| %>
+                <li>
+                  <a href="<%= show_season_path @show.slug_ru, "%02d" % s.number %>">
+                    <img src="<%= s.poster.url(:thumb) %>"/>
+                    <h5 class="season-number">Сезон <%= s.number %></h5>
+                  </a>
+                </li>
+            <%end%>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>

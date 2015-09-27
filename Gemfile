@@ -2,9 +2,9 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.3'
 gem 'pg'
-# Use SCSS for stylesheets
+
 gem 'sass-rails'
-# gem 'less-rails' #less precompiler
+gem 'autoprefixer-rails'
 gem 'therubyracer'
 gem 'uglifier', '>= 1.3.0'
 gem 'jbuilder', '~> 2.0' # Read more: https://github.com/rails/jbuilder
@@ -23,11 +23,11 @@ gem 'omniauth-vkontakte'
 gem "dynamic_sitemaps"
 
 gem 'turbolinks'
-gem 'autoprefixer-rails'
 gem 'angularjs-rails'
 gem 'jquery-rails'
 gem 'foundation-rails'
 gem 'lodash-rails'
+gem "swfobject-rails"
 
 gem 'faraday'
 gem 'faraday_middleware'
@@ -41,15 +41,16 @@ gem 'paperclip-meta'
 gem 'paperclip-av-transcoder'
 gem 'streamio-ffmpeg' # https://github.com/streamio/streamio-ffmpeg
 
-
 gem 'daemons'
 gem 'delayed_job_active_record'
 gem 'progress_job'
 gem "resque", "~> 2.0.0.pre.1", github: "resque/resque" # https://github.com/resque/resque
 
 group :development do
-  gem "awesome_print"
+  gem 'awesome_pry' #pry, awesome_prints
   gem 'spring'
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'

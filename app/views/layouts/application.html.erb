@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html data-ng-app="zumbaster" data-ng-strict-di>
+<html>
 <head>
   <title><%= content_for?(:title) ? yield(:title) : 'HdSerials' %> - Смотреть сериалы в хорошем качестве онлайн - Hd-Serials.tv</title>
+  <%= yield(:meta_tags) if content_for(:meta_tags)  %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <%= stylesheet_link_tag 'application', media: 'all'%>
   <%= csrf_meta_tags %>
   <base href="<%= request.original_fullpath %>">
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= yield :stylesheets %>
-  <%= javascript_include_tag 'vendor/modernizr' %>
-  <%= javascript_include_tag '//yandex.st/swfobject/2.2/swfobject.min.js' %>
-  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'vendor/modernizr', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true  %>
 </head>
-<body>
+<body data-ng-controller="MainCtrl as main">
     <div class="contain-to-grid sticky top-menu">
         <nav class="top-bar" data-topbar role="navigation">
           <%= render "partials/top_menu" %>
