@@ -4,13 +4,13 @@
   <title><%= content_for?(:title) ? yield(:title) : 'Admin Panel - Zumbaster' %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <%= stylesheet_link_tag 'application', media: 'all'%>
-  <%= stylesheet_link_tag 'admin/index', media: 'all'%>
+  <%= stylesheet_link_tag 'admin', media: 'all'%>
   <%= csrf_meta_tags %>
   <base href="<%= request.original_fullpath %>">
   <%= yield :stylesheets %>
   <%= javascript_include_tag 'vendor/modernizr' %>
   <%= javascript_include_tag '//yandex.st/swfobject/2.2/swfobject.min.js' %>
-  <%= javascript_include_tag 'admin/index' %>
+  <%= javascript_include_tag 'admin' %>
 </head>
 <body data-ng-controller="MainCtrl as main">
 <div class="contain-to-grid sticky top-menu">

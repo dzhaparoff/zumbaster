@@ -30,7 +30,5 @@ module Videoplayer
     config.active_job.queue_adapter = :delayed_job
     config.autoload_paths << Rails.root.join('lib')
     config.i18n.default_locale = :ru
-
-    Rails.application.config.assets.precompile += %w( admin/* )
   end
 end
