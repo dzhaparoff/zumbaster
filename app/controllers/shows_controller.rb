@@ -12,7 +12,7 @@ class ShowsController < ApplicationController
     @show = Show.find_by_slug_ru @show_slug
     @season = @show.seasons.where(number: @season_number).take
 
-    set_meta_tags title: "#{@show.title_ru}, смотреть сезон #{@season.number} онлайн"
+    set_meta_tags title: "#{@show.title_ru}, смотреть #{@season.number} сезон онлайн"
   end
 
   def episode
@@ -20,7 +20,7 @@ class ShowsController < ApplicationController
     @season = @show.seasons.where(number: @season_number).take
     @episode = @season.episodes.where(number: @episode_number).take
 
-    set_meta_tags title: "#{@show.title_ru} - #{@episode.title_ru}, сезон #{@season.number} эпизод #{@episode.number} смотреть онлайн"
+    set_meta_tags title: "#{@show.title_ru} - #{@episode.title_ru}, #{@season.number} сезон #{@episode.number} эпизод смотреть онлайн"
   end
 
   private
