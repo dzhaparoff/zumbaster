@@ -1,9 +1,7 @@
 User-agent: *
 Disallow: /admin
-Host: hd-serials.tv
 Sitemap: http://hd-serials.tv/sitemap.xml
 
 User-agent: Yandex
 Disallow: /admin
 Host: hd-serials.tv
-Sitemap: http://hd-serials.tv/sitemap.xml
