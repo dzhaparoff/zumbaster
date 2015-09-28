@@ -71,4 +71,7 @@ Rails.application.routes.draw do
   get '/:show_slug/season-:season_number/episode-:episode_number/translator-:translator_id' => 'shows#episode_translation', as: :show_episode_translation
 
   get '/genres/:genre_slug' => 'genres#detail', as: :genre
+
+  get "sitemap.xml" => "mainpage#sitemap", format: :xml, as: :sitemap
+  get "robots.txt" => "mainpage#robots", format: :text, as: :robots
 end
