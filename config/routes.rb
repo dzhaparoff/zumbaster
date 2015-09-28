@@ -72,6 +72,6 @@ Rails.application.routes.draw do
 
   get '/genres/:genre_slug' => 'genres#detail', as: :genre
 
-  # get "sitemap.xml" => "mainpage#sitemap", format: :xml, as: :sitemap
+  get "sitemap.xml" => "mainpage#sitemap", format: :xml, as: :sitemap
   get "robots.txt" => "mainpage#robots", format: :text, as: :robots
 end
