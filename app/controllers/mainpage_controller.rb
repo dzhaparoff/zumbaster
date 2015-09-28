@@ -23,9 +23,9 @@ class MainpageController < ApplicationController
   #     render text: "Sitemap not found.", status: :not_found
   #   end
   # end
-
-  def robots
-  end
+  #
+  # def robots
+  # end
 
   private
 

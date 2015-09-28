@@ -41,10 +41,8 @@ namespace :deploy do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       within release_path do
         execute :rake, "sitemap:generate"
-        execute :mkdir, "-p #{shared_path}/sitemaps"
-        execute :rm, "-rf #{release_path}/public/sitemaps"
-        execute :ln, "-s #{shared_path}/sitemaps #{release_path}/public/sitemaps"
-        execute :rake, 'cache:clear'
+        execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
+        # execute :rake, 'cache:clear'
       end
     end
   end
