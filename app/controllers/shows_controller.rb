@@ -10,6 +10,7 @@ class ShowsController < ApplicationController
 
   def season
     @show = Show.find_by_slug_ru @show_slug
+
     @season = @show.seasons.where(number: @season_number).take
 
     set_meta_tags title: "#{@show.title_ru}, смотреть #{@season.number} сезон онлайн"
@@ -17,6 +18,7 @@ class ShowsController < ApplicationController
 
   def episode
     @show = Show.find_by_slug_ru @show_slug
+
     @season = @show.seasons.where(number: @season_number).take
     @episode = @season.episodes.where(number: @episode_number).take
 

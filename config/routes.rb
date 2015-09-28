@@ -65,7 +65,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/:show_slug' => 'shows#detail', as: :show
+  get '/:show_slug' => 'shows#detail', format: false, as: :show
   get '/:show_slug/season-:season_number' => 'shows#season', as: :show_season
   get '/:show_slug/season-:season_number/episode-:episode_number' => 'shows#episode', as: :show_episode
   get '/:show_slug/season-:season_number/episode-:episode_number/translator-:translator_id' => 'shows#episode_translation', as: :show_episode_translation
