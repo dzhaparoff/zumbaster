@@ -47,6 +47,8 @@ gem 'delayed_job_active_record'
 gem 'progress_job'
 gem "resque", "~> 2.0.0.pre.1", github: "resque/resque" # https://github.com/resque/resque
 
+gem 'google-analytics-rails'
+
 group :development do
   gem 'awesome_pry' #pry, awesome_prints
   gem 'spring'
