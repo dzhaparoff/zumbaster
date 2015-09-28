@@ -150,10 +150,8 @@
         <entry file="file://$PROJECT_DIR$/Capfile">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.1548312">
-              <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
-              <folding>
-                <marker date="1443432237000" expanded="true" signature="934:950" placeholder="{ ... }" />
-              </folding>
+              <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -865,12 +863,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00003" summary="Disabled 2 gems">
-      <created>1430161039696</created>
-      <option name="number" value="00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1430161039696</updated>
-    </task>
     <task id="LOCAL-00004" summary="Disabled 2 gems">
       <created>1430161143947</created>
       <option name="number" value="00004" />
@@ -1159,7 +1151,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443432217664</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="initial commit">
+      <created>1443432244677</created>
+      <option name="number" value="00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1443432244678</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1" />
@@ -1657,10 +1655,8 @@
     <entry file="file://$PROJECT_DIR$/Capfile">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.1548312">
-          <caret line="7" column="37" selection-start-line="7" selection-start-column="37" selection-end-line="7" selection-end-column="37" />
-          <folding>
-            <marker date="1443432237000" expanded="true" signature="934:950" placeholder="{ ... }" />
-          </folding>
+          <caret line="7" column="38" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
+          <folding />
         </state>
       </provider>
     </entry>

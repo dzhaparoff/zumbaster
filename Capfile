@@ -5,7 +5,7 @@ require 'capistrano/rvm'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 require 'capistrano/passenger'
-require 'capistrano/sitemap_generator
+require 'capistrano/sitemap_generator'
 
 # Include tasks from other gems included in your Gemfile
 #
