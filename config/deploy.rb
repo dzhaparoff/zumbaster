@@ -37,11 +37,13 @@ set :linked_dirs, fetch(:linked_dirs, [])
 set :keep_releases, 3
 
 namespace :deploy do
-  after :restart, :clear_cache do
-    run "mkdir -p #{shared_path}/sitemaps"
-    run "rm -rf #{release_path}/public/sitemaps"
-    run "ln -s #{shared_path}/sitemaps #{release_path}/public/sitemaps"
+  on roles :all do
+    execute :mkdir, "-p #{shared_path}/sitemaps"
+    execute :rm, "-rf #{release_path}/public/sitemaps"
+    execute :ln, "-s #{shared_path}/sitemaps #{release_path}/public/sitemaps"
+  end
 
+  after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
       # within release_path do
