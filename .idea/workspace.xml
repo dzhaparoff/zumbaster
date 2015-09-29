@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d908706-0167-42a0-9a1f-7ca5b065c907" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/deploy.rb" afterPath="$PROJECT_DIR$/config/deploy.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/production.rb" afterPath="$PROJECT_DIR$/config/environments/production.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -150,8 +149,8 @@
       <file leaf-file-name="production.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.641604">
-              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.37969926">
+              <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -890,12 +889,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00019" summary="v 0.0.5">
-      <created>1431704933076</created>
-      <option name="number" value="00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1431704933076</updated>
-    </task>
     <task id="LOCAL-00020" summary="v 0.0.5">
       <created>1431712327718</created>
       <option name="number" value="00020" />
@@ -1184,7 +1177,13 @@
       <option name="project" value="LOCAL" />
       <updated>1443566077941</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL-00068" summary="initial commit">
+      <created>1443566420447</created>
+      <option name="number" value="00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1443566420447</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1707,8 +1706,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/environments/production.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.641604">
-          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.37969926">
+          <caret line="22" column="2" selection-start-line="22" selection-start-column="2" selection-end-line="22" selection-end-column="2" />
           <folding />
         </state>
       </provider>
