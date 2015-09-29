@@ -42,7 +42,8 @@ namespace :deploy do
       within release_path do
         execute :rake, "sitemap:generate"
         execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
-        # execute :rake, 'cache:clear'
+        execute :rake, 'tmp:clear'
+        execute "RAILS_ENV=production bin/delayed_job restart"
       end
     end
   end
