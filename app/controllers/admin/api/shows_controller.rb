@@ -294,14 +294,14 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
       translator_id = m['translator_id']
 
       moonwalk_episodes = @moonwalk.get_playlist_url_parallel kp, translator_id
-      mode = Episode.where(show: show).first.abs_name.nil? ? 'abs' : 'rel'
+      # mode = Episode.where(show: show).first.abs_name.nil? ? 'abs' : 'rel'
 
       moonwalk_episodes[:playlists].each_pair do |season_number, episodes|
         season = Season.where(show: show, number: season_number).take
         episodes.each_pair do |episode_number, playlists|
 
-          episode = Episode.where(show: show, season: season, number: episode_number).take if mode == 'abs'
-          episode = Episode.where(show: show, abs_name: "#{season_number}-#{episode_number}").take if mode == 'rel'
+          episode = Episode.where(show: show, season: season, number: episode_number).take
+          # episode = Episode.where(show: show, abs_name: "#{season_number}-#{episode_number}").take if mode == 'rel'
 
           translator = Translator.where(ex_id: translator_id).take
           translation = Translation.where(episode: episode, translator: translator).first_or_create
