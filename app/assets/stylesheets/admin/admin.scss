@@ -57,7 +57,7 @@
     bottom: -4px;
     height: 4px;
     width: 100%;
-    background: rgba(20, 32, 76, .35);
+    background: rgba(45, 66, 200, .65);
     border: none;
     transition: all 0.35s ease;
 
@@ -67,7 +67,7 @@
       left:0;
       height: 100%;
       transition: all 0.35s ease;
-      background: rgba(20, 32, 76, 1);
+      background: rgba(255, 255, 255, .88);
     }
 
     &.ng-enter {

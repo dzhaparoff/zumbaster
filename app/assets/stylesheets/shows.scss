@@ -193,3 +193,26 @@
     }
   }
 }
+
+.season {
+  .show-fanart {
+    margin-bottom: rem-calc(-250);
+  }
+
+  .show-details {
+    @media #{$medium-up} {
+      .show-poster{
+        position: relative;
+        img {
+          margin-bottom: 20px;
+          padding: rem-calc(6);
+          background: #fff;
+          box-shadow: rem-calc(0 0 30) rgba(#000, .6);
+        }
+      }
+      .show-description {
+        margin-top: rem-calc(250);
+      }
+    }
+  }
+}

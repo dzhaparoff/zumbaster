@@ -5,6 +5,7 @@
   <div class="small-12 column text-center" data-no-transition-cache>
     <h1><%= @episode.title_ru %></h1>
     <h5><%= @episode.title_en %></h5>
+    <%= @episode.description_ru %>
     <% @episode.translations.each do |e| %>
         <h4><%= e.translator.name unless e.translator.nil?%></h4>
         <div class="flex-video widescreen">

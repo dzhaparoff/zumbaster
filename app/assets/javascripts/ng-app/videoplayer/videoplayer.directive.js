@@ -51,11 +51,15 @@
 
                 });
 
+                function onJSBridge(a,e,l){
+                    console.log(a,e,l);
+                }
+
                 function construct_player() {
                     var flashvars = {
                         src: playlist.f4m,
                         autoPlay: false,
-                        javascriptCallbackFunction: "onJSBridge"
+                        javascriptCallbackFunction: onJSBridge
                     };
                     var name = "player_" + scope.id;
                     var params = {
@@ -64,7 +68,8 @@
                     var attrs = {
                         name: name
                     };
-                    swfobject.embedSWF("/system/swf/player.swf?v=1", name, "854", "480", "10.2", null, flashvars, params, attrs);
+                    console.log('player.init', name, flashvars, params, attrs);
+                    swfobject.embedSWF("/system/swf/player.swf?v=2", name, "854", "480", "10.2", null, flashvars, params, attrs);
 
                 }
             }

@@ -8,6 +8,8 @@ defaults: &defaults
   yandex_api_url: 'https://cloud-api.yandex.net:443'
   yandex_api_key: 'fbdfc29b8a5f4668b2e6f0de49202ec3'
   kinopoisk_api_url: 'http://rating.kinopoisk.ru'
+  tvdb_api_key: '5B757353E14FA17B'
+  tvdb_api_url: 'http://thetvdb.com'
 
 development:
   <<: *defaults

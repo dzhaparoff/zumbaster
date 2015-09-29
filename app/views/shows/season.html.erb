@@ -1,3 +1,4 @@
+<section class="season">
 <div class="show-fanart show-for-medium-up">
   <img src="<%= @show.fanart.url(:original) %>"/>
   <div class="show-info-params">
@@ -24,7 +25,7 @@
       <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
       <% @season.episodes.order(:number).each_with_index do |e, index| %>
       <li class="show-episodes">
-        <a href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % e.number %>"><img src="<%= e.screenshot.url(:original) %>"/></a>
+        <a href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % e.number %>"><img src="<%= e.screenshot.url(:thumb) %>"/></a>
         <h5>
           <%= e.title_ru %><br>
           <span><%= e.title_en %></span>
@@ -48,3 +49,4 @@
     </div>
   </div>
 </div>
+</section>

@@ -2,16 +2,17 @@ class SyncAllSeasonsJob < ProgressJob::Base
 
   def initialize(show)
     @show = show
+    @force_reload = false
   end
 
   def perform
     @trakt = Trakt.new
+    @tvdb = Tvdb.new
     show = @show
 
     update_progress_max @show.aired_episodes
 
     update_stage('SyncAllSeasons')
-    # return false if show.ids['imdb'] == 0
 
     imdb = "tt%07d" % show.ids['imdb'].to_i
     trakt_seasons = @trakt.show_seasons imdb
@@ -20,8 +21,6 @@ class SyncAllSeasonsJob < ProgressJob::Base
 
     trakt_seasons.each do |season|
       next if season['number'] == 0
-
-      # next if show.seasons.order(number: :asc).last.number > season['number'] && show.seasons.count > 0
 
       s = Season.where(show: show, number: season['number']).first_or_create
 
@@ -33,8 +32,8 @@ class SyncAllSeasonsJob < ProgressJob::Base
       s.slug_ru = s.slug_en = "#{season_number}"
       s.description_ru = season['overview']
 
-      s.poster = URI.parse season['images']['poster']['full'] unless season['images']['poster']['full'].nil? || s.poster.exists?
-      s.thumb = URI.parse season['images']['thumb']['full'] unless season['images']['thumb']['full'].nil? || s.thumb.exists?
+      s.poster = URI.parse season['images']['poster']['full'] unless season['images']['poster']['full'].nil?
+      s.thumb = URI.parse season['images']['thumb']['full'] unless season['images']['thumb']['full'].nil?
 
       s.save
 
@@ -56,11 +55,20 @@ class SyncAllSeasonsJob < ProgressJob::Base
         e.description_en = episode['overview']
         e.first_aired = DateTime.parse episode['first_aired'] unless episode['first_aired'].nil?
 
-        screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status unless episode['images']['screenshot']['full'].nil?
+        unless episode['images']['screenshot']['full'].nil? || (e.screenshot.exists? && !@force_reload)
+          screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
+          e.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
+          puts "reloading screenshot for episode #{e.number}"
+        end
 
-        #e.screenshot = URI.parse episode['images']['screenshot']['full'] unless episode['images']['screenshot']['full'].nil? || e.screenshot.exists? || screenshot_status == 403 || screenshot_status == 404
+        translation = @tvdb.episode_translation episode['ids']["tvdb"]
 
-        e.screenshot = URI.parse episode['images']['screenshot']['full'] unless episode['images']['screenshot']['full'].nil? || screenshot_status == 403 || screenshot_status == 404
+        unless translation.nil?
+          e.title_ru = translation[:title_ru]
+          e.description_ru = translation[:description_ru]
+          e.abs_name = "#{translation[:season]}-#{translation[:episode]}" if translation[:season] > 0 && translation[:episode] > 0
+          e.number_abs = translation[:episode]
+        end
 
         e.save
         update_progress
