@@ -281,7 +281,9 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
 
   def sync_videos
     show = Show.unscoped.find(params[:id])
-    mode = Episode.where(show: show).second.abs_name.nil? ? 'abs' : 'rel'
+    #mode = Episode.where(show: show).second.abs_name.nil? ? 'abs' : 'rel'
+
+    mode = (show.slug_ru != 'interny') ? 'abs' : 'rel'
 
     if show.ids['kp'].to_i == 0
       return render json: show
@@ -301,7 +303,7 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
           if mode == 'abs'
             episode = Episode.where(show: show, season: season, number: episode_number).take
           else
-            episode = Episode.where(show: show, abs_name: "#{season_number}-#{episode_number}").take
+            episode = Episode.where(show: show, abs_name: "#{season_number.to_i}-#{episode_number.to_i}").take
           end
 
           translator = Translator.where(ex_id: translator_id).take
