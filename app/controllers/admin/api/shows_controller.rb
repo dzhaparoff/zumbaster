@@ -281,7 +281,7 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
 
   def sync_videos
     show = Show.unscoped.find(params[:id])
-    mode = Episode.where(show: show).last.abs_name.nil? ? 'abs' : 'rel'
+    mode = Episode.where(show: show).second.abs_name.nil? ? 'abs' : 'rel'
 
     if show.ids['kp'].to_i == 0
       return render json: show
@@ -293,9 +293,7 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
 
     moonwalk.each do |m|
       translator_id = m['translator_id']
-
       moonwalk_episodes = @moonwalk.get_playlist_url_parallel kp, translator_id
-
       moonwalk_episodes[:playlists].each_pair do |season_number, episodes|
         season = Season.where(show: show, number: season_number).take
         episodes.each_pair do |episode_number, playlists|
