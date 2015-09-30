@@ -59,12 +59,21 @@ class Moonwalk
     return false if video_token == false
     playlist_request = Faraday.post APP_CONFIG['m_api_url'] + '/sessions/create_session',
                                     URI.encode_www_form(partner: nil,
-                                                        d_id: 177,
+                                                        d_id: 21609,
                                                         video_token: video_token,
                                                         content_type: 'serial',
                                                         access_key: 'zNW4q9pL82sHxV')
     JSON.parse playlist_request.body
   end
+
+  # $.post('/sessions/create_session', {
+  #                                      partner: null,
+  #                                      d_id: 21609,
+  #                                      video_token: 'c44ce63f659f7031',
+  #                                      content_type: 'russian',
+  #                                      access_key: 'zNW4q9pL82sHxV',
+  #                                      cd: condition_detected ? 1 : 0
+  #                                  })
 
   private
 
@@ -141,14 +150,11 @@ class Moonwalk
   end
 
   def check_script_tag(script, video_token)
-
-    return video_token unless video_token
-
+    return video_token if video_token.to_s.length > 5
     return false if script.nil?
     return false if script.content.nil?
 
-    video_token_raw = script.content.to_s.scan(/video_token\: \'([a-zA-Z0-9]+)\'/)
-
+    video_token_raw = script.text.to_s.scan(/video_token\: \'([a-zA-Z0-9]+)\'/)
     return false if video_token_raw.first.nil? || video_token_raw.nil? || video_token_raw.size == 0
 
     video_token_raw.first.first
