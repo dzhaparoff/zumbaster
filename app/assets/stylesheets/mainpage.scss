@@ -7,6 +7,7 @@
     padding-top: rem-calc(6);
     font-size: rem-calc(12);
     line-height: rem-calc(14);
+    word-break: break-all;
   }
 
   .show-episode {
@@ -15,15 +16,6 @@
 
     img {
       margin-bottom: rem-calc(5);
-    }
-
-    span, a {
-      display: block;
-      color: $base;
-    }
-
-    span b {
-      color: $primary-color;
     }
 
     .show-title {
@@ -37,13 +29,16 @@
     .episode-title {
       font-size: percentage(1.4);
       line-height: rem-calc(20);
-      color: $primary-color;
     }
   }
   .about-block {
     p {
       font-size: rem-calc(12);
     }
+  }
+
+  .new {
+    background: $black;
   }
 }
 
@@ -96,6 +91,11 @@
       }
     }
 
+    .awwards-list {
+      margin-top: rem-calc(20);
+      color: $white;
+    }
+
     .title_en {
       padding-top: rem-calc(5);
       color: rgba(#fff, .8);
@@ -105,5 +105,15 @@
   img {
     width: 100%;
     transform: translate3d(0,0,0)
+  }
+}
+
+.top-ten {
+  h2 {
+    text-align: center;
+  }
+
+  .top-ten-item {
+    @include item_w_rating;
   }
 }

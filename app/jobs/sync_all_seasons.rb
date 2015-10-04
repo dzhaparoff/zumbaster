@@ -66,7 +66,7 @@ class SyncAllSeasonsJob < ProgressJob::Base
         unless translation.nil?
           e.title_ru = translation[:title_ru]
           e.description_ru = translation[:description_ru]
-          e.abs_name = "#{translation[:season]}-#{translation[:episode]}" if translation[:season] > 0 && translation[:episode] > 0
+          e.abs_name = "#{translation[:season]}-#{translation[:episode]}"
           e.number_abs = translation[:episode] if translation[:episode]
         end
 

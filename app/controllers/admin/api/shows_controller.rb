@@ -281,9 +281,8 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
 
   def sync_videos
     show = Show.unscoped.find(params[:id])
-    #mode = Episode.where(show: show).second.abs_name.nil? ? 'abs' : 'rel'
-
-    mode = (show.slug_ru != 'interny') ? 'abs' : 'rel'
+    mode = Episode.where(show: show).second.number_abs > 0 ? 'abs' : 'rel'
+    #mode = (show.slug_ru != 'interny') ? 'abs' : 'rel'
 
     if show.ids['kp'].to_i == 0
       return render json: show
