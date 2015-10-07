@@ -54,6 +54,7 @@ class SyncAllSeasonsJob < ProgressJob::Base
         e.number_abs = episode['number_abs']
         e.description_en = episode['overview']
         e.first_aired = DateTime.parse episode['first_aired'] unless episode['first_aired'].nil?
+
         e.abs_name = "#{season['number']}-#{episode['number']}"
 
         unless episode['images']['screenshot']['full'].nil? || (e.screenshot.exists? && !@force_reload)
