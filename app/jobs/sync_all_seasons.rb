@@ -54,6 +54,7 @@ class SyncAllSeasonsJob < ProgressJob::Base
         e.number_abs = episode['number_abs']
         e.description_en = episode['overview']
         e.first_aired = DateTime.parse episode['first_aired'] unless episode['first_aired'].nil?
+        e.abs_name = "#{season_number}-#{episode_number}"
 
         unless episode['images']['screenshot']['full'].nil? || (e.screenshot.exists? && !@force_reload)
           screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
@@ -64,10 +65,10 @@ class SyncAllSeasonsJob < ProgressJob::Base
         translation = @tvdb.episode_translation episode['ids']["tvdb"]
 
         unless translation.nil?
-          e.title_ru = translation[:title_ru]
+          e.title_ru = translation[:title_ru] if translation[:title_ru] != episode['title']
           e.description_ru = translation[:description_ru]
-          e.abs_name = "#{translation[:season]}-#{translation[:episode]}"
-          e.number_abs = translation[:episode] if translation[:episode]
+          e.abs_name = "#{translation[:season]}-#{translation[:episode]}" if translation[:episode] > 0
+          e.number_abs = translation[:episode] if translation[:episode] > 0
         end
 
         e.save
