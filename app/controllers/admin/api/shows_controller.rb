@@ -281,8 +281,6 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
 
   def sync_videos
     show = Show.unscoped.find(params[:id])
-    # mode = Episode.where(show: show).second.number_abs > 0 ? 'abs' : 'rel'
-    # mode = (show.slug_ru != 'interny') ? 'abs' : 'rel'
 
     if show.ids['kp'].to_i == 0
       return render json: show
@@ -296,20 +294,15 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
       translator_id = m['translator_id']
       moonwalk_episodes = @moonwalk.get_playlist_url_parallel kp, translator_id
       moonwalk_episodes[:playlists].each_pair do |season_number, episodes|
-        # season = Season.where(show: show, number: season_number).take
         episodes.each_pair do |episode_number, playlists|
 
-          # if mode == 'abs'
-          #   episode = Episode.where(show: show, season: season, number: episode_number).take
-          # else
-            episode = Episode.where(show: show, abs_name: "#{season_number.to_i}-#{episode_number.to_i}").take
-          # end
+          episode = Episode.where(show: show, abs_name: "#{season_number.to_i}-#{episode_number.to_i}").take
 
           translator = Translator.where(ex_id: translator_id).take
           translation = Translation.where(episode: episode, translator: translator).first_or_create
-          translation.f4m = playlists['playlists']['manifest_f4m']
-          translation.m3u8 = playlists['playlists']['manifest_m3u8']
-          translation.moonwalk_token = playlists['token']
+          translation.f4m = playlists['playlists']['manifest_f4m'] unless playlists
+          translation.m3u8 = playlists['playlists']['manifest_m3u8'] unless playlists
+          translation.moonwalk_token = playlists['token'] unless playlists
           translation.save
         end
       end
