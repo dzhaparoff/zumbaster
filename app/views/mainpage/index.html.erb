@@ -47,7 +47,7 @@
                 <li class="show-episode">
                   <div class="show-screenshot">
                       <a href="<%= show_episode_path(s.show.slug_ru, "%02d" % s.season.number, "%02d" % s.number) %>">
-                        <img src="<%= s.screenshot.url(:original) %>"/>
+                        <img src="<%= s.screenshot.url(:thumb) %>"/>
                       </a>
                   </div>
                   <div class="show-title">
