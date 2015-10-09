@@ -2,7 +2,6 @@
 <html>
 <head>
   <%= display_meta_tags %>
-  <%= analytics_init if Rails.env.production? %>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta name='yandex-verification' content='463ee9c64c7bf5e6' />
   <meta name="google-site-verification" content="sqlTzoO8nxKhGa126DvedQoOqrq_1QmODkoXw9lVpMM" />
@@ -23,5 +22,6 @@
     <%= content_for?(:content) ? yield(:content) : yield %>
     </section>
     <%= render "partials/footer" %>
+    <%= analytics_init if Rails.env.production? %>
 </body>
 </html>
