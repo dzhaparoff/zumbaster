@@ -44,6 +44,9 @@
                 playlist.promise.then(function(){
 
                     if(playlist.f4m !== null){
+                      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+                        elem.append('<video controls src="' + playlist.m3u8 + '"></video>');
+                      else
                         construct_player();
                     }
                     else

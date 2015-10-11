@@ -53,3 +53,7 @@ a {
   }
 
 }
+
+.list-item {
+    @include item_w_rating;
+}

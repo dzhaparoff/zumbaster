@@ -1,14 +1,29 @@
 <% title @genre.name_ru %>
-<div class="row genres">
-  <div class="medium-12 column">
-    <h1><%= @genre.name_ru %></h1>
-    <ul class="small-block-grid-3 medium-block-grid-6 large-block-grid-8">
-      <% @shows.each do |s| %>
-          <li class="show_item">
-            <a href="<%= show_path(s.slug_ru) %>"><%= image_tag s.poster.url(:thumb), alt: s.title_ru%></a>
-            <%= link_to s.title_ru, show_path(s.slug_ru), class:"title"  %>
+<section class="genres p-t-60">
+  <div class="row">
+    <div class="medium-12 column">
+      <h1><%= @genre.name_ru %></h1>
+      <ul class="small-block-grid-2 medium-block-grid-4 large-block-grid-5 p-t-20">
+        <% @shows.each do |s| %>
+          <li>
+            <article class="list-item">
+              <div class="poster" data-height-equalize="<%= number_with_precision s.poster.aspect_ratio(:thumb), precision: 3 %>">
+                <a href="<%= show_path s.slug_ru %>"></a>
+                <img src="<%= s.poster.url(:thumb) %>" alt="<%= s.title_ru %>" />
+                <div class="poster pos-<%= s.id %>"></div>
+                <div class="titles">
+                  <h1 class="title_ru"><%= s.title_ru %></h1>
+                  <div class="title_en"><%= s.title_en %></div>
+                  <div class="awwards-list">
+                    <div class="awwards imdb"><div class="count"><%= number_with_precision s.rating.imdb_rating.value, precision: 1 %></div></div>
+                    <div class="awwards kinopoisk"><div class="count"><%= number_with_precision s.rating.kp_rating.value, precision: 1 %></div></div>
+                  </div>
+                </div>
+              </div>
+            </article>
           </li>
-      <% end %>
-    </ul>
+        <% end %>
+      </ul>
+    </div>
   </div>
-</div>
+</section>
