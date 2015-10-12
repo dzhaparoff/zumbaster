@@ -1,44 +1,44 @@
 <section class="season">
-  <div class="show-fanart show-for-medium-up">
+  <div class="show-fanart">
     <img src="<%= @show.fanart.url(:original) %>"/>
   </div>
   <div class="row show-details">
     <div class="small-12 columns">
-      <div class="row">
-        <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
-          <li class="season-poster">
-            <img src="<%= @season.poster.url(:medium) %>" alt="<%= @show.title_ru  %>, сезон <%=@season.number%>"/>
-            <h1>
-              <%= @show.title_ru %>
-              <span>Cезон <%=@season.number%></span>
-            </h1>
-          </li>
-        <% @season.episodes.order(:number).each_with_index do |e, index| %>
-        <li class="show-episodes">
-          <a href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % e.number %>"><img src="<%= e.screenshot.url(:thumb) %>"/></a>
-          <h5>
-            <%= e.title_ru %><br>
-            <span><%= e.title_en %></span>
-            <span><%= Russian::strftime(e.first_aired, "%d %B %Y") unless e.first_aired.nil? %></span>
-          </h5>
-          <h6>Эпизод <%= e.number %></h6>
+      <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
+        <li class="season-poster">
+          <img src="<%= @season.poster.url(:medium) %>" alt="<%= @show.title_ru  %>, сезон <%=@season.number%>"/>
+          <h1>
+            <%= @show.title_ru %>
+            <span>Cезон <%=@season.number%></span>
+          </h1>
         </li>
+        <% @season.episodes.order(:number).each_with_index do |e, index| %>
+          <li class="show-episodes">
+            <a href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % e.number %>"><img src="<%= e.screenshot.url(:thumb) %>"/></a>
+            <h5>
+              <%= e.title_ru %><br>
+              <span><%= e.title_en %></span>
+              <span><%= Russian::strftime(e.first_aired, "%d %B %Y") unless e.first_aired.nil? %></span>
+            </h5>
+            <h6>Эпизод <%= e.number %></h6>
+          </li>
         <% end %>
-        </ul>
-      </div>
-      <div class="row">
-        <h3>Другие сезоны</h3>
-        <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6 seasons-list">
+      </ul>
+    </div>
+  </div>
+  <div class="row p-t-20">
+    <div class="small-12 columns">
+      <h3>Другие сезоны</h3>
+      <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6 seasons-list p-t-20">
         <% @show.seasons.present.where.not( number: @season.number).each do |s| %>
-            <li>
-              <a href="<%= show_season_path @show.slug_ru, "%02d" % s.number %>">
-                <img src="<%= s.poster.url(:thumb) %>"/>
-                <h5 class="season-number">Сезон <%= s.number %></h5>
-              </a>
-            </li>
+          <li>
+            <a href="<%= show_season_path @show.slug_ru, "%02d" % s.number %>">
+              <img src="<%= s.poster.url(:thumb) %>"/>
+              <h5 class="season-number">Сезон <%= s.number %></h5>
+            </a>
+          </li>
         <% end %>
-        </ul>
-      </div>
+      </ul>
     </div>
   </div>
 </section>
