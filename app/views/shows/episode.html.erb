@@ -1,6 +1,10 @@
 <section class="episode">
   <div class="show-fanart">
-    <img src="<%= @show.fanart.url(:original) %>"/>
+    <% if @episode.screenshot.width < 1200 || !@episode.screenshot.exists? %>
+      <img src="<%= @show.fanart.url(:original) %>"/>
+    <% else %>
+      <img src="<%= @episode.screenshot.url(:original) %>"/>
+    <% end  %>
   </div>
   <div class="row">
     <div class="small-12 column text-center" data-no-transition-cache>

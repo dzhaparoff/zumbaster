@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8d908706-0167-42a0-9a1f-7ca5b065c907" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/episode.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/episode.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/season.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/season.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/stylesheets/shows.scss" afterPath="$PROJECT_DIR$/app/assets/stylesheets/shows.scss" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="zumbaster.iws" />
@@ -30,7 +28,7 @@
     <SUITE FILE_PATH="coverage/zumbaster@install__zumbaster.coverage" NAME="install: zumbaster Coverage Results" MODIFIED="1431637482579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@rails_update__zumbaster.coverage" NAME="rails:update: zumbaster Coverage Results" MODIFIED="1440148705600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@jobs_clear__zumbaster.coverage" NAME="jobs:clear: zumbaster Coverage Results" MODIFIED="1439676099731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
-    <SUITE FILE_PATH="coverage/zumbaster@deploy__zumbaster.coverage" NAME="deploy: zumbaster Coverage Results" MODIFIED="1444586307383" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
+    <SUITE FILE_PATH="coverage/zumbaster@deploy__zumbaster.coverage" NAME="deploy: zumbaster Coverage Results" MODIFIED="1444689192423" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@paperclip_refresh_metadata__zumbaster.coverage" NAME="paperclip:refresh:metadata: zumbaster Coverage Results" MODIFIED="1431815822127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@db_rollback__zumbaster.coverage" NAME="db:rollback: zumbaster Coverage Results" MODIFIED="1430818113895" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@sitemap_generate__zumbaster.coverage" NAME="sitemap:generate: zumbaster Coverage Results" MODIFIED="1443432152079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
@@ -83,8 +81,8 @@
       <file leaf-file-name="season.html.erb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/shows/season.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="24" />
+            <state vertical-scroll-proportion="-6.3333335">
+              <caret line="8" column="104" selection-start-line="8" selection-start-column="104" selection-end-line="8" selection-end-column="104" />
               <folding />
             </state>
           </provider>
@@ -93,8 +91,8 @@
       <file leaf-file-name="episode.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/shows/episode.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29962894">
-              <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+            <state vertical-scroll-proportion="0.37012988">
+              <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -1096,12 +1094,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00036" summary="v 0.0.3&#10;">
-      <created>1443347626356</created>
-      <option name="number" value="00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1443347626356</updated>
-    </task>
     <task id="LOCAL-00037" summary="v 0.0.3&#10;">
       <created>1443369468374</created>
       <option name="number" value="00037" />
@@ -1390,7 +1382,13 @@
       <option name="project" value="LOCAL" />
       <updated>1444586260871</updated>
     </task>
-    <option name="localTasksCounter" value="85" />
+    <task id="LOCAL-00085" summary="initial commit">
+      <created>1444689151929</created>
+      <option name="number" value="00085" />
+      <option name="project" value="LOCAL" />
+      <updated>1444689151929</updated>
+    </task>
+    <option name="localTasksCounter" value="86" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1874,14 +1872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/shows/season.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/stylesheets/shows.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-220.875">
@@ -1890,10 +1880,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/shows/season.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.3333335">
+          <caret line="8" column="104" selection-start-line="8" selection-start-column="104" selection-end-line="8" selection-end-column="104" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/shows/episode.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29962894">
-          <caret line="17" column="10" selection-start-line="17" selection-start-column="10" selection-end-line="17" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.37012988">
+          <caret line="21" column="10" selection-start-line="21" selection-start-column="10" selection-end-line="21" selection-end-column="10" />
           <folding />
         </state>
       </provider>
