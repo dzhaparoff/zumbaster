@@ -300,8 +300,6 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
 
           translator = Translator.where(ex_id: translator_id).take
           translation = Translation.where(episode: episode, translator: translator).first_or_create
-          # translation.f4m = playlists['playlists']['manifest_f4m'] unless playlists
-          # translation.m3u8 = playlists['playlists']['manifest_m3u8'] unless playlists
           translation.moonwalk_token = playlists['token']
           translation.save
         end

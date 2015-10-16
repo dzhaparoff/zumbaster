@@ -60,7 +60,7 @@
 
                 function construct_player() {
                     var flashvars = {
-                        src: playlist.f4m,
+                        src: encodeURIComponent(playlist.f4m),
                         autoPlay: false,
                         javascriptCallbackFunction: onJSBridge
                     };

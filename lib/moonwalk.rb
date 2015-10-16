@@ -111,8 +111,6 @@ class Moonwalk
             video_token = check_script_tag script, video_token
           end
 
-          #playlist_request = Moonwalk.playlist_getter video_token
-          #playlists[s][e]['playlists'] = playlist_request
           playlists[s][e]['token'] = video_token
       end
     end
