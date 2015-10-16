@@ -36,6 +36,7 @@ class Translation < ActiveRecord::Base
 
     self.f4m = new_playlist['manifest_f4m']
     self.m3u8 = new_playlist['manifest_m3u8']
+    self.moonwalk_token = video_token
 
     self.save
   end
@@ -43,14 +44,11 @@ class Translation < ActiveRecord::Base
   private
 
   def check_script_tag(script, video_token)
-
-    return video_token if video_token != false
-
+    return video_token if video_token.to_s.length > 5
     return false if script.nil?
     return false if script.content.nil?
 
-    video_token_raw = script.content.to_s.scan(/video_token\: \'([a-zA-Z0-9]+)\'/)
-
+    video_token_raw = script.text.to_s.scan(/video_token\: \'([a-zA-Z0-9]+)\'/)
     return false if video_token_raw.first.nil? || video_token_raw.nil? || video_token_raw.size == 0
 
     video_token_raw.first.first

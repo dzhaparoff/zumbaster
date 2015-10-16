@@ -98,12 +98,7 @@ class Moonwalk
   end
 
   def fill_playlists request
-    playlists_mask = {
-        m3u8: nil,
-        f4m: nil
-    }
     playlists = {}
-    f = Faraday.new(url: 'http://moonwalk.cc')
     request.each_pair do|s, req|
       playlists[s] = {}
       req.each_pair do |e, r|
@@ -116,37 +111,12 @@ class Moonwalk
             video_token = check_script_tag script, video_token
           end
 
-          if playlists_mask != false
-            if playlists_mask[:m3u8].nil? && playlists_mask[:f4m].nil?
-              playlist_request = Moonwalk.playlist_getter video_token
-              playlists_mask = make_playlist_mask playlist_request
-              playlists[s][e]['playlists'] = playlist_request
-            else
-              playlists[s][e]['playlists'] = make_playlist_from_mask playlists_mask, video_token
-            end
-            playlists[s][e]['token'] = video_token
-          end
+          #playlist_request = Moonwalk.playlist_getter video_token
+          #playlists[s][e]['playlists'] = playlist_request
+          playlists[s][e]['token'] = video_token
       end
     end
     playlists
-  end
-
-  def make_playlist_mask playlist_hash
-    return false if playlist_hash == false
-    {
-        m3u8: playlist_hash['manifest_m3u8'].gsub(/\/[a-z0-9]{12,}\//, '/#/'),
-        f4m: playlist_hash['manifest_f4m'].gsub(/\/[a-z0-9]{12,}\//, '/#/')
-    }
-  end
-
-  def make_playlist_from_mask mask_hash, video_token
-
-    return false if video_token == false
-
-    {
-        'manifest_m3u8' => mask_hash[:m3u8].gsub("#", video_token),
-        'manifest_f4m'  => mask_hash[:f4m].gsub("#", video_token)
-    }
   end
 
   def check_script_tag(script, video_token)
