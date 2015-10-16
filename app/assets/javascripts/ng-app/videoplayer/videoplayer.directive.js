@@ -43,24 +43,31 @@
 
                 playlist.promise.then(function(){
 
-                    if(playlist.f4m !== null){
-                      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
-                        elem.append('<video controls src="' + playlist.m3u8 + '"></video>');
+                  $.post('/sessions/create_session', {
+                    partner: null,
+                    d_id: 21609,
+                    video_token: playlist.token,
+                    content_type: 'russian',
+                    access_key: 'zNW4q9pL82sHxV'
+                  }).then(function (p) {
+                      if(p.manifest_f4m !== null){
+                        if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
+                          elem.append('<video controls src="' + p.manifest_m3u8 + '"></video>');
+                        else
+                          construct_player(p.manifest_f4m);
+                      }
                       else
-                        construct_player();
-                    }
-                    else
                         elem.parent().remove();
-
+                  });
                 });
 
                 function onJSBridge(a,e,l){
                     console.log(a,e,l);
                 }
 
-                function construct_player() {
+                function construct_player(video) {
                     var flashvars = {
-                        src: playlist.f4m,
+                        src: video,
                         autoPlay: false,
                         javascriptCallbackFunction: onJSBridge
                     };

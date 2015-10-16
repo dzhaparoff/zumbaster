@@ -61,7 +61,7 @@ class Moonwalk
                                     URI.encode_www_form(partner: nil,
                                                         d_id: 21609,
                                                         video_token: video_token,
-                                                        content_type: 'serial',
+                                                        content_type: 'movie',
                                                         access_key: 'zNW4q9pL82sHxV')
     JSON.parse playlist_request.body
   end

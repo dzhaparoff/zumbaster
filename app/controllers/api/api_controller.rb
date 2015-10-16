@@ -8,7 +8,8 @@ class Api::ApiController < ApplicationController
 
     render json: {
                f4m: translation.f4m,
-               m3u8: translation.m3u8
+               m3u8: translation.m3u8,
+               token: translation.monwalk_token
            }
   end
 end
