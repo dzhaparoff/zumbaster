@@ -1,3 +1,17 @@
+<%
+   set_meta_tags og: {
+                     site_name: 'HD-Serials',
+                     title: @show.title_ru,
+                     description: strip_tags(@show.description_ru),
+                     image: URI.join(request.url, @show.poster.url(:medium)),
+                     type: 'video.tv_show',
+                     url: URI.join(request.url, show_path(@show.slug_ru))
+                 },
+                 video: {
+                     duration: @show.runtime.minutes,
+                     release_date: @show.first_aired.to_time.iso8601
+                 }
+%>
 <div class="show-fanart show-for-medium-up">
   <img src="<%= @show.fanart.url(:original) %>"/>
   <div class="show-info-params">
@@ -38,6 +52,7 @@
       </div>
       <div class="medium-9 columns show-description">
         <div class="genres-list">Жанры: <%== genres_inline_list @genres %></div>
+        <%= render "partials/share" %>
         <div class="description"><%== @show.description_ru %></div>
         <!--<h5>Актеры:</h5>-->
         <!--<div class="people-list">-->

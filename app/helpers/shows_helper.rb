@@ -7,4 +7,10 @@ module ShowsHelper
     g * ", "
   end
 
+  def genres_array genres
+    genres.map do |genre|
+      return genre.name_ru unless genre.name_ru.nil?
+    end
+  end
+
 end

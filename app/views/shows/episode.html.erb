@@ -1,3 +1,20 @@
+<%
+   set_meta_tags og: {
+                     site_name: 'HD-Serials',
+                     title: "#{@episode.show.title_ru}: #{@episode.title_ru}, #{@episode.season.number} сезон #{@episode.number} эпизод",
+                     image: URI.join(request.url, @episode.screenshot.url),
+                     type: 'video.tv_show',
+                     url: URI.join(
+                         request.url,
+                         show_episode_path(@episode.show.slug_ru, "%02d" % @episode.season.number, "%02d" % @episode.number)
+                     )
+                 },
+                 video: {
+                     duration: @show.runtime.minutes,
+                     release_date: @show.first_aired.to_time.iso8601,
+                     series: URI.join(request.url, show_path(@episode.show.slug_ru))
+                 }
+%>
 <section class="episode">
   <div class="show-fanart">
     <% if @episode.screenshot.width < 1200 || !@episode.screenshot.exists? %>
@@ -10,6 +27,7 @@
     <div class="small-12 column text-center" data-no-transition-cache>
       <h1><%= @episode.title_ru %></h1>
       <h5><%= @episode.title_en %></h5>
+      <%= render "partials/share" %>
       <%= @episode.description_ru %>
       <% @episode.translations.each do |e| %>
           <h4><%= e.translator.name unless e.translator.nil?%></h4>
