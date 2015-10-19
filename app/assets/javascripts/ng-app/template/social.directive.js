@@ -50,7 +50,7 @@
       getShareCount: function(page) {
         return $http({
           method: "POST",
-          url : 'https://clients6.google.com/rpc',
+          url : 'https://clients6.google.com/rpc?key=AIzaSyBUhre6F6_WyqlxM-OSevrSFTb03zDtEu4',
           headers: {
             "Content-type" : "application/json",
             "Access-Control-Allow-Origin" : "*"
