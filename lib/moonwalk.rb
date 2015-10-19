@@ -59,9 +59,9 @@ class Moonwalk
     return false if video_token == false
 
      f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-        builder.headers['Content-Type'] = 'application/json'
-        builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'
         builder.adapter Faraday.default_adapter
+        builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'
+        builder.headers['Host'] = 'moonwalk.cc'
         builder.params['d_id'] = 21609
         builder.params['video_token'] = video_token
         builder.params['content_type'] = 'serial'
