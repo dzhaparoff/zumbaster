@@ -28,7 +28,7 @@
       <h1><%= @episode.title_ru %></h1>
       <h5><%= @episode.title_en %></h5>
       <%= render "partials/share" %>
-      <%= @episode.description_ru %>
+      <div class="p-t-20"><%= @episode.description_ru %></div>
       <% @episode.translations.each do |e| %>
           <h4><%= e.translator.name unless e.translator.nil?%></h4>
           <div class="flex-video widescreen">

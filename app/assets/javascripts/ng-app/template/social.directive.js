@@ -55,7 +55,7 @@
             "Content-type" : "application/json",
             "Access-Control-Allow-Origin" : "*"
           },
-          params : {
+          data : {
             "method" : "pos.plusones.get",
             "id" : "p",
             "params" : {
@@ -72,7 +72,7 @@
         })
       },
       share: function(page) {
-        window.open('https://plus.google.com/share?url=' + page + '%3Futm_source%3Dgoogleplus%26utm_medium%3Dsharing');
+        window.open('https://plus.google.com/share?url=' + page,"","toolbar=0,status=0,width=626,height=436");
       }
     }
   }
@@ -125,6 +125,7 @@
         {
           var t,
               get_count;
+
           $element.click(function(){
             fb.share(link);
             $scope.like.count += 1;
@@ -136,7 +137,7 @@
 
           get_count = function(){
             fb.getShareCount(link).success(function(d){
-              $scope.like.count = d.data[0].share_count
+              $scope.like.count = d.data[0].total_count
             });
           };
           get_count();
@@ -147,6 +148,7 @@
           var t,
               get_count,
               text;
+
           text = $attr.text;
           $element.click(function(){
             tw.share(link,text);
@@ -181,6 +183,7 @@
 
           get_count = function(){
             gp.getShareCount(link).success(function(d){
+              console.log(d)
               $scope.like.count = d.count;
             });
           };
