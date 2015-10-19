@@ -137,6 +137,7 @@
 
           get_count = function(){
             fb.getShareCount(link).success(function(d){
+              console.log(link, d)
               $scope.like.count = d.data[0].total_count
             });
           };
@@ -183,6 +184,7 @@
 
           get_count = function(){
             gp.getShareCount(link).success(function(d){
+              console.log(link, d)
               $scope.like.count = d.result.metadata.globalCounts.count;
             });
           };

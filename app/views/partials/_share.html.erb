@@ -3,7 +3,7 @@
     <div class="share-button">
       <a class="social-share vk"
          data-sharebox="vkontakte"
-         data-link="<%=u request.url %>"
+         data-link="<%= request.url %>"
          title="Поделиться ВКонтакте" rel="nofollow" target="_blank">
         <span class="social-icon">
           <svg pointer-events="none" height="20" width="20">
@@ -11,7 +11,7 @@
             <image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAADFBMVEVPgqxRhKtQg6tRhKsPNB+OAAAABHRSTlMB/mK2wbxAuQAAAExJREFUeNq1jkkOACAMAin8/88S0Zgar87ByrQu+AGN1zJKdF5JKW6aFKfTKyKjS55bZjMyh012qg3zfjUQ1KQuq5cFm2X//A1J/GAA0BEA7WTJ8a8AAAAASUVORK5CYII=" height="20" width="20"></image>
           </svg>
         </span>
-        <span class="social-counter">{{like.count}}</span>
+        <span class="social-counter" data-ng-bind="like.count">0</span>
       </a>
     </div>
     <div class="share-button">
@@ -25,7 +25,7 @@
             <image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAARElEQVR4AWMgFShFzDJgoAQoR8zuV46c/Q8dU2QY1QwEaaSpgchyg9NAsmMYpJkQpqqBoNin0EBMrw+nWB41cNRA+gMAp2rGM++9ftQAAAAASUVORK5CYII=" height="20" width="20"></image>
           </svg>
         </span>
-        <span class="social-counter">{{like.count}}</span>
+        <span class="social-counter" data-ng-bind="like.count">0</span>
       </a>
     </div>
     <div class="share-button">
@@ -39,7 +39,7 @@
             <image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAd0lEQVR4Ad1ThQGAMAzboz0ROQy5AHeCVfDgRLZO3EcQpMTS+XHogiSvr+Z96pu+t6KUWGF49f/r55A8JQGowWu1x0jWBCcQPcxyUgJ+VScqid87e9j6EFkDVbPIHz+cGHO51kCEJZS3ZXHdPR9WkfeViVvwFygBzwkkiHxJPVsAAAAASUVORK5CYII=" height="20" width="20"></image>
           </svg>
         </span>
-        <span class="social-counter">{{like.count}}</span>
+        <span class="social-counter" data-ng-bind="like.count">0</span>
       </a>
     </div>
     <div class="share-button">
@@ -53,7 +53,7 @@
             <image src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAADFBMVEXkXz/lYULlYEHlYUGdtwQIAAAABHRSTlMB/Fayfn+jOQAAAGNJREFUeNpdj1EOgDAMQgfc/85qafJUPpbtrQF6HlmV57UodqScl6SeMiwdMaPA84MCjlehC72QCCuktmXHtSpuNBALSlPh5xkpS6kUb5y/Cw0Fcg2QlQ3Eqr/s41vL6DgfkAvcoAEMV9XyhwAAAABJRU5ErkJggg==" height="20" width="20"></image>
           </svg>
         </span>
-        <span class="social-counter">{{like.count}}</span>
+        <span class="social-counter" data-ng-bind="like.count">0</span>
       </a>
     </div>
   </div>

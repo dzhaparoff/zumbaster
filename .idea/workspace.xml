@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d908706-0167-42a0-9a1f-7ca5b065c907" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/_share.html.erb" afterPath="$PROJECT_DIR$/app/views/partials/_share.html.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/ng-app/template/social.directive.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/ng-app/template/social.directive.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -96,21 +97,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="_share.html.erb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="_share.html.erb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/partials/_share.html.erb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-33.833332">
-              <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.7179963">
+              <caret line="50" column="60" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="social.directive.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="social.directive.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/ng-app/template/social.directive.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.70689654">
-              <caret line="183" column="33" selection-start-line="183" selection-start-column="33" selection-end-line="183" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="140" column="55" selection-start-line="140" selection-start-column="55" selection-end-line="140" selection-end-column="55" />
               <folding />
             </state>
           </provider>
@@ -209,8 +210,8 @@
         <option value="$PROJECT_DIR$/app/views/shows/detail.html.erb" />
         <option value="$PROJECT_DIR$/app/views/shows/episode.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/share.scss" />
-        <option value="$PROJECT_DIR$/app/views/partials/_share.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/ng-app/template/social.directive.js" />
+        <option value="$PROJECT_DIR$/app/views/partials/_share.html.erb" />
       </list>
     </option>
   </component>
@@ -1120,12 +1121,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00046" summary="initial commit">
-      <created>1443378283697</created>
-      <option name="number" value="00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1443378283697</updated>
-    </task>
     <task id="LOCAL-00047" summary="initial commit">
       <created>1443378423118</created>
       <option name="number" value="00047" />
@@ -1414,7 +1409,13 @@
       <option name="project" value="LOCAL" />
       <updated>1445262355691</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <task id="LOCAL-00095" summary="initial commit">
+      <created>1445264047022</created>
+      <option name="number" value="00095" />
+      <option name="project" value="LOCAL" />
+      <updated>1445264047022</updated>
+    </task>
+    <option name="localTasksCounter" value="96" />
     <servers />
   </component>
   <component name="TodoView" selected-index="1">
@@ -1913,18 +1914,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/partials/_share.html.erb">
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/ng-app/template/social.directive.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-33.833332">
-          <caret line="52" column="31" selection-start-line="52" selection-start-column="31" selection-end-line="52" selection-end-column="31" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="140" column="55" selection-start-line="140" selection-start-column="55" selection-end-line="140" selection-end-column="55" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/ng-app/template/social.directive.js">
+    <entry file="file://$PROJECT_DIR$/app/views/partials/_share.html.erb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.70689654">
-          <caret line="183" column="33" selection-start-line="183" selection-start-column="33" selection-end-line="183" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.7179963">
+          <caret line="50" column="60" selection-start-line="50" selection-start-column="60" selection-end-line="50" selection-end-column="60" />
           <folding />
         </state>
       </provider>
