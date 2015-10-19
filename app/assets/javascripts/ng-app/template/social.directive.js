@@ -50,7 +50,7 @@
       getShareCount: function(page) {
         return $http({
           method: "POST",
-          url : 'https://clients6.google.com/rpc?key=AIzaSyBUhre6F6_WyqlxM-OSevrSFTb03zDtEu4',
+          url : 'https://clients6.google.com/rpc?key=AIzaSyCKSbrvQasunBoV16zDH9R33D88CeLr9gQ',
           headers: {
             "Content-type" : "application/json",
             "Access-Control-Allow-Origin" : "*"
@@ -183,8 +183,7 @@
 
           get_count = function(){
             gp.getShareCount(link).success(function(d){
-              console.log(d)
-              $scope.like.count = d.count;
+              $scope.like.count = d.result.metadata.globalCounts.count;
             });
           };
           get_count();
