@@ -57,23 +57,21 @@ class Moonwalk
 
   def self.playlist_getter video_token
     return false if video_token == false
-    playlist_request = Faraday.post APP_CONFIG['m_api_url'] + '/sessions/create_session',
-                                    URI.encode_www_form(partner: nil,
-                                                        d_id: 21609,
-                                                        video_token: video_token,
-                                                        content_type: 'movie',
-                                                        access_key: 'zNW4q9pL82sHxV')
+
+     f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
+        builder.headers['Content-Type'] = 'application/json'
+        builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0'
+        builder.adapter Faraday.default_adapter
+        builder.params['d_id'] = 21609
+        builder.params['video_token'] = video_token
+        builder.params['content_type'] = 'serial'
+        builder.params['access_key'] = '0fb74eb4b2c16d45fe'
+     end
+
+    playlist_request = f.post '/sessions/create_session'
+
     JSON.parse playlist_request.body
   end
-
-  # $.post('/sessions/create_session', {
-  #                                      partner: null,
-  #                                      d_id: 21609,
-  #                                      video_token: 'c44ce63f659f7031',
-  #                                      content_type: 'russian',
-  #                                      access_key: 'zNW4q9pL82sHxV',
-  #                                      cd: condition_detected ? 1 : 0
-  #                                  })
 
   private
 
