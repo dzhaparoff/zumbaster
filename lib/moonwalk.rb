@@ -40,9 +40,11 @@ class Moonwalk
       request[k] = {}
       @http_parallel.in_parallel do
         v.each do |episode|
-          request[k][episode] = @http_parallel.get main_iframe_link[18..-1],
-                              season: k,
-                              episode: episode
+          # request[k][episode] = @http_parallel.get main_iframe_link[18..-1],
+          #                     season: k,
+          #                     episode: episode
+
+          request[k][episode] = "body"
         end
       end
     end
@@ -76,8 +78,6 @@ class Moonwalk
         builder.params['access_key'] = '0fb74eb4b2c16d45fe'
      end
 
-    ap f
-
     playlist_request = f.post '/sessions/create_session'
 
     JSON.parse playlist_request.body
@@ -103,8 +103,6 @@ class Moonwalk
     request = f.get "/video/#{token}/iframe"
 
     doc = Nokogiri::HTML.parse(request.body)
-
-    ap doc
 
     m_expired = nil
     m_token = nil
@@ -155,15 +153,15 @@ class Moonwalk
       playlists[s] = {}
       req.each_pair do |e, r|
           playlists[s][e] = {}
-          doc = Nokogiri::HTML.parse(r.body)
+          # doc = Nokogiri::HTML.parse(r.body)
+          #
+          # video_token = false
+          #
+          # doc.search('body > script').each do |script|
+          #   video_token = check_script_tag script, video_token
+          # end
 
-          video_token = false
-
-          doc.search('body > script').each do |script|
-            video_token = check_script_tag script, video_token
-          end
-
-          playlists[s][e]['token'] = video_token
+          playlists[s][e]['token'] = "temp_token"
       end
     end
     playlists
