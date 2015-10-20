@@ -18,9 +18,7 @@ class Translation < ActiveRecord::Base
 
     main_iframe_link = serial['serial']['iframe_url'].to_s
 
-    request = Faraday.get main_iframe_link,
-                                    season: s,
-                                    episode: e
+    request = Moonwalk.get_iframe_page(main_iframe_link, s, e)
 
     doc = Nokogiri::HTML.parse(request.body)
 
@@ -32,7 +30,13 @@ class Translation < ActiveRecord::Base
 
     return false if video_token == false
 
-    new_playlist = Moonwalk.playlist_getter video_token
+    meta_tokens = Moonwalk.get_m_headers video_token
+
+    new_playlist = Moonwalk.playlist_getter video_token, meta_tokens[:m_expired], meta_tokens[:m_token]
+
+    ap video_token
+    ap meta_tokens
+    ap new_playlist
 
     self.f4m = new_playlist['manifest_f4m']
     self.m3u8 = new_playlist['manifest_m3u8']
