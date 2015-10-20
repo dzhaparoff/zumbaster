@@ -80,6 +80,8 @@ class Moonwalk
 
     playlist_request = f.post '/sessions/create_session'
 
+    ap playlist_request if Rails.env.development?
+
     JSON.parse playlist_request.body
   end
 
@@ -97,16 +99,20 @@ class Moonwalk
     f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
       builder.adapter Faraday.default_adapter
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Accept'] = '*/*'
-      builder.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-      builder.headers['Host'] = 'moonwalk.cc'
-      builder.headers['Origin'] = 'http://moonwalk.cc'
-      builder.headers['referer'] = "http://moonwalk.cc"
+      # builder.headers['Accept'] = '*/*'
+      # builder.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+      # builder.headers['Host'] = 'moonwalk.cc'
+      # builder.headers['Origin'] = 'http://moonwalk.cc'
+      # builder.headers['referer'] = "http://moonwalk.cc"
     end
 
     request = f.get "/video/#{token}/iframe"
 
+    ap request if Rails.env.development?
+
     doc = Nokogiri::HTML.parse(request.body)
+
+    ap doc if Rails.env.development?
 
     m_expired = nil
     m_token = nil
