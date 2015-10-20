@@ -295,12 +295,10 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
       moonwalk_episodes = @moonwalk.get_playlist_url_parallel kp, translator_id
       moonwalk_episodes[:playlists].each_pair do |season_number, episodes|
         episodes.each_pair do |episode_number, playlists|
-
           episode = Episode.where(show: show, abs_name: "#{season_number.to_i}-#{episode_number.to_i}").take
-
           translator = Translator.where(ex_id: translator_id).take
           translation = Translation.where(episode: episode, translator: translator).first_or_create
-          translation.moonwalk_token = playlists['token']
+          translation.moonwalk_token = playlists['token'] unless translation.moonwalk_token == 'temp_token'
           translation.save
         end
       end

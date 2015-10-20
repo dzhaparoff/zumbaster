@@ -17,7 +17,7 @@ sitemap_for Season.all, name: :seasons do |season|
   url show_season_url(show.slug_ru, "%02d" % season.number), last_mod: season.updated_at, change_freq: "daily", priority: 0.8
 end
 
-sitemap_for Episode.all, name: :episodes do |episode|
+sitemap_for Episode.includes(:translations).where.not(translations: {id: nil}, screenshot_updated_at: nil).all, name: :episodes do |episode|
   show = episode.show
   season = episode.season
   return false if show.nil? || season.nil?

@@ -1,7 +1,15 @@
 <%
-   set_meta_tags og: {
+   if @episode.title_ru.nil?
+     title = "#{@episode.show.title_ru}: #{@episode.season.number} сезон - #{@episode.number} эпизод смотреть онлайн"
+   else
+     title = "#{@episode.show.title_ru}: #{@episode.title_ru}, #{@episode.season.number} сезон - #{@episode.number} эпизод смотреть онлайн"
+   end
+
+   set_meta_tags(
+                 title: title,
+                 og: {
                      site_name: 'HD-Serials',
-                     title: "#{@episode.show.title_ru}: #{@episode.title_ru}, #{@episode.season.number} сезон #{@episode.number} эпизод",
+                     title: title,
                      image: URI.join(request.url, @episode.screenshot.url),
                      type: 'video.tv_show',
                      url: URI.join(
@@ -14,13 +22,18 @@
                      release_date: @show.first_aired.to_time.iso8601,
                      series: URI.join(request.url, show_path(@episode.show.slug_ru))
                  }
+            )
 %>
 <section class="episode">
   <div class="show-fanart">
-    <% if @episode.screenshot.width < 1200 || !@episode.screenshot.exists? %>
-      <img src="<%= @show.fanart.url(:original) %>"/>
+    <% if @episode.screenshot.exists? %>
+      <% if @episode.screenshot.width < 1200 || !@episode.screenshot.exists? %>
+        <img src="<%= @show.fanart.url(:original) %>"/>
+      <% else %>
+        <img src="<%= @episode.screenshot.url(:original) %>"/>
+      <% end  %>
     <% else %>
-      <img src="<%= @episode.screenshot.url(:original) %>"/>
+      <img src="<%= @show.fanart.url(:original) %>"/>
     <% end  %>
   </div>
   <div class="row">

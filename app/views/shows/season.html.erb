@@ -12,7 +12,7 @@
             <span>Cезон <%=@season.number%></span>
           </h1>
         </li>
-        <% @season.episodes.order(:number).each_with_index do |e, index| %>
+        <% @season.episodes.includes(:translations).order(:number).where.not(translations: {id: nil}, screenshot_updated_at: nil).each_with_index do |e, index| %>
           <li class="show-episodes">
             <a href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % e.number %>"><img src="<%= e.screenshot.url(:thumb) %>"/></a>
             <h5>
