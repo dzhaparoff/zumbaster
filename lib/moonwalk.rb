@@ -60,25 +60,6 @@ class Moonwalk
   def self.playlist_getter video_token, m_expired, m_token
     return false unless video_token
 
-    f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-      builder.adapter :net_http
-      builder.response :logger, ::Logger.new(STDOUT), bodies: true
-      builder.request :url_encoded
-      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Access-Control-Request-Method'] = 'POST'
-      builder.headers['Host'] = 'moonwalk.cc'
-      builder.headers['Origin'] = 'http://moonwalk.cc'
-      builder.headers['Referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
-      builder.headers['Access-Control-Request-Headers'] = 'accept, content-type, x-moon-expired, x-moon-token'
-      builder.headers['Accept'] = '*/*'
-      builder.headers['Accept-Encoding'] = 'gzip, deflate, sdch'
-      builder.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
-      builder.headers['X-Real-IP'] = '5.178.79.212'
-      builder.headers['X-Forwarded-For'] = '5.178.79.212'
-    end
-
-     playlist_request = f.get '/sessions/create_session'
-
      f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
         builder.adapter :net_http
         builder.response :logger, ::Logger.new(STDOUT), bodies: true
@@ -89,17 +70,18 @@ class Moonwalk
         builder.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
         builder.headers['Host'] = 'moonwalk.cc'
         builder.headers['Origin'] = 'http://moonwalk.cc'
-        builder.headers['Referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
+        # builder.headers['Referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
+        builder.headers['Referer'] = "http://www.hdkinoteatr.com"
         builder.headers['X-MOON-EXPIRED'] = m_expired
         builder.headers['X-MOON-TOKEN'] = m_token
         builder.headers['X-Requested-With'] = 'XMLHttpRequest'
-        builder.headers['X-Real-IP'] = '5.178.79.212'
-        builder.headers['X-Forwarded-For'] = '5.178.79.212'
+        builder.headers['X-Real-IP'] = '104.27.286.106'
+        builder.headers['X-Forwarded-For'] = '104.27.286.106'
      end
 
     playlist_request = f.post '/sessions/create_session', URI.encode_www_form({
-                                                            partner: nil,
-                                                            d_id: 21609,
+                                                            partner: 175,
+                                                            d_id: 317,
                                                             video_token: video_token,
                                                             content_type: 'movie',
                                                             access_key: '0fb74eb4b2c16d45fe',
@@ -125,10 +107,11 @@ class Moonwalk
       builder.response :logger
       builder.request :url_encoded
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 'moonwalk.cc'
-      builder.headers['Origin'] = 'http://moonwalk.cc'
-      builder.headers['X-Real-IP'] = '5.178.79.212'
-      builder.headers['X-Forwarded-For'] = '5.178.79.212'
+      builder.headers['Host'] = 'www.hdkinoteatr.com'
+      builder.headers['Origin'] = 'http://www.hdkinoteatr.com'
+      builder.headers['Referer'] = "http://www.hdkinoteatr.com"
+      builder.headers['X-Real-IP'] = '104.27.286.106'
+      builder.headers['X-Forwarded-For'] = '104.27.286.106'
     end
 
     request = f.get "/video/#{token}/iframe"
@@ -153,6 +136,24 @@ class Moonwalk
         m_expired: m_expired,
         m_token: m_token
     }
+  end
+
+  def self.ms(token)
+    f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
+      builder.adapter :net_http
+      builder.response :logger
+      builder.request :url_encoded
+      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
+      builder.headers['Host'] = 'www.hdkinoteatr.com'
+      builder.headers['Origin'] = 'http://www.hdkinoteatr.com'
+      builder.headers['Referer'] = "http://www.hdkinoteatr.com"
+      builder.headers['X-Real-IP'] = '104.27.286.106'
+      builder.headers['X-Forwarded-For'] = '104.27.286.106'
+    end
+
+    request = f.get "/video/#{token}/iframe"
+
+    doc = Nokogiri::HTML.parse(request.body)
   end
 
   private
