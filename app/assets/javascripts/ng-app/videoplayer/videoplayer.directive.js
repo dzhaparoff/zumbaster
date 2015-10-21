@@ -72,7 +72,7 @@
                         name: name
                     };
                     console.log('player.init', name, flashvars, params, attrs);
-                    swfobject.embedSWF("/system/swf/player.swf?v=2", name, "854", "480", "10.2", null, flashvars, params, attrs);
+                    swfobject.embedSWF("/system/swf/player.swf", name, "854", "480", "10.2", null, flashvars, params, attrs);
 
                 }
             }
