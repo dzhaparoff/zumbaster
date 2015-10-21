@@ -61,21 +61,21 @@ class Moonwalk
     return false unless video_token
 
      f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-        builder.adapter Faraday.default_adapter
-        builder.use Faraday::Response::Logger     # log request & response to STDOUT
-        builder.use Faraday::Adapter::NetHttp
+        builder.adapter :net_http
+        builder.response :logger
+        builder.request :url_encoded
         builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
         builder.headers['Accept'] = '*/*'
-        builder.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
         builder.headers['Accept-Encoding'] = 'gzip, deflate'
         builder.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
         builder.headers['Host'] = 'moonwalk.cc'
-        builder.headers['Origin'] = 'http://moonwalk.co'
-        builder.headers['referer'] = "http://moonwalk.cc"
+        builder.headers['Origin'] = 'http://moonwalk.cc'
+        builder.headers['referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
         builder.headers['X-MOON-EXPIRED'] = m_expired
         builder.headers['X-MOON-TOKEN'] = m_token
         builder.headers['X-Requested-With'] = 'XMLHttpRequest'
-        builder.headers['Cookie'] = '_gat=1; _moon_session=bFlLeHhhS3dvSHZHWlZKQjlkVG13a0VucWhFNm5nOVNoZ1VQZUd0ckFKUU56VjdYNW91Q21UWXNDalU1SXVBaE82NmxYaE1uZUtRZUFDWHF3eVE4VmczdTVTanVjQ2VuazNURlNmdDY5d21DcHlqQzFIUmUwb0YyYkhveVNyVm1LcC9FRjZHa09QMVMyOTRWV2sycWtmS3E5VXlBY09KUFNlTmdsMU1HTWwzTHVCZmQyd2F4L2ZqYmcrSHVFRmF4LS1tbGV3WGduT3hSTFA2N3NaaURrc3hBPT0%3D--17fd18666eae5f3434961d9bf98239b2c52e421e; _ga=GA1.2.638817969.1429547048'
+        builder.headers['X-Real-IP'] = '5.178.79.212'
+        builder.headers['X-Forwarded-For'] = '5.178.79.212'
         builder.params['partner'] = nil
         builder.params['d_id'] = 21609
         builder.params['video_token'] = video_token
@@ -102,13 +102,14 @@ class Moonwalk
 
   def self.get_m_headers(token)
     f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-      builder.adapter Faraday.default_adapter
+      builder.adapter :net_http
+      builder.response :logger
+      builder.request :url_encoded
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      # builder.headers['Accept'] = '*/*'
-      # builder.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
       builder.headers['Host'] = 'moonwalk.cc'
       builder.headers['Origin'] = 'http://moonwalk.cc'
-      # builder.headers['referer'] = "http://moonwalk.cc"
+      builder.headers['X-Real-IP'] = '5.178.79.212'
+      builder.headers['X-Forwarded-For'] = '5.178.79.212'
     end
 
     request = f.get "/video/#{token}/iframe"
