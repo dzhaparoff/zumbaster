@@ -1,14 +1,15 @@
 class Api::ApiController < ApplicationController
-  def player_playlists_for
+  layout false
+
+  def manifest
     translation = Translation.find params[:id]
 
-    unless translation.translation_video_exist?
-      translation.sync_translation_video
+    if params[:format] == 'm3u8'
+      manifest = translation.manifest :mobile
+    else
+      manifest = translation.manifest :desktop
     end
 
-    render json: {
-               f4m: translation.f4m,
-               m3u8: translation.m3u8
-           }
+    render body: manifest.body
   end
 end

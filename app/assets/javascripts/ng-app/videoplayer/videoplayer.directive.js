@@ -4,31 +4,20 @@
         .module('zumbaster')
         .directive('videoplayer', videoplayer);
 
-    videoplayer.$inject = ['$http', '$q', '$timeout'];
-
-    function videoplayer($http, $q, $timeout){
+    function videoplayer(){
 
         function Playlists(id){
             this.id = id;
-            this.getPlaylists($http, $q);
+            this.getPlaylists();
         }
 
         Playlists.prototype = {
             constructor : Playlists,
-            getPlaylists : function ($http, $q) {
+            getPlaylists : function () {
                 var id = this.id;
-                var q = $q.defer();
-                var self = this;
-                $http.get('/api/player_playlists_for?id='+id)
-                    .success(function (d) {
-                        self.f4m = d.f4m;
-                        self.m3u8 = d.m3u8;
-                        q.resolve();
-                    })
-                    .error(function(error){
-                        q.reject(error);
-                    });
-                this.promise = q.promise;
+                this.mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
+                var type = this.mobile ? "m3u8" : "f4m";
+                this.manifest = 'http://192.168.1.200:3000/api/manifest/' + id + '.' + type;
             }
         };
 
@@ -38,43 +27,40 @@
             },
             link : function(scope, elem, attr){
 
-                var playlist = new Playlists(scope.id);
-                var player;
+              var playlist = new Playlists(scope.id);
+              var player;
 
-                playlist.promise.then(function(){
+              if(playlist.mobile)
+                elem.append('<video controls src="' + playlist.manifest + '"></video>');
+              else
+                construct_player(playlist.manifest);
 
-                    if(playlist.f4m !== null){
-                      if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) )
-                        elem.append('<video controls src="' + playlist.m3u8 + '"></video>');
-                      else
-                        construct_player();
-                    }
-                    else
-                        elem.parent().remove();
+              console.log(playlist.manifest)
 
-                });
+              //elem.parent().remove();
 
-                function onJSBridge(a,e,l){
-                    console.log(a,e,l);
-                }
+              function onJSBridge(a,e,l){
+                console.log(a,e,l);
+              }
 
-                function construct_player() {
-                    var flashvars = {
-                        src: encodeURIComponent(playlist.f4m),
-                        autoPlay: false,
-                        javascriptCallbackFunction: onJSBridge
-                    };
-                    var name = "player_" + scope.id;
-                    var params = {
-                        allowFullScreen: true, allowScriptAccess: "always", bgcolor: "#000000"
-                    };
-                    var attrs = {
-                        name: name
-                    };
-                    console.log('player.init', name, flashvars, params, attrs);
-                    swfobject.embedSWF("/system/swf/player.swf", name, "854", "480", "10.2", null, flashvars, params, attrs);
+              function construct_player(manifest) {
+                var flashvars = {
+                  src: encodeURIComponent(manifest),
+                  autoPlay: false,
+                  javascriptCallbackFunction: onJSBridge
+                };
+                var name = "player_" + scope.id;
+                var params = {
+                  allowFullScreen: true, allowScriptAccess: "always", bgcolor: "#000000"
+                };
+                var attrs = {
+                  name: name
+                };
+                console.log('player.init', name, flashvars, params, attrs);
+                swfobject.embedSWF("/system/swf/player.swf", name, "854", "480", "10.2", null, flashvars, params, attrs);
 
-                }
+              }
+
             }
         }
     }

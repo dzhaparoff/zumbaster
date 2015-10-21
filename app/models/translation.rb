@@ -8,6 +8,28 @@ class Translation < ActiveRecord::Base
     responce.status == 200
   end
 
+  def manifest type
+    sync_translation_video unless translation_video_exist?
+
+    manifest = type == :mobile ? m3u8 : f4m
+
+    f = Faraday.new do |builder|
+      builder.adapter :net_http
+      builder.response :logger
+      builder.headers['Accept'] = '*/*'
+      builder.headers['Accept-Encoding'] = 'gzip, deflate'
+      builder.headers['Connection'] = 'keep-alive'
+      builder.headers['Host'] = 'moonwalk.cc'
+      builder.headers['Referer'] = "http://moonwalk.cc/video/#{moonwalk_token}/iframe"
+      builder.headers['X-Requested-With'] = 'ShockwaveFlash/19.0.0.226'
+      builder.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
+      # builder.headers['X-Real-IP'] = '104.27.286.106'
+      # builder.headers['X-Forwarded-For'] = '104.27.286.106'
+    end
+
+    f.get manifest
+  end
+
   def sync_translation_video
     e = episode.number
     s = episode.season.number
