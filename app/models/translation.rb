@@ -31,8 +31,8 @@ class Translation < ActiveRecord::Base
   end
 
   def sync_translation_video
-    e = episode.number
-    s = episode.season.number
+    s, e = episode.abs_name.split('-')
+
     moonwalk = Moonwalk.new
 
     tansl_id = translator.nil? ? nil : translator.ex_id
