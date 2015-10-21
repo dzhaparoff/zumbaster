@@ -62,7 +62,7 @@ class Moonwalk
 
      f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
         builder.adapter :net_http
-        builder.response :logger
+        builder.response :logger, ::Logger.new(STDOUT), bodies: true
         builder.request :url_encoded
         builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
         builder.headers['Accept'] = '*/*'
@@ -76,14 +76,48 @@ class Moonwalk
         builder.headers['X-Requested-With'] = 'XMLHttpRequest'
         builder.headers['X-Real-IP'] = '5.178.79.212'
         builder.headers['X-Forwarded-For'] = '5.178.79.212'
-        builder.params['partner'] = nil
-        builder.params['d_id'] = 21609
-        builder.params['video_token'] = video_token
-        builder.params['content_type'] = 'movie'
-        builder.params['access_key'] = '0fb74eb4b2c16d45fe'
      end
 
-    playlist_request = f.post '/sessions/create_session'
+    playlist_request = f.post '/sessions/create_session', URI.encode_www_form({
+                                                            partner: nil,
+                                                            d_id: 21609,
+                                                            video_token: video_token,
+                                                            content_type: 'movie',
+                                                            access_key: '0fb74eb4b2c16d45fe'
+                                                        })
+
+    JSON.parse playlist_request.body
+  end
+
+
+  def self.getter video_token, m_expired, m_token
+    return false unless video_token
+
+    f = Faraday.new(url: 'http://doctorslon.ru') do |builder|
+      builder.adapter :net_http
+      builder.response :logger, ::Logger.new(STDOUT), bodies: true
+      builder.request :url_encoded
+      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
+      builder.headers['Accept'] = '*/*'
+      builder.headers['Accept-Encoding'] = 'gzip, deflate'
+      builder.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
+      # builder.headers['Host'] = 'moonwalk.cc'
+      # builder.headers['Origin'] = 'http://moonwalk.cc'
+      # builder.headers['referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
+      builder.headers['X-MOON-EXPIRED'] = m_expired
+      builder.headers['X-MOON-TOKEN'] = m_token
+      builder.headers['X-Requested-With'] = 'XMLHttpRequest'
+      builder.headers['X-Real-IP'] = '5.178.79.212'
+      builder.headers['X-Forwarded-For'] = '5.178.79.212'
+    end
+
+    playlist_request = f.post '/1.php', URI.encode_www_form({
+                                                                                  partner: nil,
+                                                                                  d_id: 21609,
+                                                                                  video_token: video_token,
+                                                                                  content_type: 'movie',
+                                                                                  access_key: '0fb74eb4b2c16d45fe'
+                                                                              })
 
     JSON.parse playlist_request.body
   end
