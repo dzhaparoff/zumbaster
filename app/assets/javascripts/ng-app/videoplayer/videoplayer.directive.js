@@ -17,7 +17,8 @@
                 var id = this.id;
                 this.mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
                 var type = this.mobile ? "m3u8" : "f4m";
-                this.manifest = 'http://192.168.1.200:3000/api/manifest/' + id + '.' + type;
+                if(typeof location.origin == 'undefined') location.origin = 'http://hd-serials.tv';
+                this.manifest = location.origin + '/api/manifest/' + id + '.' + type;
             }
         };
 
