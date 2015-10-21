@@ -85,8 +85,6 @@ class Moonwalk
 
     playlist_request = f.post '/sessions/create_session'
 
-    ap playlist_request if Rails.env.development?
-
     JSON.parse playlist_request.body
   end
 
@@ -114,11 +112,7 @@ class Moonwalk
 
     request = f.get "/video/#{token}/iframe"
 
-    ap request if Rails.env.development?
-
     doc = Nokogiri::HTML.parse(request.body)
-
-    ap doc if Rails.env.development?
 
     m_expired = nil
     m_token = nil
