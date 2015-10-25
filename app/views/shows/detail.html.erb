@@ -1,5 +1,7 @@
 <%
-   set_meta_tags og: {
+   set_meta_tags title: "#{@show.title_ru} - смотреть онлайн в хорошем качестве",
+                 description: strip_tags(@show.description_ru),
+                 og: {
                      site_name: 'HD-Serials',
                      title: @show.title_ru,
                      description: strip_tags(@show.description_ru),

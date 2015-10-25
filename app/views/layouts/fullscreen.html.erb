@@ -12,7 +12,8 @@
   <%= csrf_meta_tags %>
   <script src="http://www.quasimondo.com/StackBlurForCanvas/StackBlur.js" language="javascript"></script>
 </head>
-<body data-ng-app="zumbaster" data-ng-cloak data-ng-strict-di>
+<body data-ng-controller="MainCtrl as main">
+<%= render "partials/modals" %>
 <section class="fullscreen">
   <div class="wrapper">
     <%= content_for?(:content) ? yield(:content) : yield %>

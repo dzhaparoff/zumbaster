@@ -13,14 +13,15 @@
   <%= javascript_include_tag 'admin/admin' %>
 </head>
 <body data-ng-controller="MainCtrl as main">
+<%= render "partials/modals" %>
 <div class="contain-to-grid sticky top-menu">
   <nav class="top-bar" data-topbar role="navigation">
     <%= render "admin/partials/top_menu" %>
   </nav>
 </div>
 <section class="main-section">
-  <p class="notice"><%= notice %></p>
-  <p class="alert"><%= alert %></p>
+  <% unless notice.nil? %><div data-message="notice"><%= notice %></div><% end %>
+  <% unless alert.nil? %><div data-message="alert"><%= alert %></div><% end %>
   <%= content_for?(:content) ? yield(:content) : yield %>
 </section>
 <%= render "admin/partials/footer" %>

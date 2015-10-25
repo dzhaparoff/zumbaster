@@ -24,6 +24,16 @@ a {
 
 }
 
+.top-bar-section {
+  .dropdown {
+    li {
+      a {
+        line-height: rem-calc(35)!important;
+      }
+    }
+  }
+}
+
 
 .fullscreen {
   width: 100%;

@@ -30,6 +30,10 @@ gem 'foundation-rails'
 gem 'lodash-rails'
 gem "swfobject-rails"
 
+source "https://rails-assets.org" do
+  gem "rails-assets-ngDialog"
+end
+
 gem 'faraday'
 gem 'faraday_middleware'
 gem 'typhoeus'

@@ -1,3 +1,6 @@
+<%
+   set_meta_tags title: "#{@show.title_ru} - смотреть #{@season.number} сезон онлайн"
+%>
 <section class="season">
   <div class="show-fanart">
     <img src="<%= @show.fanart.url(:original) %>"/>

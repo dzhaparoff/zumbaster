@@ -13,13 +13,16 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true  %>
 </head>
 <body data-ng-controller="MainCtrl as main">
+<%= render "partials/modals" %>
     <div class="contain-to-grid sticky top-menu">
-        <nav class="top-bar" data-topbar role="navigation">
+        <nav class="top-bar" data-topbar role="navigation" data-options="custom_back_text: false">
           <%= render "partials/top_menu" %>
         </nav>
     </div>
     <section class="main-section">
-    <%= content_for?(:content) ? yield(:content) : yield %>
+      <% unless notice.nil? %><div data-message="notice"><%= notice %></div><% end %>
+      <% unless alert.nil? %><div data-message="alert"><%= alert %></div><% end %>
+      <%= content_for?(:content) ? yield(:content) : yield %>
     </section>
     <%= render "partials/footer" %>
     <%= analytics_init if Rails.env.production? %>

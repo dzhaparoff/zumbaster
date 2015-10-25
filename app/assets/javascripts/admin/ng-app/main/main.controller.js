@@ -2,17 +2,18 @@
     "use strict";
     angular
         .module('admin')
-        .controller('MainCtrl', MainCtrl);
-
-    MainCtrl.$inject = ['$scope', '$sce'];
+        .controller('MainCtrl', ["$scope", "$sce", "Dialog", MainCtrl]);
 
     var $_sce;
 
-    function MainCtrl($scope, $sce){
+    function MainCtrl($scope, $sce, Dialog){
         var vm = this;
         vm.scope_name = 'main';
         $_sce = $sce;
         vm.helpers = Helpers;
+        vm.modals = {
+          //error : new Dialog({template : "errorMdl", className : "errorModal"}, $scope)
+        };
     }
     
     var Helpers = {
