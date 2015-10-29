@@ -19,9 +19,16 @@ module CalendarHelper
   def today_content_tag day
     Time.zone = 'Moscow'
     if day.day == Time.zone.now.day
-      %|<div class="current-day-label">сегодня</div>|
+      %|<div class="current-day-label">сегодня</div>|.html_safe
     else
       ""
+    end
+  end
+
+  def episodes_for_date date, &block
+    episode = Episode.for_date(date).all
+    episode.each do |e|
+      block.call(e)
     end
   end
 

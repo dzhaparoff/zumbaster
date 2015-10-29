@@ -7,19 +7,59 @@ section.calendar {
   }
 
   .day {
-    padding-bottom: rem-calc(20);
+    padding-bottom: rem-calc(30);
     .day-name {
+      position: relative;
       font-weight: 700;
       font-size: rem-calc(120);
       line-height: rem-calc(140);
       color:$white;
       text-transform: uppercase;
+      padding-bottom: rem-calc(20);
+
+      .current-day-label {
+        position: absolute;
+        padding: rem-calc(10 15);
+        background: $yellow;
+        color: black;
+        top: rem-calc(10);
+        left: rem-calc(-5);
+        font-size: rem-calc(13);
+        line-height: rem-calc(15);
+      }
     }
     .day-number {
       font-size: rem-calc(30);
+      line-height: rem-calc(30);
       text-transform: uppercase;
       font-weight: 300;
-      color:$white;
+      color: $white;
+      position: absolute;
+      padding: rem-calc(10 15);
+      background: black;
+      bottom: rem-calc(0);
+    }
+  }
+
+  .episode {
+    padding-top: rem-calc(20);
+    .show-meta, .episode-date {
+      font-size: rem-calc(12);
+    }
+    .show-title {
+      margin-top: rem-calc(-10);
+      margin-left: rem-calc(-5);
+      margin-bottom: rem-calc(5);
+      width: 95%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      a {
+        color: white;
+        padding: rem-calc(5 8);
+        background: black;
+        white-space: nowrap;
+
+      }
     }
   }
 }
