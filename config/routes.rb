@@ -65,6 +65,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get '/calendar' => 'calendar#show', as: :calendar
+
   get '/:show_slug' => 'shows#detail', format: false, as: :show
   get '/:show_slug/season-:season_number' => 'shows#season', as: :show_season
   get '/:show_slug/season-:season_number/episode-:episode_number' => 'shows#episode', as: :show_episode
@@ -73,4 +75,5 @@ Rails.application.routes.draw do
   get '/genres/:genre_slug' => 'genres#detail', as: :genre
 
   get '/api/manifest/:id' => 'api/api#manifest'
+
 end

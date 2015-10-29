@@ -51,7 +51,9 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
   end
 
   def destroy
-
+    show = Show.unscoped.find(params[:id])
+    show.destroy
+    render json: { deleted: true }
   end
 
   ### non restful

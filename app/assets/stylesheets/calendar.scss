@@ -1,0 +1,25 @@
+section.calendar {
+  padding-top: rem-calc(80);
+
+  h1{
+    text-align: center;
+    padding-bottom: 20px;
+  }
+
+  .day {
+    padding-bottom: rem-calc(20);
+    .day-name {
+      font-weight: 700;
+      font-size: rem-calc(120);
+      line-height: rem-calc(140);
+      color:$white;
+      text-transform: uppercase;
+    }
+    .day-number {
+      font-size: rem-calc(30);
+      text-transform: uppercase;
+      font-weight: 300;
+      color:$white;
+    }
+  }
+}

@@ -29,6 +29,12 @@
                     item.editable = true;
                 };
 
+                vm.delete_item = function (item) {
+                  Resource.delete(re.name, item.id).then(function (d) {
+                    item.editable = false;
+                  })
+                };
+
                 vm.save_item = function (item) {
                     Resource.update(re.name, item.id, item.model);
                     item.editable = false;

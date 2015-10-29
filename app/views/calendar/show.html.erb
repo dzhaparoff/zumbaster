@@ -1,0 +1,17 @@
+<section class="calendar">
+  <h1>Календарь выхода серий</h1>
+
+  <% generate_calendar do |day| %>
+    <%= content_tag :div, class: day_class_for(day) do %>
+      <div class="small-3 columns">
+        <%== today_content_tag day %>
+        <div class="day-name"><%= Russian::strftime(day, "%a") %></div>
+        <div class="day-number"><%= %/#{ "%02d" % day.day } #{Russian::strftime(day, "%b")[0..-2]}/%></div>
+      </div>
+      <div class="small-9 columns">
+
+      </div>
+    <% end %>
+  <% end %>
+
+</section>

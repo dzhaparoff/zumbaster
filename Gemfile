@@ -40,6 +40,7 @@ gem 'typhoeus'
 gem 'nokogiri'
 
 gem 'russian'
+gem 'chronic'
 
 gem 'paperclip'
 gem 'paperclip-meta'

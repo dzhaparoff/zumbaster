@@ -36,6 +36,7 @@
                     <div class="text-right">
                       <button class="button tiny" data-ng-if="!item.editable"  data-ng-click="editor.edit_item(item)">Редактировать</button>
                       <button class="button tiny success" data-ng-if="item.editable" data-ng-click="editor.save_item(item)">Сохранить</button>
+                      <button class="button tiny alert" data-ng-if="item.editable" data-ng-click="editor.delete_item(item)">Удалить</button>
                       <button class="button tiny alert" data-ng-if="item.editable" data-ng-click="editor.cancel_edit_item(item)">Отменить</button>
                     </div>
                 </div>

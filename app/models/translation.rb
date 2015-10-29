@@ -60,7 +60,7 @@ class Translation < ActiveRecord::Base
 
     meta_tokens = Moonwalk.get_m_headers video_token
 
-    new_playlist = Moonwalk.playlist_getter video_token, meta_tokens[:m_expired], meta_tokens[:m_token]
+    new_playlist = Moonwalk.playlist_getter video_token, meta_tokens[:m_expired].to_s, meta_tokens[:m_token].to_s
 
     self.f4m = new_playlist['manifest_f4m']
     self.m3u8 = new_playlist['manifest_m3u8']

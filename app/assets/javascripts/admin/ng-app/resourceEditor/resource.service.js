@@ -52,6 +52,18 @@
             );
             return result.promise;
         },
+        delete : function(resource, id){
+          var self = this;
+          var result = self.__private__.providers.$q.defer();
+          self.loading.loading_start(resource + '-loading');
+          self.__private__.resolve_promise (
+              self.__private__.delete(api_url + resource + '/' + id),
+              result,
+              resource,
+              self
+          );
+          return result.promise;
+        },
         __private__ : {
             providers : {},
             fill_providers : function(providers){
