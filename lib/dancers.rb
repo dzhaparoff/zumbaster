@@ -13,8 +13,8 @@ class AutoUpdateVideosDancer < LoopDance::Dancer
     @force_reload = false
 
     episodes.each do |episode_for_update|
-      show = episode.show
-      season = episode.season
+      show = episode_for_update.show
+      season = episode_for_update.season
 
       imdb = "tt%07d" % show.ids['imdb'].to_i
       trakt_seasons = @trakt.show_seasons imdb
@@ -23,6 +23,8 @@ class AutoUpdateVideosDancer < LoopDance::Dancer
 
       trakt_seasons.each do |trakt_season|
         next if trakt_season['number'] != season.number
+
+        season_number = "s%02d" % season.number
 
         season.episode_count = trakt_season['episode_count']
         season.aired_episodes = trakt_season['aired_episodes']
