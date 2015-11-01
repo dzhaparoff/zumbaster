@@ -3,31 +3,30 @@
 
   <% generate_calendar do |day| %>
     <%= content_tag :div, class: day_class_for(day) do %>
-      <div class="small-5 medium-3 large-2 columns">
-        <div class="day-name">
-          <%= today_content_tag day %>
-          <%= Russian::strftime(day, "%a") %>
-          <div class="day-number"><%= %/#{ "%02d" % day.day } #{Russian::strftime(day, "%b")[0..-2]}/%></div>
-        </div>
-      </div>
-      <div class="small-7 medium-9 large-10 columns">
-        <ul class="small-block-grid-1 medium-block-grid-2 large-block-grid-4">
-        <% episodes_for_date day do |s| %>
-          <li class="show-episode">
-            <div class="episode">
-              <div class="show-screenshot">
-                <a href="<%= show_episode_path(s.show.slug_ru, "%02d" % s.season.number, "%02d" % s.number) %>">
-                  <img src="<%= s.screenshot.url(:thumb) %>"/>
-                </a>
-              </div>
-              <div class="show-title">
-                <a href="<%= show_episode_path(s.show.slug_ru, "%02d" % s.season.number, "%02d" % s.number) %>"><%= s.show.title_ru %></a>
-              </div>
-              <div class="show-meta">сезон <%= s.season.number %>, эпизод <%= s.number %></div>
-              <div class="episode-date"><%= Russian::strftime(s.first_aired, "%e %B %Y")%></div>
+      <div class="small-12 columns">
+        <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-5">
+          <li>
+            <div class="day-name">
+              <%= today_content_tag day %>
+              <%= Russian::strftime(day, "%a") %>
+              <div class="day-number"><%= %/#{ "%02d" % day.day } #{Russian::strftime(day, "%b")[0..-2]}/%></div>
             </div>
           </li>
-        <% end %>
+          <% episodes_for_date day do |s| %>
+            <li class="show-episode">
+              <div class="episode">
+                <div class="show-screenshot">
+                  <a href="<%= show_episode_path(s.show.slug_ru, "%02d" % s.season.number, "%02d" % s.number) %>">
+                    <img src="<%= s.screenshot.url(:thumb) %>"/>
+                  </a>
+                </div>
+                <div class="show-title">
+                  <a href="<%= show_episode_path(s.show.slug_ru, "%02d" % s.season.number, "%02d" % s.number) %>"><%= s.show.title_ru %></a>
+                </div>
+                <div class="show-meta">сезон <%= s.season.number %>, эпизод <%= s.number %></div>
+              </div>
+            </li>
+          <% end %>
         </ul>
       </div>
     <% end %>

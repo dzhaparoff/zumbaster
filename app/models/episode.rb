@@ -11,8 +11,10 @@ class Episode < ActiveRecord::Base
   do_not_validate_attachment_file_type :screenshot
 
   scope :for_date, -> (date) {
-    joins(:season, :show).where("episodes.first_aired > ? AND episodes.first_aired < ? AND NOT (seasons.aired_episodes = seasons.episode_count AND shows.status LIKE 'ended')",
-                                date.beginning_of_day, date.end_of_day)
+    joins(:season, :show)
+        .where("episodes.first_aired > ? AND episodes.first_aired < ? AND NOT (seasons.aired_episodes = seasons.episode_count AND shows.status LIKE 'ended')",
+                                date.yesterday.beginning_of_day, date.yesterday.end_of_day)
+        .order("episodes.first_aired")
   }
 
   private

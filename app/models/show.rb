@@ -20,6 +20,13 @@ class Show < ActiveRecord::Base
     where.not(updated: nil)
   end
 
+  scope :waiting_for_update, -> (date) {
+    joins(:seasons, :episodes)
+        .where("episodes.first_aired > ? AND episodes.first_aired < ? AND NOT (seasons.aired_episodes = seasons.episode_count AND shows.status LIKE 'ended')",
+               date.yesterday.beginning_of_day, date.yesterday.end_of_day)
+        .select("DISTINCT ON (shows.id) shows.*")
+  }
+
   def self.existed_ids
     shows = unscoped.select :ids
 
