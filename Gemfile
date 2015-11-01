@@ -48,9 +48,9 @@ gem 'paperclip-av-transcoder'
 gem 'streamio-ffmpeg' # https://github.com/streamio/streamio-ffmpeg
 
 gem 'daemons'
+gem 'whenever', :require => false
 gem 'delayed_job_active_record'
 gem 'progress_job'
-gem 'loop_dance'
 gem "resque", "~> 2.0.0.pre.1", github: "resque/resque" # https://github.com/resque/resque
 
 gem 'google-analytics-rails'

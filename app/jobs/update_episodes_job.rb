@@ -1,8 +1,8 @@
-class AutoUpdateVideosDancer < LoopDance::Dancer
+class UpdateEpisodesJob < ActiveJob::Base
+  queue_as :default
 
-  autostart true
+  def perform(*args)
 
-  every 2.hours do
     date = DateTime.now.yesterday
     # shows = Show.waiting_for_update date
     episodes = Episode.for_date date
@@ -92,6 +92,6 @@ class AutoUpdateVideosDancer < LoopDance::Dancer
         end
       end
     end
-  end
 
+  end
 end

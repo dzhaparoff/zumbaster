@@ -5,7 +5,6 @@ class Admin::AdminController < ApplicationController
 
   def index
     @shows = Show.all
-    # AutoUpdateVideosDancer.start unless AutoUpdateVideosDancer.running?
   end
 
   private
