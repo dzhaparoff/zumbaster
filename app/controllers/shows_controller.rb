@@ -16,7 +16,7 @@ class ShowsController < ApplicationController
     @season = @show.seasons.where(number: @season_number).take
     @episode = @season.episodes.where(number: @episode_number).take
 
-    render_404 if @episode.translations.count < 1
+    # render_404 if @episode.translations.count < 1
   end
 
   private

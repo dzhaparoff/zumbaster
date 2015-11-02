@@ -5,10 +5,14 @@
 
 # Example:
 #
-set :output, "../log/cron_log.log"
+set :output, "/var/log/cron_log.log"
 
 every 3.hours do
   runner "UpdateEpisodesJob.perform_later"
+end
+
+every 12.hours do
+  runner "UpdateSeasonJob.perform_later"
 end
 
 # every 4.days do
