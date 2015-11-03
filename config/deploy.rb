@@ -36,7 +36,7 @@ set :linked_dirs, fetch(:linked_dirs, [])
 # Default value for keep_releases is 5
 set :keep_releases, 3
 
-set :whenever_command, "whenever"
+# set :whenever_command, "whenever"
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
 namespace :deploy do
