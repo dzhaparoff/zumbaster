@@ -32,6 +32,9 @@ gem "swfobject-rails"
 
 source "https://rails-assets.org" do
   gem "rails-assets-ngDialog"
+  gem "rails-assets-angular-aria"
+  gem "rails-assets-angular-material"
+  gem "rails-assets-angular-ui-router"
 end
 
 gem 'faraday'
@@ -58,6 +61,7 @@ gem 'google-analytics-rails'
 group :development do
   gem 'awesome_pry' #pry, awesome_prints
   gem 'spring'
+  gem 'web-console', '~> 2.0'
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'capistrano'

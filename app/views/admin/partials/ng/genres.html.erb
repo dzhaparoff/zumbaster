@@ -1,0 +1,22 @@
+<div class="admin-content">
+    <md-list>
+      <md-list-item class="md-2-line md-no-proxy" ng-repeat="item in genres.index" ng-click="genres.edit(item, $event)">
+        <div class="md-list-item-text" flex="5">
+          <h3>{{item.id}}</h3>
+        </div>
+        <div class="md-list-item-text">
+          <h3>{{item.name_ru}}</h3>
+          <p>{{item.slug_ru}}</p>
+        </div>
+        <div class="md-list-item-text">
+          <h3>{{item.name_en}}</h3>
+          <p>{{item.slug_en}}</p>
+        </div>
+        <div class="md-list-item-text">
+          <h3>{{item.shows}}</h3>
+        </div>
+        <md-icon aria-label="seo" ng-click="genres.edit_seo(item, $event)" class="md-icon-button md-secondary">code</md-icon>
+        <md-divider ng-if="!$last"></md-divider>
+      </md-list-item>
+    </md-list>
+</div>

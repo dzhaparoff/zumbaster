@@ -1,0 +1,38 @@
+<md-dialog aria-label="Редактирование" ng-cloak>
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Редактирование
+          <md-icon
+            aria-hidden="true"
+            md-svg-src="/assets/svg/ic_chevron_right_24px.svg"
+            style="margin-top: -2px"></md-icon>
+          {{editor.model_name}}
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="editor.cancel()" md-autofocus>
+          <md-icon aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+      <md-progress-linear md-mode="{{editor.loading.mode}}"></md-progress-linear>
+    </md-toolbar>
+    <md-dialog-content style="max-width:700px; min-width: 500px;">
+      <md-content class="md-dialog-content" md-theme="dark">
+        <md-input-container ng-repeat="(column, v) in editor.item" ng-if="editor.editable_column(column)">
+          <label>{{column}}</label>
+          <input ng-model="editor.item[column]" md-maxlength="{{editor.column_maxlength(column)}}" ng-if="editor.column_type(column) == 'input'">
+          <textarea ng-model="editor.item[column]" md-maxlength="{{editor.column_maxlength(column)}}" ng-if="editor.column_type(column) == 'textarea'"></textarea>
+        </md-input-container>
+      </md-content>
+    </md-dialog-content>
+    <div class="md-actions" layout="row" tabIndex="-1">
+      <span flex></span>
+      <md-button ng-click="editor.cancel()">
+        Отменить
+      </md-button>
+      <md-button class="md-primary" ng-click="editor.save()">
+        Сохранить
+      </md-button>
+    </div>
+  </form>
+</md-dialog>

@@ -48,21 +48,28 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'admin#index'
 
+    get '/partials/:partial_name.:partial_suffix' => 'admin#partials'
+
+
     # get '/shows/:action' => 'shows'
     # get '/genres/:action' => 'genres'
 
-    resources :shows, :genres, :translators, :people do
-      get '/actions/:action', on: :collection, as: :action
-    end
+    # resources :shows, :genres, :translators, :people do
+    #   get '/actions/:action', on: :collection, as: :action
+    # end
 
     namespace :api do
-      resources :shows, :genres, :translators, :people do # RESTful api
+      resources :shows, :genres, :translators, :people, :seos do # RESTful api
         get '/1.0/:action', on: :collection # non RESTful api
         post '/1.0/:action', on: :collection
       end
       get '/:action' => 'api' # non RESTful api
       post '/:action' => 'api' # non RESTful api
     end
+
+    get '/:part' => 'admin#index'
+    get '/:part/:id' => 'admin#index'
+    get '/:part/:id/seo' => 'admin#index'
   end
 
   get '/calendar' => 'calendar#show', as: :calendar

@@ -1,25 +1,30 @@
-<ul class="title-area">
-  <li class="name">
-    <h1><a href="/admin/">AdminPanel</a></h1>
-  </li>
-  <li class="toggle-topbar menu-icon"><a href="#"><span>Меню</span></a></li>
-</ul>
-<section class="top-bar-section">
-  <!-- Right Nav Section -->
-  <ul class="right">
-    <li><a href="/logout" class="link">Выход</a></li>
-  </ul>
-  <!-- Left Nav Section -->
-  <ul class="left">
-    <li><a href="<%= admin_genres_path %>">Жанры</a></li>
-    <li class="has-dropdown">
-      <a href="#">Сериалы</a>
-      <ul class="dropdown">
-        <li><a href="<%= admin_shows_path %>" class="<%= cp(admin_shows_path) %>">Список сериалов</a></li>
-        <li><a href="<%= new_admin_show_path %>" class="<%= cp(new_admin_show_path) %>">Поиск новых сериалов</a></li>
-        <li><a href="<%= action_admin_shows_path(:pending) %>" class="<%= cp(action_admin_shows_path(:pending)) %>">Сериалы, ожидающие добавления</a></li>
-      </ul>
-    </li>
-    <li class="divider"></li>
-  </ul>
-</section>
+<md-sidenav flex="initial" class="site-sidenav md-sidenav-left md-whiteframe-z2"
+            md-component-id="left"
+            md-is-locked-open="$mdMedia('gt-sm')">
+
+  <header class="nav-header">
+    <md-button href="/admin" class="side-logo">
+      <md-icon md-svg-src="/assets/svg/logo.svg" class="main-logo" aria-label="Logo"></md-icon>
+      <h1 class="side-logotype md-heading">AdminPanel</h1>
+    </md-button>
+  </header>
+
+  <md-content role="navigation" flex>
+    <ul class="side-menu" ng-controller="MenuCtrl as menu">
+      <li ng-repeat="section in menu.sections" class="parent-list-item {{section.className || ''}}" ng-class="{'parentActive' : isSectionSelected(section)}">
+        <h2 class="menu-heading md-subhead" ng-if="section.type === 'heading'" id="heading_{{ section.name}}">
+          {{section.name}}
+        </h2>
+        <menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+        <menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+
+        <ul ng-if="section.children" class="menu-nested-list">
+          <li ng-repeat="child in section.children" ng-class="{'childActive' : isSectionSelected(child)}">
+            <menu-link section="child" ng-if="child.type === 'link'"></menu-link>
+            <menu-toggle section="child" ng-if="child.type === 'toggle'"></menu-toggle>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </md-content>
+</md-sidenav>

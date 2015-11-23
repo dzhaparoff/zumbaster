@@ -1,6 +1,6 @@
 class Admin::Api::GenresController < Admin::Api::ApiController
   def index
-    render json: Genre.order('id asc').all
+    @genres = Genre.order('id asc').all
   end
 
   def new
@@ -12,7 +12,8 @@ class Admin::Api::GenresController < Admin::Api::ApiController
   end
 
   def show
-    render json: Genre.find(params[:id])
+    @genre = Genre.find(params[:id])
+    check_seo @genre
   end
 
   def edit
@@ -28,6 +29,10 @@ class Admin::Api::GenresController < Admin::Api::ApiController
   end
 
   private
+
+  def check_seo item
+    Seo.find_or_create_by meta: item if item.seo.nil?
+  end
 
   def model_params
     params

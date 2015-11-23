@@ -3,27 +3,25 @@
 <head>
   <title><%= content_for?(:title) ? yield(:title) : 'Admin Panel - Zumbaster' %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <%= stylesheet_link_tag 'application', media: 'all'%>
   <%= stylesheet_link_tag 'admin/admin', media: 'all'%>
   <%= csrf_meta_tags %>
-  <base href="<%= request.original_fullpath %>">
+  <!--<base href="<%= request.original_fullpath %>">-->
+  <base href="/admin/">
   <%= yield :stylesheets %>
   <%= javascript_include_tag 'vendor/modernizr' %>
   <%= javascript_include_tag '//yandex.st/swfobject/2.2/swfobject.min.js' %>
   <%= javascript_include_tag 'admin/admin' %>
 </head>
-<body data-ng-controller="MainCtrl as main">
-<%= render "partials/modals" %>
-<div class="contain-to-grid sticky top-menu">
-  <nav class="top-bar" data-topbar role="navigation">
-    <%= render "admin/partials/top_menu" %>
-  </nav>
-</div>
-<section class="main-section">
-  <% unless notice.nil? %><div data-message="notice"><%= notice %></div><% end %>
-  <% unless alert.nil? %><div data-message="alert"><%= alert %></div><% end %>
-  <%= content_for?(:content) ? yield(:content) : yield %>
-</section>
+<body data-ng-controller="MainCtrl as main" layout="row">
+  <%= render "admin/partials/top_menu" %>
+  <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
+      <% unless notice.nil? %><dialog-message data-type="Внимание"><%= notice %></dialog-message><% end %>
+      <% unless alert.nil? %><dialog-message data-type="Внимание"><%= alert %></dialog-message><% end %>
+      <%= render "admin/partials/main_toolbar" %>
+      <md-content ui-view md-scroll-y flex layout-padding>
+        <%= content_for?(:content) ? yield(:content) : yield %>
+      </md-content>
+  </div>
 <%= render "admin/partials/footer" %>
 </body>
 </html>

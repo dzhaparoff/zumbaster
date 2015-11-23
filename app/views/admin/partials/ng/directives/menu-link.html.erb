@@ -1,0 +1,11 @@
+<md-button
+ng-class="{'active' : isSelected()}"
+ng-href="{{section.url}}"
+ng-click="focusSection()">
+  <md-icon aria-label="{{section.name}}" ng-if="section.icon">{{section.icon}}</md-icon>
+  {{section.name}}
+  <span class="md-visually-hidden"
+        ng-if="isSelected()">
+    current page
+  </span>
+</md-button>

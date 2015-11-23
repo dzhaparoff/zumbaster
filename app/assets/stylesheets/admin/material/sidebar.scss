@@ -1,0 +1,208 @@
+.site-sidenav {
+  background: #222;
+  &.md-locked-open {
+    width: 256px;
+    min-width: 256px;
+    max-width: 256px;
+  }
+  & > md-content {
+    background: transparent;
+  }
+  & > * {
+    min-width: 218px;
+  }
+  .side-menu {
+    margin: 0;
+    .md-button {
+      border-radius: 0;
+      color: white;
+      cursor: pointer;
+      display: block;
+      align-items: inherit;
+      line-height: 40px;
+      margin: 0;
+      max-height: 40px;
+      overflow: hidden;
+      padding: 0 16px;
+      text-align: left;
+      text-decoration: none;
+      white-space: normal;
+      width: 100%;
+    }
+  }
+}
+
+.side-menu,
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+.side-menu li {
+  margin: 0;
+
+  .material-icons {
+
+    display: inline-block;
+    vertical-align: middle;
+    svg {
+      fill: white;
+    }
+  }
+}
+.side-menu > li:nth-child(1) {
+  border-top: none;
+}
+
+.side-menu > li {
+  border-bottom: 1px solid #333;
+}
+
+.side-menu .md-button {
+  border-radius: 0;
+  color: white;
+  cursor: pointer;
+  display: block;
+  align-items: inherit;
+  line-height: 40px;
+  margin: 0;
+  max-height: 40px;
+  overflow: hidden;
+  padding: 0px 16px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  width: 100%;
+}
+.side-menu .md-button:hover,
+.side-menu .md-button:focus {
+  background: #444 !important;
+}
+.side-menu .md-button md-icon {
+  color: white;
+}
+
+.side-menu md-select {
+  margin: 0;
+  width: 100%;
+}
+
+.side-menu md-select md-select-label {
+  justify-content: flex-end;
+  padding-top: 10px;
+}
+
+.side-menu md-select md-select-label span {
+  margin-right: auto;
+  padding-left: 13px;
+}
+
+.side-menu md-select .md-select-icon {
+  margin-right: 28px;
+}
+
+.side-menu button.md-button::-moz-focus-inner {
+  padding: 0;
+}
+
+.side-menu .md-button.active {
+  background: #444;
+}
+
+.menu-heading {
+  display: block;
+  line-height: 32px;
+  margin: 0;
+  padding: 8px 16px 0;
+  text-align: left;
+  width: 100%;
+  color: rgba(255, 255, 255, 0.54)
+}
+.side-menu li.parentActive,
+.side-menu li.parentActive .menu-toggle-list {
+  /*background-color: #2C80D2 !important;*/
+}
+.menu-toggle-list {
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  -webkit-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -webkit-transition-property: height;
+  -moz-transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  -moz-transition-property: height;
+  transition: 0.75s cubic-bezier(0.35, 0, 0.25, 1);
+  transition-property: height;
+}
+.side-menu .menu-toggle-list a.md-button {
+  display: block;
+  padding: 0 16px 0 32px;
+  text-transform: none;
+  text-rendering: optimizeLegibility;
+  font-weight: 500;
+}
+
+ul#side-menu-Directives {
+  margin-bottom: 20px;
+}
+.md-button-toggle .md-toggle-icon {
+  display: block;
+  margin-left: auto;
+  speak: none;
+  vertical-align: middle;
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  transition: transform 0.3s ease-in-out;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+}
+.md-button-toggle .md-toggle-icon.toggled {
+  transform: rotate(0deg);
+  -webkit-transform: rotate(0deg);
+}
+
+/* End Docs Menu */
+
+.side-logo {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: none;
+  margin: auto 0;
+
+  md-icon {
+    width: 128px;
+    height: 128px;
+  }
+  .side-logotype {
+    color: white;
+    text-align: center;
+    font-weight: 400;
+    font-size: 26px;
+    padding: 0;
+    margin: 16px 0 0 0;
+    text-transform: none;
+  }
+}
+.side-logo:focus {
+  outline: none;
+}
+
+.nav-header {
+  background-color: #222;
+  background: linear-gradient(#000, #222);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #000), color-stop(1, #222));
+  background: -webkit-linear-gradient(top, #000 0%, #222 100%);
+  background: -moz-linear-gradient(top, #000 0%, #222 100%);
+  background: linear-gradient(top, #000 0%, #222 100%);
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.side-menu-separator-icon {
+  margin: 0;
+}
+.side-menu-separator-icon img {
+  height: 16px;
+}
