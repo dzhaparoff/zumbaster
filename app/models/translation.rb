@@ -59,9 +59,6 @@ class Translation < ActiveRecord::Base
 
     secret_key = encode_request_header secret_key
 
-    ap video_token
-    ap secret_key
-
     return false if video_token == false
 
     new_playlist = Moonwalk.playlist_getter video_token, secret_key

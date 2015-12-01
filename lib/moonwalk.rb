@@ -88,8 +88,6 @@ class Moonwalk
       })
     end
 
-    ap playlist_request
-
     JSON.parse playlist_request.body
   end
 
