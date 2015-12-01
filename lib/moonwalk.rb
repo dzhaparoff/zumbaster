@@ -57,7 +57,7 @@ class Moonwalk
     }
   end
 
-  def self.playlist_getter video_token
+  def self.playlist_getter video_token, secret_key
     return false unless video_token
 
     f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
@@ -77,7 +77,7 @@ class Moonwalk
 
     playlist_request = f.post do |b|
       b.url '/sessions/create_session'
-      b.headers['Content-Data'] = 'MTQ0ODk2NzY2OC5iYTMwNWExYWE5OTM1ZjIwMjhlZTNmY2RkZWM1NDVlYQ=='
+      b.headers['Content-Data'] = secret_key
       b.body = URI.encode_www_form({
           partner: '',
           d_id: 21609,
@@ -87,6 +87,8 @@ class Moonwalk
           cd: 0
       })
     end
+
+    ap playlist_request
 
     JSON.parse playlist_request.body
   end
@@ -107,63 +109,6 @@ class Moonwalk
     end
 
     f.get iframe[18..-1], season: s, episode: e
-  end
-
-  def self.get_m_headers(token)
-    f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-      builder.adapter :net_http
-      builder.response :logger
-      builder.request :url_encoded
-      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
-      builder.headers['Host'] = 'www.hdkinotear.com'
-      builder.headers['Origin'] = 'http://www.hdkinoteatr.com'
-      builder.headers['Referer'] = "http://www.hdkinoteatr.com"
-      builder.headers['X-Real-IP'] = '104.27.186.106'
-      builder.headers['X-Forwarded-For'] = '104.27.186.106'
-    end
-
-    request = f.get "/video/#{token}/iframe"
-
-    request.headers["set-cookie"]
-
-    # doc = Nokogiri::HTML.parse(request.body)
-    #
-    # m_expired = nil
-    # m_token = nil
-    #
-    # doc.search('body > script').each do |script|
-    #
-    #   e = script.text.to_s.scan(/X-MOON-EXPIRED[\"\'\s\=\,\:]*?([a-zA-Z0-9]+)/)
-    #   t = script.text.to_s.scan(/X-MOON-TOKEN[\"\'\s\=\,\:]*?([a-zA-Z0-9]+)/)
-    #
-    #   m_expired = e.first.first if e.length > 0
-    #   m_token   = t.first.first if t.length > 0
-    #
-    #   break if m_expired != nil && m_token != nil
-    # end
-    #
-    # {
-    #     m_expired: m_expired,
-    #     m_token: m_token
-    # }
-  end
-
-  def self.ms(token)
-    f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-      builder.adapter :net_http
-      builder.response :logger
-      builder.request :url_encoded
-      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 'www.hdkinoteatr.com'
-      builder.headers['Origin'] = 'http://www.hdkinoteatr.com'
-      builder.headers['Referer'] = "http://www.hdkinoteatr.com"
-      builder.headers['X-Real-IP'] = '104.27.286.106'
-      builder.headers['X-Forwarded-For'] = '104.27.286.106'
-    end
-
-    request = f.get "/video/#{token}/iframe"
-
-    doc = Nokogiri::HTML.parse(request.body)
   end
 
   private

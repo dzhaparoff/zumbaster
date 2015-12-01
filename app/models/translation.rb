@@ -47,15 +47,24 @@ class Translation < ActiveRecord::Base
     request = Moonwalk.get_iframe_page(main_iframe_link, s, e)
 
     video_token = false
+    secret_key = false
 
     doc = Nokogiri::HTML.parse(request.body)
     doc.search('body > script').each do |script|
-      video_token = check_script_tag script, video_token
+      unless video_token && secret_key
+        video_token = check_script_tag script, video_token
+        secret_key = find_request_header_content(script) if video_token
+      end
     end
+
+    secret_key = encode_request_header secret_key
+
+    ap video_token
+    ap secret_key
 
     return false if video_token == false
 
-    new_playlist = Moonwalk.playlist_getter video_token
+    new_playlist = Moonwalk.playlist_getter video_token, secret_key
 
     self.f4m = new_playlist['manifest_f4m']
     self.m3u8 = new_playlist['manifest_m3u8']
@@ -75,5 +84,40 @@ class Translation < ActiveRecord::Base
     return false if video_token_raw.first.nil? || video_token_raw.nil? || video_token_raw.size == 0
 
     video_token_raw.first.first
+  end
+
+  def find_request_header_content script
+    secret_key_raw = script.text.to_s.scan(/setRequestHeader\|([a-zA-Z0-9\.]+)\|/)
+    return false if secret_key_raw.first.nil? || secret_key_raw.nil? || secret_key_raw.size == 0
+    secret_key_raw.first.first
+  end
+
+  def encode_request_header string
+    cxt = V8::Context.new
+    cxt.eval(%\
+      var encode = function(e){
+            var _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+            var t = "";
+            var n, r, i, s, o, u, a;
+            var f = 0;
+            while (f < e.length) {
+                n = e.charCodeAt(f++);
+                r = e.charCodeAt(f++);
+                i = e.charCodeAt(f++);
+                s = n >> 2;
+                o = (n & 3) << 4 | r >> 4;
+                u = (r & 15) << 2 | i >> 6;
+                a = i & 63;
+                if (isNaN(r)) {
+                    u = a = 64
+                } else if (isNaN(i)) {
+                    a = 64
+                }
+                t = t + _keyStr.charAt(s) + _keyStr.charAt(o) + _keyStr.charAt(u) + _keyStr.charAt(a)
+            }
+          return t;
+        }
+    \)
+    cxt[:encode].call(string)
   end
 end
