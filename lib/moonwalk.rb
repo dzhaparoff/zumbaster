@@ -57,36 +57,36 @@ class Moonwalk
     }
   end
 
-  def self.playlist_getter video_token, m_expired, m_token
+  def self.playlist_getter video_token
     return false unless video_token
 
-     f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-        builder.adapter :net_http
-        builder.response :logger, ::Logger.new(STDOUT), bodies: true
-        builder.request :url_encoded
-        builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-        builder.headers['Accept'] = '*/*'
-        builder.headers['Accept-Encoding'] = 'gzip, deflate'
-        builder.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
-        builder.headers['Host'] = 'moonwalk.cc'
-        builder.headers['Origin'] = 'http://moonwalk.cc'
-        # builder.headers['Referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
-        builder.headers['Referer'] = "http://www.hdkinoteatr.com"
-        builder.headers['X-MOON-EXPIRED'] = m_expired
-        builder.headers['X-MOON-TOKEN'] = m_token
-        builder.headers['X-Requested-With'] = 'XMLHttpRequest'
-        builder.headers['X-Real-IP'] = '104.27.286.106'
-        builder.headers['X-Forwarded-For'] = '104.27.286.106'
-     end
+    f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
+      builder.use :cookie_jar
+      builder.adapter :net_http
+      builder.request :url_encoded
+      builder.headers['Host'] = 'moonwalk.cc'
+      builder.headers['Connection'] = 'keep-alive'
+      builder.headers['Origin'] = 'http://moonwalk.cc'
+      builder.headers['X-Requested-With'] = 'XMLHttpRequest'
+      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
+      builder.headers['Accept'] = '*/*'
+      builder.headers['Referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
+      builder.headers['Accept-Encoding'] = 'gzip, deflate'
+      builder.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
+    end
 
-    playlist_request = f.post '/sessions/create_session', URI.encode_www_form({
-                                                            partner: 175,
-                                                            d_id: 317,
-                                                            video_token: video_token,
-                                                            content_type: 'movie',
-                                                            access_key: '0fb74eb4b2c16d45fe',
-                                                            cd: 0
-                                                        })
+    playlist_request = f.post do |b|
+      b.url '/sessions/create_session'
+      b.headers['Content-Data'] = 'MTQ0ODk2NzY2OC5iYTMwNWExYWE5OTM1ZjIwMjhlZTNmY2RkZWM1NDVlYQ=='
+      b.body = URI.encode_www_form({
+          partner: '',
+          d_id: 21609,
+          video_token: video_token,
+          content_type: 'movie',
+          access_key: '0fb74eb4b2c16d45fe',
+          cd: 0
+      })
+    end
 
     JSON.parse playlist_request.body
   end
@@ -94,8 +94,16 @@ class Moonwalk
   def self.get_iframe_page(iframe,s,e)
     f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
       builder.adapter Faraday.default_adapter
-      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 'moonwalk.cc'
+      builder.headers['Accept'] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+      builder.headers['Accept-Language'] = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2"
+      builder.headers['Cache-Control'] = "max-age=0"
+      builder.headers['Connection'] = "keep-alive"
+      builder.headers['Cookie'] = "_364966110046=1; _364966110047=1448960929873; _gat=1"
+      builder.headers['Host'] = "moonwalk.cc"
+      builder.headers['Upgrade-Insecure-Requests'] = "1"
+      builder.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+      builder.headers['X-Real-IP'] = '31.220.0.145'
+      builder.headers['X-Forwarded-For'] = '31.220.0.145'
     end
 
     f.get iframe[18..-1], season: s, episode: e
@@ -106,36 +114,38 @@ class Moonwalk
       builder.adapter :net_http
       builder.response :logger
       builder.request :url_encoded
-      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 'www.hdkinoteatr.com'
+      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
+      builder.headers['Host'] = 'www.hdkinotear.com'
       builder.headers['Origin'] = 'http://www.hdkinoteatr.com'
       builder.headers['Referer'] = "http://www.hdkinoteatr.com"
-      builder.headers['X-Real-IP'] = '104.27.286.106'
-      builder.headers['X-Forwarded-For'] = '104.27.286.106'
+      builder.headers['X-Real-IP'] = '104.27.186.106'
+      builder.headers['X-Forwarded-For'] = '104.27.186.106'
     end
 
     request = f.get "/video/#{token}/iframe"
 
-    doc = Nokogiri::HTML.parse(request.body)
+    request.headers["set-cookie"]
 
-    m_expired = nil
-    m_token = nil
-
-    doc.search('body > script').each do |script|
-
-      e = script.text.to_s.scan(/X-MOON-EXPIRED[\"\'\s\=\,\:]*?([a-zA-Z0-9]+)/)
-      t = script.text.to_s.scan(/X-MOON-TOKEN[\"\'\s\=\,\:]*?([a-zA-Z0-9]+)/)
-
-      m_expired = e.first.first if e.length > 0
-      m_token   = t.first.first if t.length > 0
-
-      break if m_expired != nil && m_token != nil
-    end
-
-    {
-        m_expired: m_expired,
-        m_token: m_token
-    }
+    # doc = Nokogiri::HTML.parse(request.body)
+    #
+    # m_expired = nil
+    # m_token = nil
+    #
+    # doc.search('body > script').each do |script|
+    #
+    #   e = script.text.to_s.scan(/X-MOON-EXPIRED[\"\'\s\=\,\:]*?([a-zA-Z0-9]+)/)
+    #   t = script.text.to_s.scan(/X-MOON-TOKEN[\"\'\s\=\,\:]*?([a-zA-Z0-9]+)/)
+    #
+    #   m_expired = e.first.first if e.length > 0
+    #   m_token   = t.first.first if t.length > 0
+    #
+    #   break if m_expired != nil && m_token != nil
+    # end
+    #
+    # {
+    #     m_expired: m_expired,
+    #     m_token: m_token
+    # }
   end
 
   def self.ms(token)

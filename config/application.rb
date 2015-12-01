@@ -31,6 +31,8 @@ module Videoplayer
     config.autoload_paths << Rails.root.join('lib')
     config.i18n.default_locale = :ru
 
+    config.active_record.raise_in_transactional_callbacks = true
+
     config.assets.precompile += %w(admin/*.css)
     config.assets.precompile += %w(admin/*.js)
   end

@@ -23,8 +23,6 @@ class Translation < ActiveRecord::Base
       builder.headers['Referer'] = "http://moonwalk.cc/video/#{moonwalk_token}/iframe"
       builder.headers['X-Requested-With'] = 'ShockwaveFlash/19.0.0.226'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      # builder.headers['X-Real-IP'] = '104.27.286.106'
-      # builder.headers['X-Forwarded-For'] = '104.27.286.106'
     end
 
     f.get manifest
@@ -48,19 +46,16 @@ class Translation < ActiveRecord::Base
 
     request = Moonwalk.get_iframe_page(main_iframe_link, s, e)
 
-    doc = Nokogiri::HTML.parse(request.body)
-
     video_token = false
 
+    doc = Nokogiri::HTML.parse(request.body)
     doc.search('body > script').each do |script|
       video_token = check_script_tag script, video_token
     end
 
     return false if video_token == false
 
-    meta_tokens = Moonwalk.get_m_headers video_token
-
-    new_playlist = Moonwalk.playlist_getter video_token, meta_tokens[:m_expired].to_s, meta_tokens[:m_token].to_s
+    new_playlist = Moonwalk.playlist_getter video_token
 
     self.f4m = new_playlist['manifest_f4m']
     self.m3u8 = new_playlist['manifest_m3u8']
