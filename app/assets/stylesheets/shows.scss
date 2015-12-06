@@ -253,8 +253,14 @@
   }
 
   .show-episodes {
+    &.current {
+      img {
+        border: 4px solid white;
+        margin-bottom: -4px;
+      }
+    }
     h5{
-      margin:rem-calc(10 0 0 0);
+      margin:rem-calc(0 0 0 0);
       span {
         display: block;
         font-size: rem-calc(15);
@@ -270,6 +276,7 @@
       }
     }
     h6 {
+      margin:rem-calc(10 0 10 0);
       font-size: rem-calc(15);
       @media #{$small-only} {
         font-size: rem-calc(13);
@@ -279,6 +286,15 @@
 }
 
 .episode {
+  
+  h1 {
+    span {
+      display: block;
+      padding-top: rem-calc(5);
+      font-size: 60%;
+      opacity: .65;
+    }
+  }
   .show-fanart {
     position: relative;
     text-align: center;
@@ -292,6 +308,78 @@
       width: 100%;
       background-image: linear-gradient(to bottom, rgba(#222222, 0) 0%, rgba(#222222, 1) 80%);
       background-repeat: repeat-x;
+    }
+  }
+
+  .translation {
+    position: relative;
+    margin-bottom: rem-calc(20);
+    .flex-video {
+      margin-bottom: 0;
+    }
+    .other-episode {
+      position: absolute;
+      height: 100%;
+      width: 8.333%;
+      top:0;
+      background-color: #000;
+      overflow: hidden;
+      transition: all .35s ease;
+      z-index: 15;
+      &.prev {
+        left: 0;
+      }
+      &.next {
+        right: 0;
+      }
+      &:after {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: url(/assets/video-overlay.png);
+        z-index: 16;
+      }
+      img {
+        position: absolute;
+        top:0;
+        opacity: .65;
+        transform: translate3d(-50%, 0, 0);
+        transition: all .35s ease;
+        height: 100%;
+        max-width: inherit;
+        z-index: 15;
+      }
+      span {
+        display: block;
+        position: absolute;
+        top:50%;
+        transform: translate3d(0, -50%, 0);
+        transition: all .35s ease;
+        z-index: 18;
+        color: #fff;
+        font-size: rem-calc(20);
+        text-align: center;
+        width: 100%;
+        opacity: 0;
+        line-height: rem-calc(36);
+        color: rgba(255,255,255,.85);
+        b {
+          font-style: normal;
+          display: block;
+          font-size: 120%;
+          color: rgba(255,255,255,1)
+        }
+      }
+      &:hover {
+        width: 80%;
+        opacity: 1;
+        img {
+          transform: translate3d(0, 0, 0);
+        }
+        span {
+          opacity: 1;
+        }
+      }
     }
   }
 }

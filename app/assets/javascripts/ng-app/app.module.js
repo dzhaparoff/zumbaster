@@ -1,10 +1,7 @@
 (function() { 'use strict';
 
     angular
-        .module('zumbaster', ['ngAnimate', 'ngResource', 'ngDialog'])
-        .config(["$httpProvider", function(provider) {
-            provider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
-        }]);
+        .module('zumbaster', ['ngAnimate', 'ngResource', 'ngDialog', 'angular-cache']);
 
     $(document).on('ready page:load', function() {
         angular.bootstrap(document.body, ['zumbaster'], { strictDi : true });

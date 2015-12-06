@@ -17,6 +17,38 @@ class Episode < ActiveRecord::Base
         .order("episodes.first_aired")
   }
 
+  scope :prev, -> {
+    where(:number => number - 1)
+  }
+
+  scope :next, -> {
+    where(:number => number + 1)
+  }
+
+  def prev
+    self.class.where(show: show, season: season, :number => number - 1).take
+  end
+
+  def next
+    self.class.where(show: show, season: season, :number => number + 1).take
+  end
+
+  def translations_list
+    ids = []
+    translations.each do |t|
+      ids << t.id
+    end
+    ids
+  end
+
+  def translators_list
+    ids = []
+    translations.each do |t|
+      ids << t.translator.id
+    end
+    ids.sort!
+  end
+
   private
 
   def destroy_rating

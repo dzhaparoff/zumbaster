@@ -18,12 +18,12 @@
         <% @season.episodes.includes(:translations).order(:number).where.not(translations: {id: nil}, screenshot_updated_at: nil).each_with_index do |e, index| %>
           <li class="show-episodes">
             <a href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % e.number %>"><img src="<%= e.screenshot.url(:thumb) %>"/></a>
+            <h6>Эпизод <%= e.number %></h6>
             <h5>
               <%= e.title_ru %><br>
               <span><%= e.title_en %></span>
               <span><%= Russian::strftime(e.first_aired, "%d %B %Y") unless e.first_aired.nil? %></span>
             </h5>
-            <h6>Эпизод <%= e.number %></h6>
           </li>
         <% end %>
       </ul>

@@ -38,16 +38,121 @@
   </div>
   <div class="row">
     <div class="small-12 column text-center" data-no-transition-cache>
-      <h1><%= @episode.title_ru %></h1>
-      <h5><%= @episode.title_en %></h5>
+      <h1><%= @episode.title_ru %> <span><%= @episode.title_en %></span></h1>
+      <h5><%= @show.title_ru %> (<%= @season_number %> сезон, <%= @episode_number %> эпизод)</h5>
       <%= render "partials/share" %>
-      <div class="p-t-20"><%= @episode.description_ru %></div>
+      <% unless @episode.description_ru.nil? -%>
+        <div class="p-t-20"><%= @episode.description_ru %></div>
+      <% end -%>
+    </div>
+  </div>
+
+  <% if @episode.translations.count > 1  -%>
+  <div class="row p-t-30" data-show-translations="<%= @episode.translators_list * "," %>">
+    <div class="small-12 columns">
       <% @episode.translations.each do |e| %>
-          <h4><%= e.translator.name unless e.translator.nil?%></h4>
-          <div class="flex-video widescreen">
-          <div data-videoplayer="<%= e.id %>" id="player_<%= e.id %>"></div>
+        <div class="translation box row" data-ng-if="translation.is_active(<%= e.translator.id %>)">
+          <% unless @episode.prev.nil? -%>
+          <a class="other-episode prev" href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % @episode.prev.number %>">
+            <img src="<%= @episode.prev.screenshot.url(:original) %>"/>
+            <span>
+              Сезон <%= @season.number %> - эпизод <%= @episode.prev.number %> <br/>
+              <b><%= @episode.prev.title_ru %></b> <%= @episode.prev.title_en %>
+            </span>
+          </a>
+          <% end -%>
+          <div class="small-10 columns push-1">
+            <div class="flex-video widescreen">
+              <div data-videoplayer="<%= e.id %>" id="player_<%= e.id %>"></div>
+            </div>
           </div>
+          <% unless @episode.next.nil? -%>
+          <a class="other-episode next" href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % @episode.next.number %>">
+            <img src="<%= @episode.next.screenshot.url(:original) %>"/>
+            <span>
+              Сезон <%= @season.number %> - эпизод <%= @episode.next.number %> <br/>
+              <b><%= @episode.next.title_ru %></b> <%= @episode.next.title_en %>
+            </span>
+          </a>
+          <% end -%>
+        </div>
       <% end %>
+      <div class="translation-buttons text-center">
+        <% @episode.translations.each do |e| %>
+          <div class="translation button"
+               data-ng-click="translation.set(<%= e.translator.id %>)"
+               data-ng-class="translation.bclass(<%= e.translator.id %>)"><%= e.translator.name unless e.translator.nil?%></div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <% else -%>
+  <div class="row p-t-30">
+    <div class="small-12 columns">
+      <div class="translation box row">
+      <% @episode.translations.each do |e| %>
+        <% unless @episode.prev.nil? -%>
+          <a class="other-episode prev" href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % @episode.prev.number %>">
+            <img src="<%= @episode.prev.screenshot.url(:original) %>"/>
+            <span>
+              Сезон <%= @season.number %> - эпизод <%= @episode.prev.number %> <br/>
+              <b><%= @episode.prev.title_ru %></b> <%= @episode.prev.title_en %>
+            </span>
+          </a>
+        <% end -%>
+        <div class="small-10 columns push-1">
+          <div class="flex-video widescreen">
+            <div data-videoplayer="<%= e.id %>" id="player_<%= e.id %>"></div>
+          </div>
+        </div>
+        <% unless @episode.next.nil? -%>
+          <a class="other-episode next" href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % @episode.next.number %>">
+            <img src="<%= @episode.next.screenshot.url(:original) %>"/>
+            <span>
+              Сезон <%= @season.number %> - эпизод <%= @episode.next.number %> <br/>
+              <b><%= @episode.next.title_ru %></b> <%= @episode.next.title_en %>
+            </span>
+          </a>
+        <% end -%>
+      <% end %>
+      </div>
+    </div>
+  </div>
+  <% end -%>
+</section>
+
+<section class="season p-t-30">
+  <div class="row show-details">
+    <div class="small-12 columns">
+      <h3>Другие эпизоды <%= @season.number %> сезона</h3>
+      <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4 p-t-20">
+        <% @season.episodes.includes(:translations).order(:number).where.not(translations: {id: nil}, screenshot_updated_at: nil).each_with_index do |e, index| %>
+          <li class="show-episodes <%= "current" if e.number == @episode_number %>">
+            <a href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % e.number %>"><img src="<%= e.screenshot.url(:thumb) %>"/></a>
+            <h6>Эпизод <%= e.number %></h6>
+            <h5>
+              <%= e.title_ru %><br>
+              <span><%= e.title_en %></span>
+              <span><%= Russian::strftime(e.first_aired, "%d %B %Y") unless e.first_aired.nil? %></span>
+            </h5>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+  <div class="row p-t-20">
+    <div class="small-12 columns">
+      <h3>Другие сезоны</h3>
+      <ul class="small-block-grid-3 medium-block-grid-5 large-block-grid-6 seasons-list p-t-20">
+        <% @show.seasons.present.where.not( number: @season.number).each do |s| %>
+          <li>
+            <a href="<%= show_season_path @show.slug_ru, "%02d" % s.number %>">
+              <img src="<%= s.poster.url(:thumb) %>"/>
+              <h5 class="season-number">Сезон <%= s.number %></h5>
+            </a>
+          </li>
+        <% end %>
+      </ul>
     </div>
   </div>
 </section>

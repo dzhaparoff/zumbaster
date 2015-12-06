@@ -5,14 +5,13 @@ gem 'pg'
 
 gem 'sass-rails'
 gem 'autoprefixer-rails'
-gem 'therubyracer'
+gem 'coffee-rails'
 gem 'uglifier', '>= 1.3.0'
+
+gem 'therubyracer'
 gem 'jbuilder', '~> 2.0' # Read more: https://github.com/rails/jbuilder
 
-gem 'sdoc', '~> 0.4.0', group: :doc # bundle exec rake doc:rails generates the API under doc/api.
-
 gem 'hashie'  							#https://github.com/intridea/hashie
-gem 'will_paginate'
 
 gem 'devise' #https://github.com/plataformatec/devise#getting-started
 gem 'omniauth-facebook'
@@ -22,19 +21,25 @@ gem 'omniauth-vkontakte'
 
 gem "dynamic_sitemaps"
 gem 'meta-tags'
+gem 'will_paginate'
 
 gem 'turbolinks'
 gem 'angularjs-rails'
+gem 'angular_rails_csrf'
 gem 'jquery-rails'
 gem 'foundation-rails'
 gem 'lodash-rails'
 gem "swfobject-rails"
+gem 'ace-rails-ap' # ace code highlighter
 
 source "https://rails-assets.org" do
   gem "rails-assets-ngDialog"
+  gem "rails-assets-ng-file-upload"
   gem "rails-assets-angular-aria"
   gem "rails-assets-angular-material"
   gem "rails-assets-angular-ui-router"
+  gem "rails-assets-angular-ui-ace"
+  gem "rails-assets-angular-cache"
 end
 
 gem 'faraday'

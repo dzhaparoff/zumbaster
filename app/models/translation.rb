@@ -2,14 +2,24 @@ class Translation < ActiveRecord::Base
   belongs_to :episode
   belongs_to :translator
 
-  def translation_video_exist?
-    return false if m3u8.nil?
-    responce = Faraday.get(m3u8)
-    responce.status == 200
+  default_scope do
+    order('translator_id')
+  end
+
+  def translation_video_exist? type
+    if type == :mobile
+      return false if f4m.nil?
+      responce = Faraday.get(f4m)
+      responce.status == 200
+    else
+      return false if m3u8.nil?
+      responce = Faraday.get(m3u8)
+      responce.status == 200
+    end
   end
 
   def manifest type
-    sync_translation_video unless translation_video_exist?
+    sync_translation_video unless translation_video_exist? type
 
     manifest = type == :mobile ? m3u8 : f4m
 
