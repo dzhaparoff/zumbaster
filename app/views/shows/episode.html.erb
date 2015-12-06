@@ -124,7 +124,7 @@
 <section class="season p-t-30">
   <div class="row show-details">
     <div class="small-12 columns">
-      <h3>Другие эпизоды <%= @season.number %> сезона</h3>
+      <h3>Все эпизоды <%= @season.number %> сезона</h3>
       <ul class="small-block-grid-2 medium-block-grid-3 large-block-grid-4 p-t-20">
         <% @season.episodes.includes(:translations).order(:number).where.not(translations: {id: nil}, screenshot_updated_at: nil).each_with_index do |e, index| %>
           <li class="show-episodes <%= "current" if e.number == @episode_number %>">

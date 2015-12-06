@@ -6,18 +6,15 @@ do ->
     controller: ["$scope", "$attrs", "mainCache", ShowTranslationsCtrl]
     controllerAs: 'translation'
 
-
   class ShowTranslationsCtrl
     constructor: ($scope, $attrs, mainCache) ->
       vm = this
-      vm.list = $attrs.showTranslations.split ','
+      vm.list = (parseInt l for l in $attrs.showTranslations.split ',')
 
-      cache = mainCache.playerCache
+      vm.setCacheValue = (id) -> mainCache.playerCache.put('translator', id)
+      vm.getCacheValue = -> mainCache.playerCache.get('translator')
 
-      vm.setCacheValue = (id) -> cache.put('translator', id)
-      vm.getCacheValue = -> cache.get('translator')
-
-      if vm.getCacheValue()?
+      if vm.getCacheValue()? and vm.getCacheValue() in vm.list
         vm.active = vm.getCacheValue()
       else
         vm.active = parseInt vm.list[0]

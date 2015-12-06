@@ -36,10 +36,6 @@
               else
                 construct_player(playlist.manifest);
 
-              console.log(playlist.manifest)
-
-              //elem.parent().remove();
-
               function onJSBridge(a,e,l){
                 console.log(a,e,l);
               }
@@ -57,11 +53,8 @@
                 var attrs = {
                   name: name
                 };
-                console.log('player.init', name, flashvars, params, attrs);
                 swfobject.embedSWF("/system/swf/player.swf", name, "854", "480", "10.2", null, flashvars, params, attrs);
-
               }
-
             }
         }
     }
