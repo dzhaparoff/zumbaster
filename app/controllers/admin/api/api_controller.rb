@@ -61,6 +61,7 @@ class Admin::Api::ApiController < Admin::AdminController
           screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
           episode_for_update.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
           episode_for_update.save
+          sleep 2
         end
       end
     end
