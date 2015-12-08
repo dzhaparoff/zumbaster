@@ -40,12 +40,13 @@ class Admin::Api::ApiController < Admin::AdminController
   def sync_screenshots
 
     show = Show.find params[:id]
-    season = Season.where(show: show, number: params[:s])
+    season = Season.where(show: show, number: params[:s]).take
     episodes = Episode.where(show: show, season: season)
 
     @trakt = Trakt.new
 
     episodes.each do |episode_for_update|
+      imdb = "tt%07d" % show.ids['imdb'].to_i
       trakt_seasons = @trakt.show_seasons imdb
       next if trakt_seasons.nil?
 
