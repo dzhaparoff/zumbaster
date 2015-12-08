@@ -52,18 +52,16 @@ class Admin::Api::ApiController < Admin::AdminController
 
       trakt_seasons.each do |trakt_season|
         next if trakt_season['number'] != season.number
-
-        season.poster = URI.parse trakt_season['images']['poster']['full']
-        season.thumb = URI.parse trakt_season['images']['thumb']['full']
-        season.save
+        # season.poster = URI.parse trakt_season['images']['poster']['full']
+        # season.thumb = URI.parse trakt_season['images']['thumb']['full']
         next if trakt_season['episodes'].nil?
 
         trakt_season['episodes'].each do |episode|
           next if episode['number'] != episode_for_update.number
           screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
           episode_for_update.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
+          episode_for_update.save
         end
-
       end
     end
     render json: episodes.count

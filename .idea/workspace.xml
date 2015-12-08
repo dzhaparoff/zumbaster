@@ -30,10 +30,10 @@
     <SUITE FILE_PATH="coverage/zumbaster@rails_update__zumbaster.coverage" NAME="rails:update: zumbaster Coverage Results" MODIFIED="1440148705600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@Development__localhost.coverage" NAME="Development: localhost Coverage Results" MODIFIED="1448972146456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@jobs_clear__zumbaster.coverage" NAME="jobs:clear: zumbaster Coverage Results" MODIFIED="1439676099731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
+    <SUITE FILE_PATH="coverage/zumbaster@deploy__zumbaster.coverage" NAME="deploy: zumbaster Coverage Results" MODIFIED="1449596992303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@sitemap_generate__zumbaster.coverage" NAME="sitemap:generate: zumbaster Coverage Results" MODIFIED="1443432152079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@db_rollback__zumbaster.coverage" NAME="db:rollback: zumbaster Coverage Results" MODIFIED="1447010781601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@paperclip_refresh_metadata__zumbaster.coverage" NAME="paperclip:refresh:metadata: zumbaster Coverage Results" MODIFIED="1431815822127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
-    <SUITE FILE_PATH="coverage/zumbaster@deploy__zumbaster.coverage" NAME="deploy: zumbaster Coverage Results" MODIFIED="1449427568734" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
@@ -58,16 +58,6 @@
         <option name="myItemId" value="Rails zumbaster: production" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
-    </PATH>
-    <PATH>
-      <PATH_ELEMENT>
-        <option name="myItemId" />
-        <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="Rails zumbaster: development" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
       <PATH_ELEMENT>
         <option name="myItemId" value="zumbaster_db.public" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
@@ -79,15 +69,7 @@
         <option name="myItemType" value="com.intellij.database.view.DbRootNodeDescriptor" />
       </PATH_ELEMENT>
       <PATH_ELEMENT>
-        <option name="myItemId" value="Rails zumbaster: development" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="zumbaster_db.public" />
-        <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
-      </PATH_ELEMENT>
-      <PATH_ELEMENT>
-        <option name="myItemId" value="translations" />
+        <option name="myItemId" value="Rails zumbaster: production" />
         <option name="myItemType" value="com.intellij.database.view.DbNodeDescriptor" />
       </PATH_ELEMENT>
     </PATH>
@@ -131,9 +113,24 @@
       <file leaf-file-name="api_controller.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/controllers/admin/api/api_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.49061033">
-              <caret line="52" column="42" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+            <state vertical-scroll-proportion="0.46830985">
+              <caret line="54" column="76" selection-start-line="54" selection-start-column="76" selection-end-line="54" selection-end-column="76" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="zumbaster_db.public.shows" pinned="false" current-in-tab="false">
+        <entry file="dbDummy://dbtable:/48309482/4a446765-a57e-42df-81b5-78a56d85f3a0/zumbaster_db.public.shows">
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state>
+              <filtering enabled="true" />
             </state>
           </provider>
         </entry>
@@ -518,7 +515,7 @@
       <recent name="$PROJECT_DIR$/app/views/api" />
     </key>
   </component>
-  <component name="RunManager" selected="IRB console.Rails console: zumbaster">
+  <component name="RunManager" selected="Capistrano.deploy: zumbaster">
     <configuration default="false" name="Rails console: zumbaster" type="IrbRunConfigurationType" factoryName="IRB console" temporary="true">
       <module name="zumbaster" />
       <IRB_RUN_CONFIG NAME="RUBY_ARGS" VALUE="-e $stdout.sync=true;$stderr.sync=true;load($0=ARGV.shift)" />
@@ -954,12 +951,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00089" summary="initial commit">
-      <created>1444991641239</created>
-      <option name="number" value="00089" />
-      <option name="project" value="LOCAL" />
-      <updated>1444991641239</updated>
-    </task>
     <task id="LOCAL-00090" summary="initial commit">
       <created>1444992668866</created>
       <option name="number" value="00090" />
@@ -1248,7 +1239,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449595485302</updated>
     </task>
-    <option name="localTasksCounter" value="138" />
+    <task id="LOCAL-00138" summary="initial commit">
+      <created>1449595559420</created>
+      <option name="number" value="00138" />
+      <option name="project" value="LOCAL" />
+      <updated>1449595559420</updated>
+    </task>
+    <option name="localTasksCounter" value="139" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1313,13 +1310,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/admin.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3601896">
-          <caret line="20" column="25" selection-start-line="20" selection-start-column="18" selection-end-line="20" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/admin/ng-app/api/api.factory.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1683,10 +1673,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="dbDummy://dbtable:/48309482/4a446765-a57e-42df-81b5-78a56d85f3a0/zumbaster_db.public.shows">
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/admin/api/api_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49061033">
-          <caret line="52" column="42" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
+        <state vertical-scroll-proportion="0.46830985">
+          <caret line="54" column="76" selection-start-line="54" selection-start-column="76" selection-end-line="54" selection-end-column="76" />
           <folding />
         </state>
       </provider>
