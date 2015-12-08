@@ -54,12 +54,13 @@ class Translation < ActiveRecord::Base
 
     main_iframe_link = serial['serial']['iframe_url'].to_s
 
-    request = Moonwalk.get_iframe_page(main_iframe_link, s, e)
+    iframe = Moonwalk.get_iframe_page(main_iframe_link, s, e)
 
+    doc = Nokogiri::HTML.parse(iframe[:request].body)
     video_token = false
     secret_key = false
 
-    doc = Nokogiri::HTML.parse(request.body)
+    csrf_token = doc.search('head > meta[name="csrf-token"]')[0]['content']
     doc.search('body > script').each do |script|
       unless video_token && secret_key
         video_token = check_script_tag script, video_token
@@ -71,7 +72,7 @@ class Translation < ActiveRecord::Base
 
     return false if video_token == false
 
-    new_playlist = Moonwalk.playlist_getter video_token, secret_key
+    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, secret_key, csrf_token
 
     self.f4m = new_playlist['manifest_f4m']
     self.m3u8 = new_playlist['manifest_m3u8']

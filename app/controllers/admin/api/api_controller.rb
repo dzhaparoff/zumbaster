@@ -37,6 +37,36 @@ class Admin::Api::ApiController < Admin::AdminController
     render json: translators
   end
 
+  def sync_screenshots
+
+    show = Show.find params[:id]
+    season = Season.where(show: show, number: params[:s])
+    episodes = Episode.where(show: show, season: season)
+
+    @trakt = Trakt.new
+
+    episodes.each do |episode_for_update|
+      trakt_seasons = @trakt.show_seasons imdb
+      next if trakt_seasons.nil?
+
+      trakt_seasons.each do |trakt_season|
+        next if trakt_season['number'] != season.number
+
+        season.poster = URI.parse trakt_season['images']['poster']['full']
+        season.thumb = URI.parse trakt_season['images']['thumb']['full']
+        season.save
+        next if trakt_season['episodes'].nil?
+
+        trakt_season['episodes'].each do |episode|
+          next if episode['number'] != episode_for_update.number
+          screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
+          episode_for_update.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
+        end
+
+      end
+    end
+  end
+
   def sync_shows
     shows = @myshow.get_top_shows
 
@@ -247,8 +277,8 @@ class Admin::Api::ApiController < Admin::AdminController
     render json: true
   end
 
-  def sync_seasons
-    shows = Show.all
+  def sync_seasons id
+    shows = Show.find id
 
     shows.each do |show|
       next unless show.ids['imdb'].to_i > 0

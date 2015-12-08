@@ -57,48 +57,16 @@ class Moonwalk
     }
   end
 
-  def self.playlist_getter video_token, secret_key
-    return false unless video_token
 
+  def self.get_iframe_page(iframe,s,e)
     f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
       builder.use :cookie_jar
       builder.adapter :net_http
       builder.request :url_encoded
-      builder.headers['Host'] = 'moonwalk.cc'
-      builder.headers['Connection'] = 'keep-alive'
-      builder.headers['Origin'] = 'http://moonwalk.cc'
-      builder.headers['X-Requested-With'] = 'XMLHttpRequest'
-      builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
-      builder.headers['Accept'] = '*/*'
-      builder.headers['Referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
-      builder.headers['Accept-Encoding'] = 'gzip, deflate'
-      builder.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
-    end
-
-    playlist_request = f.post do |b|
-      b.url '/sessions/create_session'
-      b.headers['Content-Data'] = secret_key
-      b.body = URI.encode_www_form({
-          partner: '',
-          d_id: 21609,
-          video_token: video_token,
-          content_type: 'movie',
-          access_key: '0fb74eb4b2c16d45fe',
-          cd: 0
-      })
-    end
-
-    JSON.parse playlist_request.body
-  end
-
-  def self.get_iframe_page(iframe,s,e)
-    f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-      builder.adapter Faraday.default_adapter
       builder.headers['Accept'] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
       builder.headers['Accept-Language'] = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2"
       builder.headers['Cache-Control'] = "max-age=0"
       builder.headers['Connection'] = "keep-alive"
-      builder.headers['Cookie'] = "_364966110046=1; _364966110047=1448960929873; _gat=1"
       builder.headers['Host'] = "moonwalk.cc"
       builder.headers['Upgrade-Insecure-Requests'] = "1"
       builder.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
@@ -106,7 +74,39 @@ class Moonwalk
       builder.headers['X-Forwarded-For'] = '31.220.0.145'
     end
 
-    f.get iframe[18..-1], season: s, episode: e
+    {
+        request: f.get(iframe[18..-1], season: s, episode: e),
+        faraday: f
+    }
+  end
+
+  def self.playlist_getter faraday, video_token, secret_key, csrf_token
+    return false unless video_token
+
+    playlist_request = faraday.post do |b|
+      b.url '/sessions/create_session'
+      b.headers['Host'] = 'moonwalk.cc'
+      b.headers['Connection'] = 'keep-alive'
+      b.headers['Origin'] = 'http://moonwalk.cc'
+      b.headers['X-Requested-With'] = 'XMLHttpRequest'
+      b.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
+      b.headers['Accept'] = '*/*'
+      b.headers['Referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
+      b.headers['Accept-Encoding'] = 'gzip, deflate'
+      b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
+      b.headers['X-CSRF-Token'] = csrf_token
+      b.headers['Content-Data'] = secret_key
+      b.body = URI.encode_www_form({
+                                       partner: '',
+                                       d_id: 21609,
+                                       video_token: video_token,
+                                       content_type: 'movie',
+                                       access_key: '0fb74eb4b2c16d45fe',
+                                       cd: 0
+                                   })
+    end
+
+    JSON.parse playlist_request.body
   end
 
   private
