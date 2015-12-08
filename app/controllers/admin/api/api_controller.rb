@@ -66,6 +66,7 @@ class Admin::Api::ApiController < Admin::AdminController
 
       end
     end
+    render json: episodes.count
   end
 
   def sync_shows
