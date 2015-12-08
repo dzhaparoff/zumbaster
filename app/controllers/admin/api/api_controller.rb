@@ -58,10 +58,9 @@ class Admin::Api::ApiController < Admin::AdminController
 
         trakt_season['episodes'].each do |episode|
           next if episode['number'] != episode_for_update.number
-          screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
-          episode_for_update.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
+          episode_for_update.screenshot = URI.parse episode['images']['screenshot']['full'] unless episode['images']['screenshot']['full'].nil?
           episode_for_update.save
-          sleep 2
+          sleep 1
         end
       end
     end
