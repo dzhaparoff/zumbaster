@@ -36,7 +36,7 @@ class Episode < ActiveRecord::Base
   def translations_list
     ids = []
     translations.each do |t|
-      ids << t.id
+      ids << t.id unless t.nil?
     end
     ids
   end
@@ -44,7 +44,7 @@ class Episode < ActiveRecord::Base
   def translators_list
     ids = []
     translations.each do |t|
-      ids << t.translator.id
+      ids << t.translator.id unless t.translator.nil?
     end
     ids.sort!
   end
