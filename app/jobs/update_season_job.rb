@@ -60,8 +60,8 @@ class UpdateSeasonJob < ActiveJob::Base
             e.abs_name = "#{trakt_season['number']}-#{episode['number']}"
 
             unless episode['images']['screenshot']['full'].nil? || (e.screenshot.exists? && !@force_reload)
-              screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
-              e.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
+              # screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
+              e.screenshot = URI.parse episode['images']['screenshot']['full']
               puts "reloading screenshot for episode #{e.number}"
             end
 

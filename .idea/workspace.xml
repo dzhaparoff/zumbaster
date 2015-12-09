@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8d908706-0167-42a0-9a1f-7ca5b065c907" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/jobs/update_season_job.rb" afterPath="$PROJECT_DIR$/app/jobs/update_season_job.rb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="zumbaster.iws" />
@@ -29,7 +30,7 @@
     <SUITE FILE_PATH="coverage/zumbaster@rails_update__zumbaster.coverage" NAME="rails:update: zumbaster Coverage Results" MODIFIED="1440148705600" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@Development__localhost.coverage" NAME="Development: localhost Coverage Results" MODIFIED="1448972146456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@jobs_clear__zumbaster.coverage" NAME="jobs:clear: zumbaster Coverage Results" MODIFIED="1439676099731" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
-    <SUITE FILE_PATH="coverage/zumbaster@deploy__zumbaster.coverage" NAME="deploy: zumbaster Coverage Results" MODIFIED="1449606239827" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
+    <SUITE FILE_PATH="coverage/zumbaster@deploy__zumbaster.coverage" NAME="deploy: zumbaster Coverage Results" MODIFIED="1449639525371" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@sitemap_generate__zumbaster.coverage" NAME="sitemap:generate: zumbaster Coverage Results" MODIFIED="1443432152079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@db_rollback__zumbaster.coverage" NAME="db:rollback: zumbaster Coverage Results" MODIFIED="1447010781601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
     <SUITE FILE_PATH="coverage/zumbaster@paperclip_refresh_metadata__zumbaster.coverage" NAME="paperclip:refresh:metadata: zumbaster Coverage Results" MODIFIED="1431815822127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="zumbaster" />
@@ -89,71 +90,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="translation.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/translation.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="moonwalk.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/moonwalk.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="53.88889">
-              <caret line="51" column="38" selection-start-line="51" selection-start-column="31" selection-end-line="51" selection-end-column="38" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="api_controller.rb" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/controllers/admin/api/api_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78051645">
-              <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="zumbaster_db.public.delayed_jobs" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/48309482/4a446765-a57e-42df-81b5-78a56d85f3a0/zumbaster_db.public.delayed_jobs">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="zumbaster_db.public.shows" pinned="false" current-in-tab="false">
-        <entry file="dbDummy://dbtable:/48309482/4a446765-a57e-42df-81b5-78a56d85f3a0/zumbaster_db.public.shows">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="update_season_job.rb" pinned="false" current-in-tab="false">
+      <file leaf-file-name="update_season_job.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/jobs/update_season_job.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="23" selection-end-column="48" />
+            <state vertical-scroll-proportion="0.17488264">
+              <caret line="52" column="59" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -183,7 +124,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/assets/javascripts/admin/ng-app/api/loading.service.js" />
         <option value="$PROJECT_DIR$/app/views/admin/genres/index.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/stylesheets/admin/material/content.scss" />
         <option value="$PROJECT_DIR$/app/views/admin/partials/_top_menu.html.erb" />
@@ -234,6 +174,7 @@
         <option value="$PROJECT_DIR$/app/models/translation.rb" />
         <option value="$PROJECT_DIR$/lib/moonwalk.rb" />
         <option value="$PROJECT_DIR$/app/controllers/admin/api/api_controller.rb" />
+        <option value="$PROJECT_DIR$/app/jobs/update_season_job.rb" />
       </list>
     </option>
   </component>
@@ -965,12 +906,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00093" summary="initial commit">
-      <created>1445262260356</created>
-      <option name="number" value="00093" />
-      <option name="project" value="LOCAL" />
-      <updated>1445262260356</updated>
-    </task>
     <task id="LOCAL-00094" summary="initial commit">
       <created>1445262355691</created>
       <option name="number" value="00094" />
@@ -1259,7 +1194,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449609623434</updated>
     </task>
-    <option name="localTasksCounter" value="142" />
+    <task id="LOCAL-00142" summary="initial commit">
+      <created>1449639143361</created>
+      <option name="number" value="00142" />
+      <option name="project" value="LOCAL" />
+      <updated>1449639143361</updated>
+    </task>
+    <option name="localTasksCounter" value="143" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1643,14 +1584,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/jobs/update_episodes_job.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24530517">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="36" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/moonwalk.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="53.88889">
@@ -1669,14 +1602,6 @@
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/jobs/update_season_job.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="23" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1708,8 +1633,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/admin/api/api_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78051645">
-          <caret line="50" column="32" selection-start-line="50" selection-start-column="32" selection-end-line="50" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="34" column="7" selection-start-line="34" selection-start-column="7" selection-end-line="34" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/jobs/update_episodes_job.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3568075">
+          <caret line="16" column="38" selection-start-line="16" selection-start-column="38" selection-end-line="16" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/jobs/update_season_job.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17488264">
+          <caret line="52" column="59" selection-start-line="52" selection-start-column="59" selection-end-line="52" selection-end-column="59" />
           <folding />
         </state>
       </provider>
