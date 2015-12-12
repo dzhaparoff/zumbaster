@@ -51,7 +51,7 @@
   <div class="row p-t-30" data-show-translations="<%= @episode.translators_list * "," %>">
     <div class="small-12 columns">
       <% @episode.translations.each do |e| %>
-        <div class="translation box row" data-ng-if="translation.is_active(<%= e.translator.id %>)">
+        <div class="translation box row" data-ng-if="translation.is_active(<%= e.translator ? e.translator.id : 0 %>)">
           <% unless @episode.prev.nil? -%>
           <a class="other-episode prev" href="<%= show_episode_path @show.slug_ru, "%02d" % @season.number, "%02d" % @episode.prev.number %>">
             <img src="<%= @episode.prev.screenshot.url(:original) %>"/>
@@ -80,8 +80,8 @@
       <div class="translation-buttons text-center">
         <% @episode.translations.each do |e| %>
           <div class="translation button"
-               data-ng-click="translation.set(<%= e.translator.id %>)"
-               data-ng-class="translation.bclass(<%= e.translator.id %>)"><%= e.translator.name unless e.translator.nil?%></div>
+               data-ng-click="translation.set(<%= e.translator ? e.translator.id : 0 %>)"
+               data-ng-class="translation.bclass(<%= e.translator ? e.translator.id : 0 %>)"><%= e.translator.name unless e.translator.nil?%></div>
         <% end %>
       </div>
     </div>
