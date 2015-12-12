@@ -20,6 +20,7 @@ class Moonwalk
   end
 
   def get_playlist_url_parallel(kinopoisk_id, translator_id)
+    sleep 0.5
     request = @http.get('/api/serial_episodes.json',
                         kinopoisk_id: kinopoisk_id,
                         translator_id: translator_id)
@@ -40,16 +41,20 @@ class Moonwalk
       request[k] = {}
       @http_parallel.in_parallel do
         v.each do |episode|
-          # request[k][episode] = @http_parallel.get main_iframe_link[18..-1],
-          #                     season: k,
-          #                     episode: episode
-
           request[k][episode] = "body"
         end
       end
     end
 
-    playlists = fill_playlists request
+    playlists = {}
+
+    request.each_pair do|s, req|
+      playlists[s] = {}
+      req.each_pair do |e, r|
+        playlists[s][e] = {}
+        playlists[s][e]['token'] = "temp_token"
+      end
+    end
 
     {
         serial: serial,
@@ -138,14 +143,6 @@ class Moonwalk
       playlists[s] = {}
       req.each_pair do |e, r|
           playlists[s][e] = {}
-          # doc = Nokogiri::HTML.parse(r.body)
-          #
-          # video_token = false
-          #
-          # doc.search('body > script').each do |script|
-          #   video_token = check_script_tag script, video_token
-          # end
-
           playlists[s][e]['token'] = "temp_token"
       end
     end
