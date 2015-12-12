@@ -81,7 +81,7 @@
         <% @episode.translations.each do |e| %>
           <div class="translation button"
                data-ng-click="translation.set(<%= e.translator ? e.translator.id : 0 %>)"
-               data-ng-class="translation.bclass(<%= e.translator ? e.translator.id : 0 %>)"><%= e.translator.name unless e.translator.nil?%></div>
+               data-ng-class="translation.bclass(<%= e.translator ? e.translator.id : 0 %>)"><%= e.translator.nil? ? "Оригинал" : e.translator.name%></div>
         <% end %>
       </div>
     </div>
