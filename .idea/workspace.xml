@@ -93,8 +93,8 @@
       <file leaf-file-name="moonwalk.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/moonwalk.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.78051645">
-              <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.53521127">
+              <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -922,12 +922,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00098" summary="initial commit">
-      <created>1445271413316</created>
-      <option name="number" value="00098" />
-      <option name="project" value="LOCAL" />
-      <updated>1445271413316</updated>
-    </task>
     <task id="LOCAL-00099" summary="initial commit">
       <created>1445361118895</created>
       <option name="number" value="00099" />
@@ -1216,7 +1210,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449917421847</updated>
     </task>
-    <option name="localTasksCounter" value="147" />
+    <task id="LOCAL-00147" summary="initial commit">
+      <created>1449920166686</created>
+      <option name="number" value="00147" />
+      <option name="project" value="LOCAL" />
+      <updated>1449920166686</updated>
+    </task>
+    <option name="localTasksCounter" value="148" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1668,8 +1668,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/moonwalk.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78051645">
-          <caret line="35" column="7" selection-start-line="35" selection-start-column="7" selection-end-line="35" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.53521127">
+          <caret line="48" column="32" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
           <folding />
         </state>
       </provider>

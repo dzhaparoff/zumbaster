@@ -39,10 +39,8 @@ class Moonwalk
 
     seasons_episodes.sort.to_h.each_pair do |k, v|
       request[k] = {}
-      @http_parallel.in_parallel do
-        v.each do |episode|
-          request[k][episode] = "body"
-        end
+      v.each do |episode|
+        request[k][episode] = "body"
       end
     end
 
