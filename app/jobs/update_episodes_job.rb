@@ -4,14 +4,13 @@ class UpdateEpisodesJob < ActiveJob::Base
   def perform(*args)
 
     date = DateTime.now - 7.days
+    @moonwalk = Moonwalk.new
 
     7.times do |increment|
 
       date = date + increment.day
 
       episodes = Episode.for_date date
-
-      @moonwalk = Moonwalk.new
 
       episodes.each do |episode_for_update|
         show = episode_for_update.show
