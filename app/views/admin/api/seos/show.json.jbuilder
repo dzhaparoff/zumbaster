@@ -1,7 +1,8 @@
-json.(@seo, *Seo.column_names)
+json.(@seo, :'id', :'title', :'description', :'robots')
+
 json.set! "$config" do
-  json.columns_list Seo.columns_hash
+  json.columns_list Seo.fields
   json.system_columns do
-    json.array! [Seo.primary_key, "created_at", "updated_at", "meta_id", "meta_type"]
+    json.array! ["id"]
   end
 end

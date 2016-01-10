@@ -1,0 +1,55 @@
+<form name="form">
+  <input type="hidden" required ng-model="editor.item.name_ru"/>
+  <input type="hidden" required ng-model="editor.item.slug_ru"/>
+  <md-toolbar>
+    <div layout="row" flex class="fill-height">
+      <h2 flex class="md-toolbar-item md-breadcrumb md-headline">
+        <a class="md-breadcrumb-page" ui-sref="pshows">
+          <span class="md-separator-icon"><md-icon aria-hidden="true">keyboard_backspace</md-icon></span> Сериалы
+        </a>
+        <span class="md-separator-icon"><span class="md-visually-hidden">-</span><md-icon aria-hidden="true">navigate_next</md-icon></span>
+        <span class="md-breadcrumb-page">Новый сериал</span>
+      </h2>
+    </div>
+    <md-progress-linear md-mode="{{editor['loading:get'].mode}}" ng-if="editor['loading:get'].loading"></md-progress-linear>
+  </md-toolbar>
+  <div md-scroll-y class="animate-show wrapper-padding" ng-if="!editor['loading:get'].loading" layout="column">
+    <md-content class="md-whiteframe-z1 element-content-part element-content-header-part" flex layout-gt-md="row" layout="column" layout-align="center center">
+      <div flex class="header-info">
+        <h1 class="md-display-1">Добавление сериала</h1>
+      </div>
+    </md-content>
+
+    <md-content
+    class="md-whiteframe-z1 element-content-part action" flex
+    ng-if="!editor.states.equal('edit')"
+    md-ink-ripple="true"
+    ng-click="editor.states.set('edit')">
+      <h2 class="md-subheader">Поиск</h2>
+      <div class="md-body-1">Поиск сериала в базе Myshows</div>
+    </md-content>
+    <md-content class="md-whiteframe-z3 element-content-part expanded"
+                flex
+                ng-if="editor.states.equal('edit')"
+                ng-controller="SearchShowCtrl as search">
+      <div class="toolbar" ng-click="editor.states.reset()">
+        <h2 class="toolbar-heading"><md-icon>keyboard_arrow_up</md-icon> Поиск</h2>
+        <md-progress-linear md-mode="{{editor['loading:update'].mode}}" ng-if="editor['loading:update'].loading"></md-progress-linear>
+      </div>
+      <md-input-container class="md-block">
+        <label>Название сериала</label>
+        <input ng-model="editor.search.name" md-maxlength="150" required aria-label="name">
+      </md-input-container>
+    </md-content>
+  </div>
+  <div flex></div>
+
+  <div layout="row">
+    <md-button ng-click="editor.create_new()" class="md-primary md-fab md-fab-bottom-right">
+      <md-icon>done</md-icon>
+      <md-tooltip>
+        Добавить сериал
+      </md-tooltip>
+    </md-button>
+  </div>
+</form>

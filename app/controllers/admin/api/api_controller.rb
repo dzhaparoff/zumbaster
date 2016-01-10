@@ -1,5 +1,7 @@
 class Admin::Api::ApiController < Admin::AdminController
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found
   require 'typhoeus/adapters/faraday'
+
   def initialize
     @myshow = Myshows.new
     @trakt = Trakt.new
@@ -398,6 +400,42 @@ class Admin::Api::ApiController < Admin::AdminController
       end
     end
     render json: true
+  end
+
+  def check_login
+    return render json: {exist: false} if params[:login].nil?
+    user = User.find_for_database_authentication(:login => params[:login])
+    if user
+      render json: {exist: true, user: user}
+    else
+      render json: {exist: false}
+    end
+  end
+
+  def check_email
+    return render json: {exist: false} if params[:email].nil?
+    user = User.find_for_database_authentication(:email => params[:email])
+    if user
+      render json: {exist: true, user: user}
+    else
+      render json: {exist: false}
+    end
+  end
+
+  def check_username
+    return render json: {exist: false} if params[:username].nil?
+    user = User.find_for_database_authentication(:username => params[:username])
+    if user
+      render json: {exist: true, user: user}
+    else
+      render json: {exist: false}
+    end
+  end
+
+  protected
+
+  def not_found
+    render json: {error: 'not_found'}, status: 404
   end
 
   private

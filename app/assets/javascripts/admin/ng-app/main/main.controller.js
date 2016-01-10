@@ -3,13 +3,14 @@
     angular
         .module('admin')
         .controller('MainCtrl',
-          ["$scope", "$state", "$timeout", "$mdSidenav", "$loading", "Menu",
+          ["$scope", "$state", "$timeout", "$mdSidenav", "$loading", "Menu", "$mdMedia", "$document", "$locale",
           MainCtrl]
         );
 
     var $_sce;
 
-    function MainCtrl($scope, $state, $timeout, $mdSidenav, $loading, Menu){
+    function MainCtrl($scope, $state, $timeout, $mdSidenav, $loading, Menu, $mdMedia, $document, $locale){
+
       var vm = this;
       vm.loading = $loading;
       vm.menu = Menu;
@@ -21,10 +22,33 @@
       vm.openPage = openPage;
       vm.openContextMenu = openContextMenu;
       vm.closeContextMenu = closeContextMenu;
-
       vm.go = $state.go;
-
       var mainContentArea = document.querySelector("[role='main']");
+
+      vm.locale = $locale;
+      vm.locale.assign_scope($scope);
+
+      $scope.$watch(
+          function(){
+            return $mdMedia('gt-md')
+          },
+          function(md) {
+            if(!md)
+              angular.element('body').addClass('md');
+            else
+              angular.element('body').removeClass('md');
+          });
+
+      $scope.$watch(
+          function(){
+            return $mdMedia('sm')
+          },
+          function(sm) {
+            if(sm)
+              angular.element('body').addClass('sm');
+            else
+              angular.element('body').removeClass('sm');
+          });
 
       function closeMenu() {
         $timeout(function() { $mdSidenav('left').close(); });
@@ -72,7 +96,8 @@
       }
     }
     
-    var Helpers = {
+    var Helpers = (function () {
+      return {
         class : function (expression, class_active, class_passive) {
             if(expression)
                 return class_active;
@@ -85,5 +110,6 @@
         parseHtml : function(html){
             return $_sce.trustAsHtml(html);
         }
-    }
+      }
+    })()
 })();

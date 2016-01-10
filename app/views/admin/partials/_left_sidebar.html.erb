@@ -1,0 +1,36 @@
+<md-sidenav flex="initial" class="site-sidenav md-sidenav-left md-whiteframe-z2"
+            md-component-id="left"
+            md-is-locked-open="$mdMedia('gt-md')">
+
+  <header class="nav-header">
+    <md-button href="/admin" class="side-logo">
+      <md-icon md-svg-src="/assets/svg/logo.svg" class="main-logo" aria-label="Logo"></md-icon>
+    </md-button>
+  </header>
+
+  <md-content role="navigation" flex>
+    <ul class="side-menu" ng-controller="MenuCtrl as menu">
+      <li ng-repeat="section in menu.sections" class="parent-list-item {{section.className || ''}}" ng-class="{'parentActive' : isSectionSelected(section)}">
+        <h2 class="menu-heading md-subhead" ng-if="section.type === 'heading'" id="heading_{{ section.name}}">
+          {{section.name}}
+        </h2>
+        <menu-link section="section" ng-if="section.type === 'link'"></menu-link>
+        <menu-toggle section="section" ng-if="section.type === 'toggle'"></menu-toggle>
+
+        <ul ng-if="section.children" class="menu-nested-list">
+          <li ng-repeat="child in section.children" ng-class="{'childActive' : isSectionSelected(child)}">
+            <menu-link section="child" ng-if="child.type === 'link'"></menu-link>
+            <menu-toggle section="child" ng-if="child.type === 'toggle'"></menu-toggle>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </md-content>
+
+  <md-toolbar class="footer">
+    <div class="md-toolbar-tools" layout-align="center center">
+      <p>2015 © NetLab</p>
+    </div>
+  </md-toolbar>
+
+</md-sidenav>

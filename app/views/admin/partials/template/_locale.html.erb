@@ -1,0 +1,22 @@
+<md-menu md-offset="50 40" md-position-mode="target-right target">
+  <md-button aria-label="Open phone interactions menu" class="md-button" ng-click="main.openContextMenu($mdOpenMenu, $event)">
+    <md-icon md-menu-origin>language</md-icon> {{main.locale.active}}
+    <md-tooltip>
+      Локаль публикации
+    </md-tooltip>
+  </md-button>
+  <md-menu-content width="2">
+    <md-menu-item ng-repeat="locale in main.locale.locales">
+      <md-button ng-class="{'md-accent':main.locale[locale]}" ng-click="main.locale.change_locale(locale)">
+        {{locale.capitalize()}}
+      </md-button>
+    </md-menu-item>
+    <md-menu-divider></md-menu-divider>
+    <md-menu-item>
+      <md-button disabled="disabled">
+        <md-icon>settings</md-icon>
+        Настройки
+      </md-button>
+    </md-menu-item>
+  </md-menu-content>
+</md-menu>

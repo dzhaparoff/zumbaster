@@ -4,7 +4,7 @@ class Admin::Api::SeosController < Admin::Api::ApiController
   end
 
   def new
-
+    @seo = Seo.new
   end
 
   def create
@@ -12,7 +12,8 @@ class Admin::Api::SeosController < Admin::Api::ApiController
   end
 
   def show
-    @seo = Seo.find(params[:id])
+    @seo = Seo.where(id: params[:id]).first
+    @seo = Seo.new(id: params[:id]) if @seo.nil?
   end
 
   def edit
@@ -21,6 +22,8 @@ class Admin::Api::SeosController < Admin::Api::ApiController
 
   def update
     render json: Seo.find(params[:id]).update(model_params)
+  rescue
+    not_found
   end
 
   def destroy

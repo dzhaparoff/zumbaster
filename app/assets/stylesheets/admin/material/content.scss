@@ -1,14 +1,21 @@
 .site-content-toolbar {
-  box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.14),
-  0 0 2px 2px rgba(0, 0, 0, 0.098),
-  0 0 5px 1px rgba(0, 0, 0, 0.084);
+  //box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.14),
+  //0 0 2px 2px rgba(0, 0, 0, 0.098),
+  //0 0 5px 1px rgba(0, 0, 0, 0.084);
 }
 
 .admin-toolbar-tools {
-  max-width: 864px;
+  max-width: 964px;
   padding: 0;
   margin: 0 24px;
   width: auto;
+}
+
+.md-separator-icon {
+  transform: translate3d(0, 1px, 0);
+  md-icon {
+    margin-top: -2px
+  }
 }
 
 menu-toggle, menu-link {
@@ -23,6 +30,53 @@ menu-toggle, menu-link {
 }
 
 .admin-content {
-  margin: 0 24px;
-  max-width: 864px;
+  //margin: 12px 24px;
+  max-width: 964px;
+
+  .page-title {
+    .md-headline {
+      margin: 0;
+    }
+  }
+
+  .chips-items {
+    line-height: 15px;
+    .chips-item {
+      max-width: 70px;
+      padding: 6px 8px;
+      font-size: 13px;
+      line-height: 13px;
+      border-radius: 20px;
+      background-color: rgb(224,224,224);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: inline-block;
+      margin-right: 4px;
+    }
+  }
+}
+
+pre {
+  background: #FFFFD0;
+  &.inline {
+    display: inline;
+    margin: 0;
+  }
+}
+
+md-list-item.items-table {
+  .md-list-item-text {
+    p {
+      line-height: 18px!important;
+      font-size: 13px!important;
+      padding: 5px;
+      &.text-center {
+        text-align: center;
+      }
+    }
+  }
+}
+
+.proxy-padding {
+  width: 50px;
 }

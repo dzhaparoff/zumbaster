@@ -1,0 +1,37 @@
+<div class="admin-content">
+  <md-list>
+    <md-subheader class="md-no-sticky page-title"><h1 class="md-headline">Список жанров</h1></md-subheader>
+    <div layout="row">
+      <div class="proxy-padding"></div>
+      <div flex><md-subheader class="md-no-sticky">Название жанра</md-subheader></div>
+      <div flex><md-subheader class="md-no-sticky">Символьный код</md-subheader></div>
+    </div>
+    <md-divider ng-if="!$last"></md-divider>
+    <md-list-item class="md-2-line md-no-proxy-no" ng-repeat="item in items.index" ng-click="items.edit(item, $event)">
+      <md-icon class="circle-avatar">folder</md-icon>
+      <div class="md-list-item-text" >
+        <h3>{{item.name_ru}}</h3>
+        <p>{{item.name_en}}</p>
+      </div>
+      <div class="md-list-item-text">
+        <p>{{item.slug_ru}}</p>
+        <p>{{item.slug_en}}</p>
+      </div>
+      <md-divider ng-if="!$last"></md-divider>
+    </md-list-item>
+    <md-list-item class="md-1-line md-no-proxy-no animation-show" ng-if="!items.items_count() && !items.model.loading['themes:query'].loading">
+      <div class="md-list-item-text">
+        <p><md-icon>info_outline</md-icon> Тем нет</p>
+      </div>
+    </md-list-item>
+  </md-list>
+</div>
+
+<div layout="row">
+  <md-button ng-click="items.new()" class="md-primary md-fab md-fab-bottom-right">
+    <md-icon>add</md-icon>
+    <md-tooltip>
+      Добавить тему
+    </md-tooltip>
+  </md-button>
+</div>

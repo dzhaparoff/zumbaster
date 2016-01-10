@@ -13,15 +13,16 @@
   <%= javascript_include_tag 'admin/admin' %>
 </head>
 <body data-ng-controller="MainCtrl as main" layout="row">
-  <%= render "admin/partials/top_menu" %>
+  <%= render "admin/partials/left_sidebar" %>
   <div flex layout="column" tabIndex="-1" role="main" class="md-whiteframe-z2">
-      <% unless notice.nil? %><dialog-message data-type="Внимание"><%= notice %></dialog-message><% end %>
-      <% unless alert.nil? %><dialog-message data-type="Внимание"><%= alert %></dialog-message><% end %>
-      <%= render "admin/partials/main_toolbar" %>
-      <md-content ui-view md-scroll-y flex layout-padding>
-        <%= content_for?(:content) ? yield(:content) : yield %>
-      </md-content>
+    <!--<% unless notice.nil? %><dialog-message data-type="Внимание"><%= notice %></dialog-message><% end %>-->
+    <!--<% unless alert.nil? %><dialog-message data-type="Внимание"><%= alert %></dialog-message><% end %>-->
+    <%= render "admin/partials/main_toolbar" %>
+    <md-content ui-view md-scroll-y flex layout-padding>
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    </md-content>
   </div>
-<%= render "admin/partials/footer" %>
+  <%= render "admin/partials/right_sidebar" %>
+  <%= render "admin/partials/footer" %>
 </body>
 </html>

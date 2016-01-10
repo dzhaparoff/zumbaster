@@ -6,6 +6,8 @@ class Show < ActiveRecord::Base
   has_many :seasons, :dependent => :destroy
   has_many :episodes, :dependent => :destroy
 
+  after_initialize :init
+
   has_attached_file :poster, :styles => { :medium => "600x900>", :thumb => "300x450>" }, convert_options: { all: '-quality 75 -strip' }
   has_attached_file :poster_ru, :styles => { :medium => "600x900>", :thumb => "300x450>" }, convert_options: { all: '-quality 75 -strip' }
   has_attached_file :fanart, :styles => { :medium => "1280x720>", :thumb => "853x480>" }, convert_options: { all: '-quality 75 -strip' }
@@ -19,6 +21,10 @@ class Show < ActiveRecord::Base
   default_scope do
     where.not(updated: nil)
   end
+
+  scope :waiting_fot_publish, -> {
+    unscoped.where(updated: nil)
+  }
 
   scope :waiting_for_update, -> (date) {
     joins(:seasons, :episodes)
@@ -40,5 +46,20 @@ class Show < ActiveRecord::Base
     end
 
     { kp: kp, imdb: imdb, tvrage: tvrage, myshow: myshow }
+  end
+
+  class << self
+    def columns_list
+       self.column_names
+    end
+    alias_method :fields, :columns_list
+  end
+
+  attr_reader :img
+
+  private
+
+  def init
+    @img = poster.url(:thumb)
   end
 end

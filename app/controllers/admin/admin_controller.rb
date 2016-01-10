@@ -1,18 +1,13 @@
 class Admin::AdminController < ApplicationController
   layout 'admin'
-  before_action :authenticate_user!, :user_is_admin?, :prepare_globals
-  skip_before_action :verify_authenticity_token
+  before_action :authenticate_user!, :user_is_admin?, :set_site_title
 
   def index
     @user = current_user
   end
 
   def partials
-    if params[:partial_suffix] == 'directive'
-      prefix = @ng_partials_directives_path
-    else
-      prefix = @ng_partials_path
-    end
+    prefix = construct_prefix params
 
     template_name = prefix + params[:partial_name]
 
@@ -23,14 +18,29 @@ class Admin::AdminController < ApplicationController
     end
   end
 
+  protected
+
+  def json_request?
+    request.format.json?
+  end
+
   private
 
   def user_is_admin?
-    redirect_to :root if current_user.email != 'd_enver@mail.ru' && user_signed_in?
+    #redirect_to :root if !current_user.administrator? && user_signed_in?
   end
 
-  def prepare_globals
-    @ng_partials_path = "/admin/partials/ng/"
-    @ng_partials_directives_path = "/admin/partials/ng/directives/"
+  def construct_prefix params
+    if params[:partial_suffix] == 'directive'
+      prefix = "/admin/partials/ng/directives/"
+    else
+      prefix = "/admin/partials/ng/" + ( params[:model].nil? ? "" : "#{params[:model]}/" )
+    end
+
+    prefix
+  end
+
+  def set_site_title
+    set_meta_tags site: 'Inanomo', reverse: true
   end
 end

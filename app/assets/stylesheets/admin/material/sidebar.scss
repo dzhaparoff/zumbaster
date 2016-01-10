@@ -30,6 +30,13 @@
       width: 100%;
     }
   }
+
+  .footer {
+    background: transparent;
+    p {
+      font-size: 14px;
+    }
+  }
 }
 
 .side-menu,
@@ -172,8 +179,8 @@ ul#side-menu-Directives {
   margin: auto 0;
 
   md-icon {
-    width: 128px;
-    height: 128px;
+    width: 180px;
+    height: 80px;
   }
   .side-logotype {
     color: white;

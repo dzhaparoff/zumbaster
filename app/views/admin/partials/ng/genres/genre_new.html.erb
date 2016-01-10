@@ -1,0 +1,110 @@
+<form name="form">
+  <input type="hidden" required ng-model="editor.item.name_ru"/>
+  <input type="hidden" required ng-model="editor.item.slug_ru"/>
+  <md-toolbar>
+    <div layout="row" flex class="fill-height">
+      <h2 flex class="md-toolbar-item md-breadcrumb md-headline">
+        <a class="md-breadcrumb-page" ui-sref="genres">
+          <span class="md-separator-icon"><md-icon aria-hidden="true">keyboard_backspace</md-icon></span> Жанры
+        </a>
+        <span class="md-separator-icon"><span class="md-visually-hidden">-</span><md-icon aria-hidden="true">navigate_next</md-icon></span>
+        <span class="md-breadcrumb-page">Новый жанр</span>
+      </h2>
+    </div>
+    <md-progress-linear md-mode="{{editor['loading:get'].mode}}" ng-if="editor['loading:get'].loading"></md-progress-linear>
+  </md-toolbar>
+  <div md-scroll-y class="animate-show wrapper-padding" ng-if="!editor['loading:get'].loading" layout="column">
+    <md-content class="md-whiteframe-z1 element-content-part element-content-header-part" flex layout-gt-md="row" layout="column" layout-align="center center">
+      <div flex class="header-info">
+        <h1 class="md-display-1">Создание жанра</h1>
+      </div>
+    </md-content>
+
+    <md-content
+    class="md-whiteframe-z1 element-content-part action" flex
+    ng-if="!editor.states.equal('edit')"
+    md-ink-ripple="true"
+    ng-click="editor.states.set('edit')">
+      <h2 class="md-subheader">Контент</h2>
+      <div class="md-body-1">Название, постоянная ссылка (символьный код) жанра</div>
+    </md-content>
+    <md-content class="md-whiteframe-z3 element-content-part expanded" flex ng-if="editor.states.equal('edit')">
+      <div class="toolbar" ng-click="editor.states.reset()">
+        <h2 class="toolbar-heading"><md-icon>keyboard_arrow_up</md-icon> Контент</h2>
+        <md-progress-linear md-mode="{{editor['loading:update'].mode}}" ng-if="editor['loading:update'].loading"></md-progress-linear>
+      </div>
+      <md-input-container class="md-block">
+        <label>Название жанра</label>
+        <input ng-model="editor.item.name_ru" md-maxlength="150" required aria-label="name">
+      </md-input-container>
+      <div layout>
+        <md-input-container flex>
+          <label>Символьный жанра</label>
+          <input ng-model="editor.item.slug_ru" bind-to="editor.item.name_ru" transliterate="editor.transliterate" md-maxlength="255" required aria-label="slug">
+        </md-input-container>
+        <md-button class="md-icon-button" ng-click="editor.lockTransliteraion()" ng-class="{'md-accent': editor.transliterate}">
+          <md-icon>attach_file</md-icon>
+          <md-tooltip>
+            Заполнять автоматически
+          </md-tooltip>
+        </md-button>
+      </div>
+    </md-content>
+
+    <md-content
+    class="md-whiteframe-z1 element-content-part action" flex
+    ng-if="!editor.states.equal('seo')"
+    md-ink-ripple="true"
+    ng-click="editor.edit_linked('seo')">
+      <h2 class="md-subheader">SEO</h2>
+      <div class="md-body-1">Заголовок страницы, мета-описание и robots</div>
+    </md-content>
+    <md-content class="md-whiteframe-z3 element-content-part expanded" flex ng-if="editor.states.equal('seo')">
+      <div class="toolbar" ng-click="editor.states.reset()">
+        <h2 class="toolbar-heading"><md-icon>keyboard_arrow_up</md-icon> SEO</h2>
+        <md-progress-linear md-mode="{{editor.linked_models.Seo.loading['seos:get'].mode}}" ng-if="editor.linked_models.Seo.loading['seos:get'].loading"></md-progress-linear>
+
+        <div class="md-toolbar-tools absolute-aligned-toolbar">
+          <div flex></div>
+          <md-menu md-offset="10 40" md-position-mode="target-right target">
+            <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="main.openContextMenu($mdOpenMenu, $event)">
+              <md-icon md-menu-origin>more_vert</md-icon>
+            </md-button>
+            <md-menu-content width="3">
+              <md-menu-item>
+                <md-button ng-click="main.closeContextMenu()">
+                  <md-icon>undo</md-icon>
+                  Отменить все изменения
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+        </div>
+      </div>
+      <div class="edit-box animate-show" ng-if="!editor.linked_models.Seo.loading['seos:get'].loading">
+        <md-input-container class="md-block">
+          <label>Заголовок страницы</label>
+          <input ng-model="editor.item.seo.title" md-maxlength="75" aria-label="title">
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Description</label>
+          <textarea aria-label="description" ng-model="editor.item.seo.description" columns="1" md-maxlength="255" rows="3"></textarea>
+        </md-input-container>
+        <md-input-container class="md-block">
+          <label>Robots</label>
+          <input ng-model="editor.item.seo.robots" aria-label="robots">
+        </md-input-container>
+      </div>
+    </md-content>
+  </div>
+  <div flex></div>
+
+  <div layout="row">
+    <md-button ng-click="editor.create_new()" class="md-primary md-fab md-fab-bottom-right">
+      <md-icon>done</md-icon>
+      <md-tooltip>
+        Создать жанр
+      </md-tooltip>
+    </md-button>
+  </div>
+</form>

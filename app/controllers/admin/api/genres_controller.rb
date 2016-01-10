@@ -1,47 +1,59 @@
 class Admin::Api::GenresController < Admin::Api::ApiController
   def index
-    @genres = Genre.order('id asc').all
+    @items = Genre.order('id asc').all
   end
 
   def new
-
+    @item = Genre.new
   end
 
   def create
-
+    @item = Genre.create(model_params)
+    unless params[:seo].nil?
+      @item.seo.title = params[:seo][:title]
+      @item.seo.description = params[:seo][:description]
+      @item.seo.robots = params[:seo][:robots]
+      @item.seo.save
+    end
+    render action: :show
   end
 
   def show
-    @genre = Genre.find(params[:id])
-    check_seo @genre
+    @item = Genre.find(params[:id])
+  rescue
+    not_found
   end
 
   def edit
-
+     @item = Genre.find(params[:id])
+  rescue
+    not_found
   end
 
   def update
-    render json: Genre.find(params[:id]).update(model_params)
+    @item = Genre.find(params[:id])
+    @item.update(model_params)
+    unless params[:seo].nil?
+      @item.seo.title = params[:seo][:title]
+      @item.seo.description = params[:seo][:description]
+      @item.seo.robots = params[:seo][:robots]
+      @item.seo.save
+    end
+    render action: :show
   end
 
   def destroy
-
+    @item = Genre.find(params[:id])
+    @item.destroy
+    render action: :show
   end
 
   private
 
-  def check_seo item
-    Seo.find_or_create_by meta: item if item.seo.nil?
-  end
-
   def model_params
     params
-        .permit(
-            :name_ru,
-            :name_en,
-            :slug_ru,
-            :slug_en
-        )
-  end
-
+       .permit(
+          :name_ru, :name_en, :slug_ru, :slug_en, :created_at, :updated_at
+       )
+   end
 end

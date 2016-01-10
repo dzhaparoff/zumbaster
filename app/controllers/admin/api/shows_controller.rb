@@ -1,6 +1,6 @@
 class Admin::Api::ShowsController < Admin::Api::ApiController
   def index
-    render json: Show.order('id asc').all
+    @items = Show.order('id asc').all
   end
 
   def new
@@ -34,7 +34,9 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
   end
 
   def show
-    render json: Show.unscoped.find(params[:id])
+    @item = Show.unscoped.find(params[:id])
+  rescue
+    not_found
   end
 
   def edit

@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root 'admin#index'
 
-    get '/partials/:partial_name.:partial_suffix' => 'admin#partials'
+    get '(/:locale)/partials(/:model)/:partial_name.:partial_suffix' => 'admin#partials'
 
 
     # get '/shows/:action' => 'shows'
@@ -59,12 +59,14 @@ Rails.application.routes.draw do
     # end
 
     namespace :api do
-      resources :shows, :genres, :translators, :people, :seos do # RESTful api
-        get '/1.0/:action', on: :collection # non RESTful api
-        post '/1.0/:action', on: :collection
+      scope "(:locale)" do
+        resources :shows, :pshows, :seasons, :episodes, :genres, :translators, :people, :seos do # RESTful api
+          get '/1.0/:action', on: :collection # non RESTful api
+          post '/1.0/:action', on: :collection
+        end
+        get '/:action' => 'api' # non RESTful api
+        post '/:action' => 'api' # non RESTful api
       end
-      get '/:action' => 'api' # non RESTful api
-      post '/:action' => 'api' # non RESTful api
     end
 
     get '/:part' => 'admin#index'

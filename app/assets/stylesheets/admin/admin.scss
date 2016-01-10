@@ -7,6 +7,10 @@ a {
   text-decoration: none;
 }
 
+body {
+  overflow: hidden!important;
+}
+
 @mixin ng-if-fade($opacity_to){
   &.ng-enter {
     opacity: 0;
@@ -40,65 +44,52 @@ a {
   }
 }
 
+@mixin ng-if-transform($transform){
+
+  &.ng-enter, &.ng-leave {
+    transform: translateZ(0);
+  }
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    opacity:0;
+    transform: $transform;
+  }
+
+  &.ng-leave,
+  &.ng-enter.ng-enter-active {
+    opacity:1;
+    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
+  }
+}
+
 .loading-fade {
   @include loading-fade(0.4);
 }
 
-.progress-button {
-  position: relative;
+.animate-show {
+  transition: all 0.3s ease;
+  @include ng-if-fade(1);
+}
+
+.fade-to-bottom {
   transition: all 0.35s ease;
+  @include ng-if-transform(translate3d(0,20px,0));
+}
 
-  &.in-progress {
-    transform: translate3d(0,-4px,0);
+.md-toast {
+  background-color: #323232;
+}
+
+.toast-icon {
+  margin-left: -10px;
+  margin-right: 10px;
+  &.white-icon {
+    color: #fff;
   }
+}
 
-  &:focus, &:active {
-    outline: none;
-    box-shadow: none;
-  }
 
-  .progress {
-    position: absolute;
-    display: block;
-    padding:0;
-    margin:0;
-    left: 0;
-    bottom: -4px;
-    height: 4px;
-    width: 100%;
-    background: rgba(45, 66, 200, .65);
-    border: none;
-    transition: all 0.35s ease;
-
-    .bar {
-      position: absolute;
-      top:0;
-      left:0;
-      height: 100%;
-      transition: all 0.35s ease;
-      background: rgba(255, 255, 255, .88);
-    }
-
-    &.ng-enter {
-      opacity: 0;
-      bottom: 0;
-      height: 0;
-      &.ng-enter-active {
-        opacity: 1;
-        bottom: -4px;
-        height: 4px;
-      }
-    }
-
-    &.ng-leave {
-      opacity: 1;
-      bottom: -4px;
-      height: 4px;
-      &.ng-leave-active {
-        opacity: 0;
-        bottom: 0;
-        height: 0;
-      }
-    }
-  }
+.md-poster {
+  margin-right: 10px;
 }

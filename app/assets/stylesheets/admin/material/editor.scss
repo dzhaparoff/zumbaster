@@ -1,0 +1,199 @@
+.content-editable {
+  &.small-text {
+    height: 150px;
+  }
+  &.big-text {
+    height: 450px;
+  }
+}
+
+.avatar-placeholder {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: visible;
+
+  .user-avatar {
+    background-position: center;
+    background-size: cover;
+    width:100%;
+    height:100%;
+    opacity: 1;
+    transition: opacity .35s ease;
+    &.loading {
+      opacity: .6;
+    }
+  }
+
+  &.docfile-placeholder {
+    .file-placeholder {
+      text-align: center;
+      height: 150px;
+      line-height: 150px;
+      background: rgba(96,125,139,.25);
+      border: 2px dashed rgba(96,125,139,.45);
+      box-sizing: border-box;
+      span {
+        line-height: 32px;
+        display: block;
+        position: absolute;
+        top:50%;
+        left: 0;
+        right: 0;
+        margin-top: -32px;
+        md-icon {
+          display: block;
+          font-size: 42px;
+          width: 42px;
+          height: 42px;
+          text-align:center;
+          transition: color .35s ease, opacity .35s ease;
+        }
+        &.no-file {
+          margin-top: -18px;
+          md-icon{
+            color: rgba(96,125,139,.35);
+          }
+        }
+        &.existed-file {
+          md-icon{
+            color: rgba(255,171,64, .85);
+          }
+        }
+        &.new-file {
+          md-icon{
+            color: rgba(10,169,60, .85);
+          }
+        }
+      }
+      &.loading {
+        span.no-file {
+          md-icon{
+            color: rgba(96,125,139,.35);
+          }
+        }
+        span.existed-file {
+          md-icon{
+            color: rgba(96,125,139,.35);
+          }
+        }
+        span.new-file {
+          md-icon{
+            color: rgba(96,125,139,.35);
+          }
+        }
+      }
+    }
+    .loading-bar-linear {
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      height: 4px;
+      opacity: 0;
+      background-color: rgb(255,171,64);
+      z-index: 1;
+      transition: opacity .35s ease;
+      &.loading{
+        opacity: 1;
+      }
+    }
+    .drop-box {
+      border-radius: 0;
+      span {
+        font-weight: normal;
+      }
+      &:hover {
+        opacity: 1;
+      }
+      &.dragover {
+        &:after {
+          border-radius: 0;
+        }
+      }
+      &.dragover-not-allowed {
+        &:after {
+          border-radius: 0;
+        }
+      }
+    }
+    .info {
+      font-size: 13px;
+      text-align: center;
+      padding-top: 10px;
+    }
+  }
+
+  .loading-bar {
+    position: absolute;
+    top:0;
+    left:0;
+    z-index: 1;
+    overflow: visible;
+    opacity: 0;
+    transition: opacity .35s ease;
+    &.loading{
+      opacity: 1;
+    }
+    circle {
+      stroke: #ffad1e;
+      stroke-width: 4px;
+      transition: all .3s ease;
+      stroke-dashoffset: 472px;
+      transform: rotate(-90deg);
+      transform-origin: 75px 75px;
+    }
+  }
+
+  .drop-box {
+    position: absolute;
+    z-index: 2;
+    left:0; top:0; right:0; bottom:0;
+    border-radius: 100%;
+    transition: all 0.35s ease;
+    opacity: 0;
+    text-align: center;
+    background: rgba(255,255,255,.6);
+    cursor: pointer;
+    &:focus, &:active {
+      outline: none;
+    }
+    &:hover {
+      opacity: .56;
+    }
+    &:active {
+      opacity: 1;
+    }
+    &:after {
+      transition: opacity .35s ease;
+      opacity: 0;
+    }
+    &.dragover {
+      opacity: 1;
+      &:after {
+        content: "";
+        position: absolute;
+        left: -1px; top: -1px; right: -1px; bottom: -1px;
+        border-radius: 100%;
+        border: 2px dashed black;
+        opacity: 1;
+      }
+    }
+    &.dragover-not-allowed{
+      opacity: 1;
+      background: rgba(208, 10, 0, .6);
+      color: white;
+      &:after {
+        content: "";
+        cursor: not-allowed;
+        position: absolute;
+        left: -1px; top: -1px; right: -1px; bottom: -1px;
+        border-radius: 100%;
+        border: 2px dashed darkred;
+        opacity: 1;
+      }
+    }
+    span {
+      font-weight: bold;
+    }
+  }
+}

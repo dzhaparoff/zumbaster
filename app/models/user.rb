@@ -1,8 +1,11 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  has_attached_file :avatar, :styles => { :medium => "500x500#", :thumb => "250x250#" }, convert_options: { all: '-quality 75 -strip' }
-  do_not_validate_attachment_file_type :avatar
+  has_attached_file :avatar,
+                    :styles => { :medium => "500x500#", :thumb => "250x250#" },
+                    convert_options: { all: '-quality 75 -strip' }
+
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
 
   devise :database_authenticatable,
          :rememberable, :trackable, :validatable, :registerable,
