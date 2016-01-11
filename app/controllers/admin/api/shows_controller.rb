@@ -84,7 +84,7 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
     end
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
   def sync_ru_names
@@ -117,7 +117,7 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
     end
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
   ### end

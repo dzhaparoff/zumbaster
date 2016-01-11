@@ -109,7 +109,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     sleep 0.5
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
   def sync_translate
@@ -135,7 +135,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     sleep 0.5
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
   def sync_pics
@@ -169,7 +169,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     sleep 0.01
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
   def sync_rating
@@ -200,7 +200,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     sleep 0.01
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
 
@@ -251,7 +251,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     show.save
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
 
@@ -272,7 +272,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     sleep 0.5
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
   def sync_seasons
@@ -310,7 +310,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     end
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
   def sync_ru_names
@@ -343,7 +343,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     end
 
     @item = show
-    render action: :show
+    render action: :show, formats: :json
   end
 
   ### end
