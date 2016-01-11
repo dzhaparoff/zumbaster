@@ -30,7 +30,8 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     end
     new_show.save
 
-    render json: new_show
+    @item = new_show
+    render action: :show
   end
 
   def show
@@ -49,7 +50,9 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
       show.ids = params[:ids]
       show.save
     end
-    render json: show.update(model_params)
+    show.update(model_params)
+    @item = show
+    render action: :show
   end
 
   def destroy
@@ -61,11 +64,14 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
   ### non restful
 
   def search_in_myshow
+    shows = @myshow.find_show(params[:name])
+    return render json: [] if shows.size == 0
+
     existing_ids = Show.existed_ids
-    shows = @myshow.find_show(params[:name]).values.each do |show|
+    shows.values.each do |show|
       show['exist'] = true if existing_ids[:myshow].include? show['id'].to_i
     end
-    render json: shows
+    render json: shows.values
   end
 
   def sync_with_trakt
@@ -102,7 +108,8 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
     sleep 0.5
 
-    render json: show
+    @item = show
+    render action: :show
   end
 
   def sync_translate
@@ -127,7 +134,8 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
     sleep 0.5
 
-    render json: show
+    @item = show
+    render action: :show
   end
 
   def sync_pics
@@ -160,7 +168,8 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
     sleep 0.01
 
-    render json: show
+    @item = show
+    render action: :show
   end
 
   def sync_rating
@@ -190,7 +199,8 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
     sleep 0.01
 
-    render json: show
+    @item = show
+    render action: :show
   end
 
 
@@ -240,8 +250,8 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
     show.save
 
-    render json: show
-
+    @item = show
+    render action: :show
   end
 
 
@@ -261,7 +271,8 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
     sleep 0.5
 
-    render json: show
+    @item = show
+    render action: :show
   end
 
   def sync_seasons
@@ -298,7 +309,8 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
       end
     end
 
-    render json: show
+    @item = show
+    render action: :show
   end
 
   def sync_ru_names
@@ -330,7 +342,8 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
       episode.save
     end
 
-    render json: show
+    @item = show
+    render action: :show
   end
 
   ### end

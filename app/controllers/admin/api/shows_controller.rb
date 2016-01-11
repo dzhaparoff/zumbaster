@@ -8,29 +8,7 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
   end
 
   def create
-    show = model_params
-    show.merge! @myshow.get_show model_params[:id]
 
-    new_show = Show.new do |s|
-      ids = {
-          kp: show['kinopoiskId'],
-          imdb: show['imdbId'],
-          tvrage: show['tvrageId'],
-          myshow: show['id']
-      }
-      s.slug_ru = show['ruTitle'].parameterize unless show['ruTitle'].nil?
-      s.slug_en = show['title'].parameterize unless show['title'].nil?
-      s.title_ru = show['ruTitle']
-      s.title_en = show['title']
-      s.description_ru = show['description']
-      s.year = show['year']
-      s.ids = ids
-      s.runtime = show['runtime']
-      s.status = show['status']
-    end
-    new_show.save
-
-    render json: new_show
   end
 
   def show
@@ -49,7 +27,9 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
       show.ids = params[:ids]
       show.save
     end
-    render json: show.update(model_params)
+    show.update(model_params)
+    @item = show
+    render action: :show
   end
 
   def destroy
@@ -65,7 +45,8 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
     show.updated = nil
     show.save
     sleep 0.5
-    render json: show
+    @item = show
+    render action: :show
   end
 
   def sync_seasons
@@ -102,7 +83,8 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
       end
     end
 
-    render json: show
+    @item = show
+    render action: :show
   end
 
   def sync_ru_names
@@ -134,7 +116,8 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
       episode.save
     end
 
-    render json: show
+    @item = show
+    render action: :show
   end
 
   ### end

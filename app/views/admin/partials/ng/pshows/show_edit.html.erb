@@ -57,6 +57,23 @@
         <label>Название сериала</label>
         <input ng-model="editor.item.title_ru" md-maxlength="150" required aria-label="name">
       </md-input-container>
+
+      <md-subheader class="md-primary no-padding-left">Идентификаторы</md-subheader>
+      <div layout>
+        <md-input-container class="md-block" flex>
+          <label>IMDB</label>
+          <input ng-model="editor.item.ids.imdb" required aria-label="name">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>KP</label>
+          <input ng-model="editor.item.ids.kp" required aria-label="name">
+        </md-input-container>
+        <md-input-container class="md-block" flex>
+          <label>TVRAGE</label>
+          <input ng-model="editor.item.ids.tvrage" required aria-label="name">
+        </md-input-container>
+      </div>
+
       <div layout>
         <md-input-container flex>
           <label>Символьный жанра</label>

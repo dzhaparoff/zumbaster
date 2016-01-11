@@ -4,7 +4,7 @@ class SearchShowCtrl
   constructor: ($scope, @messages) ->
     @result = []
   searchInMyshow: (editor) ->
-    editor.model.$api.$get('shows/1.0/search_in_myshow', name: @query)
+    editor.model.$api.$get('pshows/1.0/search_in_myshow', name: @query)
       .then (d) =>
         @result = d.data
   add: (editor, id) ->
