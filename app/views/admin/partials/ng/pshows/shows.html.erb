@@ -2,7 +2,6 @@
   <md-list>
     <md-subheader class="md-no-sticky page-title"><h1 class="md-headline">Список сериалов ожидающих добавления</h1></md-subheader>
     <md-list-item class="md-2-line md-no-proxy-no" ng-repeat="item in items.index" ng-click="items.edit(item, $event)">
-      <img ng-src="{{item.img}}" class="md-poster" height="60" alt=""/>
       <div class="md-list-item-text">
         <h3>{{item.title_ru}} ({{item.year}})</h3>
         <p>{{item.title_en}}</p>

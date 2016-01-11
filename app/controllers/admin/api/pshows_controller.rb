@@ -61,10 +61,9 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
   ### non restful
 
   def search_in_myshow
-    shows = @myshow.find_show(params[:name])
     existing_ids = Show.existed_ids
-    shows.each do |_, show|
-      show['exist'] = true if existing_ids[:myshow].include? show['id']
+    shows = @myshow.find_show(params[:name]).values.each do |show|
+      show['exist'] = true if existing_ids[:myshow].include? show['id'].to_i
     end
     render json: shows
   end
@@ -152,20 +151,11 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     show.banner = URI.parse(trakt_show['images']['banner']['full']) unless trakt_show['images']['banner']['full'].nil?
     show.thumb = URI.parse(trakt_show['images']['thumb']['full']) unless trakt_show['images']['thumb']['full'].nil?
 
-    show.save
-
-    sleep 0.01
-
-    render json: show
-  end
-
-
-  def sync_ru_pics
-    show = Show.unscoped.find(params[:id])
     if show.poster_ru.exists? || show.ids['kp'].to_i == 0
       return render json: show
     end
     show.poster_ru = URI.parse("http://st.kinopoisk.ru/images/film_big/#{show.ids['kp']}.jpg")
+
     show.save
 
     sleep 0.01

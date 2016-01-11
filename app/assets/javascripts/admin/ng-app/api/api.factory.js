@@ -44,13 +44,17 @@
     }
 
     function get_api_url(action){
-      return api_url.replace(':locale', getLocale()) + action
+      if(!$locale.active)
+        return api_url.replace(':locale/', '') + action
+      else
+        return api_url.replace(':locale', getLocale()) + action
     }
 
     function ApiInterface(resource_name){
       var self = this;
       var loading_id = resource_name + ":" + 'api';
       self.loading = $loading.new(loading_id);
+      self.progress = {}
     }
 
     ApiInterface.prototype = {
@@ -58,26 +62,56 @@
       $get : function(action, data){
         var u = get_api_url(action);
         if(typeof data !== 'undefined') u = u + toQueryString(data);
-        return this.$$request_loading($http.get(u));
+        return this.$$request_loading($http.get(u), action);
       },
       $post : function(action, data){
         var u = get_api_url(action);
-        return this.$$request_loading($http.post(u, data));
+        return this.$$request_loading($http.post(u, data), action);
       },
       $put : function(action, data){
-
+        var u = get_api_url(action);
+        return this.$$request_loading($http.put(u, data), action);
       },
       $delete : function(action){
         var u = get_api_url(action);
-        return this.$$request_loading($http.delete(u));
+        return this.$$request_loading($http.delete(u), action);
       },
-      $$request_loading : function(request){
+      $$request_loading : function(request, action){
+        action = action.split('/').slice(-1)[0];
         var self = this;
         self.loading.loading_start();
-        request.then(function(){
+        request.then(function(d){
           self.loading.loading_stop();
+          if( d.data.hasOwnProperty('job') ){
+            self.__checkJobStatus(d.data.job.id, action);
+          }
         });
         return request;
+      },
+      __checkJobStatus : function(id, loading_id){
+        var self = this;
+        if(!self.progress.hasOwnProperty(loading_id)) self.progress[loading_id] = {};
+        if(!self.progress[loading_id].hasOwnProperty('in_progress'))
+          self.progress[loading_id] = $loading.newProgressBar('progress-job-' + id);
+
+        var checking_interval = $interval(function(){
+          try {
+            $http.get('/progress-job/' + id)
+                .success(function (d) {
+                  self.progress[loading_id].setProgress(d.progress_current);
+                  self.progress[loading_id].setPercentage(d.percentage);
+                  self.progress[loading_id].setProgressMax(d.progress_max);
+                })
+                .error(function () {
+                  self.progress[loading_id].setCompleted();
+                  $interval.cancel(checking_interval);
+                  checking_interval = undefined;
+                })
+          }
+          catch(e) {
+            console.log('progress finished');
+          }
+        },100);
       }
     };
 
@@ -206,6 +240,7 @@
       },
       __checkJobStatus : function(id, loading_id){
         var self = this;
+        if(!self.progress.hasOwnProperty(loading_id)) self.progress[loading_id] = {};
         if(!self.progress[loading_id].hasOwnProperty('in_progress'))
           self.progress[loading_id] = $loading.newProgressBar('progress-job-' + id);
 

@@ -1,6 +1,6 @@
 json.items do
   json.array! @items do |item|
-    json.id item.id
+    json.id item.id.to_s
      json.slug_ru item.slug_ru
      json.slug_en item.slug_en
      json.title_ru item.title_ru

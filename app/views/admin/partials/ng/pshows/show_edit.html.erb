@@ -17,7 +17,6 @@
     <md-content class="md-whiteframe-z1 element-content-part element-content-header-part" flex layout-gt-md="row" layout="column" layout-align="center center">
       <div flex class="header-info">
         <div layout="row" layout-align="start center">
-          <img ng-src="{{editor.item.img}}" alt="{{editor.item.title_ru}}" height="150" class="md-poster"/>
           <div flex>
             <h1 class="md-display-1">{{editor.item.title_ru}}</h1>
             <div class="md-subhead">{{editor.item.title_en}} ({{editor.item.year}})</div>
@@ -74,59 +73,47 @@
       <div class="content-editable big-text" ng-model="editor.item.description_ru" contenteditable="true" ui-ace="editor.ace_config"></div>
     </md-content>
 
-    <!-- seasons -->
-    <div ng-repeat="season in editor.item.season">
-      <md-content
-      class="md-whiteframe-z1 element-content-part action" flex
-      ng-if="!editor.states.equal('season_' + season.id)"
-      md-ink-ripple="true"
-      ng-click="editor.edit_linked_from_many('season', season)">
-        <div layout="row" layout-align="start center">
-          <img ng-src="{{season.img}}" alt="{{editor.item.title_ru}} {{season.number}}" height="50" class="md-poster"/>
-          <div flex>
-            <h2 class="md-subheader">Сезон {{season.number}}</h2>
-            <div class="md-body-1">Всякие настройки</div>
-          </div>
-        </div>
-      </md-content>
-      <md-content class="md-whiteframe-z3 element-content-part expanded" flex ng-if="editor.states.equal('season_' + season.id)">
-        <div class="toolbar" ng-click="editor.states.reset()">
-          <h2 class="toolbar-heading"><md-icon>keyboard_arrow_up</md-icon> Сезон {{season.number}}</h2>
-          <md-progress-linear md-mode="{{editor.linked_models.Seo.loading['seos:get'].mode}}" ng-if="editor.linked_models.Seo.loading['seos:get'].loading"></md-progress-linear>
-          <div class="md-toolbar-tools absolute-aligned-toolbar">
-            <div flex></div>
-            <md-menu md-offset="10 40" md-position-mode="target-right target">
-              <md-button aria-label="Open phone interactions menu" class="md-icon-button" ng-click="main.openContextMenu($mdOpenMenu, $event)">
-                <md-icon md-menu-origin>more_vert</md-icon>
-              </md-button>
-              <md-menu-content width="3">
-                <md-menu-item>
-                  <md-button ng-click="">
-                    <md-icon>undo</md-icon>
-                    Отменить все изменения
-                  </md-button>
-                </md-menu-item>
-              </md-menu-content>
-            </md-menu>
-          </div>
-        </div>
-        <div class="edit-box animate-show" ng-if="!editor.linked_models.Seo.loading['seos:get'].loading">
-          <md-input-container class="md-block">
-            <label>Заголовок страницы</label>
-            <input ng-model="editor.item.seo.title" md-maxlength="75" aria-label="title">
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label>Description</label>
-            <textarea aria-label="description" ng-model="editor.item.seo.description" columns="1" md-maxlength="255" rows="3"></textarea>
-          </md-input-container>
-          <md-input-container class="md-block">
-            <label>Robots</label>
-            <input ng-model="editor.item.seo.robots" aria-label="robots">
-          </md-input-container>
-        </div>
-      </md-content>
-    </div>
-    <!-- end seasons -->
+    <md-content
+    class="md-whiteframe-z1 element-content-part action" flex
+    ng-if="!editor.states.equal('ext')"
+    md-ink-ripple="true"
+    ng-click="editor.states.set('ext')">
+      <h2 class="md-subheader">Действия</h2>
+      <div class="md-body-1">Заполнение информацией из различных баз</div>
+    </md-content>
+    <md-content class="md-whiteframe-z3 element-content-part expanded" flex
+                ng-if="editor.states.equal('ext')" ng-controller="PengingShowCtrl as pshow">
+      <div class="toolbar" ng-click="editor.states.reset()">
+        <h2 class="toolbar-heading"><md-icon>keyboard_arrow_up</md-icon> Действия</h2>
+        <md-progress-linear md-mode="{{editor.model.$api.loading.mode}}" ng-if="editor.model.$api.loading.loading"></md-progress-linear>
+      </div>
+      <md-list>
+        <md-list-item ng-click="pshow.trakt(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать информацию с Trakt.tv</p>
+        </md-list-item>
+        <md-list-item ng-click="pshow.translate(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать перевод</p>
+        </md-list-item>
+        <md-list-item ng-click="pshow.pics(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать изображения</p>
+        </md-list-item>
+        <md-list-item ng-click="pshow.rating(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать рейтинг</p>
+        </md-list-item>
+        <md-list-item ng-click="pshow.people(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать персонажей</p>
+        </md-list-item>
+        <md-list-item ng-click="pshow.activate(editor, $event)">
+          <md-icon>playlist_add_check</md-icon>
+          <p>Активировать сериал</p>
+        </md-list-item>
+      </md-list>
+    </md-content>
   </div>
   <div flex></div>
   <div layout="row">

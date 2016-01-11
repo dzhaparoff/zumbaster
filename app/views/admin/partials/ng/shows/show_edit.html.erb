@@ -74,6 +74,40 @@
       <div class="content-editable big-text" ng-model="editor.item.description_ru" contenteditable="true" ui-ace="editor.ace_config"></div>
     </md-content>
 
+    <md-content
+    class="md-whiteframe-z1 element-content-part action" flex
+    ng-if="!editor.states.equal('ext')"
+    md-ink-ripple="true"
+    ng-click="editor.states.set('ext')">
+      <h2 class="md-subheader">Действия</h2>
+      <div class="md-body-1">Синхронизация сезонов и эпизодов</div>
+    </md-content>
+    <md-content class="md-whiteframe-z3 element-content-part expanded" flex
+                ng-if="editor.states.equal('ext')"
+                ng-controller="ActiveShowCtrl as show">
+      <div class="toolbar" ng-click="editor.states.reset()">
+        <h2 class="toolbar-heading"><md-icon>keyboard_arrow_up</md-icon> Действия</h2>
+        <md-progress-linear md-mode="{{editor.model.$api.loading.mode}}" ng-if="editor.model.$api.loading.loading"></md-progress-linear>
+      </div>
+      <md-list>
+        <md-list-item ng-click="show.seasons(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать сезоны</p>
+        </md-list-item>
+        <md-progress-linear md-mode="{{editor.model.$api.progress.sync_seasons.mode}}" ng-if="editor.model.$api.progress.sync_seasons.loading" value="{{editor.model.$api.progress.sync_seasons.percentage}}"></md-progress-linear>
+      </md-list>
+      <md-list>
+        <md-list-item ng-click="show.episodes(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать видео эпизодов</p>
+        </md-list-item>
+        <md-list-item ng-click="show.titles(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать названия эпизодов с кинопоиска</p>
+        </md-list-item>
+      </md-list>
+    </md-content>
+
     <!-- seasons -->
     <div ng-repeat="season in editor.item.season">
       <md-content
