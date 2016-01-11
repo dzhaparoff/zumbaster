@@ -6,14 +6,10 @@ class ApplicationController < ActionController::Base
 
   after_filter :set_csrf_cookie_for_ng
 
-  before_action :set_locale, :set_site_title
+  before_action :set_site_title
 
   def set_csrf_cookie_for_ng
     cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
-  end
-
-  def default_url_options(options = {})
-    { locale: I18n.locale }.merge options
   end
 
   private
@@ -28,15 +24,6 @@ class ApplicationController < ActionController::Base
 
   def verified_request?
     super || form_authenticity_token == request.headers['X-XSRF-TOKEN']
-  end
-
-  def set_locale
-    # I18n.locale = params[:locale] || I18n.default_locale
-    I18n.locale = params[:locale] || extract_locale_from_header
-  end
-
-  def extract_locale_from_header
-    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   end
 
   def set_site_title
