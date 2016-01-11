@@ -25,7 +25,7 @@ class Admin::Api::GenresController < Admin::Api::ApiController
   end
 
   def edit
-     @item = Genre.find(params[:id])
+    @item = Genre.find(params[:id])
   rescue
     not_found
   end

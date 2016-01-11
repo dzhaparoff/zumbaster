@@ -1,5 +1,9 @@
 class Genre < ActiveRecord::Base
 
+  after_find do
+    Seo.find_or_create_by meta: self if seo.nil?
+  end
+
   after_save do
     Seo.find_or_create_by meta: self if self.seo.nil?
   end
