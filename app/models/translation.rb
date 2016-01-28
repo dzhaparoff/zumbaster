@@ -7,6 +7,9 @@ class Translation < ActiveRecord::Base
   end
 
   def translation_video_exist? type
+
+    return false if Time.at(expires) < Time.now
+
     if type == :mobile
       return false if f4m.nil?
       responce = Faraday.get(f4m)
@@ -76,6 +79,7 @@ class Translation < ActiveRecord::Base
 
     self.f4m = new_playlist['manifest_f4m']
     self.m3u8 = new_playlist['manifest_m3u8']
+    self.expires = new_playlist['manifest_f4m'][/expired=(\d+)/].delete('expired=').to_i
     self.moonwalk_token = video_token
 
     self.save

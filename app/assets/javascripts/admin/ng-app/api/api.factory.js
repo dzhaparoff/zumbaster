@@ -95,7 +95,6 @@
           self.progress[loading_id] = $loading.newProgressBar('progress-job-' + id);
 
         var checking_interval = $interval(function(){
-          try {
             $http.get('/progress-job/' + id)
                 .success(function (d) {
                   self.progress[loading_id].setProgress(d.progress_current);
@@ -107,11 +106,7 @@
                   $interval.cancel(checking_interval);
                   checking_interval = undefined;
                 })
-          }
-          catch(e) {
-            console.log('progress finished');
-          }
-        },100);
+        },500);
       }
     };
 
@@ -256,7 +251,7 @@
                 $interval.cancel(checking_interval);
                 checking_interval = undefined;
               })
-        },100);
+        },500);
       }
     };
 
