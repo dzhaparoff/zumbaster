@@ -71,10 +71,9 @@ class Moonwalk
       builder.headers['Cache-Control'] = "max-age=0"
       builder.headers['Connection'] = "keep-alive"
       builder.headers['Host'] = "moonwalk.cc"
+      builder.headers['Referer'] = "http://moonwalk.cc/"
       builder.headers['Upgrade-Insecure-Requests'] = "1"
       builder.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
-      builder.headers['X-Real-IP'] = '31.220.0.145'
-      builder.headers['X-Forwarded-For'] = '31.220.0.145'
     end
 
     {

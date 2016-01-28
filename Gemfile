@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 gem 'rails', '4.2.3'
 gem 'pg'
+gem 'redis-rails'
 
 gem 'figaro' # app configuration using ENV and a single YAML file
 
@@ -70,6 +71,10 @@ gem 'progress_job'
 gem "resque", "~> 2.0.0.pre.1", github: "resque/resque" # https://github.com/resque/resque
 
 gem 'google-analytics-rails'
+
+
+gem 'rack-mini-profiler' #
+gem 'rack-streaming-proxy'
 
 group :development do
   gem 'awesome_pry' #pry, awesome_prints
