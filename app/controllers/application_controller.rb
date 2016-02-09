@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   end
 
   def set_site_title
-    set_meta_tags site: 'Сериалы в хорошем качестве бесплатно', reverse: true
+    set_meta_tags site: 'Сериалы в хорошем качестве бесплатно и без рекламы', reverse: true
   end
 
   protected
