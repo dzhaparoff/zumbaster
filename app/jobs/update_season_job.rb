@@ -22,7 +22,7 @@ class UpdateSeasonJob < ActiveJob::Base
 
         imdb = "tt%07d" % show.ids['imdb'].to_i
         trakt_seasons = @trakt.show_seasons imdb
-
+        sleep 0.5
         next if trakt_seasons.nil?
 
         trakt_seasons.each do |trakt_season|
@@ -36,14 +36,14 @@ class UpdateSeasonJob < ActiveJob::Base
 
           season.poster = URI.parse trakt_season['images']['poster']['full'] unless trakt_season['images']['poster']['full'].nil?
           season.thumb = URI.parse trakt_season['images']['thumb']['full'] unless trakt_season['images']['thumb']['full'].nil?
-
+          sleep 0.5
           season.save
 
           next if trakt_season['episodes'].nil?
 
           trakt_season['episodes'].each do |episode|
             e = Episode.where(show: show, season: season, number: episode['number']).first_or_create
-
+            sleep 0.5
             episode_number = "e%02d" % episode['number']
             e.show = show
             e.season = season

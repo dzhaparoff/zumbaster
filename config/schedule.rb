@@ -7,7 +7,7 @@
 #
 set :output, "/var/log/cron_log.log"
 
-every 3.hours do
+every 1.hours do
   runner "UpdateEpisodesJob.perform_later"
 end
 

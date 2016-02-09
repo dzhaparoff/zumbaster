@@ -20,8 +20,10 @@ class UpdateEpisodesJob < ActiveJob::Base
         moonwalk = @moonwalk.show kp
 
         moonwalk.each do |m|
+          sleep 0.5
           translator_id = m['translator_id']
           moonwalk_episodes = @moonwalk.get_playlist_url_parallel kp, translator_id
+          sleep 1
           moonwalk_episodes[:playlists].each_pair do |season_number, m_episodes|
             next if season_number != season.number
             m_episodes.each_pair do |episode_number, playlists|
