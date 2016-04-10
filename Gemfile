@@ -17,7 +17,7 @@ gem 'jbuilder', '~> 2.0' # Read more: https://github.com/rails/jbuilder
 
 gem 'therubyracer'
 
-gem 'devise', git: 'git@github.com:plataformatec/devise.git' #https://github.com/plataformatec/devise#getting-started
+gem 'devise', git: 'git://github.com/plataformatec/devise.git' #https://github.com/plataformatec/devise#getting-started
 gem 'omniauth-facebook'
 gem 'omniauth-vkontakte'
 
