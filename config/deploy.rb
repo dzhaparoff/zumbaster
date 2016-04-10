@@ -96,6 +96,7 @@ namespace :deploy do
   end
 
   after :restart, :clear_cache do
+    invoke 'delayed_job:restart'
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       within release_path do
         # execute :rake, "sitemap:generate"
