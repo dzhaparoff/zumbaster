@@ -1,8 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'puma'
-
 gem 'rails', '>= 5.0.0.beta3'
+gem 'puma'
 gem 'pg'
 gem 'redis-rails'
 
