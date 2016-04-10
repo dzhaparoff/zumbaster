@@ -100,10 +100,9 @@ namespace :deploy do
     #start-stop-daemon -Sbvx /home/zumbaster/proxy-stream/target/release/zumbaster-proxy-stream
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       within release_path do
-        # execute :rake, "sitemap:generate"
-        # execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
+        execute :rake, "sitemap:generate"
+        execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
         # execute :rake, 'tmp:clear'
-        # execute "RAILS_ENV=production bin/delayed_job restart"
       end
     end
   end

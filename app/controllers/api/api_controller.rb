@@ -23,7 +23,7 @@ class Api::ApiController < ApplicationController
   private
   def create_m3u8_file translation
     manifest = translation.manifest(:mobile).body
-    manifest.gsub!(/http:\/\//, '/stream/m3u8/')
+    manifest.gsub!(/http:\/\//, '/api/manifest/stream/m3u8/')
     send_data manifest, format: 'application/vnd.apple.mpegurl; charset=utf-8'
   end
 end
