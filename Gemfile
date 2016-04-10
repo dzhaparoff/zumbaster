@@ -89,4 +89,6 @@ group :development do
   gem 'capistrano-bundler'
   gem 'capistrano-rvm'
   gem 'capistrano3-puma'
+  gem 'capistrano-faster-assets', '~> 1.0.2'
+  gem 'capistrano-ext',     require: false
 end

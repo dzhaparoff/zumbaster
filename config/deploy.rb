@@ -24,7 +24,7 @@ set :deploy_to, '/home/zumbaster'
 
 # Default value for :linked_files is []
 set :linked_files, fetch(:linked_files, [])
-                       .push('config/database.yml', 'config/config.yml', 'config/secrets.yml', 'config/app_environment_variables.rb')
+                       .push('config/database.yml', 'config/puma.rb', 'config/config.yml', 'config/secrets.yml', 'config/app_environment_variables.rb')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, [])
@@ -39,9 +39,9 @@ set :keep_releases, 3
 # set :whenever_command, "whenever"
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
-set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"    #accept array for multi-bind
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"
 set :puma_default_control_app, "unix://#{shared_path}/tmp/sockets/pumactl.sock"
-set :puma_conf, "#{release_path}/config/puma.rb"
+set :puma_conf, "#{shared_path}/config/puma.rb"
 set :puma_access_log, "#{shared_path}/log/puma_access.log"
 set :puma_error_log, "#{shared_path}/log/puma_error.log"
 set :puma_role, :app

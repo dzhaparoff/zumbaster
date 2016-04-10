@@ -84,6 +84,10 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
+    capistrano-ext (1.2.1)
+      capistrano (>= 1.0.0)
+    capistrano-faster-assets (1.0.2)
+      capistrano (>= 3.1)
     capistrano-rails (1.1.6)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
@@ -357,6 +361,8 @@ DEPENDENCIES
   binding_of_caller
   capistrano (~> 3.4)
   capistrano-bundler
+  capistrano-ext
+  capistrano-faster-assets (~> 1.0.2)
   capistrano-rails
   capistrano-rvm
   capistrano3-puma
