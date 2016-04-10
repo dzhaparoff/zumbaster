@@ -5,6 +5,8 @@ gem 'puma'
 gem 'pg'
 gem 'redis-rails'
 
+gem 'rack-streaming-proxy'
+
 gem 'figaro' # app configuration using ENV and a single YAML file
 
 gem 'sass-rails'
