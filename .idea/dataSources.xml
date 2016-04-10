@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1692049265">
+  <component name="DataSourceManagerImpl" format="xml" hash="2753443894">
     <data-source source="LOCAL" name="PostgreSQL - zumbaster@localhost" uuid="f4f9826c-795e-4dc3-8dc5-f7f0615084bb">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/zumbaster_db</jdbc-url>
-      <libraries />
     </data-source>
     <data-source source="LOCAL" name="Rails zumbaster: development" uuid="9d43ba6b-e975-4e96-851c-1d4ea7839715">
       <driver-ref>postgresql</driver-ref>

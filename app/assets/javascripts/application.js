@@ -3,11 +3,12 @@
 //= require lodash
 //= require swfobject
 //= require foundation
+//= require disqus_rails
 //= require_self
 //= require ng-app
 
-Turbolinks.enableTransitionCache();
-Turbolinks.enableProgressBar();
+//Turbolinks.enableTransitionCache();
+//Turbolinks.enableProgressBar();
 
 var mobile = false;
 

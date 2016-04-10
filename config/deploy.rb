@@ -39,17 +39,77 @@ set :keep_releases, 3
 # set :whenever_command, "whenever"
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"    #accept array for multi-bind
+set :puma_default_control_app, "unix://#{shared_path}/tmp/sockets/pumactl.sock"
+set :puma_conf, "#{release_path}/config/puma.rb"
+set :puma_access_log, "#{shared_path}/log/puma_access.log"
+set :puma_error_log, "#{shared_path}/log/puma_error.log"
+set :puma_role, :app
+set :puma_env, fetch(:rack_env, fetch(:rails_env, 'production'))
+set :puma_threads, [4, 12]
+set :puma_workers, 0
+set :puma_worker_timeout, nil
+set :puma_init_active_record, true
+set :puma_preload_app, true
+set :nginx_use_ssl, false
+
+
+namespace :puma do
+  desc 'Create Directories for Puma Pids and Socket'
+  task :make_dirs do
+    on roles(:app) do
+      execute "mkdir #{shared_path}/tmp/sockets -p"
+      execute "mkdir #{shared_path}/tmp/pids -p"
+    end
+  end
+
+  before :start, :make_dirs
+end
+
+
 namespace :deploy do
+
+  desc "Make sure local git is in sync with remote."
+  task :check_revision do
+    on roles(:app) do
+      unless `git rev-parse HEAD` == `git rev-parse origin/master`
+        puts "WARNING: HEAD is not the same as origin/master"
+        puts "Run `git push` to sync changes."
+        exit
+      end
+    end
+  end
+
+  desc 'Initial Deploy'
+  task :initial do
+    on roles(:app) do
+      before 'deploy:restart', 'puma:start'
+      invoke 'deploy'
+    end
+  end
+
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), in: :sequence, wait: 5 do
+      invoke 'puma:restart'
+    end
+  end
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       within release_path do
         execute :rake, "sitemap:generate"
-        execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
+        # execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
         execute :rake, 'tmp:clear'
         # execute "RAILS_ENV=production bin/delayed_job restart"
       end
     end
   end
+
+  before :starting,     :check_revision
+  after  :finishing,    :compile_assets
+  after  :finishing,    :cleanup
+  after  :finishing,    :restart
 
   after :finishing, 'deploy:cleanup'
 

@@ -84,3 +84,4 @@ production:
   username: zumbaster
   password: <%= ENV['ZUMBASTER_DATABASE_PASSWORD'] %>
   host: 185.53.169.174
+  pool: 12

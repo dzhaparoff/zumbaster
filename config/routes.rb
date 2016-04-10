@@ -84,6 +84,4 @@ Rails.application.routes.draw do
   get '/genres/:genre_slug' => 'genres#detail', as: :genre
 
   get '/api/manifest/:id' => 'api/api#manifest'
-  # get '/api/manifest/stream/f4m/*host/sec/*address' => 'proxy#stream_f4m'
-  # get '/api/manifest/stream/m3u8/*host/sec/*address' => 'proxy#stream_f4m'
 end

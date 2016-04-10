@@ -4,7 +4,11 @@ require 'capistrano/deploy'
 require 'capistrano/rvm'
 require 'capistrano/bundler'
 require 'capistrano/rails'
-require 'capistrano/passenger'
+require 'capistrano/puma'
+# require 'capistrano/puma/workers' # if you want to control the workers (in cluster mode)
+# require 'capistrano/puma/jungle'  # if you need the jungle tasks
+# require 'capistrano/puma/monit'   # if you need the monit tasks
+require 'capistrano/puma/nginx'   # if you want to upload a nginx site template
 require 'whenever/capistrano'
 
 # Include tasks from other gems included in your Gemfile
