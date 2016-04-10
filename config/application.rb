@@ -30,12 +30,10 @@ module Videoplayer
     config.active_job.queue_adapter = :delayed_job
 
     config.autoload_paths += %W( #{config.root}/lib )
-    config.eager_load_paths += %W( #{config.root}/lib/kinopoisk.rb
-                                   #{config.root}/lib/moonwalk.rb
-                                   #{config.root}/lib/myshows.rb
-                                   #{config.root}/lib/trakt.rb
-                                   #{config.root}/lib/tvdb.rb
-                                  )
+
+    config.eager_load_paths += %W(
+      #{config.root}/lib/shows
+    )
 
     config.i18n.default_locale = :ru
 
