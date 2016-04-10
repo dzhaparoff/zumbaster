@@ -23,6 +23,7 @@ gem 'omniauth-vkontakte'
 
 # gem 'pg_search'
 
+gem "russian"
 gem "dynamic_sitemaps"
 gem 'meta-tags'
 gem 'will_paginate'
