@@ -1,13 +1,6 @@
 GIT
-  remote: git://github.com/turbolinks/turbolinks-classic.git
-  revision: 37a7c296232d20a61bd1946f600da7f2009189db
-  specs:
-    turbolinks (3.0.0)
-      coffee-rails
-
-GIT
-  remote: git@github.com:plataformatec/devise.git
-  revision: 2b3799e6ceb315172d14a16103ab9fb1702f79fc
+  remote: git://github.com/plataformatec/devise.git
+  revision: b397d33246ae3dbc725f681a3f718a20d34313af
   specs:
     devise (4.0.0.rc2)
       bcrypt (~> 3.0)
@@ -15,6 +8,13 @@ GIT
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
+
+GIT
+  remote: git://github.com/turbolinks/turbolinks-classic.git
+  revision: 37a7c296232d20a61bd1946f600da7f2009189db
+  specs:
+    turbolinks (3.0.0)
+      coffee-rails
 
 GEM
   remote: https://rubygems.org/
