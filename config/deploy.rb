@@ -39,7 +39,7 @@ set :keep_releases, 3
 # set :whenever_command, "whenever"
 set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 
-set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 set :puma_default_control_app, "unix://#{shared_path}/tmp/sockets/pumactl.sock"
 set :puma_conf, "#{shared_path}/config/puma.rb"
 set :puma_access_log, "#{shared_path}/log/puma_access.log"
