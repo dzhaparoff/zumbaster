@@ -22,11 +22,12 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
   end
 
   def update
-    show = Show.unscoped.find(params[:id])
-    unless params[:ids].nil? && params[:ids].size > 0
-      show.ids = params[:ids]
-      show.save
+    show = Show.unscoped.find(model_params[:id])
+
+    unless model_params[:ids].nil? && model_params[:ids].size > 0
+      show.update(id: model_params[:ids])
     end
+
     show.update(model_params)
     @item = show
     render action: :show

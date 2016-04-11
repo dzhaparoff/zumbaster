@@ -23,6 +23,14 @@
     <section class="main-section">
       <% unless notice.nil? %><div data-message="notice"><%= notice %></div><% end %>
       <% unless alert.nil? %><div data-message="alert"><%= alert %></div><% end %>
+      <div class="row">
+        <div class="columns small-12" style="margin-top: 70px;">
+          <p><b>Внимание!</b> Сайт временно работает в ограниченном режиме. Возможны проблемы с соединением и
+            нормальным функционированием. В связи с очень большой нагрузкой мы вынуждены искать другой, более производильный хостинг.
+            Так как мы против рекламы на сайте во всех ее проявлениях, поддерживать проект приходится на полном энтузиазме с большими
+            финансовыми затратами. Если вы готовы оказать небольшую финансовую помощь, пишите на <a href="mailto:info@hd-serials.tv">info@hd-serials.tv</a></p>
+        </div>
+      </div>
       <%= content_for?(:content) ? yield(:content) : yield %>
     </section>
     <%= render "partials/footer" %>
