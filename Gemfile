@@ -5,8 +5,6 @@ gem 'puma'
 gem 'pg'
 gem 'redis-rails'
 
-gem 'rack-streaming-proxy'
-
 gem 'figaro' # app configuration using ENV and a single YAML file
 
 gem 'sass-rails'
@@ -92,6 +90,4 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano3-puma'
   gem 'capistrano3-delayed-job', '~> 1.0'
-  gem 'capistrano-faster-assets', '~> 1.0.2'
-  gem 'capistrano-ext',     require: false
 end
