@@ -80,8 +80,8 @@ test:
 #
 production:
   <<: *default
-  database: <%= ENV['ps_db'] %>
-  username: <%= ENV['ps_user'] %>
-  password: <%= ENV['ps_password'] %>
-  host: <%= ENV['ps_host'] %>
+  host: <%= ENV['psql_host'] %>
+  database: zumbaster_db
+  username: zumbaster
+  password: <%= ENV['psql_password'] %>
   pool: 12

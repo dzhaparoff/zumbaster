@@ -8,8 +8,8 @@
     </data-source>
     <data-source name="Rails zumbaster: test" uuid="7c170c17-b47b-49b6-bd6c-4c72a2c388d4" />
     <data-source name="Rails zumbaster: production" uuid="4a446765-a57e-42df-81b5-78a56d85f3a0">
-      <user-name>&lt;%= ENV['ps_user'] %&gt;</user-name>
-      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddfdadfd9dff5dfdadfcbdfd9dfd9dfdddfc5dfd8dfcedf8ddff7df8adf8fdf94</user-password>
+      <user-name>zumbaster</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddfdadfd9dfdbdfc6dff5dfdadfcbdfd9dfd9dfdddfc5dfd8dfcedf8ddff7df8adf8fdf94</user-password>
     </data-source>
   </component>
 </project>
