@@ -132,9 +132,12 @@ GEM
       http-cookie (~> 1.0.0)
     faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
+    fast_stack (0.2.0)
     ffi (1.9.10)
     figaro (1.1.1)
       thor (~> 0.14)
+    flamegraph (0.1.0)
+      fast_stack
     foundation-rails (5.5.3.2)
       railties (>= 3.1.0)
       sass (>= 3.3.0, < 3.5)
@@ -161,6 +164,7 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    memory_profiler (0.9.6)
     meta-tags (2.1.0)
       actionpack (>= 3.0.0)
     method_source (0.8.2)
@@ -315,6 +319,7 @@ GEM
     sshkit (1.9.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
+    stackprof (0.2.9)
     swfobject-rails (2.0)
       rails (>= 3.0)
     temple (0.7.6)
@@ -374,11 +379,13 @@ DEPENDENCIES
   faraday-cookie_jar
   faraday_middleware
   figaro
+  flamegraph
   foundation-rails (= 5.5.3.2)
   google-analytics-rails
   jbuilder (~> 2.0)
   jquery-rails
   lodash-rails
+  memory_profiler
   meta-tags
   nokogiri
   omniauth-facebook
@@ -409,6 +416,7 @@ DEPENDENCIES
   sass-rails
   slim-rails
   spring
+  stackprof
   swfobject-rails
   therubyracer
   turbolinks!
