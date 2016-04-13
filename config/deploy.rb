@@ -97,12 +97,12 @@ namespace :deploy do
 
   after :restart, :clear_cache do
     invoke 'delayed_job:restart'
-    #start-stop-daemon -Sbvx /home/zumbaster/proxy-stream/target/release/zumbaster-proxy-stream
+    #sudo start-stop-daemon -Sbvx /home/zumbaster/stream-proxy/target/release/stream-proxy
+    #sudo start-stop-daemon -Kvx /home/zumbaster/stream-proxy/target/release/stream-proxy
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       within release_path do
         # execute :rake, "sitemap:generate"
         # execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
-        # execute :rake, 'tmp:clear'
       end
     end
   end
