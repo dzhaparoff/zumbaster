@@ -6,6 +6,11 @@ gem 'figaro' # app configuration using ENV and a single YAML file
 gem 'puma'
 gem 'pg'
 gem 'redis-rails'
+gem 'rack-mini-profiler'
+gem 'flamegraph'
+gem 'stackprof'
+gem 'memory_profiler'
+
 
 gem 'sass-rails'
 gem 'autoprefixer-rails'
@@ -73,8 +78,6 @@ gem 'delayed_job_active_record'
 gem 'progress_job'
 
 gem 'google-analytics-rails'
-
-gem 'rack-mini-profiler', require: false
 
 group :development do
   gem 'awesome_pry' #pry, awesome_prints

@@ -3,21 +3,12 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
 
   protect_from_forgery with: :exception
-
   after_filter :set_csrf_cookie_for_ng
-
-  before_action :set_site_title
+  before_action :set_site_title, :authorize_rmp_request
 
   def set_csrf_cookie_for_ng
     cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
   end
-
-  before_action do
-    if current_user && current_user.id == 1
-      Rack::MiniProfiler.authorize_request
-    end
-  end
-
 
   private
 
@@ -41,5 +32,9 @@ class ApplicationController < ActionController::Base
 
   def has_permissions_to_edit? params
     current_user.present? && (current_user.administrator? || current_user.id == params[:id].to_i)
+  end
+
+  def authorize_rmp_request
+    Rack::MiniProfiler.authorize_request if current_user && current_user.id == 1
   end
 end
