@@ -57,7 +57,7 @@ end
 
 gem 'angular_rails_csrf'
 
-gem 'disqus_rails'
+# gem 'disqus_rails'
 
 gem 'faraday'
 gem 'faraday_middleware'

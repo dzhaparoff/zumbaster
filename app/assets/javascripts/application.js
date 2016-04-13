@@ -3,7 +3,6 @@
 //= require lodash
 //= require swfobject
 //= require foundation
-//= require disqus_rails
 //= require_self
 //= require ng-app
 
@@ -17,9 +16,12 @@ $(document).on('ready page:load', function(){
 
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
         mobile = true;
-        $('body').addClass('mobile')
+        $('body').addClass('mobile');
     }
-    else mobile = false;
+    else {
+      mobile = false;
+      $('body').removeClass('mobile');
+    }
 });
 
 $(document).on('page:change', function() {

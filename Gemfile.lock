@@ -116,8 +116,6 @@ GEM
     delayed_job_active_record (4.1.0)
       activerecord (>= 3.0, < 5)
       delayed_job (>= 3.0, < 5)
-    disqus_rails (0.0.6)
-      rails
     domain_name (0.5.20160310)
       unf (>= 0.0.5, < 1.0.0)
     dynamic_sitemaps (2.0.0)
@@ -373,7 +371,6 @@ DEPENDENCIES
   daemons
   delayed_job_active_record
   devise!
-  disqus_rails
   dynamic_sitemaps
   faraday
   faraday-cookie_jar

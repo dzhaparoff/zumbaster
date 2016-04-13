@@ -6,7 +6,7 @@ class SyncAllPhotosJob < ProgressJob::Base
 
     shows = Show.all
 
-    update_progress_max shows.count
+    update_progress_max Episode.count
     update_stage('SyncAllPhotosJob')
 
     shows.each do |show|
@@ -33,10 +33,7 @@ class SyncAllPhotosJob < ProgressJob::Base
 
         season['episodes'].each do |episode|
           e = Episode.where(show: show, season: s, number: episode['number']).first
-          next if e.nil?
-          next if episode['images']['screenshot']['full'].nil?
-
-          next if File.exist?(s.thumb.url)
+          next if e.nil? || episode['images']['screenshot']['full'].nil? || File.exist?(e.screenshot.url)
 
           screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
           e.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
@@ -44,18 +41,16 @@ class SyncAllPhotosJob < ProgressJob::Base
           translation = @tvdb.episode_translation episode['ids']["tvdb"]
 
           unless translation.nil?
-            e.title_ru = translation[:title_ru] if translation[:title_ru] != episode['title']
-            e.description_ru = translation[:description_ru]
-            e.number_abs = translation[:episode] if translation[:episode] > 0
+            e.title_ru = translation[:title_ru] if translation[:title_ru] != '' && translation[:title_ru] != episode['title']
+            e.description_ru = translation[:description_ru] if translation[:description_ru] != ''
           end
 
           e.save
 
-          sleep 0.05
+          sleep 0.5
+          update_progress
         end
       end
-
-      update_progress
     end
   end
 end
