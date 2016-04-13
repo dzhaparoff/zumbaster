@@ -25,14 +25,14 @@ class SyncAllPhotosJob < ProgressJob::Base
 
         next if s.nil?
 
-        if !season['images']['poster']['full'].nil? && !File.exist?(s.poster.url)
+        if !File.exist?(s.poster.url) && !season['images']['poster']['full'].nil?
           poster_status = Faraday.new.get(season['images']['poster']['full']).status
           sleep 0.1
           s.poster = URI.parse season['images']['poster']['full'] if poster_status == 200
           sleep 0.1
         end
 
-        if !season['images']['thumb']['full'].nil? && !File.exist?(s.thumb.url)
+        if !File.exist?(s.thumb.url) && !season['images']['thumb']['full'].nil?
           thumb_status = Faraday.new.get(season['images']['thumb']['full']).status
           sleep 0.1
           s.thumb = URI.parse season['images']['thumb']['full'] if thumb_status == 200

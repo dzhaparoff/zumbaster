@@ -128,8 +128,8 @@
       <file leaf-file-name="sync_all_photos.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/jobs/sync_all_photos.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47750866">
-              <caret line="37" column="79" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
+            <state vertical-scroll-proportion="0.39446366">
+              <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -1236,12 +1236,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00172" summary="initial commit">
-      <created>1460283031905</created>
-      <option name="number" value="00172" />
-      <option name="project" value="LOCAL" />
-      <updated>1460283031905</updated>
-    </task>
     <task id="LOCAL-00173" summary="initial commit">
       <created>1460284056772</created>
       <option name="number" value="00173" />
@@ -1530,7 +1524,13 @@
       <option name="project" value="LOCAL" />
       <updated>1460582718890</updated>
     </task>
-    <option name="localTasksCounter" value="221" />
+    <task id="LOCAL-00221" summary="initial commit">
+      <created>1460582906699</created>
+      <option name="number" value="00221" />
+      <option name="project" value="LOCAL" />
+      <updated>1460582906699</updated>
+    </task>
+    <option name="localTasksCounter" value="222" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2054,8 +2054,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/jobs/sync_all_photos.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47750866">
-          <caret line="37" column="79" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
+        <state vertical-scroll-proportion="0.39446366">
+          <caret line="34" column="39" selection-start-line="34" selection-start-column="39" selection-end-line="34" selection-end-column="39" />
           <folding />
         </state>
       </provider>
