@@ -83,5 +83,5 @@ production:
   host: 94.23.170.251
   database: zumbaster_db
   username: zumbaster
-  password: <%= Figaro.env.psql_password %>
+  password: jisq0Kvq62Xc62OEKb7tiSb75GRrbl0hgcbULXjelZJWyN4CDYBy71OW1gLqI8UD
   pool: 12
