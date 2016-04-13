@@ -2,6 +2,7 @@ class SyncAllPhotosJob < ProgressJob::Base
 
   def perform
     @trakt = Trakt.new
+    @tvdb = Tvdb.new
 
     shows = Show.all
 
@@ -33,6 +34,7 @@ class SyncAllPhotosJob < ProgressJob::Base
         season['episodes'].each do |episode|
           e = Episode.where(show: show, season: s, number: episode['number']).first
           next if e.nil?
+          next if episode['images']['screenshot']['full'].nil?
 
           screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
           e.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
