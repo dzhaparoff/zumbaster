@@ -71,11 +71,8 @@ gem 'daemons'
 gem 'whenever', :require => false
 gem 'delayed_job_active_record'
 gem 'progress_job'
-# gem "resque", "~> 2.0.0.pre.1", github: "resque/resque" # https://github.com/resque/resque
 
 gem 'google-analytics-rails'
-
-#gem 'rack-streaming-proxy'
 
 group :development do
   gem 'rack-mini-profiler'

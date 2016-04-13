@@ -5,7 +5,7 @@
 
 # Example:
 #
-set :output, "/var/log/cron_log.log"
+set :output, "/home/zumbaster/cron_log.log"
 
 every 1.hours do
   runner "UpdateEpisodesJob.perform_later"

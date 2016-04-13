@@ -25,8 +25,8 @@ class SyncAllPhotosJob < ProgressJob::Base
 
         next if s.nil?
 
-        s.poster = URI.parse season['images']['poster']['full'] unless season['images']['poster']['full'].nil?
-        s.thumb = URI.parse season['images']['thumb']['full'] unless season['images']['thumb']['full'].nil?
+        s.poster = URI.parse season['images']['poster']['full'] if !season['images']['poster']['full'].nil? && File.exist?(s.poster.url)
+        s.thumb = URI.parse season['images']['thumb']['full'] if !season['images']['thumb']['full'].nil? && File.exist?(s.thumb.url)
         s.save
 
         next if season['episodes'].nil?
@@ -35,6 +35,8 @@ class SyncAllPhotosJob < ProgressJob::Base
           e = Episode.where(show: show, season: s, number: episode['number']).first
           next if e.nil?
           next if episode['images']['screenshot']['full'].nil?
+
+          next if File.exist?(s.thumb.url)
 
           screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
           e.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
@@ -48,6 +50,8 @@ class SyncAllPhotosJob < ProgressJob::Base
           end
 
           e.save
+
+          sleep 0.05
         end
       end
 

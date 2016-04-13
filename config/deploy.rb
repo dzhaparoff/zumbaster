@@ -46,11 +46,11 @@ set :puma_access_log, "#{shared_path}/log/puma_access.log"
 set :puma_error_log, "#{shared_path}/log/puma_error.log"
 set :puma_role, :app
 set :puma_env, fetch(:rack_env, fetch(:rails_env, 'production'))
-set :puma_threads, [4, 12]
-set :puma_workers, 0
+set :puma_threads, [3, 12]
+set :puma_workers, 3
 set :puma_worker_timeout, nil
-set :puma_init_active_record, false
-set :puma_preload_app, false
+set :puma_init_active_record, true
+set :puma_preload_app, true
 set :nginx_use_ssl, false
 
 
@@ -97,8 +97,6 @@ namespace :deploy do
 
   after :restart, :clear_cache do
     invoke 'delayed_job:restart'
-    #sudo start-stop-daemon -Sbvx /home/zumbaster/stream-proxy/target/release/stream-proxy
-    #sudo start-stop-daemon -Kvx /home/zumbaster/stream-proxy/target/release/stream-proxy
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       within release_path do
         # execute :rake, "sitemap:generate"
