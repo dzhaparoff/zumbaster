@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
   end
 
   before_action do
-    if current_user && current_user.is_admin?
+    if current_user && current_user.id == 1
       Rack::MiniProfiler.authorize_request
     end
   end
