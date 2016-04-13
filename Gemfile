@@ -74,8 +74,9 @@ gem 'progress_job'
 
 gem 'google-analytics-rails'
 
+gem 'rack-mini-profiler'
+
 group :development do
-  gem 'rack-mini-profiler'
   gem 'awesome_pry' #pry, awesome_prints
   gem 'spring'
   gem 'web-console', '~> 2.0'
