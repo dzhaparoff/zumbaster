@@ -80,8 +80,8 @@ test:
 #
 production:
   <<: *default
-  host: <%= ENV['psql_host'] %>
+  host: 94.23.170.251
   database: zumbaster_db
   username: zumbaster
-  password: <%= ENV['psql_password'] %>
+  password: <%= Figaro.env.psql_password %>
   pool: 12
