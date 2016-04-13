@@ -80,8 +80,8 @@ test:
 #
 production:
   <<: *default
-  database: zumbaster_db
-  username: zumbaster
-  password: <%= ENV['ZUMBASTER_DATABASE_PASSWORD'] %>
-  host: 185.53.169.174
+  database: <%= ENV['ps_db'] %>
+  username: <%= ENV['ps_user'] %>
+  password: <%= ENV['ps_password'] %>
+  host: <%= ENV['ps_host'] %>
   pool: 12

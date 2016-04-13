@@ -39,7 +39,7 @@
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql://185.53.169.174/zumbaster_db</jdbc-url>
+      <jdbc-url>jdbc:postgresql://&lt;%= ENV['ps_host'] %&gt;/&lt;%= ENV['ps_db'] %&gt;</jdbc-url>
       <libraries>
         <library>
           <url>file://$APPLICATION_CONFIG_DIR$/jdbc-drivers/postgresql-driver-license.txt</url>
