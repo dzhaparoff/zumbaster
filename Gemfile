@@ -74,7 +74,7 @@ gem 'progress_job'
 
 gem 'google-analytics-rails'
 
-gem 'rack-mini-profiler'
+gem 'rack-mini-profiler', require: false
 
 group :development do
   gem 'awesome_pry' #pry, awesome_prints
