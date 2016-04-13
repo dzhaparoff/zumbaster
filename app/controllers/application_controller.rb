@@ -35,6 +35,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authorize_rmp_request
-    Rack::MiniProfiler.authorize_request if current_user && current_user.id == 1
+    Rack::MiniProfiler.authorize_request if current_user && current_user.id == 5
   end
 end
