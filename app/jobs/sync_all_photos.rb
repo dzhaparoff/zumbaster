@@ -25,8 +25,8 @@ class SyncAllPhotosJob < ProgressJob::Base
 
         next if s.nil?
 
-        s.poster = URI.parse season['images']['poster']['full'] if !season['images']['poster']['full'].nil? && File.exist?(s.poster.url)
-        s.thumb = URI.parse season['images']['thumb']['full'] if !season['images']['thumb']['full'].nil? && File.exist?(s.thumb.url)
+        s.poster = URI.parse season['images']['poster']['full'] if !season['images']['poster']['full'].nil? && !File.exist?(s.poster.url)
+        s.thumb = URI.parse season['images']['thumb']['full'] if !season['images']['thumb']['full'].nil? && !File.exist?(s.thumb.url)
         s.save
 
         next if season['episodes'].nil?
