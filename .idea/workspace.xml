@@ -3,17 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="8d908706-0167-42a0-9a1f-7ca5b065c907" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/zumbaster.iml" afterPath="$PROJECT_DIR$/.idea/zumbaster.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile" afterPath="$PROJECT_DIR$/Gemfile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gemfile.lock" afterPath="$PROJECT_DIR$/Gemfile.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/application.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/application.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/jobs/sync_all_photos.rb" afterPath="$PROJECT_DIR$/app/jobs/sync_all_photos.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/detail.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/detail.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/shows/episode.html.erb" afterPath="$PROJECT_DIR$/app/views/shows/episode.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/development.rb" afterPath="$PROJECT_DIR$/config/environments/development.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/environments/production.rb" afterPath="$PROJECT_DIR$/config/environments/production.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/initializers/disqus_rails.rb" afterPath="$PROJECT_DIR$/config/initializers/disqus_rails.rb" />
     </list>
     <ignored path="zumbaster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -138,8 +128,8 @@
       <file leaf-file-name="sync_all_photos.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/jobs/sync_all_photos.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3875432">
-              <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.5847751">
+              <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -1246,12 +1236,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00170" summary="initial commit">
-      <created>1460281860674</created>
-      <option name="number" value="00170" />
-      <option name="project" value="LOCAL" />
-      <updated>1460281860674</updated>
-    </task>
     <task id="LOCAL-00171" summary="initial commit">
       <created>1460282349257</created>
       <option name="number" value="00171" />
@@ -1540,7 +1524,13 @@
       <option name="project" value="LOCAL" />
       <updated>1460572777392</updated>
     </task>
-    <option name="localTasksCounter" value="219" />
+    <task id="LOCAL-00219" summary="initial commit">
+      <created>1460582586100</created>
+      <option name="number" value="00219" />
+      <option name="project" value="LOCAL" />
+      <updated>1460582586100</updated>
+    </task>
+    <option name="localTasksCounter" value="220" />
     <servers />
   </component>
   <component name="TodoView">
@@ -2064,8 +2054,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/jobs/sync_all_photos.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3875432">
-          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.5847751">
+          <caret line="43" column="10" selection-start-line="43" selection-start-column="10" selection-end-line="43" selection-end-column="10" />
           <folding />
         </state>
       </provider>
