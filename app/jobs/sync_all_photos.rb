@@ -67,4 +67,9 @@ class SyncAllPhotosJob < ProgressJob::Base
       end
     end
   end
+
+  def max_run_time
+    9999999999
+  end
+
 end
