@@ -61,7 +61,7 @@ test:
 
 production:
   <<: *default
-  host: 94.23.170.251
+  host: localhost
   database: zumbaster_db
   username: zumbaster
   password: <%= ENV['DATABASE_PASSWORD'] %>
