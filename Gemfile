@@ -32,7 +32,7 @@ gem "dynamic_sitemaps"
 gem 'meta-tags'
 gem 'will_paginate'
 
-gem 'turbolinks', github: 'turbolinks/turbolinks-classic'
+gem 'turbolinks', '~> 5.0.0.beta'
 gem 'jquery-rails'
 gem 'foundation-rails', '5.5.3.2'
 gem 'lodash-rails'

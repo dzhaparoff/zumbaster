@@ -11,7 +11,7 @@
 
 var mobile = false;
 
-$(document).on('ready page:load', function(){
+$(document).on('turbolinks:load', function(){
     $(document).foundation();
 
     if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
@@ -24,7 +24,8 @@ $(document).on('ready page:load', function(){
     }
 });
 
-$(document).on('page:change', function() {
+$(document).on('turbolinks:visit', function() {
+  console.log("turbolinks:visit");
     if (window._gaq != null) {
         return _gaq.push(['_trackPageview']);
     } else if (window.pageTracker != null) {

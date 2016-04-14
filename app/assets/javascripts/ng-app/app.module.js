@@ -3,7 +3,7 @@
     angular
         .module('zumbaster', ['ngAnimate', 'ngResource', 'ngDialog', 'angular-cache']);
 
-    $(document).on('ready page:load', function() {
+    $(document).on('turbolinks:load', function() {
         angular.bootstrap(document.body, ['zumbaster'], { strictDi : true });
     })
 

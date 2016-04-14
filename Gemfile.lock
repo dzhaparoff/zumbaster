@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: b397d33246ae3dbc725f681a3f718a20d34313af
+  revision: 57d150e535f65c9b408504fa6f279a5417fa3de5
   specs:
     devise (4.0.0.rc2)
       bcrypt (~> 3.0)
@@ -8,13 +8,6 @@ GIT
       railties (>= 4.1.0, < 5.1)
       responders
       warden (~> 1.2.3)
-
-GIT
-  remote: git://github.com/turbolinks/turbolinks-classic.git
-  revision: 37a7c296232d20a61bd1946f600da7f2009189db
-  specs:
-    turbolinks (3.0.0)
-      coffee-rails
 
 GEM
   remote: https://rubygems.org/
@@ -61,7 +54,7 @@ GEM
     angular_rails_csrf (1.0.4)
       rails (>= 3, < 5)
     arel (7.0.0)
-    autoprefixer-rails (6.3.5)
+    autoprefixer-rails (6.3.6)
       execjs
     av (0.9.0)
       cocaine (~> 0.5.3)
@@ -220,7 +213,7 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.4)
       pry (>= 0.9.10)
-    puma (3.2.0)
+    puma (3.4.0)
     rack (2.0.0.alpha)
       json
     rack-mini-profiler (0.9.9.2)
@@ -247,7 +240,7 @@ GEM
       rails-assets-angular (= 1.5.3)
     rails-assets-angular-cache (4.5.0)
       rails-assets-angular (>= 1)
-    rails-assets-angular-material (1.0.6)
+    rails-assets-angular-material (1.0.7)
       rails-assets-angular (>= 1.4.8, < 2)
       rails-assets-angular-animate (>= 1.4.8, < 2)
       rails-assets-angular-aria (>= 1.4.8, < 2)
@@ -306,8 +299,8 @@ GEM
       railties (>= 3.1, < 5.0)
       slim (~> 3.0)
     slop (3.6.0)
-    spring (1.6.4)
-    sprockets (3.5.2)
+    spring (1.7.1)
+    sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
     sprockets-rails (3.0.4)
@@ -327,6 +320,9 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.2)
+    turbolinks (5.0.0.beta2)
+      turbolinks-source
+    turbolinks-source (5.0.0.beta3)
     typhoeus (1.0.1)
       ethon (>= 0.8.0)
     tzinfo (1.2.2)
@@ -416,7 +412,7 @@ DEPENDENCIES
   stackprof
   swfobject-rails
   therubyracer
-  turbolinks!
+  turbolinks (~> 5.0.0.beta)
   typhoeus
   uglifier (>= 1.3.0)
   web-console (~> 2.0)

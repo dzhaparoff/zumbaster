@@ -10,10 +10,12 @@
 
 @include margins-paddings-list;
 
-html.turbolinks-progress-bar::before {
+div.turbolinks-progress-bar {
   background-color: $green !important;
   height: 3px !important;
   box-shadow: rem-calc(0 0 20 0) rgba(0,0,0,0.8);
+  width: 0;
+  transition: all 0.25s ease;
 }
 
 a {

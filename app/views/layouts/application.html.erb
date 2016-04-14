@@ -6,15 +6,19 @@
   <meta name='yandex-verification' content='463ee9c64c7bf5e6' />
   <meta name="google-site-verification" content="sqlTzoO8nxKhGa126DvedQoOqrq_1QmODkoXw9lVpMM" />
   <%= csrf_meta_tags %>
-  <base href="<%= request.original_fullpath %>">
+  <meta name="turbolinks-root" content="/">
+  <% if request.original_fullpath == "/"%>
+    <meta name="turbolinks-cache-control" content="no-cache">
+  <% end %>
   <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= yield :stylesheets %>
   <%= javascript_include_tag 'vendor/modernizr', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true  %>
 </head>
 <body data-ng-controller="MainCtrl as main">
-<%= render "partials/modals" %>
-    <div class="contain-to-grid sticky top-menu">
+  <div class="turbolinks-progress-bar"></div>
+  <%= render "partials/modals" %>
+    <div class="contain-to-grid sticky top-menu" id="header-top-bar" data-turbolinks-permanent>
         <nav class="top-bar" data-topbar role="navigation" data-options="custom_back_text: false">
           <%= render "partials/top_menu" %>
         </nav>
