@@ -25,6 +25,8 @@ class SyncAllPhotosJob < ProgressJob::Base
       show.banner = URI.parse(trakt_show['images']['banner']['full']) unless trakt_show['images']['banner']['full'].nil? || File.exist?(show.banner.url)
       show.thumb = URI.parse(trakt_show['images']['thumb']['full']) unless trakt_show['images']['thumb']['full'].nil? || File.exist?(show.thumb.url)
 
+      show.save
+
       sleep 0.05
 
       trakt_seasons = @trakt.show_seasons imdb
