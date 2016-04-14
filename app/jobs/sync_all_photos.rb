@@ -18,12 +18,12 @@ class SyncAllPhotosJob < ProgressJob::Base
       trakt_show = @trakt.show imdb
       next if trakt_show.nil?
 
-      show.poster = URI.parse(trakt_show['images']['poster']['full']) unless trakt_show['images']['poster']['full'].nil? && File.exist?(show.poster.url)
-      show.fanart = URI.parse(trakt_show['images']['fanart']['full']) unless trakt_show['images']['fanart']['full'].nil? && File.exist?(show.fanart.url)
-      show.logo = URI.parse(trakt_show['images']['logo']['full']) unless trakt_show['images']['logo']['full'].nil? && File.exist?(show.logo.url)
-      show.clearart = URI.parse(trakt_show['images']['clearart']['full']) unless trakt_show['images']['clearart']['full'].nil? && File.exist?(show.clearart.url)
-      show.banner = URI.parse(trakt_show['images']['banner']['full']) unless trakt_show['images']['banner']['full'].nil? && File.exist?(show.banner.url)
-      show.thumb = URI.parse(trakt_show['images']['thumb']['full']) unless trakt_show['images']['thumb']['full'].nil? && File.exist?(show.thumb.url)
+      show.poster = URI.parse(trakt_show['images']['poster']['full']) unless trakt_show['images']['poster']['full'].nil? || File.exist?(show.poster.url)
+      show.fanart = URI.parse(trakt_show['images']['fanart']['full']) unless trakt_show['images']['fanart']['full'].nil? || File.exist?(show.fanart.url)
+      show.logo = URI.parse(trakt_show['images']['logo']['full']) unless trakt_show['images']['logo']['full'].nil? || File.exist?(show.logo.url)
+      show.clearart = URI.parse(trakt_show['images']['clearart']['full']) unless trakt_show['images']['clearart']['full'].nil? || File.exist?(show.clearart.url)
+      show.banner = URI.parse(trakt_show['images']['banner']['full']) unless trakt_show['images']['banner']['full'].nil? || File.exist?(show.banner.url)
+      show.thumb = URI.parse(trakt_show['images']['thumb']['full']) unless trakt_show['images']['thumb']['full'].nil? || File.exist?(show.thumb.url)
 
       sleep 0.05
 

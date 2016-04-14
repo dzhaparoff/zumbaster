@@ -4,7 +4,6 @@
     <list default="true" id="8d908706-0167-42a0-9a1f-7ca5b065c907" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/jobs/sync_all_photos.rb" afterPath="$PROJECT_DIR$/app/jobs/sync_all_photos.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/deploy/production.rb" afterPath="$PROJECT_DIR$/config/deploy/production.rb" />
     </list>
     <ignored path="zumbaster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -129,8 +128,8 @@
       <file leaf-file-name="sync_all_photos.rb" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/jobs/sync_all_photos.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5847751">
-              <caret line="25" column="143" selection-start-line="25" selection-start-column="143" selection-end-line="25" selection-end-column="143" />
+            <state vertical-scroll-proportion="0.3633218">
+              <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -1190,12 +1189,6 @@
       <option name="number" value="Default" />
       <updated>1423763152869</updated>
     </task>
-    <task id="LOCAL-00179" summary="initial commit">
-      <created>1460290336888</created>
-      <option name="number" value="00179" />
-      <option name="project" value="LOCAL" />
-      <updated>1460290336889</updated>
-    </task>
     <task id="LOCAL-00180" summary="initial commit">
       <created>1460291519810</created>
       <option name="number" value="00180" />
@@ -1484,7 +1477,13 @@
       <option name="project" value="LOCAL" />
       <updated>1460633477116</updated>
     </task>
-    <option name="localTasksCounter" value="228" />
+    <task id="LOCAL-00228" summary="initial commit">
+      <created>1460636361808</created>
+      <option name="number" value="00228" />
+      <option name="project" value="LOCAL" />
+      <updated>1460636361808</updated>
+    </task>
+    <option name="localTasksCounter" value="229" />
     <servers />
   </component>
   <component name="TodoView">
@@ -1997,8 +1996,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/jobs/sync_all_photos.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5847751">
-          <caret line="25" column="143" selection-start-line="25" selection-start-column="143" selection-end-line="25" selection-end-column="143" />
+        <state vertical-scroll-proportion="0.3633218">
+          <caret line="17" column="35" selection-start-line="17" selection-start-column="35" selection-end-line="17" selection-end-column="35" />
           <folding />
         </state>
       </provider>
