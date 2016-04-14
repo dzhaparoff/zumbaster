@@ -14,9 +14,22 @@ class SyncAllPhotosJob < ProgressJob::Base
 
       imdb = "tt%07d" % show.ids['imdb'].to_i
 
+
+      trakt_show = @trakt.show imdb
+      next if trakt_show.nil?
+
+      show.poster = URI.parse(trakt_show['images']['poster']['full']) unless trakt_show['images']['poster']['full'].nil? && File.exist?(show.poster.url)
+      show.fanart = URI.parse(trakt_show['images']['fanart']['full']) unless trakt_show['images']['fanart']['full'].nil? && File.exist?(show.fanart.url)
+      show.logo = URI.parse(trakt_show['images']['logo']['full']) unless trakt_show['images']['logo']['full'].nil? && File.exist?(show.logo.url)
+      show.clearart = URI.parse(trakt_show['images']['clearart']['full']) unless trakt_show['images']['clearart']['full'].nil? && File.exist?(show.clearart.url)
+      show.banner = URI.parse(trakt_show['images']['banner']['full']) unless trakt_show['images']['banner']['full'].nil? && File.exist?(show.banner.url)
+      show.thumb = URI.parse(trakt_show['images']['thumb']['full']) unless trakt_show['images']['thumb']['full'].nil? && File.exist?(show.thumb.url)
+
+      sleep 0.05
+
       trakt_seasons = @trakt.show_seasons imdb
 
-      return false if trakt_seasons.nil?
+      next if  trakt_seasons.nil?
 
       trakt_seasons.each do |season|
         next if season['number'] == 0
@@ -24,8 +37,6 @@ class SyncAllPhotosJob < ProgressJob::Base
         s = Season.where(show: show, number: season['number']).first
 
         next if s.nil?
-
-        begin
 
           if !File.exist?(s.poster.url) && !season['images']['poster']['full'].nil?
             poster_status = Faraday.new.get(season['images']['poster']['full']).status
@@ -66,10 +77,6 @@ class SyncAllPhotosJob < ProgressJob::Base
             sleep 0.5
             update_progress
           end
-
-        rescue
-          next
-        end
 
       end
     end
