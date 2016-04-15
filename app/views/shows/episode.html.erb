@@ -5,8 +5,12 @@
      title = "#{@episode.show.title_ru}: #{@episode.title_ru}, #{@episode.season.number} сезон - #{@episode.number} эпизод смотреть онлайн"
    end
 
+  description = if @episode.description_ru.nil? then '' else @episode.description_ru end
+
    set_meta_tags(
                  title: title,
+                 description: description,
+                 keywords: "#{@episode.show.title_ru}, #{@episode.season.number} сезон, #{@episode.number} эпизод, смотреть онлайн, без рекламы, бесплатно, без регистрации, HD, качество",
                  og: {
                      site_name: 'HD-Serials',
                      title: title,

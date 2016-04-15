@@ -6,10 +6,12 @@ class SyncAllPhotosJob < ProgressJob::Base
 
     shows = Show.all
 
-    update_progress_max Episode.count
+    update_progress_max Show.count
     update_stage('SyncAllPhotosJob')
 
     shows.each do |show|
+      next if File.exist?(show.poster.url)
+
       next unless show.ids['imdb'].to_i > 0
 
       imdb = "tt%07d" % show.ids['imdb'].to_i
@@ -77,10 +79,11 @@ class SyncAllPhotosJob < ProgressJob::Base
             e.save
 
             sleep 0.5
-            update_progress
+
           end
 
       end
+      update_progress
     end
   end
 
