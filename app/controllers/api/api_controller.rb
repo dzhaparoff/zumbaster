@@ -32,7 +32,7 @@ class Api::ApiController < ApplicationController
     manifest = translation.manifest :desktop
     manifest = Nokogiri::XML manifest.body
     manifest.css("media").each do |media|
-      media['url'] = media['url'].gsub(/http:\/\//,'http://stream.hd-serials.tv/stream/f4m/')
+      media['url'] = media['url'].gsub(/http:\/\//,'/stream/')
     end
     send_data manifest.to_xml, format: 'application/xml; charset=utf-8'
   end
@@ -40,7 +40,7 @@ class Api::ApiController < ApplicationController
   private
   def create_m3u8_file translation
     manifest = translation.manifest(:mobile).body
-    manifest.gsub!(/http:\/\//, 'http://stream.hd-serials.tv/stream/m3u8/')
+    manifest.gsub!(/http:\/\//, '/stream/')
     send_data manifest, format: 'application/vnd.apple.mpegurl; charset=utf-8'
   end
 end
