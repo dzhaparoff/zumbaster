@@ -66,3 +66,14 @@ a {
 .list-item {
     @include item_w_rating;
 }
+
+footer {
+  margin-top: rem-calc(30);
+  margin-bottom: rem-calc(20);
+  p {
+    margin-bottom: rem-calc(5);
+    text-align: center;
+    color: rgb(150,150,150);
+    font-size: rem-calc(12);
+  }
+}
