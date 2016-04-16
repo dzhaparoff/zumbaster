@@ -25,7 +25,7 @@ class Admin::Api::ShowsController < Admin::Api::ApiController
     show = Show.unscoped.find(model_params[:id])
 
     if model_params[:ids].present? && model_params[:ids].size > 0
-      show.update(id: model_params[:ids])
+      show.update(ids: model_params[:ids])
     end
 
     show.update(model_params)
