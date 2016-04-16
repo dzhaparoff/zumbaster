@@ -1,5 +1,8 @@
 <%
-   set_meta_tags title: "#{@show.title_ru} - смотреть #{@season.number} сезон онлайн"
+   description = if @show.description_ru.nil? then '' else strip_tags(@show.description_ru) end
+   set_meta_tags title: "#{@show.title_ru} - смотреть #{@season.number} сезон онлайн",
+                 description: description,
+                 keywords: "#{@show.title_ru}, #{@season.number} сезон, смотреть онлайн, без рекламы, бесплатно, без регистрации, HD, качество, высокое качество, с телефона, с планшета"
 %>
 <section class="season">
   <div class="show-fanart">
@@ -45,3 +48,7 @@
     </div>
   </div>
 </section>
+<div data-google-analytics-tracker
+     data-page="<%= request.original_fullpath %>"
+     data-title="<%= "Страница сезона: #{@show.title_ru} - #{@season.number} сезон" %>"
+></div>

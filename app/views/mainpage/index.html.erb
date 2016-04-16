@@ -4,8 +4,7 @@
 %>
 <section class="main-page-fanart page-fanart show-for-medium-up" data-no-transition-cache>
   <article class="fanart-slide">
-    <div class="poster"><img src="<%= @random_show.poster.url(:thumb) %>" alt="<%= @random_show.title_ru %>"/></div>
-    <h1 class="title_ru"><%= @random_show.title_ru %></h1>
+    <h1 class="title_ru"><a href="<%= show_path @random_show.slug_ru %>"><%= @random_show.title_ru %></a></h1>
     <div class="title_en"><%= @random_show.title_en %></div>
     <div class="awwards-list">
       <div class="awwards imdb"><div class="count"><%= @random_show.rating.imdb_rating.value %></div></div>
@@ -14,19 +13,7 @@
   </article>
   <img src="<%= @random_show.fanart.url(:original) %>" alt="<%= @random_show.title_ru %>"/>
 </section>
-<div class="row" style="padding-top: 25px; padding-bottom: 25px;">
-  <div class="columns medium-6">
-    <p><b>Внимание!</b> Сайт временно работает в ограниченном режиме. Возможны проблемы с соединением и
-      нормальным функционированием. В связи с очень большой нагрузкой мы вынуждены искать другой, более производильный хостинг.
-      Так как мы против рекламы на сайте во всех ее проявлениях, поддерживать проект приходится на полном энтузиазме с большими
-      финансовыми затратами. Если вы готовы оказать небольшую финансовую помощь, пишите на <a href="mailto:info@hd-serials.tv">info@hd-serials.tv</a></p>
-  </div>
-  <div class="columns medium-6">
-    <p style="text-align:center">
-      <iframe frameborder="0" allowtransparency="true" scrolling="no" src="https://money.yandex.ru/embed/donate.xml?account=41001720623037&quickpay=donate&payment-type-choice=on&mobile-payment-type-choice=on&default-sum=50&targets=%D0%9F%D0%BE%D0%B6%D0%B5%D1%80%D1%82%D0%B2%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5+%D0%BD%D0%B0+%D0%BF%D0%BE%D0%B4%D0%B4%D0%B5%D1%80%D0%B6%D0%BA%D1%83+%D0%B8+%D1%80%D0%B0%D0%B7%D0%B2%D0%B8%D1%82%D0%B8%D0%B5+%D0%BF%D1%80%D0%BE%D0%BA%D1%82%D0%B0+HD-Serials&target-visibility=on&project-name=HD-Serials.tv&project-site=HD-Serials.tv&button-text=05&successURL=HD-Serials.tv" width="508" height="117"></iframe>
-    </p>
-  </div>
-</div>
+<%= render "partials/donat" %>
 <section class="main-page">
     <div class="row">
       <div class="medium-8 column popular">
@@ -114,3 +101,7 @@
         </div>
     </section>
 </section>
+<div data-google-analytics-tracker
+     data-page="<%= request.original_fullpath %>"
+     data-title="Главная страница"
+></div>

@@ -23,12 +23,3 @@ $(document).on('turbolinks:load', function(){
       $('body').removeClass('mobile');
     }
 });
-
-$(document).on('turbolinks:visit', function() {
-  console.log("turbolinks:visit");
-    if (window._gaq != null) {
-        return _gaq.push(['_trackPageview']);
-    } else if (window.pageTracker != null) {
-        return pageTracker._trackPageview();
-    }
-});

@@ -70,6 +70,18 @@ class ActiveShowCtrl
     editor.model.$api.$post('pshows/1.0/sync_ru_names', editor.item)
       .success (d) =>
         @messages.show('Русскоязычные заголовки эпизодов синхронизированы', 'save')
+  pics: (editor, ev) ->
+    ev.preventDefault() if ev?
+    editor.model.$api.$post('pshows/1.0/sync_pics', editor.item)
+    .success (d) =>
+      angular.merge(editor.item, d)
+      @messages.show('Изображения синхронизированы', 'save')
+  rating: (editor, ev) ->
+    ev.preventDefault() if ev?
+    editor.model.$api.$post('pshows/1.0/sync_rating', editor.item)
+    .success (d) =>
+      angular.merge(editor.item, d)
+      @messages.show('Рейтинг синхронизирован', 'save')
 
 angular
   .module "admin"
