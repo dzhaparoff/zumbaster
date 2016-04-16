@@ -66,6 +66,18 @@ namespace :puma do
   before :start, :make_dirs
 end
 
+namespace :sitemap do
+  desc 'Create Sitemap'
+  task :create do
+    on roles(:app) do
+      within release_path do
+        execute :rake, "sitemap:generate"
+        execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
+      end
+    end
+  end
+end
+
 
 namespace :deploy do
 
@@ -92,16 +104,6 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:restart'
-    end
-  end
-
-  after :restart, :clear_cache do
-    invoke 'delayed_job:restart'
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
-      within release_path do
-        execute :rake, "sitemap:generate"
-        execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
-      end
     end
   end
 
