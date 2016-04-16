@@ -68,10 +68,10 @@ end
 
 namespace :sitemap do
   desc 'Create Sitemap'
-  task :create do
+  task :generate do
     on roles(:app) do
       within release_path do
-        execute :rake, "sitemap:generate"
+        execute :rake, "sitemap:generate RAILS_ENV=production"
         execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
       end
     end
@@ -105,6 +105,10 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:restart'
     end
+  end
+
+  after :restart, :clear_cache do
+    invoke 'delayed_job:restart'
   end
 
   before :starting,     :check_revision

@@ -6,9 +6,11 @@ googleAnalyticsTracker = ->
     title = attrs.title
 
     if window.ga?
+      console.log('google_send_pageview', page, title)
       ga('send', {
         hitType: 'pageview',
-        page: page
+        page: page,
+        title: title
       });
 
 
