@@ -1,8 +1,8 @@
 <%
-   if @episode.title_ru.nil?
-     title = "#{@episode.show.title_ru}: #{@episode.season.number} сезон - #{@episode.number} эпизод смотреть онлайн и без рекламы в HD качестве"
+   if @episode.title_ru.nil? || @episode.title_ru.blank?
+     title = "#{@episode.show.title_ru}, #{@episode.season.number} сезон - #{@episode.number} эпизод смотреть онлайн и без рекламы в HD качестве"
    else
-     title = "#{@episode.show.title_ru}: #{@episode.title_ru}, #{@episode.season.number} сезон - #{@episode.number} эпизод смотреть онлайн"
+     title = "#{@episode.show.title_ru}, #{@episode.season.number} сезон - #{@episode.number} эпизод (#{@episode.title_ru}) смотреть онлайн"
    end
 
   description = if @episode.description_ru.nil? then '' else @episode.description_ru end
