@@ -1,4 +1,8 @@
 class Episode < ActiveRecord::Base
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+
   has_one :rating, as: :rated
   has_many :translations, :dependent => :destroy
   belongs_to :show
