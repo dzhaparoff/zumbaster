@@ -42,11 +42,11 @@ gem "swfobject-rails"
 gem 'ace-rails-ap' # ace code highlighter
 
 source "https://rails-assets.org" do
-  gem "rails-assets-angular", '~> 1.5.2'
-  gem "rails-assets-angular-animate", '~> 1.5.2'
+  gem "rails-assets-angular", '~> 1.5.5'
+  gem "rails-assets-angular-animate", '~> 1.5.5'
   gem "rails-assets-angular-resource"
   gem "rails-assets-angular-cache"
-  gem "rails-assets-angular-messages", '~> 1.5.2'
+  gem "rails-assets-angular-messages", '~> 1.5.5'
   gem "rails-assets-angular-aria"
   gem "rails-assets-angular-material"
   gem "rails-assets-ngDialog"

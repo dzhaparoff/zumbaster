@@ -23,7 +23,6 @@ class Translation < ActiveRecord::Base
 
   def manifest type
     sync_translation_video unless translation_video_exist? type
-
     manifest = type == :mobile ? m3u8 : f4m
 
     f = Faraday.new do |builder|
@@ -62,14 +61,18 @@ class Translation < ActiveRecord::Base
     doc = Nokogiri::HTML.parse(iframe[:request].body)
     video_token = false
     secret_key = false
+    subtitles = false
 
     csrf_token = doc.search('head > meta[name="csrf-token"]')[0]['content']
     doc.search('body > script').each do |script|
       unless video_token && secret_key
+        subtitles = find_subtitles script
         video_token = check_script_tag script, video_token
         secret_key = find_request_header_content(script) if video_token
       end
     end
+
+    self.subtitles = subtitles
 
     secret_key = encode_request_header secret_key
 
@@ -96,6 +99,12 @@ class Translation < ActiveRecord::Base
     return false if video_token_raw.first.nil? || video_token_raw.nil? || video_token_raw.size == 0
 
     video_token_raw.first.first
+  end
+
+  def find_subtitles script
+    raw = script.text.to_s.scan(/src: \"(http:\/\/[a-zA-Z0-9.]+\/static\/srt\/subtitles\/[a-zA-Z0-9-._]+\/[a-zA-Z0-9-._]+)\"/)
+    return false if raw.nil? || raw.size == 0 || raw.first.nil?
+    raw.first.first
   end
 
   def find_request_header_content script

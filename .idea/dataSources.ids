@@ -8,7 +8,7 @@
       <identifier-quote-string>&quot;</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
-    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.4">
+    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.5">
       <database id="1" name="zumbaster_db"/>
       <schema id="2" parent="1" name="public">
         <object-id>2200</object-id>
@@ -1393,7 +1393,7 @@ meta_id</columns>
       <identifier-quote-string>&quot;</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
-    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.4">
+    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.5">
       <database id="1" name="zumbaster_db"/>
       <schema id="2" parent="1" name="public">
         <object-id>2200</object-id>
@@ -2778,7 +2778,7 @@ meta_id</columns>
       <identifier-quote-string>&quot;</identifier-quote-string>
     </database-info>
     <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact"/>
-    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.4">
+    <database-model serializer="dbm" rdbms="POSTGRES" format-version="2.5">
       <database id="1" name="zumbaster_db"/>
       <schema id="2" parent="1" name="public">
         <object-id>2200</object-id>

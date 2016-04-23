@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128065226) do
+ActiveRecord::Schema.define(version: 20160423105501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,6 +254,7 @@ ActiveRecord::Schema.define(version: 20160128065226) do
     t.integer  "episode_id"
     t.integer  "translator_id"
     t.integer  "expires",                    default: 0
+    t.string   "subtitles",                  default: ""
   end
 
   create_table "translators", force: :cascade do |t|
