@@ -1,4 +1,4 @@
-var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI;
+var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI, onPlayerPlaybackTimeChangedEvent;
 
 
 (function(){
@@ -33,6 +33,8 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI;
       },
       link : function(scope, elem, attr){
 
+        console.log(scope.title);
+
         var playlist = new Playlists(scope.id);
 
         function construct_player(manifest) {
@@ -51,7 +53,7 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI;
                 maxFontSize: 36,
                 textColor: 0xDFDFDF,
                 bgColor: 0x101010,
-                bgAlpha: 0.8
+                bgAlpha: 0.65
               }
             });
           }
@@ -76,15 +78,15 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI;
 
           if(typeof scope.subtitles != 'undefined') {
             flash_vars.subtitles = encodeURIComponent(JSON.stringify({
-              subtitles: [ {
-                src: scope.subtitles,
+              subtitles: [{
+                url: scope.subtitles,
                 label: "Russian"
               }],
               config: {
                 fontSize: 20,
                 textColor: 0xDFDFDF,
                 bgColor: 0x101010,
-                bgAlpha: 0.8
+                bgAlpha: 0.65
               }
             }));
           }
@@ -100,12 +102,10 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI;
           };
 
           var player_url = '/system/swf/player_base.swf';
-          // var player_url = 'http://hd-serials.tv/system/swf/player.swf';
           swfobject.embedSWF(player_url, name, "854", "480", "10.2", null, flash_vars, params, attrs);
         }
 
         onJSBridge = function(playerId, event, data){
-          console.log(playerId, event);
           switch(event)
           {
             case "onJavaScriptBridgeCreated":
@@ -114,7 +114,7 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI;
               setupPlayerGUI();
               break;
           }
-        }
+        };
 
         setQualityLabels = function(tracks) {
           for (var i in tracks) {
@@ -148,18 +148,39 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI;
 
         function addPlayerListeners()
         {
-          flashPlayer.addEventListener("fragDownloadComplete", "onPlayerEvent");
+          // flashPlayer.addEventListener("fragDownloadComplete", "onPlayerEvent");
           flashPlayer.addEventListener("playbackStateChanged", "onPlayerEvent");
-          flashPlayer.addEventListener("playbackTimeChanged", "onPlayerEvent");
-          flashPlayer.addEventListener("playbackDurationChanged", "onPlayerEvent");
-          flashPlayer.addEventListener("seekingChanged", "onPlayerEvent");
-          flashPlayer.addEventListener("bufferingChanged", "onPlayerEvent");
+          // flashPlayer.addEventListener("playbackTimeChanged", "onPlayerEvent");
+          flashPlayer.addEventListener("playbackTimeChanged", "onPlayerPlaybackTimeChangedEvent");
+          // flashPlayer.addEventListener("playbackDurationChanged", "onPlayerEvent");
+          // flashPlayer.addEventListener("seekingChanged", "onPlayerEvent");
+          // flashPlayer.addEventListener("bufferingChanged", "onPlayerEvent");
         }
+
+        var old_event = '';
 
         onPlayerEvent = function()
         {
-          console.log('[onPlayerEvent]', arguments);
-        }
+          if(typeof window.ga !== 'undefined') {
+            if(arguments[1] == 'playing' && old_event == 'ready') {
+              ga('send', 'event', 'TV Shows', 'play', scope.title);
+            }
+            if(arguments[1] == 'finished') {
+              ga('send', 'event', 'TV Shows', 'finish', scope.title);
+            }
+          }
+          old_event = arguments[1];
+        };
+
+        var old_heartbeat_mark = 60 * 5;
+
+        onPlayerPlaybackTimeChangedEvent = function(player_id , playback){
+          if(typeof window.ga !== 'undefined' && playback.time > old_heartbeat_mark ) {
+            console.log('heartbeat', playback);
+            ga('send', 'event', 'TV Shows', 'playing-heartbeat', scope.title, parseInt(playback.time));
+            old_heartbeat_mark += (60 * 5)
+          }
+        };
 
         setupPlayerGUI = function() {
           var default_layout = {
@@ -387,7 +408,7 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI;
 
           // flashPlayer.setLayout(default_layout);
           // flashPlayer.setStyle(default_style);
-        }
+        };
 
 
         if(playlist.mobile)
