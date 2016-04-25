@@ -32,7 +32,8 @@ gem 'omniauth-vkontakte'
 gem "russian"
 gem "dynamic_sitemaps"
 gem 'meta-tags'
-gem 'will_paginate'
+# gem 'will_paginate'
+gem 'kaminari', github: 'amatsuda/kaminari'
 
 gem 'turbolinks', '~> 5.0.0.beta'
 gem 'jquery-rails'
