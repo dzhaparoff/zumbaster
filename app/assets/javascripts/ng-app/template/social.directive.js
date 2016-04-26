@@ -19,11 +19,11 @@
         return $http({
           method: "JSONP",
           responseType : "text/javascript",
-          url : 'http://vk.com/share.php?act=count&index=1&url='+page+'&callback=JSON_CALLBACK'
+          url : 'https://vk.com/share.php?act=count&index=1&url='+page+'&callback=JSON_CALLBACK'
         })
       },
       share: function(page) {
-        window.open('http://vk.com/share.php?url='+page,"","toolbar=0,status=0,width=626,height=436")
+        window.open('https://vk.com/share.php?url='+page,"","toolbar=0,status=0,width=626,height=436")
       }
     }
   }
@@ -33,14 +33,14 @@
       getShareCount: function(page) {
         return $http({
           method: "GET",
-          url : 'http://graph.facebook.com/fql?q=SELECT share_count, like_count, comment_count, total_count, commentsbox_count, comments_fbid, click_count FROM link_stat WHERE url=%22'+page+'%22',
+          url : 'https://graph.facebook.com/fql?q=SELECT share_count, like_count, comment_count, total_count, commentsbox_count, comments_fbid, click_count FROM link_stat WHERE url=%22'+page+'%22',
           headers: {
             "Access-Control-Allow-Origin" : "*"
           }
         })
       },
       share: function(page) {
-        window.open('http://facebook.com/sharer.php?p[url]='+page,"","toolbar=0,status=0,width=626,height=436")
+        window.open('https://facebook.com/sharer.php?p[url]='+page,"","toolbar=0,status=0,width=626,height=436")
       }
     }
   }
@@ -82,11 +82,11 @@
       getShareCount: function(page) {
         return $http({
           method: "jsonp",
-          url : 'http://urls.api.twitter.com/1/urls/count.json?url='+page+'&callback=JSON_CALLBACK'
+          url : 'https://urls.api.twitter.com/1/urls/count.json?url='+page+'&callback=JSON_CALLBACK'
         })
       },
       share: function(page, text) {
-        window.open('http://twitter.com/share?url='+page+'&text='+text,"","toolbar=0,status=0,width=626,height=436")
+        window.open('https://twitter.com/share?url='+page+'&text='+text,"","toolbar=0,status=0,width=626,height=436")
       }
     }
   }
