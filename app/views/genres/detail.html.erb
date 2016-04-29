@@ -19,10 +19,12 @@
                 <div class="titles">
                   <h1 class="title_ru"><%= s.title_ru %></h1>
                   <div class="title_en"><%= s.title_en %></div>
+                  <% unless s.rating.nil? %>
                   <div class="awwards-list">
                     <div class="awwards imdb"><div class="count"><%= number_with_precision s.rating.imdb_rating.value, precision: 1 %></div></div>
                     <div class="awwards kinopoisk"><div class="count"><%= number_with_precision s.rating.kp_rating.value, precision: 1 %></div></div>
                   </div>
+                  <% end %>
                 </div>
               </div>
             </article>

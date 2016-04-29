@@ -28,10 +28,12 @@
               <h1><%= @show.title_ru %></h1>
               <div class="subtitle"><%= @show.title_en %> (<%= @show.first_aired.year %>, <%= @show.country.upcase %>)</div>
             </div>
+            <% unless @show.rating.nil? %>
             <div class="awwards-list">
               <div class="awwards imdb"><div class="count"><%= @show.rating.imdb_rating.value %></div></div>
               <div class="awwards kinopoisk"><div class="count"><%= number_with_precision @show.rating.kp_rating.value, precision: 1 %></div></div>
             </div>
+            <% end %>
           </div>
         </div>
         <div class="row additional-info">
