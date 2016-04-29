@@ -1,6 +1,6 @@
 User-agent: *
 Disallow: /admin
-Sitemap: http://hd-serials.tv/sitemap.xml
+Sitemap: https://hd-serials.tv/sitemap.xml
 
 User-agent: Yandex
 Disallow: /admin
