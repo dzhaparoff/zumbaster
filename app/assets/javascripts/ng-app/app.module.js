@@ -1,7 +1,7 @@
 (function() { 'use strict';
 
     angular
-        .module('zumbaster', ['ngAnimate', 'ngResource', 'ngDialog', 'angular-cache']);
+        .module('zumbaster', ['ngAnimate', 'nlLoading', 'ngResource', 'ngDialog', 'angular-cache']);
 
     $(document).on('turbolinks:load', function() {
         angular.bootstrap(document.body, ['zumbaster'], { strictDi : true });

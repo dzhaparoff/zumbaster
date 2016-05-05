@@ -1,0 +1,80 @@
+.site-search {
+  position: relative;
+  input {
+    background: rgba(0,0,0, 0.75);
+    color: white;
+    border: 1px solid rgba(53, 53, 53, 0.75);
+    width: 190px;
+    &:focus {
+      color: black;
+    }
+  }
+  .button {
+    background: $green;
+    line-height: 0.78rem;
+  }
+  .search-result {
+    position: absolute;
+    padding: 20px;
+    background: rgba(0,0,0, .85);
+    top: 60px;
+    right: 0;
+    width: 460px;
+    font-size: 0;
+    line-height: 0;
+    overflow-y: auto;
+    max-height: 600px;
+
+    .other-title {
+      font-size: rem-calc(18);
+      padding: 20px 0 15px;
+      color: white;
+      line-height: 24px;
+      span {
+        font-size: rem-calc(13);
+        display: block;
+      }
+    }
+    .nothing-found {
+      font-size: rem-calc(15);
+      color: white;
+    }
+    .item {
+      padding-bottom: 20px;
+      &.last {
+        padding-bottom: 0;
+      }
+      .poster {
+        width: 100px;
+        display: inline-block;
+      }
+      .body {
+        line-height: 20px;
+        width: 300px;
+        display: inline-block;
+        vertical-align: top;
+        padding-left: 20px;
+        .title {
+          font-size: rem-calc(16);
+        }
+        .en-title {
+          padding-top: 4px;
+          font-size: rem-calc(14);
+        }
+        .seasons {
+          padding-top: 6px;
+          .season {
+            width: 50%;
+            font-size: rem-calc(14);
+            display: inline-block;
+            color: white;
+            span {
+              font-size: rem-calc(12);
+              color: #ccc;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -114,6 +114,16 @@ class Show < ActiveRecord::Base
        self.column_names
     end
     alias_method :fields, :columns_list
+
+    def search_by_name name
+      myshows = Myshows.new
+      founded = myshows.find_show(name).map do |e, k|
+        k["existed"] = self.where("(ids->>'myshow')::integer = ?", k["id"]).first
+        k["existed_seasons"] = k["existed"].seasons  unless k["existed"].nil?
+        k
+      end
+      founded.sort! do |e| e["existed"].nil? ? 1 : -1 end
+    end
   end
 
   attr_reader :img

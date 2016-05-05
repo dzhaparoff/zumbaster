@@ -41,6 +41,8 @@ Rails.application.routes.draw do
   # auth end
 
   namespace :api do
+    resources :search, only: :show
+
     get '/:action' => 'api' # non RESTful api
     post '/:action' => 'api' # non RESTful api
   end
