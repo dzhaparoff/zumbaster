@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8d908706-0167-42a0-9a1f-7ca5b065c907" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/ng-app/api/api.factory.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/javascripts/ng-app/search/siteSearch.directive.coffee" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/assets/stylesheets/search.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/controllers/api/search_controller.rb" />
+    <list default="true" id="8d908706-0167-42a0-9a1f-7ca5b065c907" name="Default" comment="initial commit">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/ng-app/app.module.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/ng-app/app.module.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/assets/javascripts/ng-app/index.js" afterPath="$PROJECT_DIR$/app/assets/javascripts/ng-app/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/models/show.rb" afterPath="$PROJECT_DIR$/app/models/show.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/layouts/application.html.erb" afterPath="$PROJECT_DIR$/app/views/layouts/application.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/partials/_top_menu.html.erb" afterPath="$PROJECT_DIR$/app/views/partials/_top_menu.html.erb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
     </list>
     <ignored path="zumbaster.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -99,8 +89,8 @@
       <file leaf-file-name="siteSearch.directive.coffee" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/assets/javascripts/ng-app/search/siteSearch.directive.coffee">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="17" column="55" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
+            <state relative-caret-position="800">
+              <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
               <folding />
             </state>
           </provider>
@@ -1746,14 +1736,7 @@
       <workItem from="1461945720592" duration="1054000" />
       <workItem from="1461959734481" duration="421000" />
       <workItem from="1462193133173" duration="2842000" />
-      <workItem from="1462377229969" duration="11737000" />
-    </task>
-    <task id="LOCAL-00208" summary="initial commit">
-      <created>1460565425475</created>
-      <option name="number" value="00208" />
-      <option name="presentableId" value="LOCAL-00208" />
-      <option name="project" value="LOCAL" />
-      <updated>1460565425475</updated>
+      <workItem from="1462377229969" duration="11745000" />
     </task>
     <task id="LOCAL-00209" summary="initial commit">
       <created>1460565744167</created>
@@ -2091,11 +2074,18 @@
       <option name="project" value="LOCAL" />
       <updated>1462198501311</updated>
     </task>
-    <option name="localTasksCounter" value="257" />
+    <task id="LOCAL-00257" summary="initial commit">
+      <created>1462443043208</created>
+      <option name="number" value="00257" />
+      <option name="presentableId" value="LOCAL-00257" />
+      <option name="project" value="LOCAL" />
+      <updated>1462443043208</updated>
+    </task>
+    <option name="localTasksCounter" value="258" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44074000" />
+    <option name="totallyTimeSpent" value="44082000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2571,8 +2561,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/assets/javascripts/ng-app/search/siteSearch.directive.coffee">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="17" column="55" selection-start-line="17" selection-start-column="55" selection-end-line="17" selection-end-column="55" />
+        <state relative-caret-position="800">
+          <caret line="33" column="79" selection-start-line="33" selection-start-column="79" selection-end-line="33" selection-end-column="79" />
           <folding />
         </state>
       </provider>
