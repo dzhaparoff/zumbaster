@@ -16,7 +16,7 @@ class MainpageController < ApplicationController
                 - s.rating.imdb_rating.value * s.rating.kp_rating.value / 2
               end
     else
-      top = Show.where(id: [20, 29, 33, 17, 18, 22, 31, 32, 39, 28, 81])
+      top = Show.where(id: [20, 29, 33, 17, 18, 22, 31, 32, 39, 81])
     end
 
     @top_ten = top[0...10]
