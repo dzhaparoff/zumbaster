@@ -26,6 +26,7 @@ class MainpageController < ApplicationController
     @random_show = rand_shows.offset(random_seed).first
 
     @popular_shows = Show.where(title_ru: [
+        "Игра престолов",
         "Сверхъестественное",
         "Ходячие мертвецы",
         "Стрела",
