@@ -86,7 +86,7 @@ class Moonwalk
     return false unless video_token
 
     playlist_request = faraday.post do |b|
-      b.url '/sessions/create_session'
+      b.url '/sessions/create_new'
       b.headers['Host'] = 'moonwalk.cc'
       b.headers['Connection'] = 'keep-alive'
       b.headers['Origin'] = 'http://moonwalk.cc'
@@ -97,7 +97,7 @@ class Moonwalk
       b.headers['Accept-Encoding'] = 'gzip, deflate'
       b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
       b.headers['X-CSRF-Token'] = csrf_token
-      b.headers['Content-Data'] = secret_key
+      b.headers['Encoding-Pool'] = secret_key
       b.body = URI.encode_www_form({
                                        partner: '',
                                        d_id: 21609,

@@ -73,7 +73,6 @@ class Translation < ActiveRecord::Base
     end
 
     self.subtitles = subtitles
-
     secret_key = encode_request_header secret_key
 
     return false if video_token == false
@@ -108,7 +107,7 @@ class Translation < ActiveRecord::Base
   end
 
   def find_request_header_content script
-    secret_key_raw = script.text.to_s.scan(/setRequestHeader\|([a-zA-Z0-9\.]+)\|/)
+    secret_key_raw = script.text.to_s.scan(/setRequestHeader\|\|([a-zA-Z0-9\.\:]+)\|/)
     return false if secret_key_raw.first.nil? || secret_key_raw.nil? || secret_key_raw.size == 0
     secret_key_raw.first.first
   end
