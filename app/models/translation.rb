@@ -7,10 +7,8 @@ class Translation < ActiveRecord::Base
   end
 
   def translation_video_exist? type
-
-    return false if Time.at(expires) < Time.now
-
-    if type == :mobile
+    # return false if Time.at(expires) < Time.now
+    if type != :mobile
       return false if f4m.nil?
       responce = Faraday.get(f4m)
       responce.status == 200
@@ -64,6 +62,7 @@ class Translation < ActiveRecord::Base
     subtitles = false
 
     csrf_token = doc.search('head > meta[name="csrf-token"]')[0]['content']
+
     doc.search('body > script').each do |script|
       unless video_token && secret_key
         subtitles = find_subtitles script
@@ -81,7 +80,7 @@ class Translation < ActiveRecord::Base
 
     self.f4m = new_playlist['manifest_f4m']
     self.m3u8 = new_playlist['manifest_m3u8']
-    self.expires = new_playlist['manifest_f4m'][/expired=(\d+)/].delete('expired=').to_i
+    # self.expires = new_playlist['manifest_f4m'][/expired=(\d+)/].delete('expired=').to_i
     self.moonwalk_token = video_token
 
     self.save

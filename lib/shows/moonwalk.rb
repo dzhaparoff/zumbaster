@@ -86,7 +86,7 @@ class Moonwalk
     return false unless video_token
 
     playlist_request = faraday.post do |b|
-      b.url '/sessions/create_new'
+      b.url '/sessions/new_session'
       b.headers['Host'] = 'moonwalk.cc'
       b.headers['Connection'] = 'keep-alive'
       b.headers['Origin'] = 'http://moonwalk.cc'
