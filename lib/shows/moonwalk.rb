@@ -99,11 +99,11 @@ class Moonwalk
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['Encoding-Pool'] = secret_key
       b.body = URI.encode_www_form({
-                                       partner: '',
-                                       d_id: 21609,
+                                       mw_pid: nil,
+                                       mw_did: 21609,
                                        video_token: video_token,
-                                       content_type: 'movie',
-                                       access_key: '0fb74eb4b2c16d45fe',
+                                       content_type: 'serial',
+                                       access_key: '75204f694b34d5f1',
                                        cd: 0
                                    })
     end
