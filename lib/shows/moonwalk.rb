@@ -101,6 +101,8 @@ class Moonwalk
       b.body = URI.encode_www_form({
                                        mw_pid: nil,
                                        mw_did: 21609,
+                                       # mw_pid: 2502,
+                                       # mw_did: 355795,
                                        video_token: video_token,
                                        content_type: 'serial',
                                        access_key: '75204f694b34d5f1',

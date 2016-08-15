@@ -79,6 +79,8 @@ class Translation < ActiveRecord::Base
 
     new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, secret_key, csrf_token
 
+    new_playlist = new_playlist['data']
+
     self.f4m = new_playlist['manifest_f4m']
     self.m3u8 = new_playlist['manifest_m3u8']
     self.expires = new_playlist['manifest_f4m'][/expired=(\d+)/].delete('expired=').to_i
