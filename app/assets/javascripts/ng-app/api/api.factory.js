@@ -31,10 +31,10 @@
     return '?' + parts.join("&");
   }
 
-  function ApiFactory($http, $q, $compile, $interval, $loading, $resource, $locale){
+  function ApiFactory($http, $q, $compile, $interval, $loading, $resource, $locale) {
     var api_url = '/api/:locale/';
 
-    function Api(){
+    function Api() {
       this.name = 'Api';
       this.resource = Resource;
     }
