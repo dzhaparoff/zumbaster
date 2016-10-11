@@ -214,7 +214,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
     show.save
 
-    sleep .1
+    sleep 0.1
 
     @item = show
     render action: :show, formats: :json
