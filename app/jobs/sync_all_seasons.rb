@@ -2,7 +2,7 @@ class SyncAllSeasonsJob < ProgressJob::Base
 
   def initialize(show)
     @show = show
-    @force_reload = false
+    @force_reload = true
   end
 
   def perform
