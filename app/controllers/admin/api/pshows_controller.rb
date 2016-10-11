@@ -153,12 +153,59 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
       return render json: show
     end
 
-    show.poster = URI.parse(trakt_show['images']['poster']['full']) unless trakt_show['images']['poster']['full'].nil?
-    show.fanart = URI.parse(trakt_show['images']['fanart']['full']) unless trakt_show['images']['fanart']['full'].nil?
-    show.logo = URI.parse(trakt_show['images']['logo']['full']) unless trakt_show['images']['logo']['full'].nil?
-    show.clearart = URI.parse(trakt_show['images']['clearart']['full']) unless trakt_show['images']['clearart']['full'].nil?
-    show.banner = URI.parse(trakt_show['images']['banner']['full']) unless trakt_show['images']['banner']['full'].nil?
-    show.thumb = URI.parse(trakt_show['images']['thumb']['full']) unless trakt_show['images']['thumb']['full'].nil?
+    begin
+      poster_full_src = trakt_show['images']['poster']['full']
+      if poster_full_src.present?
+        poster_full_src = poster_full_src.sub('medium', 'original')
+        show.poster = URI.parse(poster_full_src)
+      end
+    rescue
+    end
+
+    begin
+      fanart_full_src = trakt_show['images']['fanart']['full']
+      if fanart_full_src.present?
+        fanart_full_src = fanart_full_src.sub('medium', 'original')
+        show.fanart = URI.parse(fanart_full_src)
+      end
+    rescue
+    end
+
+    begin
+      logo_full_src = trakt_show['images']['logo']['full']
+      if logo_full_src.present?
+        logo_full_src = logo_full_src.sub('medium', 'original')
+        show.logo = URI.parse(logo_full_src)
+      end
+    rescue
+    end
+
+    begin
+      clearart_full_src = trakt_show['images']['clearart']['full']
+      if clearart_full_src.present?
+        clearart_full_src = clearart_full_src.sub('medium', 'original')
+        show.clearart = URI.parse(clearart_full_src)
+      end
+    rescue
+    end
+
+    begin
+      banner_full_src = trakt_show['images']['banner']['full']
+      if banner_full_src.present?
+        banner_full_src = banner_full_src.sub('medium', 'original')
+        show.banner = URI.parse(banner_full_src)
+      end
+    rescue
+    end
+
+    begin
+      thumb_full_src = trakt_show['images']['thumb']['full']
+      if thumb_full_src.present?
+        thumb_full_src = thumb_full_src.sub('medium', 'original')
+        show.thumb = URI.parse(thumb_full_src)
+      end
+    rescue
+    end
 
     if show.poster_ru.exists? || show.ids['kp'].to_i == 0
       return render json: show
@@ -167,7 +214,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
     show.save
 
-    sleep 0.01
+    sleep .1
 
     @item = show
     render action: :show, formats: :json
