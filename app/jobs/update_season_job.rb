@@ -34,8 +34,24 @@ class UpdateSeasonJob < ActiveJob::Base
           season.aired_episodes = trakt_season['aired_episodes']
           season.description_ru = trakt_season['overview'] unless season.description_ru.nil?
 
-          season.poster = URI.parse trakt_season['images']['poster']['full'] unless trakt_season['images']['poster']['full'].nil?
-          season.thumb = URI.parse trakt_season['images']['thumb']['full'] unless trakt_season['images']['thumb']['full'].nil?
+          begin
+            poster_full_src = trakt_season['images']['poster']['full']
+            if poster_full_src.present?
+              poster_full_src = poster_full_src.sub('medium', 'original')
+              season.poster = URI.parse(poster_full_src)
+            end
+          rescue
+          end
+
+          begin
+            thumb_full_src = trakt_season['images']['thumb']['full']
+            if thumb_full_src.present?
+              thumb_full_src = thumb_full_src.sub('medium', 'original')
+              season.thumb = URI.parse(thumb_full_src)
+            end
+          rescue
+          end
+
           sleep 0.5
           season.save
 
@@ -61,7 +77,14 @@ class UpdateSeasonJob < ActiveJob::Base
 
             unless episode['images']['screenshot']['full'].nil? || (e.screenshot.exists? && !@force_reload)
               # screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
-              e.screenshot = URI.parse episode['images']['screenshot']['full']
+              begin
+                screenshot_full_src = episode['images']['screenshot']['full']
+                if screenshot_full_src.present?
+                  screenshot_full_src = screenshot_full_src.sub('medium', 'original')
+                  e.screenshot = URI.parse(screenshot_full_src)
+                end
+              rescue
+              end
               puts "reloading screenshot for episode #{e.number}"
             end
 

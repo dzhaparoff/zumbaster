@@ -32,8 +32,23 @@ class SyncAllSeasonsJob < ProgressJob::Base
       s.slug_ru = s.slug_en = "#{season_number}"
       s.description_ru = season['overview']
 
-      s.poster = URI.parse season['images']['poster']['full'] unless season['images']['poster']['full'].nil?
-      s.thumb = URI.parse season['images']['thumb']['full'] unless season['images']['thumb']['full'].nil?
+      begin
+        poster_full_src = season['images']['poster']['full']
+        if poster_full_src.present?
+          poster_full_src = poster_full_src.sub('medium', 'original')
+          s.poster = URI.parse(poster_full_src)
+        end
+      rescue
+      end
+
+      begin
+        thumb_full_src = season['images']['thumb']['full']
+        if thumb_full_src.present?
+          thumb_full_src = thumb_full_src.sub('medium', 'original')
+          s.thumb = URI.parse(thumb_full_src)
+        end
+      rescue
+      end
 
       s.save
 
@@ -58,9 +73,13 @@ class SyncAllSeasonsJob < ProgressJob::Base
         e.abs_name = "#{season['number']}-#{episode['number']}"
 
         unless episode['images']['screenshot']['full'].nil? || (e.screenshot.exists? && !@force_reload)
-          screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
-          e.screenshot = URI.parse episode['images']['screenshot']['full'] if screenshot_status == 200
-          puts "reloading screenshot for episode #{e.number}"
+          begin
+            screenshot_full_src = episode['images']['screenshot']['full'].sub('medium', 'original')
+            screenshot_status = Faraday.new.get(screenshot_full_src).status
+            e.screenshot = URI.parse screenshot_full_src if screenshot_status == 200
+            puts "reloading screenshot for episode #{e.number}"
+          rescue
+          end
         end
 
         translation = @tvdb.episode_translation episode['ids']["tvdb"]
