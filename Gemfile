@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '>= 5.0.0.beta3'
+gem 'rails', '>= 5.0.0.1'
 gem 'figaro' # app configuration using ENV and a single YAML file
 
 gem 'puma'

@@ -37,7 +37,9 @@ class UpdateSeasonJob < ActiveJob::Base
           begin
             poster_full_src = trakt_season['images']['poster']['full']
             if poster_full_src.present?
-              poster_full_src = poster_full_src.sub('medium', 'original')
+              if poster_full_src.scan(/medium/).count > 0
+                poster_full_src = poster_full_src.sub('medium', 'original')
+              end
               season.poster = URI.parse(poster_full_src)
             end
           rescue
@@ -46,7 +48,9 @@ class UpdateSeasonJob < ActiveJob::Base
           begin
             thumb_full_src = trakt_season['images']['thumb']['full']
             if thumb_full_src.present?
-              thumb_full_src = thumb_full_src.sub('medium', 'original')
+              if thumb_full_src.scan(/medium/).count > 0
+                thumb_full_src = thumb_full_src.sub('medium', 'original')
+              end
               season.thumb = URI.parse(thumb_full_src)
             end
           rescue
@@ -76,12 +80,14 @@ class UpdateSeasonJob < ActiveJob::Base
             e.abs_name = "#{trakt_season['number']}-#{episode['number']}"
 
             unless episode['images']['screenshot']['full'].nil? || (e.screenshot.exists? && !@force_reload)
-              # screenshot_status = Faraday.new.get(episode['images']['screenshot']['full']).status
               begin
                 screenshot_full_src = episode['images']['screenshot']['full']
                 if screenshot_full_src.present?
-                  screenshot_full_src = screenshot_full_src.sub('medium', 'original')
-                  e.screenshot = URI.parse(screenshot_full_src)
+                  if screenshot_full_src.scan(/medium/).count > 0
+                    screenshot_full_src = screenshot_full_src.sub('medium', 'original')
+                  end
+                  screenshot_status = Faraday.new.get(screenshot_full_src).status
+                  e.screenshot = URI.parse(screenshot_full_src) if screenshot_status == 200
                 end
               rescue
               end

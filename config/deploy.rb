@@ -78,6 +78,17 @@ namespace :sitemap do
   end
 end
 
+namespace :paperclip do
+  desc 'Paperclip'
+  task :refreshScreenshots do
+    on roles(:app) do
+      within release_path do
+        execute :rake, "paperclip:refresh CLASS=Episode RAILS_ENV=production"
+      end
+    end
+  end
+end
+
 
 namespace :deploy do
 
