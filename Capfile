@@ -4,7 +4,7 @@ require 'capistrano/deploy'
 require 'capistrano/rvm'
 require 'capistrano/bundler'
 require 'capistrano/rails'
-require 'capistrano/delayed-job'
+require 'capistrano/delayed_job'
 require 'capistrano/puma'
 require 'whenever/capistrano'
 

@@ -68,7 +68,6 @@ class Translation < ActiveRecord::Base
       unless video_token && secret_key
         subtitles = find_subtitles script
         video_token = check_script_tag script, video_token
-        secret_key = find_request_header_content(script) if video_token
       end
     end
 
@@ -77,7 +76,7 @@ class Translation < ActiveRecord::Base
 
     return false if video_token == false
 
-    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, secret_key, csrf_token
+    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token
 
    if new_playlist.is_a? Hash
      new_playlist = new_playlist.first[1]
@@ -108,12 +107,6 @@ class Translation < ActiveRecord::Base
     raw = script.text.to_s.scan(/src: \"(http:\/\/[a-zA-Z0-9.]+\/static\/srt\/subtitles\/[a-zA-Z0-9-._]+\/[a-zA-Z0-9-._]+)\"/)
     return false if raw.nil? || raw.size == 0 || raw.first.nil?
     raw.first.first
-  end
-
-  def find_request_header_content script
-    secret_key_raw = script.text.to_s.scan(/setRequestHeader\|\|([a-zA-Z0-9\.\:]+)\|/)
-    return false if secret_key_raw.first.nil? || secret_key_raw.nil? || secret_key_raw.size == 0
-    secret_key_raw.first.first
   end
 
   def encode_request_header string

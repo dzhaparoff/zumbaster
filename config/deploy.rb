@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '3.4.1'
+lock '3.6.1'
 
 set :application, 'zumbaster'
 set :repo_url, 'https://github.com/dzhaparoff/zumbaster.git'

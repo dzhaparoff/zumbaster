@@ -82,7 +82,7 @@ class Moonwalk
     }
   end
 
-  def self.playlist_getter faraday, video_token, secret_key, csrf_token
+  def self.playlist_getter faraday, video_token, csrf_token
     return false unless video_token
 
     playlist_request = faraday.post do |b|
@@ -93,22 +93,18 @@ class Moonwalk
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
       b.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
       b.headers['Accept'] = '*/*'
-      b.headers['Referer'] = "http://moonwalk.cc/video/#{video_token}/iframe"
+      b.headers['Referer'] = "http://moonwalk.cc/serial/#{video_token}/iframe"
       b.headers['Accept-Encoding'] = 'gzip, deflate'
       b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
       b.headers['X-CSRF-Token'] = csrf_token
-      b.headers['Encoding-Pool'] = secret_key
+      b.headers['X-Data-Pool'] = 'Stream'
       b.body = URI.encode_www_form({
-                                       # mw_pid: nil,
-                                       # mw_did: 21609,
-                                      #  mw_pid: 2502,
-                                      #  mw_did: 355795,
                                        mw_pid: 219,
                                        mw_domain_id: 10653,
                                        video_token: video_token,
                                        content_type: 'serial',
                                        access_key: '75204f694b34d5f1',
-                                       cd: 0
+                                       ad_attr: 0
                                    })
     end
 
