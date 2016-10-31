@@ -84,6 +84,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
   def sync_with_trakt
     show = Show.unscoped.find(params[:id])
     @item = show.sync_with_trakt
+    show.sync_meta
     render action: :show, formats: :json
   end
 
