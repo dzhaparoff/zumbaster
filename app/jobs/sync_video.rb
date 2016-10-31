@@ -10,6 +10,8 @@ class SyncShowVideoJob < ProgressJob::Base
     show = @show
     return false if show.ids['kp'].to_i == 0
 
+    Translator.sync
+
     kp = show.ids['kp']
     moonwalk = @moonwalk.show kp
 

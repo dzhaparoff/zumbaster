@@ -20,9 +20,11 @@ class UpdateSeasonJob < ActiveJob::Base
         show = episode_for_update.show
         season = episode_for_update.season
 
-        imdb = "tt%07d" % show.ids['imdb'].to_i
-        trakt_seasons = @trakt.show_seasons imdb
+        imdb          = "tt%07d" % show.ids['imdb'].to_i
+        trakt_seasons = show.seasons_trakt
+
         sleep 0.5
+
         next if trakt_seasons.nil?
 
         trakt_seasons.each do |trakt_season|
@@ -30,78 +32,36 @@ class UpdateSeasonJob < ActiveJob::Base
 
           season_number = "s%02d" % season.number
 
-          season.episode_count = trakt_season['episode_count']
+          season.episode_count  = trakt_season['episode_count']
           season.aired_episodes = trakt_season['aired_episodes']
-          season.description_ru = trakt_season['overview'] unless season.description_ru.nil?
-
-          begin
-            poster_full_src = trakt_season['images']['poster']['full']
-            if poster_full_src.present?
-              if poster_full_src.scan(/medium/).count > 0
-                poster_full_src = poster_full_src.sub('medium', 'original')
-              end
-              season.poster = URI.parse(poster_full_src)
-            end
-          rescue
-          end
-
-          begin
-            thumb_full_src = trakt_season['images']['thumb']['full']
-            if thumb_full_src.present?
-              if thumb_full_src.scan(/medium/).count > 0
-                thumb_full_src = thumb_full_src.sub('medium', 'original')
-              end
-              season.thumb = URI.parse(thumb_full_src)
-            end
-          rescue
-          end
-
-          sleep 0.5
           season.save
+
+          season.sync_by_tmdb
+          season.sync_images_by_tmdb
 
           next if trakt_season['episodes'].nil?
 
           trakt_season['episodes'].each do |episode|
             e = Episode.where(show: show, season: season, number: episode['number']).first_or_create
-            sleep 0.5
+            sleep 0.25
+
             episode_number = "e%02d" % episode['number']
-            e.show = show
-            e.season = season
-            e.number = episode['number']
             e.ids = episode['ids']
-            e.slug_ru = "#{season_number}#{episode_number}"
-            e.slug_en = "#{season_number}#{episode_number}"
-            e.title_en = episode['title']
-            e.slug_en = episode['title'].parameterize unless episode['title'].nil?
-            e.number_abs = episode['number_abs']
+
+            e.slug_ru        = "#{season_number}#{episode_number}"
+            e.slug_en        = "#{season_number}#{episode_number}"
+
+            e.title_en       = episode['title']
+            e.number_abs     = episode['number_abs']
             e.description_en = episode['overview']
-            e.first_aired = DateTime.parse episode['first_aired'] unless episode['first_aired'].nil?
 
-            e.abs_name = "#{trakt_season['number']}-#{episode['number']}"
+            e.first_aired    = DateTime.parse episode['first_aired'] unless episode['first_aired'].nil?
 
-            unless episode['images']['screenshot']['full'].nil? || (e.screenshot.exists? && !@force_reload)
-              begin
-                screenshot_full_src = episode['images']['screenshot']['full']
-                if screenshot_full_src.present?
-                  if screenshot_full_src.scan(/medium/).count > 0
-                    screenshot_full_src = screenshot_full_src.sub('medium', 'original')
-                  end
-                  screenshot_status = Faraday.new.get(screenshot_full_src).status
-                  e.screenshot = URI.parse(screenshot_full_src) if screenshot_status == 200
-                end
-              rescue
-              end
-              puts "reloading screenshot for episode #{e.number}"
-            end
+            e.abs_name       = "#{season['number']}-#{episode['number']}"
 
-            translation = @tvdb.episode_translation episode['ids']["tvdb"]
-
-            unless translation.nil?
-              e.title_ru = translation[:title_ru] if translation[:title_ru] != episode['title']
-              e.description_ru = translation[:description_ru]
-              e.abs_name = "#{translation[:season]}-#{translation[:episode]}" if translation[:episode] > 0
-              e.number_abs = translation[:episode] if translation[:episode] > 0
-            end
+            e.sync_translation_from_tvdb
+            e.sync_by_tmdb
+            e.sync_images_by_tmdb
 
             e.save
           end

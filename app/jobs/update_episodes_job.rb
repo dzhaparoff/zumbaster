@@ -6,6 +6,8 @@ class UpdateEpisodesJob < ActiveJob::Base
     date = DateTime.now - 7.days
     @moonwalk = Moonwalk.new
 
+    Translator.sync
+
     7.times do |increment|
 
       date = date + increment.day
