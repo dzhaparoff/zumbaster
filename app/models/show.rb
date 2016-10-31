@@ -212,6 +212,8 @@ class Show < ActiveRecord::Base
       show.genres << g unless g.nil?
     end unless show.genres.count > 0
 
+    show.save
+
     show
   end
 
