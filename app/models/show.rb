@@ -303,7 +303,7 @@ class Show < ActiveRecord::Base
     end
 
     if _fanart_images['tvbanner'].present?
-      show.banner = URI.parse(_fanart_images['tvbanner']['url'].first) if _fanart_images['tvbanner'].first.present?
+      show.banner = URI.parse(_fanart_images['tvbanner'].first['url']) if _fanart_images['tvbanner'].first.present?
     end
 
     if !show.poster_ru.exists? && show.ids['kp'].present?
