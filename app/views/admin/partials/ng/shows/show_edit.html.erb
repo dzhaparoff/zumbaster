@@ -97,6 +97,26 @@
         <md-progress-linear md-mode="{{editor.model.$api.progress.sync_seasons.mode}}" ng-if="editor.model.$api.progress.sync_seasons.loading" value="{{editor.model.$api.progress.sync_seasons.percentage}}"></md-progress-linear>
       </md-list>
       <md-list>
+        <md-list-item ng-click="show.trakt(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать информацию с Trakt.tv</p>
+        </md-list-item>
+        <md-list-item ng-click="show.ids(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать Ids</p>
+        </md-list-item>
+        <md-list-item ng-click="show.tmdb(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать tmdb</p>
+        </md-list-item>
+        <md-list-item ng-click="show.fanart(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать информацию с Fanart</p>
+        </md-list-item>
+        <md-list-item ng-click="show.translate(editor, $event)">
+          <md-icon>sync</md-icon>
+          <p>Синхронизировать перевод</p>
+        </md-list-item>
         <md-list-item ng-click="show.episodes(editor, $event)">
           <md-icon>sync</md-icon>
           <p>Синхронизировать видео эпизодов</p>

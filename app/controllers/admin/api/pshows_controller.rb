@@ -75,179 +75,51 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     render json: shows.values
   end
 
+  def sync_ids
+    show = Show.unscoped.find(params[:id])
+    @item = show.sync_ids
+    render action: :show, formats: :json
+  end
+
   def sync_with_trakt
     show = Show.unscoped.find(params[:id])
+    @item = show.sync_with_trakt
+    render action: :show, formats: :json
+  end
 
-    if show.ids['imdb'].to_i == 0
-      return render json: show
-    end
+  def sync_meta
+    show = Show.unscoped.find(params[:id])
+    @item = show.sync_meta
+    render action: :show, formats: :json
+  end
 
-    imdb = imdb_to_trakt_id(show.ids['imdb'])
-    trakt_show = @trakt.show(imdb)
+  def sync_with_tmdb
+    show = Show.unscoped.find(params[:id])
+    @item = show.sync_with_tmdb
+    render action: :show, formats: :json
+  end
 
-    return false if trakt_show.nil?
-
-    show.slug_en = trakt_show['ids']['slug']
-    show.title_en = trakt_show['title']
-    show.description_en = trakt_show['overview']
-    show.first_aired = DateTime.parse trakt_show['first_aired']
-    #show.updated = DateTime.parse trakt_show['updated_at']
-    show.airs = trakt_show['airs']
-    show.certification = trakt_show['certification']
-    show.network = trakt_show['network']
-    show.country = trakt_show['country']
-    show.homepage = trakt_show['homepage']
-    show.status = trakt_show['status']
-    show.aired_episodes = trakt_show['aired_episodes']
-
-    trakt_show['genres'].each do |genre|
-      g = Genre.find_by_slug_en genre
-      show.genres << g unless g.nil?
-    end unless show.genres.count > 0
-
-    show.save
-
-    sleep 0.5
-
-    @item = show
+  def sync_with_fanart
+    show  = Show.unscoped.find(params[:id])
+    @item = show.sync_with_fanart
     render action: :show, formats: :json
   end
 
   def sync_translate
-    show = Show.unscoped.find(params[:id])
-
-    unless show.description_ru.nil? || show.ids['imdb'].to_i > 0
-      return render json: show
-    end
-
-    imdb = imdb_to_trakt_id show.ids['imdb']
-    trakt_show_translation = @trakt.show_translations imdb
-    myshow = @myshow.get_show show.ids['myshow']
-    myshow_translation = myshow['description']
-
-    if trakt_show_translation.nil? || trakt_show_translation[0].nil?
-      show.description_ru = "#{myshow_translation}"
-    else
-      show.description_ru = "#{myshow_translation} <p>#{trakt_show_translation[0]['overview']}</p>"
-    end
-
-    show.save
-
-    sleep 0.5
-
-    @item = show
+    show  = Show.unscoped.find(params[:id])
+    @item = show.sync_translate
     render action: :show, formats: :json
   end
 
   def sync_pics
-    show = Show.unscoped.find(params[:id])
-
-    if show.ids['imdb'].to_i == 0 || show.poster.exists? || show.fanart.exists? || show.logo.exists? || show.clearart.exists? || show.banner.exists? || show.thumb.exists?
-      return render json: show
-    end
-
-    imdb = imdb_to_trakt_id show.ids['imdb']
-    trakt_show = @trakt.show imdb
-
-    if trakt_show.nil?
-      return render json: show
-    end
-
-    begin
-      poster_full_src = trakt_show['images']['poster']['full']
-      if poster_full_src.present?
-        poster_full_src = poster_full_src.sub('medium', 'original')
-        show.poster = URI.parse(poster_full_src)
-      end
-    rescue
-    end
-
-    begin
-      fanart_full_src = trakt_show['images']['fanart']['full']
-      if fanart_full_src.present?
-        fanart_full_src = fanart_full_src.sub('medium', 'original')
-        show.fanart = URI.parse(fanart_full_src)
-      end
-    rescue
-    end
-
-    begin
-      logo_full_src = trakt_show['images']['logo']['full']
-      if logo_full_src.present?
-        logo_full_src = logo_full_src.sub('medium', 'original')
-        show.logo = URI.parse(logo_full_src)
-      end
-    rescue
-    end
-
-    begin
-      clearart_full_src = trakt_show['images']['clearart']['full']
-      if clearart_full_src.present?
-        clearart_full_src = clearart_full_src.sub('medium', 'original')
-        show.clearart = URI.parse(clearart_full_src)
-      end
-    rescue
-    end
-
-    begin
-      banner_full_src = trakt_show['images']['banner']['full']
-      if banner_full_src.present?
-        banner_full_src = banner_full_src.sub('medium', 'original')
-        show.banner = URI.parse(banner_full_src)
-      end
-    rescue
-    end
-
-    begin
-      thumb_full_src = trakt_show['images']['thumb']['full']
-      if thumb_full_src.present?
-        thumb_full_src = thumb_full_src.sub('medium', 'original')
-        show.thumb = URI.parse(thumb_full_src)
-      end
-    rescue
-    end
-
-    if show.poster_ru.exists? || show.ids['kp'].to_i == 0
-      return render json: show
-    end
-    show.poster_ru = URI.parse("http://st.kinopoisk.ru/images/film_big/#{show.ids['kp']}.jpg")
-
-    show.save
-
-    sleep 0.1
-
-    @item = show
+    show  = Show.unscoped.find(params[:id])
+    @item = show.sync_pics
     render action: :show, formats: :json
   end
 
   def sync_rating
     show = Show.unscoped.find(params[:id])
-
-    if show.ids['kp'].to_i == 0
-      return render json: show
-    end
-
-    kp = show.ids['kp']
-    rating = @kinopoisk.rating(kp)
-
-    new_rating = Rating.find_or_create_by rated: show do |r|
-      new_rating_imdb = ImdbRating.find_or_create_by rating: r do |r_item|
-        r_item.value = rating[:imdb]
-        r_item.count = rating[:imdb_num_vote]
-      end
-      new_rating_imdb.save
-
-      new_rating_kp = KpRating.find_or_create_by rating: r do |r_item|
-        r_item.value = rating[:kp]
-        r_item.count = rating[:kp_num_vote]
-      end
-      new_rating_kp.save
-    end
-    new_rating.save
-
-    sleep 0.01
-
-    @item = show
+    @item = show.sync_rating
     render action: :show, formats: :json
   end
 
@@ -259,44 +131,44 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
     if show.ids['kp'].to_i == 0
       return render json: show
     end
-
-    imdb = imdb_to_trakt_id show.ids['imdb']
-    people = @trakt.show_people imdb
-
-    people['cast'].each do |c|
-      person = Person.where(slug_en: c['person']['ids']['slug']).first_or_create
-      cast = show.casts.where(character: c['character'], person: person, show: show).first_or_create
-      person.name_en = c['person']['name']
-      person.slug_en = c['person']['ids']['slug']
-      person.biography_en = c['person']['biography']
-      person.birthday = Date.parse c['person']['birthday'] unless c['person']['birthday'].nil?
-      person.death = Date.parse c['person']['death'] unless c['person']['death'].nil?
-      person.ids = c['person']['ids']
-      person.headshot = c['person']['images']['headshot']['full'] unless c['person']['images']['headshot']['full'].nil? || person.headshot.exists?
-      person.save
-      cast.save
-      show.casts << cast
-    end unless people['cast'].nil?
-
-    people['crew'].each do |key, group|
-      group.each do |c|
-        person = Person.where(slug_en: c['person']['ids']['slug']).first_or_create
-        crew = show.crews.where(job: c['job'], person: person, show: show).first_or_create
-        person.name_en = c['person']['name']
-        person.slug_en = c['person']['ids']['slug']
-        person.biography_en = c['person']['biography']
-        person.birthday = Date.parse c['person']['birthday'] unless c['person']['birthday'].nil?
-        person.death = Date.parse c['person']['death'] unless c['person']['death'].nil?
-        person.ids = c['person']['ids']
-        person.headshot = c['person']['images']['headshot']['full'] unless c['person']['images']['headshot']['full'].nil? || person.headshot.exists?
-        person.save
-        crew.job_group = key
-        crew.save
-        show.crews << crew
-      end
-    end unless people['crew'].nil?
-
-    show.save
+    #
+    # imdb = imdb_to_trakt_id show.ids['imdb']
+    # people = @trakt.show_people imdb
+    #
+    # people['cast'].each do |c|
+    #   person = Person.where(slug_en: c['person']['ids']['slug']).first_or_create
+    #   cast = show.casts.where(character: c['character'], person: person, show: show).first_or_create
+    #   person.name_en = c['person']['name']
+    #   person.slug_en = c['person']['ids']['slug']
+    #   person.biography_en = c['person']['biography']
+    #   person.birthday = Date.parse c['person']['birthday'] unless c['person']['birthday'].nil?
+    #   person.death = Date.parse c['person']['death'] unless c['person']['death'].nil?
+    #   person.ids = c['person']['ids']
+    #   person.headshot = c['person']['images']['headshot']['full'] unless c['person']['images']['headshot']['full'].nil? || person.headshot.exists?
+    #   person.save
+    #   cast.save
+    #   show.casts << cast
+    # end unless people['cast'].nil?
+    #
+    # people['crew'].each do |key, group|
+    #   group.each do |c|
+    #     person = Person.where(slug_en: c['person']['ids']['slug']).first_or_create
+    #     crew = show.crews.where(job: c['job'], person: person, show: show).first_or_create
+    #     person.name_en = c['person']['name']
+    #     person.slug_en = c['person']['ids']['slug']
+    #     person.biography_en = c['person']['biography']
+    #     person.birthday = Date.parse c['person']['birthday'] unless c['person']['birthday'].nil?
+    #     person.death = Date.parse c['person']['death'] unless c['person']['death'].nil?
+    #     person.ids = c['person']['ids']
+    #     person.headshot = c['person']['images']['headshot']['full'] unless c['person']['images']['headshot']['full'].nil? || person.headshot.exists?
+    #     person.save
+    #     crew.job_group = key
+    #     crew.save
+    #     show.crews << crew
+    #   end
+    # end unless people['crew'].nil?
+    #
+    # show.save
 
     @item = show
     render action: :show, formats: :json
@@ -305,21 +177,7 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
   def activate
     show = Show.unscoped.find(params[:id])
-
-    if show.ids['imdb'].to_i == 0
-      return render json: show
-    end
-
-    imdb = imdb_to_trakt_id(show.ids['imdb'])
-    trakt_show = @trakt.show(imdb)
-
-    return false if trakt_show.nil?
-    show.updated = DateTime.parse trakt_show['updated_at']
-    show.save
-
-    sleep 0.5
-
-    @item = show
+    @item = show.activate
     render action: :show, formats: :json
   end
 
@@ -334,63 +192,13 @@ class Admin::Api::PshowsController < Admin::Api::ApiController
 
   def sync_videos
     show = Show.unscoped.find(params[:id])
-
-    if show.ids['kp'].to_i == 0
-      return render json: show
-    end
-
-    kp = show.ids['kp']
-
-    moonwalk = @moonwalk.show kp
-
-    moonwalk.each do |m|
-      translator_id = m['translator_id']
-      moonwalk_episodes = @moonwalk.get_playlist_url_parallel kp, translator_id
-      moonwalk_episodes[:playlists].each_pair do |season_number, episodes|
-        episodes.each_pair do |episode_number, playlists|
-          episode = Episode.where(show: show, abs_name: "#{season_number.to_i}-#{episode_number.to_i}").take
-          translator = Translator.where(ex_id: translator_id).take
-          translation = Translation.where(episode: episode, translator: translator).first_or_create
-          translation.moonwalk_token = playlists['token'] unless translation.moonwalk_token == 'temp_token'
-          translation.save
-        end
-      end
-    end
-
-    @item = show
+    @item = show.sync_videos
     render action: :show, formats: :json
   end
 
   def sync_ru_names
     show = Show.unscoped.find(params[:id])
-
-    if show.ids['kp'].to_i == 0
-      return render json: show
-    end
-
-    kp = show.ids['kp']
-    kp_episode_names = @kinopoisk.episode_names kp
-    show.episodes.each do |episode|
-      title_en = episode.title_en
-      next if title_en.nil?
-      next if title_en.size < 2
-      kp_episode_names.each do |key, value|
-        next unless value.size > 0
-        regexp = Regexp.new("#{title_en}", Regexp::IGNORECASE)
-        if key.length > 1
-          regexp2 = Regexp.new("#{key}", Regexp::IGNORECASE)
-        else
-          regexp2 = key
-        end
-        if key[regexp] || title_en[regexp2]
-          episode.title_ru = value
-          episode.title_en = key
-        end
-      end
-      episode.save
-    end
-
-    @item = show
+    @item = show.sync_ru_names
     render action: :show, formats: :json
   end
 

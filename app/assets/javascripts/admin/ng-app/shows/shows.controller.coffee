@@ -52,8 +52,26 @@ class PengingShowCtrl
       .success (d) =>
         angular.merge(editor.item, d)
         @messages.show('Сериал активирован', 'save')
+  ids: (editor, ev) ->
+    ev.preventDefault() if ev?
+    editor.model.$api.$post('pshows/1.0/sync_ids', editor.item)
+    .success (d) =>
+      angular.merge(editor.item, d)
+      @messages.show('Ids синхронизированы', 'save')
+  fanart: (editor, ev) ->
+    ev.preventDefault() if ev?
+    editor.model.$api.$post('pshows/1.0/sync_with_fanart', editor.item)
+      .success (d) =>
+        angular.merge(editor.item, d)
+        @messages.show('Синхронизован с Fanart', 'save')
+  tmdb: (editor, ev) ->
+    ev.preventDefault() if ev?
+    editor.model.$api.$post('pshows/1.0/sync_with_tmdb', editor.item)
+    .success (d) =>
+      angular.merge(editor.item, d)
+      @messages.show('Tmdb синхронизирован', 'save')
 
-class ActiveShowCtrl
+class ActiveShowCtrl extends PengingShowCtrl
   constructor: ($scope, @messages) ->
   seasons: (editor, ev) ->
     ev.preventDefault() if ev?
@@ -70,18 +88,7 @@ class ActiveShowCtrl
     editor.model.$api.$post('pshows/1.0/sync_ru_names', editor.item)
       .success (d) =>
         @messages.show('Русскоязычные заголовки эпизодов синхронизированы', 'save')
-  pics: (editor, ev) ->
-    ev.preventDefault() if ev?
-    editor.model.$api.$post('pshows/1.0/sync_pics', editor.item)
-    .success (d) =>
-      angular.merge(editor.item, d)
-      @messages.show('Изображения синхронизированы', 'save')
-  rating: (editor, ev) ->
-    ev.preventDefault() if ev?
-    editor.model.$api.$post('pshows/1.0/sync_rating', editor.item)
-    .success (d) =>
-      angular.merge(editor.item, d)
-      @messages.show('Рейтинг синхронизирован', 'save')
+
 
 angular
   .module "admin"

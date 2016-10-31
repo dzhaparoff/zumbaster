@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160423105501) do
+ActiveRecord::Schema.define(version: 20161031102802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,10 @@ ActiveRecord::Schema.define(version: 20160423105501) do
     t.integer  "screenshot_file_size"
     t.datetime "screenshot_updated_at"
     t.text     "screenshot_meta"
+    t.json     "trakt_data"
+    t.json     "tmdb_data"
+    t.json     "tmdb_images"
+    t.json     "fanart_images"
   end
 
   create_table "genres", force: :cascade do |t|
@@ -162,6 +166,10 @@ ActiveRecord::Schema.define(version: 20160423105501) do
     t.datetime "thumb_updated_at"
     t.text     "poster_meta"
     t.text     "thumb_meta"
+    t.json     "trakt_data"
+    t.json     "tmdb_data"
+    t.json     "tmdb_images"
+    t.json     "fanart_images"
   end
 
   create_table "seos", force: :cascade do |t|
@@ -206,14 +214,6 @@ ActiveRecord::Schema.define(version: 20160423105501) do
     t.string   "poster_content_type"
     t.integer  "poster_file_size"
     t.datetime "poster_updated_at"
-    t.string   "logo_file_name"
-    t.string   "logo_content_type"
-    t.integer  "logo_file_size"
-    t.datetime "logo_updated_at"
-    t.string   "clearart_file_name"
-    t.string   "clearart_content_type"
-    t.integer  "clearart_file_size"
-    t.datetime "clearart_updated_at"
     t.string   "banner_file_name"
     t.string   "banner_content_type"
     t.integer  "banner_file_size"
@@ -233,6 +233,10 @@ ActiveRecord::Schema.define(version: 20160423105501) do
     t.text     "clearart_meta"
     t.text     "banner_meta"
     t.text     "thumb_meta"
+    t.json     "trakt_data"
+    t.json     "tmdb_data"
+    t.json     "tmdb_images"
+    t.json     "fanart_images"
     t.index ["network"], name: "index_shows_on_network", using: :btree
     t.index ["year"], name: "index_shows_on_year", using: :btree
   end

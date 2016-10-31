@@ -5,7 +5,7 @@ class Kinopoisk
   end
 
   def rating(kinopoisk_id)
-    rating = Nokogiri::Slop @http.get("http://rating.kinopoisk.ru/#{kinopoisk_id}.xml").body
+    rating = Nokogiri::Slop @http.get("https://rating.kinopoisk.ru/#{kinopoisk_id}.xml").body
 
     kp = rating.rating.kp_rating.content if defined? rating.rating.kp_rating
     kp_num_vote = rating.rating.kp_rating['num_vote'] if defined? rating.rating.kp_rating
