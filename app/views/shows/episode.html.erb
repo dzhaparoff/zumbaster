@@ -69,8 +69,11 @@
             <div class="flex-video widescreen">
               <div data-videoplayer="<%= e.id %>"
                    id="player_<%= e.id %>"
-                   <% if !e.subtitles.nil? && e.subtitles.size > 0 %>data-subtitles="<%= e.subtitles %>"<% end %>
-                   data-title="<%= "#{@episode.show.title_ru}: #{@episode.season.number} сезон - #{@episode.number} эпизод" %>"></div>
+                   data-title="<%= "#{@episode.show.title_ru}: #{@episode.season.number} сезон - #{@episode.number} эпизод" %>"
+                   <%- if(!e.subtitles.nil? && e.subtitles.size > 0) %>
+                   data-subtitles="<%= e.subtitles %>"
+                   <% end -%>
+                   ></div>
             </div>
           </div>
           <% unless @episode.next.nil? -%>
@@ -109,7 +112,10 @@
         <% end -%>
         <div class="small-10 columns push-1">
           <div class="flex-video widescreen">
-            <div data-videoplayer="<%= e.id %>" id="player_<%= e.id %>"></div>
+            <div data-videoplayer="<%= e.id %>"
+                 id="player_<%= e.id %>"
+                 data-title="<%= "#{@episode.show.title_ru}: #{@episode.season.number} сезон - #{@episode.number} эпизод" %>"
+                 ></div>
           </div>
         </div>
         <% unless @episode.next.nil? -%>

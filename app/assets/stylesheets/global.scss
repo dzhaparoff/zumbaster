@@ -81,3 +81,20 @@ footer {
 .banner-row {
   padding: rem-calc(40 0);
 }
+
+.rotator-ad {
+  noindex {
+    display: none;
+  }
+}
+
+
+.rotator-ad-episode {
+  max-height: 0;
+  transition: all .35s ease;
+  overflow: hidden;
+
+  &.show {
+    max-height: rem-calc(600);
+  }
+}

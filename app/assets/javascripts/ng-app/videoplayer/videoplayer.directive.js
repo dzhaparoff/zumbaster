@@ -32,9 +32,6 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI, on
         subtitles : '@'
       },
       link : function(scope, elem, attr){
-
-        console.log(scope.title);
-
         var playlist = new Playlists(scope.id);
 
         function construct_player(manifest) {
@@ -169,6 +166,13 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI, on
               ga('send', 'event', 'TV Shows', 'finish', scope.title);
             }
           }
+
+          if(arguments[1] == 'playing' && old_event == 'ready') {
+            if (typeof $('body .rotator-ad-episode')[0] !== 'undefined') {
+              $('body .rotator-ad-episode')[0].show().play();
+            }
+          }
+
           old_event = arguments[1];
         };
 

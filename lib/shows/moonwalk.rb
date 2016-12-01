@@ -62,16 +62,16 @@ class Moonwalk
 
 
   def self.get_iframe_page(iframe,s,e)
-    f = Faraday.new(url: APP_CONFIG['m_api_url']) do |builder|
-      builder.use :cookie_jar
+    f = Faraday.new(url: 'http://online.kinozz.net') do |builder|
+      builder.use     :cookie_jar
       builder.adapter :net_http
       builder.request :url_encoded
       builder.headers['Accept'] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
       builder.headers['Accept-Language'] = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2"
       builder.headers['Cache-Control'] = "max-age=0"
-      builder.headers['Connection'] = "keep-alive"
-      builder.headers['Host'] = "moonwalk.cc"
-      builder.headers['Referer'] = "http://moonwalk.cc/"
+      builder.headers['Connection']    = "keep-alive"
+      builder.headers['Host']          = "online.kinozz.net"
+      builder.headers['Referer']       = "http://kinozz.net/"
       builder.headers['Upgrade-Insecure-Requests'] = "1"
       builder.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
     end
@@ -82,31 +82,35 @@ class Moonwalk
     }
   end
 
-  def self.playlist_getter faraday, video_token, csrf_token
+  def self.playlist_getter faraday, video_token, csrf_token, uuid, referer
     return false unless video_token
 
     playlist_request = faraday.post do |b|
       b.url '/sessions/new_session'
-      b.headers['Host'] = 'moonwalk.cc'
       b.headers['Connection'] = 'keep-alive'
-      b.headers['Origin'] = 'http://moonwalk.cc'
-      b.headers['X-Requested-With'] = 'XMLHttpRequest'
+      b.headers['Host'] = 'online.kinozz.net'
+      b.headers['Origin'] = 'http://online.kinozz.net'
+      b.headers['Referer'] = referer.sub!("moonwalk.cc", "online.kinozz.net")
       b.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
       b.headers['Accept'] = '*/*'
-      b.headers['Referer'] = "http://moonwalk.cc/serial/#{video_token}/iframe"
       b.headers['Accept-Encoding'] = 'gzip, deflate'
       b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['X-Data-Pool'] = 'Stream'
+      b.headers['X-Requested-With'] = 'XMLHttpRequest'
       b.body = URI.encode_www_form({
-                                       mw_pid: 219,
-                                       mw_domain_id: 10653,
+                                       mw_pid: 934,
+                                       mw_domain_id: 25893,
                                        video_token: video_token,
                                        content_type: 'serial',
-                                       access_key: '75204f694b34d5f1',
-                                       ad_attr: 0
+                                       access_key: 'd5441152cb1dd4c4',
+                                       ad_attr: 0,
+                                       uuid: uuid,
+                                       debug: false
                                    })
     end
+
+    ap playlist_request
 
     JSON.parse playlist_request.body
   end

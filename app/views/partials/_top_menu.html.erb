@@ -21,7 +21,7 @@
         <div class="items">
           <div class="item" data-ng-class="{'last': $last}" data-ng-repeat="item in search.result_existed">
             <div class="poster">
-              <a href="/{{item.existed.slug_ru}}"><img src="{{item.image}}"></a>
+              <a href="/{{item.existed.slug_ru}}"><img data-ng-src="{{item.image}}"></a>
             </div>
             <div class="body">
               <div class="title"><a href="/{{item.existed.slug_ru}}">{{item.existed.title_ru}}</a></div>
@@ -36,7 +36,7 @@
           <div class="other-title" data-ng-if="search.otherShows()">Другие сериалы<span>их пока нет на нашем сайте:</span></div>
           <div class="item" data-ng-class="{'last': $last}" data-ng-repeat="item in search.result_not_existed">
             <div class="poster">
-              <img src="{{item.image}}">
+              <img data-ng-src="{{item.image}}">
             </div>
             <div class="body">
               <div class="title">{{item.ruTitle}}</div>
