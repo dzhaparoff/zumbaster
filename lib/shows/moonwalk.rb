@@ -71,7 +71,7 @@ class Moonwalk
       builder.headers['Cache-Control'] = "max-age=0"
       builder.headers['Connection']    = "keep-alive"
       builder.headers['Host']          = "online.kinozz.net"
-      builder.headers['Referer']       = "http://kinozz.net/"
+      builder.headers['Referer']       = "http://s5.cdnapponline.com/"
       builder.headers['Upgrade-Insecure-Requests'] = "1"
       builder.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
     end
@@ -88,9 +88,9 @@ class Moonwalk
     playlist_request = faraday.post do |b|
       b.url '/sessions/new_session'
       b.headers['Connection'] = 'keep-alive'
-      b.headers['Host'] = 'online.kinozz.net'
-      b.headers['Origin'] = 'http://online.kinozz.net'
-      b.headers['Referer'] = referer.sub!("moonwalk.cc", "online.kinozz.net")
+      b.headers['Host'] = 's5.cdnapponline.com'
+      b.headers['Origin'] = 'http://s5.cdnapponline.com'
+      b.headers['Referer'] = referer.sub!("moonwalk.cc", "s5.cdnapponline.com")
       b.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
       b.headers['Accept'] = '*/*'
       b.headers['Accept-Encoding'] = 'gzip, deflate'
@@ -99,8 +99,8 @@ class Moonwalk
       b.headers['X-Data-Pool'] = 'Stream'
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
       b.body = URI.encode_www_form({
-                                       mw_pid: 934,
-                                       mw_domain_id: 25893,
+                                       mw_pid: 157,
+                                       mw_domain_id: 15820,
                                        video_token: video_token,
                                        content_type: 'serial',
                                        access_key: 'd5441152cb1dd4c4',
