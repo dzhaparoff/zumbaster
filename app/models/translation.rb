@@ -79,9 +79,7 @@ class Translation < ActiveRecord::Base
 
     return false if video_token == false
 
-    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token, uuid, referer
-
-    ap new_playlist
+    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token, uuid, referer   
 
     if new_playlist.is_a? Hash
      new_playlist = new_playlist.first[1]
