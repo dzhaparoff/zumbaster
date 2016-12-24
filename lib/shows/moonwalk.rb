@@ -62,7 +62,7 @@ class Moonwalk
 
 
   def self.get_iframe_page(iframe,s,e)
-    f = Faraday.new(url: 'http://pandastream.cc') do |builder|
+    f = Faraday.new(url: 'http://moonwalk.cc') do |builder|
       builder.use     :cookie_jar
       builder.adapter :net_http
       builder.request :url_encoded
@@ -70,8 +70,8 @@ class Moonwalk
       builder.headers['Accept-Language'] = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2"
       builder.headers['Cache-Control'] = "max-age=0"
       builder.headers['Connection']    = "keep-alive"
-      builder.headers['Host']          = "pandastream.cc"
-      builder.headers['Referer']       = "http://pandastream.cc/"
+      builder.headers['Host']          = "moonwalk.cc"
+      builder.headers['Referer']       = "http://moonwalk.cc/"
       builder.headers['Upgrade-Insecure-Requests'] = "1"
       builder.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
     end
@@ -88,19 +88,20 @@ class Moonwalk
     playlist_request = faraday.post do |b|
       b.url '/sessions/new_session'
       b.headers['Connection'] = 'keep-alive'
-      b.headers['Host'] = 'pandastream.cc'
-      b.headers['Origin'] = 'http://pandastream.cc'
-      b.headers['Referer'] = referer.sub!("moonwalk.cc", "pandastream.cc")
+      b.headers['Host'] = 'moonwalk.cc'
+      b.headers['Origin'] = 'http://moonwalk.cc'
+      b.headers['Referer'] = referer.sub!("moonwalk.cc", "moonwalk.cc")
       b.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
       b.headers['Accept'] = '*/*'
       b.headers['Accept-Encoding'] = 'gzip, deflate'
       b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['X-Data-Pool'] = 'Stream'
+      b.headers['X-Iframe-Option'] = 'Direct'
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
       b.body = URI.encode_www_form({
-                                       mw_pid: 4,
-                                       mw_domain_id: 14666,
+                                       mw_pid: 28,
+                                       mw_domain_id: 130,
                                        mw_key: '1152cb1dd4c4d544',
                                        video_token: video_token,
                                        content_type: 'serial',
