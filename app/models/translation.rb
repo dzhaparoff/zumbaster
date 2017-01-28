@@ -66,7 +66,7 @@ class Translation < ActiveRecord::Base
     csrf_token = doc.search('head > meta[name="csrf-token"]')[0]['content']
 
     doc.search('body > script').each do |script|
-      unless video_token && uuid
+      unless video_token && argv
         subtitles   = find_subtitles script
         video_token = check_script_tag script, video_token
         argv        = find_argv script, argv
