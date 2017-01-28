@@ -29,8 +29,8 @@ class Translation < ActiveRecord::Base
       builder.headers['Accept'] = '*/*'
       builder.headers['Accept-Encoding'] = 'gzip, deflate'
       builder.headers['Connection'] = 'keep-alive'
-      builder.headers['Host'] = 'moonwalk.cc'
-      builder.headers['Referer'] = "http://moonwalk.cc/video/#{moonwalk_token}/iframe"
+      builder.headers['Host'] = 'previewer.cc'
+      builder.headers['Referer'] = "http://previewer.cc/video/#{moonwalk_token}/iframe"
       builder.headers['X-Requested-With'] = 'ShockwaveFlash/19.0.0.226'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
     end
@@ -61,7 +61,7 @@ class Translation < ActiveRecord::Base
     video_token = false
     secret_key = false
     subtitles = false
-    uuid = false
+    argv = false
 
     csrf_token = doc.search('head > meta[name="csrf-token"]')[0]['content']
 
@@ -69,7 +69,7 @@ class Translation < ActiveRecord::Base
       unless video_token && uuid
         subtitles   = find_subtitles script
         video_token = check_script_tag script, video_token
-        uuid        = find_uuid script, uuid
+        argv        = find_argv script, argv
       end
     end
 
@@ -79,7 +79,7 @@ class Translation < ActiveRecord::Base
 
     return false if video_token == false
 
-    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token, uuid, referer   
+    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token, argv, referer
 
     if new_playlist.is_a? Hash
      new_playlist = new_playlist.first[1]
@@ -112,15 +112,15 @@ class Translation < ActiveRecord::Base
     raw.first.first
   end
 
-  def find_uuid script, uuid
-    return uuid if uuid.to_s.length > 5
+  def find_argv script, argv
+    return argv if argv.to_s.length > 5
     return false if script.nil?
     return false if script.content.nil?
 
-    uuid_raw = script.text.to_s.scan(/uuid\: \'([a-zA-Z0-9]+)\'/)
-    return false if uuid_raw.first.nil? || uuid_raw.nil? || uuid_raw.size == 0
+    argv_raw = script.text.to_s.scan(/var argv \= \'([a-zA-Z0-9]+)\'/)
+    return false if argv_raw.first.nil? || argv_raw.nil? || argv_raw.size == 0
 
-    uuid_raw.first.first
+    argv_raw.first.first
   end
 
   def encode_request_header string

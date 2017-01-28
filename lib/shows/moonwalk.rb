@@ -82,15 +82,15 @@ class Moonwalk
     }
   end
 
-  def self.playlist_getter faraday, video_token, csrf_token, uuid, referer
+  def self.playlist_getter faraday, video_token, csrf_token, argv, referer
     return false unless video_token
 
     playlist_request = faraday.post do |b|
       b.url '/sessions/new_session'
       b.headers['Connection'] = 'keep-alive'
-      b.headers['Host'] = 'moonwalk.cc'
-      b.headers['Origin'] = 'http://moonwalk.cc'
-      b.headers['Referer'] = referer.sub!("moonwalk.cc", "moonwalk.cc")
+      b.headers['Host'] = 'previewer.cc'
+      b.headers['Origin'] = 'http://previewer.cc'
+      b.headers['Referer'] = referer.sub!("moonwalk.cc", "previewer.cc")
       b.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
       b.headers['Accept'] = '*/*'
       b.headers['Accept-Encoding'] = 'gzip, deflate'
@@ -100,13 +100,13 @@ class Moonwalk
       b.headers['X-Iframe-Option'] = 'Direct'
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
       b.body = URI.encode_www_form({
-                                       mw_pid: 28,
-                                       mw_domain_id: 130,
+                                       mw_pid: 918,
+                                       mw_domain_id: 26873,
                                        mw_key: '1152cb1dd4c4d544',
                                        video_token: video_token,
                                        content_type: 'serial',
                                        ad_attr: 0,
-                                       uuid: uuid,
+                                       argv: argv,
                                        debug: false
                                    })
     end
@@ -121,7 +121,7 @@ class Moonwalk
     Faraday.new(url: api_url, parallel_manager: manager) do |builder|
       builder.headers['Content-Type'] = 'application/json'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 'moonwalk.cc'
+      builder.headers['Host'] = 'previewer.cc'
       builder.params['api_token'] = api_key
       builder.adapter :typhoeus
     end
@@ -131,7 +131,7 @@ class Moonwalk
     Faraday.new(url: api_url) do |builder|
       builder.headers['Content-Type'] = 'application/json'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 'moonwalk.cc'
+      builder.headers['Host'] = 'previewer.cc'
       builder.params['api_token'] = api_key
       builder.adapter Faraday.default_adapter
     end
