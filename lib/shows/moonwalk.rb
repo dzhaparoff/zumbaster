@@ -88,25 +88,28 @@ class Moonwalk
     playlist_request = faraday.post do |b|
       b.url '/sessions/new_session'
       b.headers['Connection'] = 'keep-alive'
-      b.headers['Host'] = 'previewer.cc'
-      b.headers['Origin'] = 'http://previewer.cc'
-      b.headers['Referer'] = referer.sub!("moonwalk.cc", "previewer.cc")
+      b.headers['Host'] = 'moon.hdkinoteatr.com'
+      b.headers['Origin'] = 'http://moon.hdkinoteatr.com'
+      b.headers['Referer'] = referer.sub!("moonwalk.cc", "moon.hdkinoteatr.com")
       b.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
       b.headers['Accept'] = '*/*'
       b.headers['Accept-Encoding'] = 'gzip, deflate'
       b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
       b.headers['X-CSRF-Token'] = csrf_token
-      b.headers['X-Data-Pool'] = 'Stream'
-      b.headers['X-Iframe-Option'] = 'Direct'
+      # b.headers['X-Data-Pool'] = 'Stream'
+      # b.headers['X-Iframe-Option'] = 'Direct'
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
+      b.headers['X-Iframe-Param'] = 'Redirect'
+
       b.body = URI.encode_www_form({
-                                       mw_pid: 918,
-                                       mw_domain_id: 26873,
-                                       mw_key: '1152cb1dd4c4d544',
+                                      #  mw_domain_id: 26873,
                                        video_token: video_token,
                                        content_type: 'serial',
+                                       mw_key: '1152cb1dd4c4d544',
+                                       mw_pid: 175,
+                                       p_domain_id: 317,
                                        ad_attr: 0,
-                                       argv: argv,
+                                       dparam: argv,
                                        debug: false
                                    })
     end
