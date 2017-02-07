@@ -118,7 +118,7 @@ class Translation < ActiveRecord::Base
     return false if script.content.nil?
 
     # argv_raw = script.text.to_s.scan(/var argv \= \'([a-zA-Z0-9]+)\'/)
-    argv_raw = script.text.to_s.scan(/var cparam \= \'([a-zA-Z0-9]+)\'/)
+    argv_raw = script.text.to_s.scan(/var varb1 \= \'([a-zA-Z0-9]+)\'/)
 
     return false if argv_raw.first.nil? || argv_raw.nil? || argv_raw.size == 0
 
