@@ -97,7 +97,7 @@ class Moonwalk
       b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
-      b.headers['X-Var-Document'] = 'String'
+      b.headers['X-Condition-Safe'] = 'Normal'
 
       b.body = URI.encode_www_form({
                                       #  mw_domain_id: 26873,
@@ -107,7 +107,7 @@ class Moonwalk
                                        mw_pid: 175,
                                        p_domain_id: 317,
                                        ad_attr: 0,
-                                       varb1: argv,
+                                       condition_safe: argv,
                                        debug: false
                                    })
     end
