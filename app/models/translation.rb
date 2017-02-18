@@ -30,7 +30,7 @@ class Translation < ActiveRecord::Base
       builder.headers['Accept-Encoding'] = 'gzip, deflate'
       builder.headers['Connection'] = 'keep-alive'
       builder.headers['Host'] = 'moon.hdkinoteatr.com'
-      builder.headers['Referer'] = "http://moon.hdkinoteatr.com/video/#{moonwalk_token}/iframe"
+      builder.headers['Referer'] = "http://s1.staticnlcdn.com/video/#{moonwalk_token}/iframe"
       builder.headers['X-Requested-With'] = 'ShockwaveFlash/19.0.0.226'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
     end
@@ -118,7 +118,7 @@ class Translation < ActiveRecord::Base
     return false if script.content.nil?
 
     # argv_raw = script.text.to_s.scan(/var argv \= \'([a-zA-Z0-9]+)\'/)
-    argv_raw = script.text.to_s.scan(/var condition_safe \= \'([a-zA-Z0-9]+)\'/)
+    argv_raw = script.text.to_s.scan(/var version_control \= \'([a-zA-Z0-9]+)\'/)
 
     return false if argv_raw.first.nil? || argv_raw.nil? || argv_raw.size == 0
 

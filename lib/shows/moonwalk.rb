@@ -62,7 +62,7 @@ class Moonwalk
 
 
   def self.get_iframe_page(iframe,s,e)
-    f = Faraday.new(url: 'http://moonwalk.cc') do |builder|
+    f = Faraday.new(url: 'http://s1.staticnlcdn.com') do |builder|
       builder.use     :cookie_jar
       builder.adapter :net_http
       builder.request :url_encoded
@@ -71,7 +71,7 @@ class Moonwalk
       builder.headers['Cache-Control'] = "max-age=0"
       builder.headers['Connection']    = "keep-alive"
       builder.headers['Host']          = "moonwalk.cc"
-      builder.headers['Referer']       = "http://moonwalk.cc/"
+      builder.headers['Referer']       = "http://s1.staticnlcdn.com/"
       builder.headers['Upgrade-Insecure-Requests'] = "1"
       builder.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
     end
@@ -89,8 +89,8 @@ class Moonwalk
       b.url '/sessions/new_session'
       b.headers['Connection'] = 'keep-alive'
       b.headers['Host'] = 'moon.hdkinoteatr.com'
-      b.headers['Origin'] = 'http://moon.hdkinoteatr.com'
-      b.headers['Referer'] = referer.sub!("moonwalk.cc", "moon.hdkinoteatr.com")
+      b.headers['Origin'] = 'http://s1.staticnlcdn.com'
+      b.headers['Referer'] = referer.sub!("moonwalk.cc", "s1.staticnlcdn.com")
       b.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36'
       b.headers['Accept'] = '*/*'
       b.headers['Accept-Encoding'] = 'gzip, deflate'
@@ -103,15 +103,15 @@ class Moonwalk
                                       #  mw_domain_id: 26873,
                                        video_token: video_token,
                                        content_type: 'serial',
-                                       mw_key: '1152cb1dd4c4d544',
-                                       mw_pid: 175,
-                                       p_domain_id: 317,
+                                       mw_key: '1152сb1dd4c4d544',
+                                       mw_pid: 918,
+                                       p_domain_id: 26873,
                                        ad_attr: 0,
-                                       condition_safe: argv,
+                                       version_control: argv,
                                        debug: false
                                    })
     end
-
+    
     JSON.parse playlist_request.body
   end
 
