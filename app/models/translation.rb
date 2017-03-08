@@ -29,8 +29,8 @@ class Translation < ActiveRecord::Base
       builder.headers['Accept'] = '*/*'
       builder.headers['Accept-Encoding'] = 'gzip, deflate'
       builder.headers['Connection'] = 'keep-alive'
-      builder.headers['Host'] = 'previewer.cc'
-      builder.headers['Referer'] = "http://previewer.cc/video/#{moonwalk_token}/iframe"
+      builder.headers['Host'] = 's1.staticnlcdn.com'
+      builder.headers['Referer'] = "http://s1.staticnlcdn.com/video/#{moonwalk_token}/iframe"
       builder.headers['X-Requested-With'] = 'ShockwaveFlash/19.0.0.226'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
     end
