@@ -98,7 +98,7 @@ class Moonwalk
 
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
-      b.headers['X-Bool-Ray'] = 'XRAY'
+      b.headers['X-Mega-Version'] = '505'
 
       b.body = URI.encode_www_form({
                                       #  mw_domain_id: 26873,
@@ -108,7 +108,7 @@ class Moonwalk
                                        mw_pid: 918,
                                        p_domain_id: 26873,
                                        ad_attr: 0,
-                                       version_control: argv,
+                                       detect_true: argv,
                                        debug: false
                                    })
     end
