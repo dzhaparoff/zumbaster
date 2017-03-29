@@ -98,17 +98,17 @@ class Moonwalk
 
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
-      b.headers['X-Mega-Version'] = '505'
+      b.headers['X-Format-Token'] = 'B300'
 
       b.body = URI.encode_www_form({
                                       #  mw_domain_id: 26873,
                                        video_token: video_token,
                                        content_type: 'serial',
-                                       mw_key: 'f5a9fc6888e7bc5cb41ffd4aa558cc51',
+                                       mw_key: '1ffd4aa558cc51f5a9fc6888e7bc5cb4',
                                        mw_pid: 918,
                                        p_domain_id: 26873,
                                        ad_attr: 0,
-                                       detect_true: argv,
+                                       async_method: argv,
                                        debug: false
                                    })
     end
