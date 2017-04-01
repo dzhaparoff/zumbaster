@@ -16,7 +16,7 @@
   </article>
   <img src="<%= @random_show.fanart.url(:original) %>" alt="<%= @random_show.title_ru %>"/>
 </section>
-<%= render "partials/donat" %>
+
 <section class="main-page">
     <div class="row">
       <div class="medium-8 column popular">
@@ -42,7 +42,8 @@
         </ul>
       </div>
     </div>
-  <%= render "partials/banner" %>
+    <%= render "partials/donat" %>
+    <%= render "partials/banner" %>
     <div class="row">
       <div class="small-12 medium-8 medium-push-4 column new-episodes">
           <h4>Новые эпизоды</h4>
