@@ -98,3 +98,18 @@ footer {
     max-height: rem-calc(600);
   }
 }
+
+.widget-qiwi {
+  margin-top: rem-calc(30);
+  margin-bottom: rem-calc(30);
+  padding: rem-calc(30 0 50 0);
+  width: 100%;
+  max-width: 100%;
+  background: white;
+
+  .widget-pre {
+    p {
+      color: #060606;
+    }
+  }
+}

@@ -7,10 +7,12 @@
   <article class="fanart-slide">
     <h1 class="title_ru"><a href="<%= show_path @random_show.slug_ru %>"><%= @random_show.title_ru %></a></h1>
     <div class="title_en"><%= @random_show.title_en %></div>
+    <% if @random_show.rating.present? %>
     <div class="awwards-list">
       <div class="awwards imdb"><div class="count"><%= @random_show.rating.imdb_rating.value %></div></div>
       <div class="awwards kinopoisk"><div class="count"><%= number_with_precision @random_show.rating.kp_rating.value, precision: 1 %></div></div>
     </div>
+    <% end %>
   </article>
   <img src="<%= @random_show.fanart.url(:original) %>" alt="<%= @random_show.title_ru %>"/>
 </section>
