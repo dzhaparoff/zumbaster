@@ -62,18 +62,19 @@ class Moonwalk
 
 
   def self.get_iframe_page(iframe,s,e)
-    f = Faraday.new(url: 'http://s1.staticnlcdn.com') do |builder|
+    f = Faraday.new(url: 'http://s8.staticnlcdn.com') do |builder|
       builder.use     :cookie_jar
       builder.adapter :net_http
       builder.request :url_encoded
       builder.headers['Accept'] = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
       builder.headers['Accept-Language'] = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2"
-      builder.headers['Cache-Control'] = "max-age=0"
+      builder.headers['Cache-Control'] = "no-cache"
       builder.headers['Connection']    = "keep-alive"
-      builder.headers['Host']          = "s1.staticnlcdn.com"
-      builder.headers['Referer']       = "http://s1.staticnlcdn.com/"
+      builder.headers['Host']          = "s8.staticnlcdn.com"
+      builder.headers['Pragma']        = "no-cache"
+      builder.headers['Referer']       = "http://baskino.club/serial/8567-drevnie-pervorodnye.html"
       builder.headers['Upgrade-Insecure-Requests'] = "1"
-      builder.headers['User-Agent'] = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36"
+      builder.headers['User-Agent'] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
     end
 
     {
@@ -88,17 +89,19 @@ class Moonwalk
     playlist_request = faraday.post do |b|
       b.url '/sessions/new_session'
       b.headers['Connection'] = 'keep-alive'
-      b.headers['Host'] = 's1.staticnlcdn.com'
-      b.headers['Origin'] = 'http://s1.staticnlcdn.com'
-      b.headers['Referer'] = referer.sub!("moonwalk.cc", "s1.staticnlcdn.com")
-      b.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36'
+      b.headers['Cache-Control'] = 'no-cache'
+      b.headers['Host'] = 's8.staticnlcdn.com'
+      b.headers['Origin'] = 'http://s8.staticnlcdn.com'
+      b.headers['Referer'] = referer.sub!("moonwalk.cc", "s8.staticnlcdn.com")
+      b.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
       b.headers['Accept'] = '*/*'
+      b.headers['Pragma'] = 'no-cache'
       b.headers['Accept-Encoding'] = 'gzip, deflate'
       b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
+      b.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
-      b.headers['X-Format-Token'] = 'B300'
 
       b.body = URI.encode_www_form({
                                       #  mw_domain_id: 26873,
@@ -108,7 +111,7 @@ class Moonwalk
                                        mw_pid: 918,
                                        p_domain_id: 26873,
                                        ad_attr: 0,
-                                       async_method: argv,
+                                       runner_go: argv,
                                        debug: false
                                    })
     end
@@ -123,7 +126,7 @@ class Moonwalk
     Faraday.new(url: api_url, parallel_manager: manager) do |builder|
       builder.headers['Content-Type'] = 'application/json'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 's1.staticnlcdn.com'
+      builder.headers['Host'] = 's8.staticnlcdn.com'
       builder.params['api_token'] = api_key
       builder.adapter :typhoeus
     end
@@ -133,7 +136,7 @@ class Moonwalk
     Faraday.new(url: api_url) do |builder|
       builder.headers['Content-Type'] = 'application/json'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 's1.staticnlcdn.com'
+      builder.headers['Host'] = 's8.staticnlcdn.com'
       builder.params['api_token'] = api_key
       builder.adapter Faraday.default_adapter
     end
