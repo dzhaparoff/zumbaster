@@ -83,7 +83,7 @@ class Moonwalk
     }
   end
 
-  def self.playlist_getter faraday, video_token, csrf_token, argv, referer
+  def self.playlist_getter faraday, video_token, csrf_token, argv_name, argv_value, referer
     return false unless video_token
 
     playlist_request = faraday.post do |b|
@@ -111,7 +111,7 @@ class Moonwalk
                                        mw_pid: 918,
                                        p_domain_id: 26873,
                                        ad_attr: 0,
-                                       runner_go: argv,
+                                       "#{argv_name}": argv_value,
                                        debug: false
                                    })
     end

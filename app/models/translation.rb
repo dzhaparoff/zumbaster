@@ -61,15 +61,28 @@ class Translation < ActiveRecord::Base
     video_token = false
     secret_key = false
     subtitles = false
-    argv = false
+
+    argv_name = false
+    argv_value = false
 
     csrf_token = doc.search('head > meta[name="csrf-token"]')[0]['content']
 
     doc.search('body > script').each do |script|
-      unless video_token && argv
+      unless video_token
         subtitles   = find_subtitles script
         video_token = check_script_tag script, video_token
-        argv        = find_argv script, argv
+      end
+    end
+
+    doc.search('body > script').each do |script|
+      unless argv_name
+        argv_name = find_extra_name script, argv_name
+      end
+    end
+
+    doc.search('body > script').each do |script|
+      unless argv_value
+        argv_value = find_extra_value script, argv_value
       end
     end
 
@@ -79,7 +92,7 @@ class Translation < ActiveRecord::Base
 
     return false if video_token == false
 
-    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token, argv, referer
+    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token, argv_name, argv_value, referer
 
     if new_playlist.is_a? Hash
      new_playlist = new_playlist.first[1]
@@ -112,17 +125,28 @@ class Translation < ActiveRecord::Base
     raw.first.first
   end
 
-  def find_argv script, argv
-    return argv if argv.to_s.length > 5
+  def find_extra_name script, a
+    return a if a.to_s.length > 5
     return false if script.nil?
     return false if script.content.nil?
 
-    # argv_raw = script.text.to_s.scan(/var argv \= \'([a-zA-Z0-9]+)\'/)
-    argv_raw = script.text.to_s.scan(/post_method\.runner_go \= \'([a-zA-Z0-9\S]+)\'/)
+    a_raw = script.text.to_s.scan(/[a-zA-Z0-9\S]+\[\'(([a-zA-Z0-9\S]+))\'\] \= \'[a-zA-Z0-9\S]+\'/)
 
-    return false if argv_raw.first.nil? || argv_raw.nil? || argv_raw.size == 0
+    return false if a_raw.first.nil? || a_raw.nil? || a_raw.size == 0
 
-    argv_raw.first.first
+    a_raw.first.first
+  end
+
+  def find_extra_value script, a
+    return a if a.to_s.length > 5
+    return false if script.nil?
+    return false if script.content.nil?
+
+    a_raw = script.text.to_s.scan(/[a-zA-Z0-9\S]+\[\'[a-zA-Z0-9\S]+\'\] \= \'([a-zA-Z0-9\S]+)\'/)
+
+    return false if a_raw.first.nil? || a_raw.nil? || a_raw.size == 0
+
+    a_raw.first.first
   end
 
   def encode_request_header string
