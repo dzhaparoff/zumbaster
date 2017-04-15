@@ -16,7 +16,7 @@ class Api::ApiController < ApplicationController
     manifest = Nokogiri::XML manifest.body
     manifest.css("media").each do |media|
       media['url'] = media['url'].gsub(/http:\/\//,'/stream/')
-    end if Rails.env.production? && false
+    end if Rails.env.production?
     send_data manifest.to_xml, format: 'application/xml; charset=utf-8'
   end
 
