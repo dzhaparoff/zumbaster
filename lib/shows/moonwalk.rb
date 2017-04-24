@@ -72,7 +72,7 @@ class Moonwalk
       builder.headers['Connection']    = "keep-alive"
       builder.headers['Host']          = "s8.staticnlcdn.com"
       builder.headers['Pragma']        = "no-cache"
-      # builder.headers['Referer']       = "http://baskino.co/serial/8567-drevnie-pervorodnye.html"
+      builder.headers['Referer']       = "http://baskino.co/serial/8567-drevnie-pervorodnye.html"
       builder.headers['Upgrade-Insecure-Requests'] = "1"
       builder.headers['User-Agent'] = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
     end
