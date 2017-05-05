@@ -61,6 +61,7 @@ class Translation < ActiveRecord::Base
     video_token = false
     secret_key = false
     subtitles = false
+    frame_commit = false
 
     argv_name = false
     argv_value = false
@@ -71,6 +72,12 @@ class Translation < ActiveRecord::Base
       unless video_token
         subtitles   = find_subtitles script
         video_token = check_script_tag script, video_token
+      end
+    end
+
+    doc.search('body > script').each do |script|
+      unless frame_commit
+        frame_commit = find_frame_commit script, frame_commit
       end
     end
 
@@ -92,7 +99,7 @@ class Translation < ActiveRecord::Base
 
     return false if video_token == false
 
-    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token, argv_name, argv_value, referer
+    new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token, frame_commit, argv_name, argv_value, referer
 
     if new_playlist.is_a? Hash
      new_playlist = new_playlist.first[1]
@@ -117,6 +124,17 @@ class Translation < ActiveRecord::Base
     return false if video_token_raw.first.nil? || video_token_raw.nil? || video_token_raw.size == 0
 
     video_token_raw.first.first
+  end
+
+  def find_frame_commit(script, frame_commit)
+    return frame_commit if frame_commit.to_s.length > 5
+    return false if script.nil?
+    return false if script.content.nil?
+
+    frame_commit_raw = script.text.to_s.scan(/\'X-Frame-Commit\'\: \'([a-zA-Z0-9]+)\'/)
+    return false if frame_commit_raw.first.nil? || frame_commit_raw.nil? || frame_commit_raw.size == 0
+
+    frame_commit_raw.first.first
   end
 
   def find_subtitles script

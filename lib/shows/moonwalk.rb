@@ -83,7 +83,7 @@ class Moonwalk
     }
   end
 
-  def self.playlist_getter faraday, video_token, csrf_token, argv_name, argv_value, referer
+  def self.playlist_getter faraday, video_token, csrf_token, frame_commit, argv_name, argv_value, referer
     return false unless video_token
 
     playlist_request = faraday.post do |b|
@@ -102,6 +102,7 @@ class Moonwalk
 
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
+      b.headers['X-Frame-Commit'] = frame_commit
 
       b.body = URI.encode_www_form({
                                       #  mw_domain_id: 26873,
