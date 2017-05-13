@@ -20,7 +20,7 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI, on
         var id = this.id;
         this.mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         var type = this.mobile ? "m3u8" : "f4m";
-        if(typeof location.origin == 'undefined') location.origin = 'http://hd-serials.tv';
+        if(typeof location.origin == 'undefined') location.origin = 'https://hd-serials.tv';
         this.manifest = location.origin + '/api/manifest/' + id + '.' + type;
       }
     };
@@ -415,11 +415,12 @@ var onJSBridge, setQualityLabels, flashPlayer, onPlayerEvent, setupPlayerGUI, on
         };
 
 
-        if(playlist.mobile)
+        if(playlist.mobile) {
           elem.append('<video controls src="' + playlist.manifest + '"></video>');
-        else
+        }
+        else {
           construct_player(playlist.manifest);
-
+        }
       }
     }
   }
