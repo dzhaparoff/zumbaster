@@ -30,6 +30,8 @@ class Season < ActiveRecord::Base
     tmdb = Tmdb.new
 
     _tmdb_data = self.show.tmdb_data
+    return self if _tmdb_data.nil?
+
     tmdb_id = _tmdb_data['id']
     return false unless !id.nil? || tmdb_id
 
@@ -49,6 +51,9 @@ class Season < ActiveRecord::Base
 
     _tmdb_data   = self.tmdb_data
     _tmdb_images = self.tmdb_images
+
+    return self if _tmdb_data.nil?
+
     self.sync_season_by_tmdb if _tmdb_data.blank? || _tmdb_images.blank?
 
     if _tmdb_data['poster_path'].blank?
