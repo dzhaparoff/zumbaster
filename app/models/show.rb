@@ -196,7 +196,7 @@ class Show < ActiveRecord::Base
     show.slug_en        = trakt_show['ids']['slug']
     show.title_en       = trakt_show['title']
     show.description_en = trakt_show['overview']
-    show.first_aired    = DateTime.parse trakt_show['first_aired']
+    show.first_aired    = DateTime.parse trakt_show['first_aired'] unless trakt_show['first_aired'].nil?
     show.airs           = trakt_show['airs']
     show.certification  = trakt_show['certification']
     show.network        = trakt_show['network']
