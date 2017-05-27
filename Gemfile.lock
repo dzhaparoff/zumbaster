@@ -14,6 +14,13 @@ GIT
     kaminari-core (0.1.0)
 
 GIT
+  remote: git://github.com/lassebunk/dynamic_sitemaps.git
+  revision: 37beeba143e8202218ee814056231b0e6974bafb
+  branch: master
+  specs:
+    dynamic_sitemaps (2.0.0)
+
+GIT
   remote: git://github.com/plataformatec/devise.git
   revision: a9bb7d0318054ebb74d09d835927fbb377afd8bd
   specs:
@@ -131,7 +138,6 @@ GEM
       delayed_job (>= 3.0, < 5)
     domain_name (0.5.20160826)
       unf (>= 0.0.5, < 1.0.0)
-    dynamic_sitemaps (2.0.0)
     erubis (2.7.0)
     ethon (0.9.1)
       ffi (>= 1.3.0)
@@ -393,7 +399,7 @@ DEPENDENCIES
   daemons
   delayed_job_active_record
   devise!
-  dynamic_sitemaps
+  dynamic_sitemaps!
   faraday
   faraday-cookie_jar
   faraday_middleware
