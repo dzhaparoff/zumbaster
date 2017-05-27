@@ -31,7 +31,7 @@ gem 'omniauth-vkontakte'
 # gem 'pg_search'
 
 gem "russian"
-gem "dynamic_sitemaps"
+gem 'dynamic_sitemaps', github: 'lassebunk/dynamic_sitemaps', branch: 'master'
 gem 'meta-tags'
 # gem 'will_paginate'
 gem 'kaminari', github: 'amatsuda/kaminari'
