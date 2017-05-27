@@ -10,7 +10,7 @@ class Donation < ApplicationRecord
 
       if donations['status'] === 'success' &&  donations['count'] > 0
         donations['data'].each do |donation|
-          self.create do |new_donation|
+          self.where(ex_id: donation['id']).first_or_create do |new_donation|
             new_donation.ex_id = donation['id']
             new_donation.name = donation['vars']['name']
 
