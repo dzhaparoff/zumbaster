@@ -76,6 +76,14 @@ namespace :sitemap do
       end
     end
   end
+
+  task :relink do
+    on roles(:app) do
+      within release_path do
+        execute :ln, "-s #{release_path}/public/sitemaps/sitemap.xml #{release_path}/public/sitemap.xml"
+      end
+    end
+  end
 end
 
 namespace :paperclip do

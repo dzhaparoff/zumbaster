@@ -1,5 +1,6 @@
 # Change this to your host. See the readme at https://github.com/lassebunk/dynamic_sitemaps
 host "hd-serials.tv"
+protocol "https"
 
 sitemap :site do
   url root_url, last_mod: Time.now, change_freq: "daily", priority: 1.0
@@ -24,4 +25,4 @@ sitemap_for Episode.includes(:translations).where.not(translations: {id: nil}, s
   url show_episode_url(show.slug_ru, "%02d" % season.number, "%02d" % episode.number), last_mod: episode.updated_at, change_freq: "daily", priority: 0.8
 end
 
-ping_with "http://hd-serials.tv/sitemap.xml"
+ping_with "https://hd-serials.tv/sitemap.xml"
