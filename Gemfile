@@ -19,7 +19,8 @@ gem 'autoprefixer-rails'
 gem 'slim-rails'
 gem 'coffee-rails'
 gem 'uglifier', '>= 1.3.0'
-gem 'jbuilder', '~> 2.0' # Read more: https://github.com/rails/jbuilder
+gem 'jbuilder', '~> 2.5' # Read more: https://github.com/rails/jbuilder
+gem 'oj'
 
 gem 'therubyracer'
 

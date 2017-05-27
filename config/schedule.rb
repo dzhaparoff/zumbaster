@@ -11,6 +11,10 @@ every 1.hours do
   runner "UpdateEpisodesJob.perform_later"
 end
 
+every 1.minute do
+  runner "Donation.sync"
+end
+
 every 12.hours do
   runner "UpdateSeasonJob.perform_later"
 end

@@ -112,4 +112,20 @@ footer {
       color: #060606;
     }
   }
+
+  h2 {
+    margin: rem-calc(30 0 20);
+  }
+
+  h3 {
+    margin: rem-calc(20 0 20);
+  }
+
+  h2, h3, h4, h5 {
+    color: $blue;
+  }
+
+  .progress {
+    margin: 0 auto;
+  }
 }

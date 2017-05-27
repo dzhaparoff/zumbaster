@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417162927) do
+ActiveRecord::Schema.define(version: 20170527124843) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,8 +56,11 @@ ActiveRecord::Schema.define(version: 20170417162927) do
     t.string   "amount"
     t.string   "comment"
     t.datetime "donation_date"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
+    t.decimal  "amount_payed",   precision: 12, scale: 2, default: "0.0"
+    t.decimal  "amount_cash",    precision: 12, scale: 2, default: "0.0"
+    t.string   "payment_system"
     t.index ["ex_id"], name: "index_donations_on_ex_id", using: :btree
   end
 
