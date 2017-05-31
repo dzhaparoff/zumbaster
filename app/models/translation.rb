@@ -131,7 +131,7 @@ class Translation < ActiveRecord::Base
     return false if script.nil?
     return false if script.content.nil?
 
-    frame_commit_raw = script.text.to_s.scan(/\'X-User-Story\'\: \'([a-zA-Z0-9]+)\'/)
+    frame_commit_raw = script.text.to_s.scan(/\'X-Access-Level\'\: \'([a-zA-Z0-9]+)\'/)
     return false if frame_commit_raw.first.nil? || frame_commit_raw.nil? || frame_commit_raw.size == 0
 
     frame_commit_raw.first.first

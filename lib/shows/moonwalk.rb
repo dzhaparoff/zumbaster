@@ -102,7 +102,7 @@ class Moonwalk
 
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
-      b.headers['X-User-Story'] = frame_commit
+      b.headers['X-Access-Level'] = frame_commit
 
       b.body = URI.encode_www_form({
                                       #  mw_domain_id: 26873,
