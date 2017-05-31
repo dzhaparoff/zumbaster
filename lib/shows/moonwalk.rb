@@ -105,15 +105,13 @@ class Moonwalk
       b.headers['X-Access-Level'] = frame_commit
 
       b.body = URI.encode_www_form({
-                                      #  mw_domain_id: 26873,
                                        video_token: video_token,
                                        content_type: 'serial',
                                        mw_key: '1ffd4aa558cc51f5a9fc6888e7bc5cb4',
                                        mw_pid: 157,
                                        p_domain_id: 15820,
                                        ad_attr: 0,
-                                       "#{argv_name}": argv_value,
-                                       debug: false
+                                       "#{argv_name}": argv_value
                                    })
     end
 
