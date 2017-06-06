@@ -93,16 +93,19 @@ class Moonwalk
       b.headers['Host'] = 's1.cdnapponline.com'
       b.headers['Origin'] = 'http://s1.cdnapponline.com'
       b.headers['Referer'] = referer.sub!("moonwalk.cc", "s1.cdnapponline.com")
-      b.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36'
+      b.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
       b.headers['Accept'] = '*/*'
       b.headers['Pragma'] = 'no-cache'
       b.headers['Accept-Encoding'] = 'gzip, deflate'
-      b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2'
+      b.headers['Accept-Language'] = 'ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2,pt;q=0.2'
       b.headers['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
 
       b.headers['X-CSRF-Token'] = csrf_token
       b.headers['X-Requested-With'] = 'XMLHttpRequest'
       b.headers['X-Access-Level'] = frame_commit
+
+      argv_name = 'c90b4ca500a12b91e2b54b2d4a1e4fb7'
+      argv_value = 'cc5610c93fa23befc2d244a76500ee6c'
 
       b.body = URI.encode_www_form({
                                        video_token: video_token,
