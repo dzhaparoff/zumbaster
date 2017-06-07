@@ -111,8 +111,8 @@ class Moonwalk
                                        video_token: video_token,
                                        content_type: 'serial',
                                        mw_key: '1ffd4aa558cc51f5a9fc6888e7bc5cb4',
-                                       mw_pid: 157,
-                                       p_domain_id: 15820,
+                                       mw_pid: 2876,
+                                       p_domain_id: 435094,
                                        ad_attr: 0,
                                        "#{argv_name}": argv_value
                                    })
