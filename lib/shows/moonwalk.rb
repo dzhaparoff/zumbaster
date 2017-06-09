@@ -62,7 +62,7 @@ class Moonwalk
 
 
   def self.get_iframe_page(iframe,s,e)
-    f = Faraday.new(url: 'http://s8.staticnlcdn.com') do |builder|
+    f = Faraday.new(url: 'http://cdn.hdrezka2.me') do |builder|
       builder.use     :cookie_jar
       builder.adapter :net_http
       builder.request :url_encoded
@@ -70,7 +70,7 @@ class Moonwalk
       builder.headers['Accept-Language'] = "ru-RU,ru;q=0.8,en-US;q=0.6,en;q=0.4,bg;q=0.2,de;q=0.2,es;q=0.2,fr;q=0.2,it;q=0.2,mk;q=0.2,tr;q=0.2"
       builder.headers['Cache-Control'] = "no-cache"
       builder.headers['Connection']    = "keep-alive"
-      builder.headers['Host']          = "s8.staticnlcdn.com"
+      builder.headers['Host']          = "cdn.hdrezka2.me"
       builder.headers['Pragma']        = "no-cache"
       builder.headers['Referer']       = "http://baskino.co/series/comedy/2040-kremnievaya-dolina-2016-besplatno.html"
       builder.headers['Upgrade-Insecure-Requests'] = "1"
@@ -90,9 +90,9 @@ class Moonwalk
       b.url '/sessions/new_session'
       b.headers['Connection'] = 'keep-alive'
       b.headers['Cache-Control'] = 'no-cache'
-      b.headers['Host'] = 's8.staticnlcdn.com'
-      b.headers['Origin'] = 'http://s8.staticnlcdn.com'
-      b.headers['Referer'] = referer.sub!("moonwalk.cc", "s8.staticnlcdn.com")
+      b.headers['Host'] = 'cdn.hdrezka2.me'
+      b.headers['Origin'] = 'http://cdn.hdrezka2.me'
+      b.headers['Referer'] = referer.sub!("moonwalk.cc", "cdn.hdrezka2.me")
       b.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
       b.headers['Accept'] = '*/*'
       b.headers['Pragma'] = 'no-cache'
@@ -111,8 +111,8 @@ class Moonwalk
                                        video_token: video_token,
                                        content_type: 'serial',
                                        mw_key: '1ffd4aa558cc51f5a9fc6888e7bc5cb4',
-                                       mw_pid: 918,
-                                       p_domain_id: 455971,
+                                       mw_pid: 2876,
+                                       p_domain_id: 435094,
                                        ad_attr: 0,
                                        "#{argv_name}": argv_value
                                    })
@@ -128,7 +128,7 @@ class Moonwalk
     Faraday.new(url: api_url, parallel_manager: manager) do |builder|
       builder.headers['Content-Type'] = 'application/json'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 's8.staticnlcdn.com'
+      builder.headers['Host'] = 'cdn.hdrezka2.me'
       builder.params['api_token'] = api_key
       builder.adapter :typhoeus
     end
@@ -138,7 +138,7 @@ class Moonwalk
     Faraday.new(url: api_url) do |builder|
       builder.headers['Content-Type'] = 'application/json'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
-      builder.headers['Host'] = 's8.staticnlcdn.com'
+      builder.headers['Host'] = 'cdn.hdrezka2.me'
       builder.params['api_token'] = api_key
       builder.adapter Faraday.default_adapter
     end
