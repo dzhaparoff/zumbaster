@@ -114,12 +114,12 @@ class Translation < ActiveRecord::Base
 
     self.save
 
-    OpenStruct.new (
+    OpenStruct.new({
       f4m: new_playlist['manifest_f4m'],
       m3u8: new_playlist['manifest_m3u8'],
       dash: new_playlist['manifest_dash'],
       mp4: new_playlist['manifest_mp4']
-    )
+    })
   end
 
   private
