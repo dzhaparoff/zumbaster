@@ -20,7 +20,7 @@ class Translation < ActiveRecord::Base
   end
 
   def manifest type
-    sync_translation_video unless translation_video_exist? type
+    sync_translation_video #unless translation_video_exist? type
     m = type == :mobile ? m3u8 : f4m
 
     f = Faraday.new do |builder|
