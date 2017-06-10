@@ -20,8 +20,10 @@ class Translation < ActiveRecord::Base
   end
 
   def manifest type
-    sync_translation_video #unless translation_video_exist? type
-    m = type == :mobile ? m3u8 : f4m
+    # sync_translation_video #unless translation_video_exist? type
+    # m = type == :mobile ? m3u8 : f4m
+    mans = sync_translation_video
+    m = type == :mobile ? mans.m3u8 : mans.f4m
 
     f = Faraday.new do |builder|
       builder.adapter :net_http
@@ -111,6 +113,13 @@ class Translation < ActiveRecord::Base
     self.moonwalk_token = video_token
 
     self.save
+
+    OpenStruct.new (
+      f4m: new_playlist['manifest_f4m'],
+      m3u8: new_playlist['manifest_m3u8'],
+      dash: new_playlist['manifest_dash'],
+      mp4: new_playlist['manifest_mp4']
+    )
   end
 
   private
