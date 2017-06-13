@@ -115,9 +115,7 @@ class Moonwalk
                                        ad_attr: 0,
                                        "#{argv_name}": argv_value
                                    })
-    end
-
-    ap playlist_request
+    end    
 
     JSON.parse playlist_request.body
   end
