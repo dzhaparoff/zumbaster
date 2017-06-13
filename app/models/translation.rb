@@ -20,9 +20,12 @@ class Translation < ActiveRecord::Base
   end
 
   def manifest type
-    # sync_translation_video #unless translation_video_exist? type
-    # m = type == :mobile ? m3u8 : f4m
-    mans = sync_translation_video
+    if translation_video_exist? type
+      mans = self
+    else
+      mans = sync_translation_video
+    end
+
     m = type == :mobile ? mans.m3u8 : mans.f4m
 
     f = Faraday.new do |builder|
@@ -83,18 +86,6 @@ class Translation < ActiveRecord::Base
       end
     end
 
-    # doc.search('body > script').each do |script|
-    #   unless argv_name
-    #     argv_name = find_extra_name script, argv_name
-    #   end
-    # end
-    #
-    # doc.search('body > script').each do |script|
-    #   unless argv_value
-    #     argv_value = find_extra_value script, argv_value
-    #   end
-    # end
-
     self.subtitles = subtitles
 
     # secret_key = encode_request_header secret_key
@@ -150,32 +141,6 @@ class Translation < ActiveRecord::Base
     raw = script.text.to_s.scan(/src: \"(http:\/\/[a-zA-Z0-9.]+\/static\/srt\/subtitles\/[a-zA-Z0-9-._]+\/[a-zA-Z0-9-._]+)\"/)
     return false if raw.nil? || raw.size == 0 || raw.first.nil?
     raw.first.first
-  end
-
-  def find_extra_name script, a
-    return a if a.to_s.length > 5
-    return false if script.nil?
-    return false if script.content.nil?
-
-    # a_raw = script.text.to_s.scan(/[a-zA-Z0-9\S]+\[\'(([a-zA-Z0-9\S]+))\'\] \= \'[a-zA-Z0-9\S]+\'/)
-    a_raw = script.text.to_s.scan(/[a-zA-Z0-9\S]+\[\'(([a-zA-Z0-9\S]+))\'\] \= \'[a-zA-Z0-9\S]+\'/)
-
-    return false if a_raw.first.nil? || a_raw.nil? || a_raw.size == 0
-
-    a_raw.first.first
-  end
-
-  def find_extra_value script, a
-    return a if a.to_s.length > 5
-    return false if script.nil?
-    return false if script.content.nil?
-
-    # a_raw = script.text.to_s.scan(/[a-zA-Z0-9\S]+\[\'[a-zA-Z0-9\S]+\'\] \= \'([a-zA-Z0-9\S]+)\'/)
-    a_raw = script.text.to_s.scan(/[a-zA-Z0-9\S]+\[\'[a-zA-Z0-9\S]+\'\] \= \'([a-zA-Z0-9\S]+)\'/)
-
-    return false if a_raw.first.nil? || a_raw.nil? || a_raw.size == 0
-
-    a_raw.first.first
   end
 
   def encode_request_header string
