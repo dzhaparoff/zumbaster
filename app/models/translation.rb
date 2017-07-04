@@ -20,13 +20,13 @@ class Translation < ActiveRecord::Base
   end
 
   def manifest type
-    if translation_video_exist? type
-      mans = self
-    else
-      mans = sync_translation_video
-    end
+    # if translation_video_exist? type
+    #   mans = self
+    # else
+    #   mans = sync_translation_video
+    # end
 
-    # mans = sync_translation_video
+    mans = sync_translation_video
 
     m = type == :mobile ? mans.m3u8 : mans.f4m
 
