@@ -26,6 +26,8 @@ class Translation < ActiveRecord::Base
       mans = sync_translation_video
     end
 
+    # mans = sync_translation_video
+
     m = type == :mobile ? mans.m3u8 : mans.f4m
 
     f = Faraday.new do |builder|
@@ -34,12 +36,13 @@ class Translation < ActiveRecord::Base
       builder.headers['Accept'] = '*/*'
       builder.headers['Accept-Encoding'] = 'gzip, deflate'
       builder.headers['Connection'] = 'keep-alive'
-      builder.headers['Host'] = 'moonwalk.cc'
-      builder.headers['Referer'] = "http://moonwalk.cc/video/#{moonwalk_token}/iframe"
+      builder.headers['Host'] = 'cdn.hdrezka2.me'
+      builder.headers['Referer'] = "http://cdn.hdrezka2.me/serial/#{moonwalk_token}/iframe"
       builder.headers['X-Requested-With'] = 'ShockwaveFlash/19.0.0.226'
-      builder.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.71 Safari/537.36'
+      builder.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
     end
-    f.get m
+    r = f.get m
+    r
   end
 
   def sync_translation_video

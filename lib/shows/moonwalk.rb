@@ -92,8 +92,8 @@ class Moonwalk
       b.headers['Cache-Control'] = 'no-cache'
       b.headers['Host'] = 'cdn.hdrezka2.me'
       b.headers['Origin'] = 'http://cdn.hdrezka2.me'
-      b.headers['Referer'] = referer #referer.sub!("cdn.hdrezka2.me", "cdn.hdrezka2.me")
-      b.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36'
+      b.headers['Referer'] = referer.sub!("moonwalk.cc", "cdn.hdrezka2.me")
+      b.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
       b.headers['Accept'] = '*/*'
       b.headers['Pragma'] = 'no-cache'
       b.headers['Accept-Encoding'] = 'gzip, deflate'
@@ -113,11 +113,10 @@ class Moonwalk
                                        mw_pid: 2876,
                                        p_domain_id: 435094,
                                        ad_attr: 0,
-                                       "#{argv_name}": argv_value
+                                       :"c90b4ca500a12b91e2b54b2d4a1e4fb7" => 'cc5610c93fa23befc2d244a76500ee6c'
                                    })
-    end    
-
-    JSON.parse playlist_request.body
+    end
+    JSON.parse Zlib::GzipReader.new(StringIO.new(playlist_request.body), encoding: 'ASCII-8BIT').read
   end
 
   private
