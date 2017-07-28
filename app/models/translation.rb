@@ -61,9 +61,7 @@ class Translation < ActiveRecord::Base
 
     main_iframe_link = serial['serial']['iframe_url'].to_s
 
-    iframe = Moonwalk.get_iframe_page(main_iframe_link, s, e)
-
-    ap iframe[:request].body
+    iframe = Moonwalk.get_iframe_page(main_iframe_link, s, e)    
 
     referer = main_iframe_link + "?season=#{s}"
 
