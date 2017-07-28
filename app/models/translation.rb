@@ -36,7 +36,7 @@ class Translation < ActiveRecord::Base
       builder.headers['Accept'] = '*/*'
       builder.headers['Accept-Encoding'] = 'gzip, deflate'
       builder.headers['Connection'] = 'keep-alive'
-      builder.headers['Host'] = 'alchemists.pw'
+      builder.headers['Host'] = 's8.staticnlcdn.com'
       builder.headers['Referer'] = m
       builder.headers['X-Requested-With'] = 'With:XMLHttpRequest'
       builder.headers['User-Agent'] = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36'
@@ -62,6 +62,8 @@ class Translation < ActiveRecord::Base
     main_iframe_link = serial['serial']['iframe_url'].to_s
 
     iframe = Moonwalk.get_iframe_page(main_iframe_link, s, e)
+
+    ap iframe[:request].body
 
     referer = main_iframe_link + "?season=#{s}"
 
@@ -96,7 +98,6 @@ class Translation < ActiveRecord::Base
     return false if video_token == false
 
     new_playlist = Moonwalk.playlist_getter iframe[:faraday], video_token, csrf_token, frame_commit, argv_name, argv_value, referer
-    Rails.logger.info new_playlist
 
     if new_playlist.is_a? Hash
      new_playlist = new_playlist.first[1]
