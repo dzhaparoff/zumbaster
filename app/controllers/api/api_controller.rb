@@ -14,12 +14,12 @@ class Api::ApiController < ApplicationController
   def create_f4m_file translation
     manifest = translation.manifest :desktop
     # manifest = Nokogiri::XML Zlib::GzipReader.new(StringIO.new(manifest.body), encoding: 'ASCII-8BIT').read
-    # manifest = Nokogiri::XML manifest.body
-    # manifest.css("media").each do |media|
-    #   media['url'] = media['url'].gsub(/http:\/\//,'/stream/')
-    # end if Rails.env.production?
-    # send_data manifest.to_xml, format: 'application/xml; charset=utf-8'
-    send_data manifest.body, format: 'application/xml; charset=utf-8'
+    manifest = Nokogiri::XML manifest.body
+    manifest.css("media").each do |media|
+      media['url'] = media['url'].gsub(/http:\/\//,'/stream/')
+    end if Rails.env.production?
+    send_data manifest.to_xml, format: 'application/xml; charset=utf-8'
+    # send_data manifest.body, format: 'application/xml; charset=utf-8'
   end
 
   private
